@@ -1,0 +1,30 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(duration) ~ session * sensations + (1 | participant_id) +      (1 | problem_id)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    171.0     190.8     -78.5     157.0       118 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.43138 -0.54046 -0.06984  0.58003  2.30528 
+
+Random effects:
+ Groups         Name        Variance Std.Dev.
+ participant_id (Intercept) 0.1663   0.4079  
+ problem_id     (Intercept) 0.3008   0.5485  
+ Residual                   0.1024   0.3200  
+Number of obs: 125, groups:  participant_id, 26; problem_id, 10
+
+Fixed effects:
+                    Estimate Std. Error t value
+(Intercept)          4.55623    0.19898  22.898
+session2            -0.17072    0.06872  -2.484
+sensations           0.05983    0.16515   0.362
+session2:sensations -0.33813    0.24098  -1.403
+
+Correlation of Fixed Effects:
+            (Intr) sessn2 snstns
+session2    -0.198              
+sensations  -0.138  0.370       
+sssn2:snstn  0.073 -0.418 -0.521

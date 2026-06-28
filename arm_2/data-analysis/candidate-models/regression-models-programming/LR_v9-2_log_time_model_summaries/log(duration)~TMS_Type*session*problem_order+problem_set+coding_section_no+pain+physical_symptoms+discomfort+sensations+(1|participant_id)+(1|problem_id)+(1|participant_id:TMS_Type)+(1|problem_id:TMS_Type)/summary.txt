@@ -1,0 +1,41 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(duration) ~ TMS_Type * session * problem_order + problem_set +  
+    coding_section_no + pain + physical_symptoms + discomfort +      sensations + (1 | participant_id) + (1 | problem_id) + (1 |  
+    participant_id:TMS_Type) + (1 | problem_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    187.0     240.7     -74.5     149.0       106 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.03320 -0.57278 -0.06801  0.57359  2.21897 
+
+Random effects:
+ Groups                  Name        Variance Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.00000  0.0000  
+ participant_id          (Intercept) 0.15627  0.3953  
+ problem_id:TMS_Type     (Intercept) 0.00000  0.0000  
+ problem_id              (Intercept) 0.39747  0.6305  
+ Residual                            0.09272  0.3045  
+Number of obs: 125, groups:  participant_id:TMS_Type, 51; participant_id, 26; problem_id:TMS_Type, 19; problem_id, 10
+
+Fixed effects:
+                                  Estimate Std. Error t value
+(Intercept)                        4.77322    0.29710  16.066
+TMS_TypeWM                        -0.43354    0.24643  -1.759
+session2                          -0.62789    0.24352  -2.578
+problem_order                     -0.05321    0.04557  -1.168
+problem_setb                       0.33969    0.22296   1.524
+coding_section_no                 -0.02983    0.04374  -0.682
+pain                              -0.07793    0.23755  -0.328
+physical_symptoms                  0.27817    0.19024   1.462
+discomfort                        -0.07815    0.17353  -0.450
+sensations                        -0.05499    0.16715  -0.329
+TMS_TypeWM:session2                0.56221    0.40313   1.395
+TMS_TypeWM:problem_order           0.08634    0.05705   1.513
+session2:problem_order             0.11100    0.06066   1.830
+TMS_TypeWM:session2:problem_order -0.12874    0.08137  -1.582
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

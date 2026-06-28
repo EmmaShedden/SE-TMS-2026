@@ -1,0 +1,39 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(response.time) ~ TMS_Type + session + problem_order + (1 |  
+    participant_id) + (1 | shown_letter) + (1 | participant_id:shown_letter) +  
+    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  -1089.1   -1023.3     554.5   -1109.1      5271 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.5073 -0.6676 -0.0965  0.5550  4.8372 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev. 
+ participant_id:shown_letter (Intercept) 6.977e-10 2.641e-05
+ participant_id:TMS_Type     (Intercept) 8.707e-03 9.331e-02
+ participant_id              (Intercept) 1.560e-02 1.249e-01
+ shown_letter:TMS_Type       (Intercept) 1.556e-10 1.247e-05
+ shown_letter                (Intercept) 3.026e-05 5.501e-03
+ Residual                                4.567e-02 2.137e-01
+Number of obs: 5281, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                Estimate Std. Error t value
+(Intercept)   -0.5103028  0.0336449 -15.167
+TMS_TypeWM     0.0134714  0.0260868   0.516
+session2      -0.0682703  0.0260867  -2.617
+problem_order -0.0007454  0.0001018  -7.323
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW sessn2
+TMS_TypeWM  -0.402              
+session2    -0.402  0.037       
+problem_rdr -0.153  0.000  0.000
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

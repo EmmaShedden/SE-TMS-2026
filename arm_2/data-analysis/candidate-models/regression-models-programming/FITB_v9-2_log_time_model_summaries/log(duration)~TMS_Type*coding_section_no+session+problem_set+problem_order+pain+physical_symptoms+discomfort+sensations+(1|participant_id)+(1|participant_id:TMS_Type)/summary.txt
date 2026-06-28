@@ -1,0 +1,48 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(duration) ~ TMS_Type * coding_section_no + session + problem_set +  
+    problem_order + pain + physical_symptoms + discomfort + sensations +      (1 | participant_id) + (1 | participant_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    603.6     658.3    -287.8     575.6       354 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.3165 -0.6692  0.0163  0.6355  3.5258 
+
+Random effects:
+ Groups                  Name        Variance Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.0000   0.0000  
+ participant_id          (Intercept) 0.1211   0.3480  
+ Residual                            0.2412   0.4911  
+Number of obs: 368, groups:  participant_id:TMS_Type, 53; participant_id, 27
+
+Fixed effects:
+                             Estimate Std. Error t value
+(Intercept)                   3.80305    0.12912  29.453
+TMS_TypeWM                   -0.15337    0.14798  -1.036
+coding_section_no            -0.06620    0.04593  -1.441
+session2                     -0.04540    0.05446  -0.834
+problem_setb                 -0.26635    0.06202  -4.295
+problem_order                 0.01785    0.01563   1.142
+pain                         -0.02745    0.19320  -0.142
+physical_symptoms             0.08988    0.15021   0.598
+discomfort                   -0.03720    0.14984  -0.248
+sensations                    0.23983    0.14554   1.648
+TMS_TypeWM:coding_section_no  0.07044    0.06430   1.095
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM cdng__ sessn2 prblm_s prblm_r pain   physc_ dscmfr snstns
+TMS_TypeWM  -0.531                                                                   
+cdng_sctn_n -0.692  0.644                                                            
+session2    -0.166 -0.103   -0.055                                                   
+problem_stb -0.155  0.097    0.070 -0.187                                            
+problem_rdr -0.183 -0.059   -0.130 -0.017 -0.043                                     
+pain        -0.039  0.003   -0.034  0.050 -0.175  -0.008                             
+physcl_symp  0.023 -0.213   -0.029  0.093 -0.083  -0.006  -0.095                     
+discomfort   0.116 -0.243   -0.013  0.086 -0.194   0.002  -0.436  0.287              
+sensations  -0.113  0.026   -0.040  0.197 -0.306   0.016   0.303 -0.077 -0.402       
+TMS_TyWM:__  0.474 -0.884   -0.707  0.088 -0.047   0.083   0.034  0.014 -0.022  0.091
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

@@ -1,0 +1,986 @@
+---
+title: "TMS WM Analysis"
+output: html_document
+date: "2025-1-29"
+---
+
+## Packages
+
+```{r}
+# import packages
+library(lme4)     # mixed models
+library(dplyr)    # dataframe manipulation
+library(readr)    # reading in the data
+library(emmeans)  # likelihood ratio testing
+library(purrr)    # for map()
+library(lattice)  # for xyplot()
+library(TAF)      # setting up output file directory structure during model fitting
+library(moments)  # skewness for selecting between additive and multiplicative models of response times
+library(stringr)
+
+
+#If you get an error, you likely need to install the packages using the "install.package('insert-package-name-here')" command
+```
+
+## Notebook configurable settings
+
+```{r}
+# name the directories to read data from and write output to
+input_version = 9
+output_version = 'programming'
+program_type = 'long'
+
+```
+
+make an overall output directory (model summaries, stats, etc. will all go here)
+
+```{r}
+#setwd("..")
+outputdir = sprintf("%s/../journal-candidate-models/regression-models-%s",getwd(), output_version)
+```
+
+```{r}
+
+mkdir(outputdir)
+```
+
+## Loading Data
+
+```{r}
+input_file = sprintf("%s/../preprocessed-data/full-data-version-%d/programming-full-data.csv", getwd(), input_version)
+data <- read.csv(input_file)
+
+#Transforming the session number such that it is treated as a character and not a value
+data <- transform( 
+  data, session = as.character(session)) 
+
+#Transforming correctness into binaries of 1 or 0
+data$correctness <- as.integer(ifelse(data$accuracy == 'Pass', 1, 0))
+
+```
+
+lets look at the data head.
+
+```{r}
+head(data)
+
+```
+
+```{r}
+# full dataset (including other problem types)
+mean_value <- mean((data$correctness))
+std_value <- sd((data$correctness))
+print(mean_value)
+print(std_value)
+```
+
+Removing irrelevant data from dataframe
+
+```{r Nans}
+#remove rows that have no values - nothing actually happens here. Everyone saw the stimuli
+data <- data[data$duration > 1, ] 
+
+#removing two problems that were not graded from analysis (2 LR questions)
+data <- data[data$accuracy != "",]
+
+
+#Removing the one participant that didn't listen to instructions (2 SD below the mean in N-back):
+participants_to_remove <- c("5ZCK")
+data <- subset(data, !(participant_id %in% participants_to_remove))
+```
+
+Looking at LR - Make sure there are 318 rows
+
+```{r}
+
+data <- data[data$problem_type == program_type, ]
+
+
+number_of_rows <- nrow(data)
+print(number_of_rows) #number of rows
+
+```
+
+```{r}
+#Make sure you have n=27 participants
+
+id <- unique(data$participant_id)
+id #all unique IDs
+length(id) #number of participants
+```
+
+12 problems (removing 2 problems that are not graded yet)
+
+```{r}
+count_table <- table(data$TMS_Type, data$participant_id)
+
+print(count_table)
+```
+
+```{r}
+# actual stats for this problem
+mean_value <- mean((data$correctness))
+std_value <- sd((data$correctness))
+print(mean_value)
+print(std_value)
+table(data$accuracy)
+```
+
+## Select independent variables
+
+1.  `participant_id` (person) : random intercept
+    -   People are drawn from an underlying distribution; we aren't interested in learning coefficients specific to the members of our sample, but rather in what they tell us about that underlying population. Random effects tell us about the distribution rather than the elements observed.
+
+    -   This variable is used to model person-specific attributes, such as a "skill," translating to overall faster or slower response times, that can be different for each person
+2.  `problem_id` (question prompt) : random intercept
+    -   The underlying distribution of stimuli is a little less clear than that of participants. This variable can be thought of as modeling the dispersion of question-specific difficulties.
+3.  `TMS_Type` (TMS treatment condition, i.e. brain region stimulated) : fixed & random intercepts
+    -   Based on previous literature, we hypothesize that the brain region stimulated may have an effect that is systematic (i.e. very consistent between people, topics, etc.), quantitatively heterogeneous (i.e. directionally consistent, but widely varying in magnitude), or even a qualitatively heterogeneous (i.e. varying in direction, possibly in conjunction with magnitude). Therefore, we assess the goodness of fit for candidate models containing `TMS_Type` as a fixed effect, random effect, both, or neither, in order to test this hypothesis.
+4.  `session`, `coding_section_no`, and `problem_order` (chronological numbering of the session, per participant) : fixed intercept
+    -   This is used to account for learning/training effect, i.e. participants getting better at test-taking under our specific test instrument over the course of the study. For example, they may become more familiar with the question structure, or become better at recalling old material as they do more practice questions. We expect this to be systematic (uniformly decreasing response time), so we model it as a fixed effect.
+
+## Specify candidate predictor structures for mixed model formulas
+
+variables are treated as factors
+
+```{r}
+data$gender <- as.factor(data$gender)
+data$prog_exp <- as.factor(data$programming_exp)
+data$occupation <- as.factor(data$occupation)
+data$session <- as.numeric(data$session)
+```
+
+```{r}
+fixed_effects = c(
+  # no fixed effects
+  "", 
+  
+  # no interactions
+  "TMS_Type", 
+  "session", 
+  "coding_section_no", 
+  "problem_order", 
+  "problem_set", 
+  
+  "pain",
+  "physical_symptoms",
+  "discomfort", 
+  "sensations",
+  
+  "TMS_Type + session",
+  "TMS_Type + coding_section_no",
+  "TMS_Type + problem_order",
+  "TMS_Type + problem_set",
+  "session + coding_section_no",
+  "session + problem_order",
+  "session + problem_set",
+  "problem_set + coding_section_no",
+  "problem_set + problem_order",
+  "coding_section_no + problem_order",
+  
+  "TMS_Type + pain",
+  "TMS_Type + physical_symptoms",
+  "TMS_Type + discomfort",
+  "TMS_Type + sensations",
+  "session + pain",
+  "session + physical_symptoms",
+  "session + discomfort",
+  "session + sensations",
+  "coding_section_no + pain",
+  "coding_section_no + physical_symptoms",
+  "coding_section_no + discomfort",
+  "coding_section_no + sensations",
+  "problem_order + pain",
+  "problem_order + physical_symptoms",
+  "problem_order + discomfort",
+  "problem_order + sensations",
+  "problem_set + pain",
+  "problem_set + physical_symptoms",
+  "problem_set + discomfort",
+  "problem_set + sensations",
+  
+  "TMS_Type + session + coding_section_no + problem_order + problem_set + pain + physical_symptoms + discomfort + sensations",
+  
+  # 2-way interactions
+  "TMS_Type * session",
+  "TMS_Type * coding_section_no",
+  "TMS_Type * problem_order",
+  "TMS_Type * problem_set",
+  "session * coding_section_no",
+  "session * problem_order",
+  "session * problem_set",
+  "problem_set * coding_section_no",
+  "problem_set * problem_order",
+  "coding_section_no * problem_order",
+  
+  "TMS_Type * pain",
+  "TMS_Type * physical_symptoms",
+  "TMS_Type * discomfort",
+  "TMS_Type * sensations", 
+  "session * pain",
+  "session * physical_symptoms",
+  "session * discomfort",
+  "session * sensations",
+  "coding_section_no * pain",
+  "coding_section_no * physical_symptoms",
+  "coding_section_no * discomfort",
+  "coding_section_no * sensations",
+  "problem_order * pain",
+  "problem_order * physical_symptoms",
+  "problem_order * discomfort",
+  "problem_order * sensations",
+  "problem_set * pain",
+  "problem_set * physical_symptoms",
+  "problem_set * discomfort",
+  "problem_set * sensations",
+  
+  # 1- and 2-way interactions
+  "TMS_Type * session + problem_set + coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_set + session + coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * coding_section_no + session + problem_set + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_order + session + problem_set + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "session * problem_set + TMS_Type + coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "session * coding_section_no + TMS_Type + problem_set + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "session * problem_order + TMS_Type + problem_set + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "problem_set * coding_section_no + TMS_Type + session + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "problem_set * problem_order + TMS_Type + session + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "coding_section_no * problem_order + TMS_Type + session + problem_set + pain + physical_symptoms + discomfort + sensations",
+  
+  "TMS_Type * pain + session + problem_set + coding_section_no + problem_order",
+  "TMS_Type * physical_symptoms + session + problem_set + coding_section_no + problem_order",
+  "TMS_Type * discomfort + session + problem_set + coding_section_no + problem_order",
+  "TMS_Type * sensations + session + problem_set + coding_section_no + problem_order", 
+  
+  # multiple 2-way interactions
+  "TMS_Type * session + problem_set * coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * session + problem_set * problem_order + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * session + coding_section_no * problem_order + problem_set + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_set + session * coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_set + session * problem_order + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_set + coding_section_no * problem_order + session + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * coding_section_no + session * problem_set + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * coding_section_no + session * problem_order + problem_set + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * coding_section_no + problem_set * problem_order + session + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_order + session * problem_set + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_order + session * coding_section_no + problem_set + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_order + problem_set * coding_section_no + session + pain + physical_symptoms + discomfort + sensations",
+  "session * problem_set + coding_section_no * problem_order + TMS_Type + pain + physical_symptoms + discomfort + sensations",
+  "session * coding_section_no + problem_set * problem_order + TMS_Type + pain + physical_symptoms + discomfort + sensations",
+  "session * problem_order + problem_set * coding_section_no + TMS_Type + pain + physical_symptoms + discomfort + sensations",
+  
+  # 3-way interactions
+  "TMS_Type * session * problem_set + coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations", 
+  "TMS_Type * session * coding_section_no + problem_set + problem_order + pain + physical_symptoms + discomfort + sensations", 
+  "TMS_Type * session * problem_order + problem_set + coding_section_no + pain + physical_symptoms + discomfort + sensations", 
+  "TMS_Type * problem_set * coding_section_no + problem_order + session + pain + physical_symptoms + discomfort + sensations", 
+  "TMS_Type * problem_set * problem_order + coding_section_no + session + pain + physical_symptoms + discomfort + sensations", 
+  "TMS_Type * coding_section_no * problem_order + session + problem_set + pain + physical_symptoms + discomfort + sensations", 
+  "session * problem_set * coding_section_no + problem_order + TMS_Type + pain + physical_symptoms + discomfort + sensations", 
+  "session * problem_set * problem_order + coding_section_no + TMS_Type + pain + physical_symptoms + discomfort + sensations", 
+  "session * coding_section_no * problem_order + TMS_Type + problem_set + pain + physical_symptoms + discomfort + sensations", 
+  "problem_set * coding_section_no * problem_order + TMS_Type + session + pain + physical_symptoms + discomfort + sensations"
+)
+```
+
+```{r}
+random_effects = c(
+  "participant_id", 
+  "problem_id", 
+  "participant_id:TMS_Type",
+  "problem_id:TMS_Type"
+)
+```
+
+In this first cell, we enumerate random effect structures by taking all combinations of the random effects specified.
+
+```{r}
+random_effects = map(random_effects, function (s) sprintf("(1|%s)", s))
+
+random_exprs = c()
+N_random = length(random_effects)
+for (k in 1:N_random) {
+  iii = combn(1:N_random, k, simplify=FALSE)
+  for (ii in iii) {
+    expr = paste(random_effects[ii], collapse = " + ")
+    random_exprs = append(random_exprs, expr)
+  }
+}
+```
+
+Now, we combine the response variable, fixed effects, and random effects together to generate our candidate model structures.
+
+```{r}
+logistic_formulae = c()
+for (fe in fixed_effects) {
+  for (re in random_exprs) {
+    f = ""
+    if (fe == "") {
+      f = sprintf("correctness ~ %s", re)
+    } else {
+      f = sprintf("correctness ~ %s + %s", fe, re)
+    }
+    logistic_formulae = append(logistic_formulae, f)
+  }
+}
+
+print(length(logistic_formulae))
+```
+
+Filter out invalid model specifications
+
+```{r}
+# generate all the boolean index vectors
+
+# formulas with TMS fixed effect
+has_TMS <- grepl('TMS_Type ', logistic_formulae, fixed = TRUE)
+
+# formulas with participant random effect
+has_participant <- grepl('(1|participant_id)', logistic_formulae, fixed = TRUE)
+
+# formulas with problem random effect
+has_problem <- grepl('(1|problem_id)', logistic_formulae, fixed = TRUE)
+
+# formulas with TMS x participant random effect
+has_TMS_participant <- grepl('(1|participant_id:TMS_Type)', logistic_formulae, fixed = TRUE)
+
+# formulas with TMS x problem random effect
+has_TMS_problem <- grepl('(1|problem_id:TMS_Type)', logistic_formulae, fixed = TRUE)
+
+# remove them
+
+invalid <- (has_TMS_participant & (!has_TMS | !has_participant)) | (has_TMS_problem & (!has_TMS | !has_problem))
+
+invalid_logistic_formulae <- logistic_formulae[invalid]
+logistic_formulae <- logistic_formulae[!invalid]
+
+print(length(logistic_formulae))
+```
+
+### Model fitting (\~2 minutes)
+
+Here, we fit all the models. Of note, we use MLE rather than REML for compatibility with the AIC model selection strategy.
+
+We also store BIC (an alternative model selection criterion) in addition to AIC here. The two have different theoretical properties, both of which may be useful. Both describe the log likelihood of a fitted model, with a penalty for model complexity. The penalty in BIC is higher than that for AIC, so optimal-BIC models tend to be smaller (with fewer parameters) than optimal-AIC models. We have done our analysis relying on AIC, but we provide BIC-based model selection here in case the reader is interested.
+
+```{r cache=TRUE}
+if (TRUE) {
+  # make an output directory for the output of all the candidate linear models
+  model_outputdir = 
+    sprintf("%s/LR_v9-2_accur_model_summaries", outputdir)
+  mkdir(model_outputdir)
+  
+  # make an output file for the AIC and BIC of each model
+  metricsfile = sprintf("%s/metrics.csv", model_outputdir)
+  file.create(metricsfile)
+  
+  sink(file = metricsfile,
+       append = FALSE,
+       type = "output",
+       split = FALSE
+       )
+  
+  cat("formula,AIC,BIC\n")
+  
+  sink()
+  
+  for (f in logistic_formulae) {
+    # make an output directory for the output of this specific candidate model
+    f_outputdir = sprintf("%s/%s", model_outputdir, gsub(" ", "", f, fixed = TRUE))
+    mkdir(f_outputdir)
+    
+    # make the individual output file
+    summaryfile = sprintf("%s/summary.txt", f_outputdir)
+    
+    file.create(summaryfile)
+    
+    # print a delimiter for console output
+    cat(sprintf("\n---------------------------------------------\n%s\n", f))
+    
+    # fit the model
+    #m = try(glmer(f, family=binomial, data=data))
+    
+    result <- tryCatch({
+      # Code that may produce an error
+      m = try(glmer(f, family=binomial, data=data))
+      # send the model summary to the summary file
+      sink(file = summaryfile,
+         append = FALSE,
+         type = "output",
+         split = FALSE
+         )
+    
+      print(summary(m))
+    
+      sink()
+      
+      # send the AIC and BIC to the metrics file
+      metrics = sprintf("%s,%f,%f\n", f, AIC(m), BIC(m))
+    
+      sink(file = metricsfile,
+         append = TRUE,
+         type = "output",
+         split = FALSE)
+    
+      cat(metrics)
+    
+      sink()
+      
+      }, error = function(e) {
+      # Handle the error
+      cat("An error occurred:", conditionMessage(e), "\n")
+      NA
+      })
+    
+  }
+}
+```
+
+## Model selection
+
+Read in AIC and BIC data
+
+```{r}
+# read in the AIC/BIC data
+#fin = sprintf("%s/LR_MWP_babytest3_accur_model_summaries/metrics.csv", outputdir) #from original submission
+fin = sprintf("%s/LR_v9-2_accur_model_summaries/metrics.csv", outputdir)
+correctness_models_da = read_csv(fin)
+```
+
+```{r}
+#looking at top models from AIC
+head(correctness_models_da[order(correctness_models_da$AIC),], n = 10)
+```
+
+```{r}
+#looking at top models from BIC
+head(correctness_models_da[order(correctness_models_da$BIC),], n = 10)
+```
+
+```{r}
+fA = correctness_models_da[order(correctness_models_da$AIC),]$formula[[1]]
+cat(fA)
+```
+
+```{r}
+fB = correctness_models_da[order(correctness_models_da$BIC),]$formula[[1]]
+cat(fB)
+```
+
+We find that using AIC for model selection favors `correctness ~ problem_set * sensations + (1|problem_id) + (1|participant_id)`
+
+The variance point estimates shown here feed directly into the PVE below.
+
+```{r}
+m0 = glmer(fA, family=binomial, data=data) #logical scaler
+summary(m0)
+```
+
+```{r}
+m1 = glmer(fB, family=binomial, data=data) #logical scaler
+summary(m1)
+```
+
+We also evaluate the best-AIC model but including TMS as a fixed effect.
+
+```{r}
+f_TMS = paste(fA, ' + TMS_Type')
+m_TMS <- glmer(
+  f_TMS,
+  data = data,
+  family = binomial
+)
+
+# Compare:
+anova(m_TMS, m0)
+```
+
+`TMS_Type` does not survive as a fixed effect and is thus not included in the model.
+
+Now, we check if including TMS as a random effect makes the model better, since it also appears in a low-AIC model. We make the minimum necessary changes to the model structure to satisfy the inheritance principle (if an interaction term is included, so should member effects); TMS is a fixed effect to avoid the singular fit error:
+
+```{r}
+# Model WITHOUT participant_id:TMS_Type
+cat(fA)
+
+m_reduced <- glmer(
+  fA, 
+  #correctness ~ sensations + (1|problem_id) + (1|participant_id), # revised version
+  #correctness ~ sensations + (1|problem_id), # original version
+  data = data,
+  family = binomial
+)
+```
+
+```{r}
+# Model WITH participant_id:TMS_Type
+f_full = paste(fA, ' + TMS_Type + (1|participant_id:TMS_Type)')
+
+m_full <- glmer(
+  f_full, 
+  #correctness ~ sensations + TMS_Type + (1|problem_id) + (1|participant_id) + (1|participant_id:TMS_Type), # revised version
+  #correctness ~ sensations + (1|problem_id) + (1|participant_id:TMS_Type), # original version
+  data = data,
+  family = binomial
+)
+summary(m_full)
+```
+
+```{r}
+# Likelihood ratio test
+anova(m_reduced, m_full)
+```
+
+`TMS_Type` does not survive so is not included in the model.
+
+~~We compared two models differing only in the inclusion of a random intercept for participants nested within TMS condition. The model including participant_id:TMS_Type provided a significantly better fit, χ²(1) = 5.74, p = .017, supporting the inclusion of this grouping structure to capture individual variability in response to stimulation.~~
+
+**Below demonstrates why the interaction term appeared to improve the model fit:**
+
+~~I hardcoded these before adding extra interactions in the candidate model formulas, which is why `session` is missing in this section, but adding that in shouldn't change the overall results.~~ Corrected 5/18, and it didn't change the results.
+
+```{r}
+m_reduced_demo <- glmer( # remove participant
+  correctness ~ problem_set * sensations + (1|problem_id), # revised version 5/18
+  #correctness ~ sensations + (1|problem_id), # original version
+  data = data,
+  family = binomial
+)
+```
+
+```{r}
+m_full_demo <- glmer( # add participant back
+  correctness ~ problem_set * sensations + (1|participant_id) + (1|problem_id), # revised version 5/18
+  #correctness ~ sensations + (1|problem_id) + (1|participant_id), # original version
+  data = data,
+  family = binomial
+)
+```
+
+```{r}
+# Likelihood ratio test
+anova(m_reduced_demo, m_full_demo)
+```
+
+Conclusion: adding `participant_id` improves the model fit (statistically significantly).
+
+I tried combining `participant_id` and `TMS_Type` using a *random slope* instead of *grouping interaction*, since it might make more sense in this context:
+
+```{r}
+# this cell makes a dummy boolean version of the `TMS_Type` variable where 0 means control and 1 means intervention. I think this is what lme4 guesses anyway (as opposed to making 1 be the control, which is weird), but it's good to be sure (this only matters for random slopes, not when grouping).
+data$TMS_Type_WM <- as.integer(data$TMS_Type == 'WM')
+```
+
+```{r}
+m_reduced_2 <- m_full_demo # revised version 5/18
+#m_reduced_2 <- glmer( # original version
+#  correctness ~ sensations + (1|problem_id) + (1|participant_id),
+#  data = data,
+#  family = binomial
+#)
+```
+
+```{r}
+m_full_2 <- glmer(
+  correctness ~ problem_set * sensations + TMS_Type + (1|problem_id) + (1+TMS_Type_WM|participant_id), # revised version 5/18
+  #correctness ~ sensations + TMS_Type + (1|problem_id) + (1+TMS_Type_WM|participant_id), # original version
+  data = data,
+  family = binomial
+)
+summary(m_full_2)
+# your innate ability and your TMS effect are uncorrelated (-0.01) <-- original version
+```
+
+```{r}
+# not significant
+anova(m_reduced_2, m_full_2)
+```
+
+Conclusion: adding `TMS_Type` (as random slope) doesn't improve the model fit (statistically significantly).
+
+The final change to the model that we will try is separating out the random intercept and slope. This enforces that they are uncorrelated, reducing the DoF of the model by 1 compared to the previous version (no learned correlation between the random intercept and slope distributions). ~~This assumption is supported by the fact that the previous test `m_full_2` already demonstrated that these two are basically uncorrelated (correlation coefficient -0.01).~~ Corrected 5/18, the correlation increased but there's no harm in trying it anyway.
+
+```{r}
+m_full_3 <- glmer(
+  correctness ~ problem_set * sensations + TMS_Type + (1|problem_id) + (1|participant_id) + (0+TMS_Type_WM|participant_id), # revised version 5/18
+  #correctness ~ sensations + TMS_Type + (1|problem_id) + (1|participant_id) + (0+TMS_Type_WM|participant_id), # original version
+  data = data,
+  family = binomial
+)
+summary(m_full_3)
+```
+
+```{r}
+anova(m_reduced_2, m_full_3)
+```
+
+Conclusion: adding `TMS_Type` (as uncorrelated random slope) doesn't improve the model fit (statistically significantly).
+
+For completeness/fun, we'll try the same thing but with the `TMS_Type` random effect grouped by problem instead of participant:
+
+```{r}
+# with correlation
+m_full_4 <- glmer(
+  correctness ~ problem_set * sensations + TMS_Type + (1+TMS_Type_WM|problem_id) + (1|participant_id), # revised version 5/18
+  #correctness ~ sensations + TMS_Type + (1+TMS_Type_WM|problem_id) + (1|participant_id), # original version
+  data = data,
+  family = binomial
+)
+#summary(m_full_4)
+anova(m_reduced_2, m_full_4)
+```
+
+```{r}
+# without correlation
+m_full_5 <- glmer(
+  correctness ~ problem_set * sensations + TMS_Type + (1|problem_id) + (1|participant_id) + (0+TMS_Type_WM|problem_id), # revised version 5/18
+  #correctness ~ sensations + TMS_Type + (1|problem_id) + (1|participant_id) + (0+TMS_Type_WM|problem_id), # original version
+  data = data,
+  family = binomial
+)
+#summary(m_full_5)
+anova(m_reduced_2, m_full_5)
+```
+
+Conclusion: adding `TMS_Type` (as correlated or uncorrelated random slope, grouped by problem) doesn't improve the model fit (statistically significantly).
+
+## Confidence Intervals and PVE
+
+We use the profile function to find CI
+
+```{r}
+m_full_refit <- glmer(
+  f_full, 
+  data = data,
+  family = binomial, 
+  control=glmerControl(
+    #optimizer = "Nelder_Mead", 
+    tol = 1e-9
+  )
+)
+
+summary(m_full_refit)
+```
+
+```{r}
+VarCorr(m_full_refit)
+```
+
+```{r cache=TRUE}
+#profiling to get confidence intervals
+pp0 = profile(m_full_refit)
+```
+
+```{r}
+#Getting confidence intervals
+confint(pp0)
+```
+
+```{r}
+xyplot(pp0)
+```
+
+~~Both random effects (sig01, sig02) are significant because both rejects zero in CI.~~
+
+```{r cache=TRUE}
+m0_refit <- glmer(
+  fA, 
+  family=binomial, 
+  data=data, 
+  control=glmerControl(
+    tol = 1e-9
+  )
+)
+pp1 <- profile(m0_refit)
+```
+
+```{r}
+summary(m0_refit)
+confint(pp1)
+```
+
+```{r}
+xyplot(pp1)
+```
+
+## PVE
+
+```{r}
+get_pve = function(m, effect) {
+  random_effects = as.data.frame(VarCorr(m)) %>% 
+    rename(Groups = grp, Name = var1, Variance = vcov, Std.Dev. = sdcor) %>% 
+    select(-var2)
+  
+  num = (random_effects %>% filter(Groups == effect))$Variance
+  
+  denom = sum(random_effects$Variance)
+  
+  return (c(num / denom))
+}
+
+
+get_pve(m_full, "problem_id")
+```
+
+We find that (1 \| problem_id) has a PVE of 86% (0.86). Meaning, problem difficulty plays about 76% of the point variance estimate of the accuracy outcome.
+
+```{r}
+get_pve(m_full, "participant_id:TMS_Type")
+```
+
+~~We find that (1 \| participant_id:TMS_Type) has a PVE of 15% (0.15). Meaning, problem person-dependent TMS effect plays about 24% of the point varience estimate of the acurracy outcome.~~
+
+PVE is 3.7% by point estimate, however, CI doesn't exclude zero.
+
+# Trends
+
+We may also be interested in assessing the differences in accuracy outcome from control to treatment
+
+```{r}
+#How often did people get an answer right in the Control group vs Treatment group?
+df_summary <- data %>%
+  group_by(TMS_Type) %>%
+  summarise(
+    mean_correct = mean(correctness, na.rm = TRUE),
+    sd_correct = sd(correctness, na.rm = TRUE),
+    count = n()
+  )
+
+print(df_summary)
+
+```
+
+Since correctness is typically represented as 0 (incorrect) or 1 (correct) in binary data. Mean correctness is 0.36 in control and 0.41 in WM with SD of 0.5 in both an SD of 0.5 is quite large. This suggests that some participants answered almost all questions correctly (near 1.0), while others answered very few correctly (near 0.3 or lower). The variation might be due to individual differences, task difficulty, or randomness in responses.
+
+# Testing other model candidates
+
+For completeness, we will try the likelihood ratio test with all low-AIC model formulas.
+
+1.  Get all the best-AIC model formulas (score within 3 of the best, this is heuristic)
+
+    ```{r}
+    best_AIC <- correctness_models_da[order(correctness_models_da$AIC),]$AIC[[1]]
+    best_AIC
+
+    AIC_candidates <- correctness_models_da[correctness_models_da$AIC < best_AIC + 3,]
+    AIC_candidates <- AIC_candidates[order(AIC_candidates$AIC),]
+    AIC_candidates
+    ```
+
+2.  Remove invalid model formulas (which don't satisfy the inheritance principle). These are in the original list of candidate models because the formulas are auto-generated pretty naively, and we err on the side of including everything.\
+    Besides being able to report interpretable results, we need to use models that satisfy the inheritance principle because it's impossible to do the likelihood ratio test with nested models that only differ in the variable we care about, if that term also contains another variable that doesn't appear elsewhere in the model.
+
+    ```{r}
+    # 2(a) generate all the boolean index vectors
+
+    # formulas with TMS fixed effect
+    has_TMS <- grepl('TMS_Type ', AIC_candidates$formula, fixed = TRUE)
+
+    # formulas with participant random effect
+    has_participant <- grepl('(1|participant_id)', AIC_candidates$formula, fixed = TRUE)
+
+    # formulas with problem random effect
+    has_problem <- grepl('(1|problem_id)', AIC_candidates$formula, fixed = TRUE)
+
+    # formulas with TMS x participant random effect
+    has_TMS_participant <- grepl('(1|participant_id:TMS_Type)', AIC_candidates$formula, fixed = TRUE)
+
+    # formulas with TMS x problem random effect
+    has_TMS_problem <- grepl('(1|problem_id:TMS_Type)', AIC_candidates$formula, fixed = TRUE)
+
+
+    AIC_candidates[has_TMS_problem,] # replace with relevant boolean index to check the formulas
+    ```
+
+    ```{r}
+    # 2(b) remove them
+
+    invalid <- (has_TMS_participant & (!has_TMS | !has_participant)) | (has_TMS_problem & (!has_TMS | !has_problem))
+
+    invalid_AIC_candidates <- AIC_candidates[invalid,]
+    AIC_candidates <- AIC_candidates[!invalid,]
+    AIC_candidates
+    ```
+
+    ```{r}
+    invalid_AIC_candidates
+    ```
+
+    In hindsight, maybe we should do this upfront, I thought it would be harder.
+
+3.  Likelihood ratio test for the TMS_Type fixed effect. If present in the model we will compare against a reduced model without it, and vice versa.
+
+```{r}
+# formulas with TMS fixed effect
+has_TMS <- grepl('TMS_Type ', AIC_candidates$formula, fixed = TRUE)
+
+add_fixed_TMS <- paste0(AIC_candidates$formula, ' + TMS_Type')
+AIC_candidates$fixed_TMS_full <- ifelse(
+  has_TMS, AIC_candidates$formula, add_fixed_TMS)
+
+AIC_candidates$fixed_TMS_reduced <- str_remove_all(
+  AIC_candidates$formula, fixed('TMS_Type + '))
+AIC_candidates$fixed_TMS_reduced <- str_remove_all(
+  AIC_candidates$fixed_TMS_reduced, fixed('TMS_Type * '))
+
+#AIC_candidates[,c('formula', 'fixed_TMS_reduced')] # double-check
+```
+
+```{r}
+AIC_candidates$fixed_TMS_pval <- -1.0
+for (i in seq_len(nrow(AIC_candidates))) {
+  m_full <- glmer(
+    AIC_candidates$fixed_TMS_full[i],
+    data = data,
+    family = binomial
+  )
+  m_reduced <- glmer(
+    AIC_candidates$fixed_TMS_reduced[i],
+    data = data,
+    family = binomial
+  )
+  a <- anova(m_full, m_reduced)
+  p_val <- a$"Pr(>Chisq)"[2]
+  #print(p_val)
+  AIC_candidates$fixed_TMS_pval[i] <- p_val
+}
+
+AIC_candidates[AIC_candidates$fixed_TMS_pval < 0.05,]
+```
+
+```{r}
+AIC_candidates[AIC_candidates$fixed_TMS_pval < 0.1,]
+```
+
+```{r}
+hist(AIC_candidates$fixed_TMS_pval) # look at where the p-values are
+```
+
+Conclusion: no model supports fixed TMS effect.
+
+4.  Likelihood ratio test for the `(1|TMS_Type:participant_id)` random effect. If present in the model we will compare against a reduced model without it, and vice versa (introducing necessary component terms, per the inheritance principle).
+
+    ```{r}
+
+    # formulas with TMS fixed effect
+    has_TMS <- grepl('TMS_Type ', AIC_candidates$formula, fixed = TRUE)
+
+    # formulas with participant random effect
+    has_participant <- grepl(
+      '(1|participant_id)', AIC_candidates$formula, fixed = TRUE)
+
+    # formulas with TMS x participant random effect
+    has_TMS_participant <- grepl(
+      '(1|participant_id:TMS_Type)', AIC_candidates$formula, fixed = TRUE)
+
+    AIC_candidates$TMS_participant_full <- AIC_candidates$formula
+
+    tmp <- paste0(AIC_candidates$TMS_participant_full, ' + TMS_Type')
+    AIC_candidates$TMS_participant_full <- ifelse(
+      has_TMS, AIC_candidates$TMS_participant_full, tmp)
+
+    tmp <- paste0(AIC_candidates$TMS_participant_full, ' + (1|participant_id)')
+    AIC_candidates$TMS_participant_full <- ifelse(
+      has_participant, AIC_candidates$TMS_participant_full, tmp)
+
+    tmp <- paste0(AIC_candidates$TMS_participant_full, ' + (1|participant_id:TMS_Type)')
+    AIC_candidates$TMS_participant_full <- ifelse(
+      has_TMS_participant, AIC_candidates$TMS_participant_full, tmp)
+
+    AIC_candidates$TMS_participant_reduced <- str_remove_all(
+      AIC_candidates$TMS_participant_full, fixed(' + (1|participant_id:TMS_Type)'))
+
+    #AIC_candidates[,c('formula', 'TMS_participant_full', 'TMS_participant_reduced')] # double-check
+
+    # note that there are many duplicate model specifications in there
+    ```
+
+    ```{r}
+    AIC_candidates$TMS_participant_pval <- -1.0
+    for (i in seq_len(nrow(AIC_candidates))) {
+      m_full <- glmer(
+        AIC_candidates$TMS_participant_full[i],
+        data = data,
+        family = binomial
+      )
+      m_reduced <- glmer(
+        AIC_candidates$TMS_participant_reduced[i],
+        data = data,
+        family = binomial
+      )
+      a <- anova(m_full, m_reduced)
+      p_val <- a$"Pr(>Chisq)"[2]
+      #print(p_val)
+      AIC_candidates$TMS_participant_pval[i] <- p_val
+    }
+
+    AIC_candidates[AIC_candidates$TMS_participant_pval < 0.05,]
+    ```
+
+    ```{r}
+    hist(AIC_candidates$TMS_participant_pval) # look at where the p-values are
+    ```
+
+    Conclusion: no model supports random TMS x participant effect.
+
+5.  Likelihood ratio test for the `(1|TMS_Type:problem_id)` random effect. If present in the model we will compare against a reduced model without it, and vice versa (introducing necessary component terms, per the inheritance principle).
+
+```{r}
+
+# formulas with TMS fixed effect
+has_TMS <- grepl('TMS_Type ', AIC_candidates$formula, fixed = TRUE)
+
+# formulas with problem random effect
+has_problem <- grepl(
+  '(1|problem_id)', AIC_candidates$formula, fixed = TRUE)
+
+# formulas with TMS x problem random effect
+has_TMS_problem <- grepl(
+  '(1|problem_id:TMS_Type)', AIC_candidates$formula, fixed = TRUE)
+
+AIC_candidates$TMS_problem_full <- AIC_candidates$formula
+
+tmp <- paste0(AIC_candidates$TMS_problem_full, ' + TMS_Type')
+AIC_candidates$TMS_problem_full <- ifelse(
+  has_TMS, AIC_candidates$TMS_problem_full, tmp)
+
+tmp <- paste0(AIC_candidates$TMS_problem_full, ' + (1|problem_id)')
+AIC_candidates$TMS_problem_full <- ifelse(
+  has_problem, AIC_candidates$TMS_problem_full, tmp)
+
+tmp <- paste0(AIC_candidates$TMS_problem_full, ' + (1|problem_id:TMS_Type)')
+AIC_candidates$TMS_problem_full <- ifelse(
+  has_TMS_problem, AIC_candidates$TMS_problem_full, tmp)
+
+AIC_candidates$TMS_problem_reduced <- str_remove_all(
+  AIC_candidates$TMS_problem_full, fixed(' + (1|problem_id:TMS_Type)'))
+
+#AIC_candidates[,c('formula', 'TMS_problem_full', 'TMS_problem_reduced')] # double-check
+
+# note that there are many duplicate model specifications in there
+```
+
+```{r}
+AIC_candidates$TMS_problem_pval <- -1.0
+for (i in seq_len(nrow(AIC_candidates))) {
+  m_full <- glmer(
+    AIC_candidates$TMS_problem_full[i],
+    data = data,
+    family = binomial
+  )
+  m_reduced <- glmer(
+    AIC_candidates$TMS_problem_reduced[i],
+    data = data,
+    family = binomial
+  )
+  a <- anova(m_full, m_reduced)
+  p_val <- a$"Pr(>Chisq)"[2]
+  #print(p_val)
+  AIC_candidates$TMS_problem_pval[i] <- p_val
+}
+
+AIC_candidates[AIC_candidates$TMS_problem_pval < 0.05,]
+```
+
+```{r}
+hist(AIC_candidates$TMS_problem_pval) # look at where the p-values are
+```

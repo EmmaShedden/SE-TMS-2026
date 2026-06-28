@@ -1,0 +1,42 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(duration) ~ TMS_Type + session + coding_section_no + problem_order +  
+    problem_set + pain + physical_symptoms + discomfort + sensations +      (1 | problem_id)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    604.4     651.3    -290.2     580.4       356 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.0202 -0.7215 -0.0162  0.6123  3.4372 
+
+Random effects:
+ Groups     Name        Variance Std.Dev.
+ problem_id (Intercept) 0.1902   0.4361  
+ Residual               0.2440   0.4940  
+Number of obs: 368, groups:  problem_id, 22
+
+Fixed effects:
+                   Estimate Std. Error t value
+(Intercept)        3.799340   0.144875  26.225
+TMS_TypeWM         0.053233   0.061715   0.863
+session2          -0.096030   0.053711  -1.788
+coding_section_no -0.067823   0.032635  -2.078
+problem_order      0.008599   0.015870   0.542
+problem_setb       0.116142   0.147483   0.787
+pain               0.003754   0.107041   0.035
+physical_symptoms  0.010772   0.116444   0.093
+discomfort        -0.059395   0.105706  -0.562
+sensations         0.151638   0.096242   1.576
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW sessn2 cdng__ prblm_r prblm_s pain   physc_ dscmfr
+TMS_TypeWM  -0.155                                                          
+session2    -0.154 -0.020                                                   
+cdng_sctn_n -0.441  0.050  0.008                                            
+problem_rdr -0.207  0.032 -0.034 -0.120                                     
+problem_stb -0.433 -0.066 -0.124 -0.012 -0.017                              
+pain        -0.025  0.122  0.012  0.028 -0.066  -0.062                      
+physcl_symp -0.008 -0.365  0.095 -0.005  0.014  -0.002  -0.343              
+discomfort   0.058 -0.468  0.064 -0.037  0.019  -0.033  -0.349  0.319       
+sensations  -0.075  0.186  0.166  0.023  0.011  -0.130   0.259 -0.063 -0.385

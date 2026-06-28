@@ -1,0 +1,555 @@
+---
+title: "LR RT Analysis"
+output: html_document
+date: "2026-05-19"
+---
+
+## 0. Packages
+
+```{r}
+# import packages
+library(lme4)     # mixed models
+library(dplyr)    # dataframe manipulation
+library(readr)    # reading in the data
+library(emmeans)  # likelihood ratio testing
+library(purrr)    # for map()
+library(lattice)  # for xyplot()
+library(TAF)      # setting up output file directory structure during model fitting
+library(moments)  # skewness for selecting between additive and multiplicative models of response times
+library(stringr)
+
+
+#If you get an error, you likely need to install the packages using the "install.package('insert-package-name-here')" command
+```
+
+## Notebook configurable settings
+
+```{r}
+# name the directories to read data from and write output to
+input_version = 9 # why 7 - TODO 
+output_version = 'programming'
+program_type = 'long'
+```
+
+make an overall output directory (model summaries, stats, etc. will all go here)
+
+```{r}
+outputdir = sprintf("%s/../journal-candidate-models/regression-models-%s",getwd(), output_version)
+```
+
+```{r}
+mkdir(outputdir)
+```
+
+## Loading Data
+
+```{r}
+input_file = sprintf("%s/../preprocessed-data/full-data-version-%d/programming-full-data.csv", getwd(), input_version)
+data <- read.csv(input_file)
+
+#Transforming the session number such that it is treated as a character and not a value
+data <- transform( 
+  data, session = as.character(session)) 
+
+#data
+```
+
+# Removing irrelevant data from dataframe
+
+```{r Nans}
+#remove rows that have no values 
+data <- data[data$duration > 0, ] 
+
+#Removing the 2 LR problems that were not graded
+data <- data[data$accuracy != "", ] 
+
+
+#Removing the one participants that didn't listen to instructions:
+participants_to_remove <- c("5ZCK")
+data <- subset(data, !(participant_id %in% participants_to_remove))
+```
+
+Looking at only LR correct responses
+
+```{r}
+data <- data[data$problem_type == 'long', ] 
+data <- data[data$accuracy == 'Pass', ] 
+
+```
+
+Preview data head
+
+```{r}
+head(data)
+```
+
+Looking at the average duartion of correctly made LR responses and finding its distribution.
+
+```{r}
+mean_value <- mean((data$duration))
+
+print(mean_value)
+```
+
+We find the distribution has a skew so we log-transform duration time
+
+```{r}
+hist(log(data$duration))
+```
+
+```{r}
+#Make sure you have n=26 participants - that is because one participant just got all of the LR wrong.
+
+id <- unique(data$participant_id)
+id #all unique IDs
+length(id) #number of participants
+```
+
+```{r}
+count_table <- table(data$TMS_Type, data$participant_id)
+
+# Print the result
+print(count_table)
+```
+
+```{r}
+fixed_effects = c(
+  # no fixed effects
+  "", 
+  
+  # no interactions
+  "TMS_Type", 
+  "session", 
+  "coding_section_no", 
+  "problem_order", 
+  "problem_set", 
+  
+  "pain",
+  "physical_symptoms",
+  "discomfort", 
+  "sensations",
+  
+  "TMS_Type + session",
+  "TMS_Type + coding_section_no",
+  "TMS_Type + problem_order",
+  "TMS_Type + problem_set",
+  "session + coding_section_no",
+  "session + problem_order",
+  "session + problem_set",
+  "problem_set + coding_section_no",
+  "problem_set + problem_order",
+  "coding_section_no + problem_order",
+  
+  "TMS_Type + pain",
+  "TMS_Type + physical_symptoms",
+  "TMS_Type + discomfort",
+  "TMS_Type + sensations",
+  "session + pain",
+  "session + physical_symptoms",
+  "session + discomfort",
+  "session + sensations",
+  "coding_section_no + pain",
+  "coding_section_no + physical_symptoms",
+  "coding_section_no + discomfort",
+  "coding_section_no + sensations",
+  "problem_order + pain",
+  "problem_order + physical_symptoms",
+  "problem_order + discomfort",
+  "problem_order + sensations",
+  "problem_set + pain",
+  "problem_set + physical_symptoms",
+  "problem_set + discomfort",
+  "problem_set + sensations",
+  
+  "TMS_Type + session + coding_section_no + problem_order + problem_set + pain + physical_symptoms + discomfort + sensations",
+  
+  # 2-way interactions
+  "TMS_Type * session",
+  "TMS_Type * coding_section_no",
+  "TMS_Type * problem_order",
+  "TMS_Type * problem_set",
+  "session * coding_section_no",
+  "session * problem_order",
+  "session * problem_set",
+  "problem_set * coding_section_no",
+  "problem_set * problem_order",
+  "coding_section_no * problem_order",
+
+  "TMS_Type * pain",
+  "TMS_Type * physical_symptoms",
+  "TMS_Type * discomfort",
+  "TMS_Type * sensations", 
+  "session * pain",
+  "session * physical_symptoms",
+  "session * discomfort",
+  "session * sensations",
+  "coding_section_no * pain",
+  "coding_section_no * physical_symptoms",
+  "coding_section_no * discomfort",
+  "coding_section_no * sensations",
+  "problem_order * pain",
+  "problem_order * physical_symptoms",
+  "problem_order * discomfort",
+  "problem_order * sensations",
+  "problem_set * pain",
+  "problem_set * physical_symptoms",
+  "problem_set * discomfort",
+  "problem_set * sensations",
+  
+  # 1- and 2-way interactions
+  "TMS_Type * session + problem_set + coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_set + session + coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * coding_section_no + session + problem_set + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_order + session + problem_set + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "session * problem_set + TMS_Type + coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "session * coding_section_no + TMS_Type + problem_set + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "session * problem_order + TMS_Type + problem_set + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "problem_set * coding_section_no + TMS_Type + session + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "problem_set * problem_order + TMS_Type + session + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "coding_section_no * problem_order + TMS_Type + session + problem_set + pain + physical_symptoms + discomfort + sensations",
+  
+  "TMS_Type * pain + session + problem_set + coding_section_no + problem_order",
+  "TMS_Type * physical_symptoms + session + problem_set + coding_section_no + problem_order",
+  "TMS_Type * discomfort + session + problem_set + coding_section_no + problem_order",
+  "TMS_Type * sensations + session + problem_set + coding_section_no + problem_order", 
+  
+  # multiple 2-way interactions
+  "TMS_Type * session + problem_set * coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * session + problem_set * problem_order + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * session + coding_section_no * problem_order + problem_set + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_set + session * coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_set + session * problem_order + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_set + coding_section_no * problem_order + session + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * coding_section_no + session * problem_set + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * coding_section_no + session * problem_order + problem_set + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * coding_section_no + problem_set * problem_order + session + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_order + session * problem_set + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_order + session * coding_section_no + problem_set + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_order + problem_set * coding_section_no + session + pain + physical_symptoms + discomfort + sensations",
+  "session * problem_set + coding_section_no * problem_order + TMS_Type + pain + physical_symptoms + discomfort + sensations",
+  "session * coding_section_no + problem_set * problem_order + TMS_Type + pain + physical_symptoms + discomfort + sensations",
+  "session * problem_order + problem_set * coding_section_no + TMS_Type + pain + physical_symptoms + discomfort + sensations",
+  
+  # 3-way interactions
+  "TMS_Type * session * problem_set + coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations", 
+  "TMS_Type * session * coding_section_no + problem_set + problem_order + pain + physical_symptoms + discomfort + sensations", 
+  "TMS_Type * session * problem_order + problem_set + coding_section_no + pain + physical_symptoms + discomfort + sensations", 
+  "TMS_Type * problem_set * coding_section_no + problem_order + session + pain + physical_symptoms + discomfort + sensations", 
+  "TMS_Type * problem_set * problem_order + coding_section_no + session + pain + physical_symptoms + discomfort + sensations", 
+  "TMS_Type * coding_section_no * problem_order + session + problem_set + pain + physical_symptoms + discomfort + sensations", 
+  "session * problem_set * coding_section_no + problem_order + TMS_Type + pain + physical_symptoms + discomfort + sensations", 
+  "session * problem_set * problem_order + coding_section_no + TMS_Type + pain + physical_symptoms + discomfort + sensations", 
+  "session * coding_section_no * problem_order + TMS_Type + problem_set + pain + physical_symptoms + discomfort + sensations", 
+  "problem_set * coding_section_no * problem_order + TMS_Type + session + pain + physical_symptoms + discomfort + sensations"
+)
+```
+
+```{r}
+random_effects = c(
+  "participant_id", 
+  "problem_id", 
+  "participant_id:TMS_Type",
+  "problem_id:TMS_Type"
+)
+```
+
+In this first cell, we enumerate random effect structures by taking all combinations of the random effects specified in Section 5.
+
+```{r}
+random_effects = map(random_effects, function (s) sprintf("(1|%s)", s))
+
+random_exprs = c()
+N_random = length(random_effects)
+for (k in 1:N_random) {
+  iii = combn(1:N_random, k, simplify=FALSE)
+  for (ii in iii) {
+    expr = paste(random_effects[ii], collapse = " + ")
+    random_exprs = append(random_exprs, expr)
+  }
+}
+```
+
+Now, we combine the response variable, fixed effects, and random effects together to generate our candidate model structures.
+
+```{r}
+loglinear_formulae = c()
+for (fe in fixed_effects) {
+  for (re in random_exprs) {
+    f = ""
+    if (fe == "") {
+      f = sprintf("log(duration) ~ %s", re)
+    } else {
+      f = sprintf("log(duration) ~ %s + %s", fe, re)
+    }
+    loglinear_formulae = append(loglinear_formulae, f)
+  }
+}
+
+print(length(loglinear_formulae))
+```
+
+Filter out invalid model specifications
+
+```{r}
+# generate all the boolean index vectors
+
+# formulas with TMS fixed effect
+has_TMS <- grepl('TMS_Type ', loglinear_formulae, fixed = TRUE)
+
+# formulas with participant random effect
+has_participant <- grepl('(1|participant_id)', loglinear_formulae, fixed = TRUE)
+
+# formulas with problem random effect
+has_problem <- grepl('(1|problem_id)', loglinear_formulae, fixed = TRUE)
+
+# formulas with TMS x participant random effect
+has_TMS_participant <- grepl('(1|participant_id:TMS_Type)', loglinear_formulae, fixed = TRUE)
+
+# formulas with TMS x problem random effect
+has_TMS_problem <- grepl('(1|problem_id:TMS_Type)', loglinear_formulae, fixed = TRUE)
+
+# remove them
+
+invalid <- (has_TMS_participant & (!has_TMS | !has_participant)) | (has_TMS_problem & (!has_TMS | !has_problem))
+
+invalid_loglinear_formulae <- loglinear_formulae[invalid]
+loglinear_formulae <- loglinear_formulae[!invalid]
+
+print(length(loglinear_formulae))
+```
+
+### Model fitting (\~2 minutes)
+
+Here, we fit all the models. Of note, we use MLE rather than REML for compatibility with the AIC model selection strategy.
+
+We also store BIC (an alternative model selection criterion) in addition to AIC here. The two have different theoretical properties, both of which may be useful. Both describe the log likelihood of a fitted model, with a penalty for model complexity. The penalty in BIC is higher than that for AIC, so optimal-BIC models tend to be smaller (with fewer parameters) than optimal-AIC models. We have done our analysis relying on AIC, but we provide BIC-based model selection here in case the reader is interested.
+
+```{r cache=TRUE}
+if (TRUE) {
+  # make an output directory for the output of all the candidate linear models
+  logtime_outputdir = 
+    sprintf("%s/LR_v9-2_log_time_model_summaries", outputdir)
+  mkdir(logtime_outputdir)
+  
+  # make an output file for the AIC and BIC of each model
+  metricsfile = sprintf("%s/metrics.csv", logtime_outputdir)
+  file.create(metricsfile)
+  
+  sink(file = metricsfile,
+       append = FALSE,
+       type = "output",
+       split = FALSE
+       )
+  
+  cat("formula,AIC,BIC\n")
+  
+  sink()
+  
+  for (f in loglinear_formulae) {
+    # make an output directory for the output of this specific candidate model
+    f_outputdir = sprintf("%s/%s", logtime_outputdir, gsub(" ", "", f, fixed = TRUE))
+    mkdir(f_outputdir)
+    
+    # make the individual output file
+    summaryfile = sprintf("%s/summary.txt", f_outputdir)
+    
+    file.create(summaryfile)
+    
+    # print a delimiter for console output
+    cat(sprintf("\n---------------------------------------------\n%s\n", f))
+    
+    # fit the model
+    m = lmer(f, data = data, REML = FALSE)
+    
+    # send the model summary to the summary file
+    sink(file = summaryfile,
+         append = FALSE,
+         type = "output",
+         split = FALSE
+         )
+    
+    print(summary(m))
+    
+    sink()
+    
+    # send the AIC and BIC to the metrics file
+    metrics = sprintf("%s,%f,%f\n", f, AIC(m), BIC(m))
+    
+    sink(file = metricsfile,
+         append = TRUE,
+         type = "output",
+         split = FALSE)
+    
+    cat(metrics)
+    
+    sink()
+  }
+}
+```
+
+### Model selection
+
+```{r}
+# read in the AIC/BIC data
+# fin = sprintf("%s/LR_MWP_babytest3_log_time_model_summaries/metrics.csv", outputdir)
+fin = sprintf("%s/LR_v9-2_log_time_model_summaries/metrics.csv", outputdir)
+log_time_models_da <- read_csv(fin)
+```
+
+```{r}
+head(log_time_models_da[order(log_time_models_da$AIC),], n = 10)
+```
+
+```{r}
+head(log_time_models_da[order(log_time_models_da$BIC),], n = 10)
+```
+
+```{r}
+fA = log_time_models_da[order(log_time_models_da$AIC),]$formula[[1]]
+cat(fA)
+```
+
+```{r}
+fB = log_time_models_da[order(log_time_models_da$BIC),]$formula[[1]]
+cat(fB)
+```
+
+Check including TMS fixed effect
+
+```{r}
+m0 = lmer(fA, data = data, REML = FALSE)
+summary(m0)
+```
+
+```{r}
+f1 = paste(fA, ' + TMS_Type')
+
+m1 = lmer(f1, data = data, REML = FALSE)
+summary(m1)
+```
+
+The t-value of the TMS term indicates it is not significant, but we'll do a likelihood ratio test anyway:
+
+```{r}
+anova(m0, m1)
+```
+
+Indeed, it is not significant. Lastly, check for other low-AIC models:
+
+```{r}
+best_AIC <- log_time_models_da[order(log_time_models_da$AIC),]$AIC[[1]]
+best_AIC
+
+AIC_candidates <- log_time_models_da[log_time_models_da$AIC < best_AIC + 3,]
+AIC_candidates <- AIC_candidates[order(AIC_candidates$AIC),]
+AIC_candidates
+```
+
+```{r}
+# formulas with TMS fixed effect
+has_TMS <- grepl('TMS_Type ', AIC_candidates$formula, fixed = TRUE)
+AIC_candidates[has_TMS,]
+
+add_fixed_TMS <- paste0(AIC_candidates$formula, ' + TMS_Type')
+AIC_candidates$fixed_TMS_full <- ifelse(
+  has_TMS, AIC_candidates$formula, add_fixed_TMS)
+
+AIC_candidates$fixed_TMS_reduced <- str_remove_all(
+  AIC_candidates$formula, fixed('TMS_Type + '))
+AIC_candidates$fixed_TMS_reduced <- str_remove_all(
+  AIC_candidates$fixed_TMS_reduced, fixed('TMS_Type * '))
+
+AIC_candidates$fixed_TMS_reduced <- str_remove_all(
+  AIC_candidates$fixed_TMS_reduced, fixed(' + (1|participant_id:TMS_Type)'))
+AIC_candidates$fixed_TMS_reduced <- str_remove_all(
+  AIC_candidates$fixed_TMS_reduced, fixed(' + (1|problem_id:TMS_Type)'))
+```
+
+```{r}
+# debugging
+for (f in AIC_candidates[has_TMS,]$fixed_TMS_full){
+  cat(f, '\n')
+}
+cat('\n\n')
+for (f in AIC_candidates[has_TMS,]$fixed_TMS_reduced){
+  cat(f, '\n')
+}
+```
+
+```{r}
+AIC_candidates$fixed_TMS_pval <- -1.0
+for (i in seq_len(nrow(AIC_candidates))) {
+  m_full <- lmer(
+    AIC_candidates$fixed_TMS_full[i],
+    data = data,
+    REML = FALSE
+  )
+  m_reduced <- lmer(
+    AIC_candidates$fixed_TMS_reduced[i],
+    data = data,
+    REML = FALSE
+  )
+  a <- anova(m_full, m_reduced)
+  p_val <- a$"Pr(>Chisq)"[2]
+  AIC_candidates$fixed_TMS_pval[i] <- p_val
+}
+
+AIC_candidates[AIC_candidates$fixed_TMS_pval < 0.05,]
+```
+
+Now, manually check interaction terms and random effects:
+
+```{r}
+# 1. test fixed interaction - not significant
+f_full_tmp <- 'log(duration) ~ TMS_Type * session + (1|participant_id) + (1|problem_id)'
+f_red_tmp <- 'log(duration) ~ TMS_Type + session + (1|participant_id) + (1|problem_id)'
+
+m_full_tmp <- lmer(
+  f_full_tmp,
+  data = data,
+  REML = FALSE
+)
+m_reduced_tmp <- lmer(
+  f_red_tmp,
+  data = data,
+  REML = FALSE
+)
+summary(m_full_tmp)
+anova(m_full_tmp, m_reduced_tmp)
+```
+
+```{r}
+# 2. test random interaction with participant - not significant
+f_full_tmp <- 'log(duration) ~ TMS_Type + session + (1|participant_id) + (1|problem_id) + (1|participant_id:TMS_Type)'
+f_red_tmp <- 'log(duration) ~ TMS_Type + session + (1|participant_id) + (1|problem_id)'
+
+m_full_tmp <- lmer(
+  f_full_tmp,
+  data = data,
+  REML = FALSE
+)
+m_reduced_tmp <- lmer(
+  f_red_tmp,
+  data = data,
+  REML = FALSE
+)
+summary(m_full_tmp)
+```
+
+```{r}
+# 2. test random interaction with problem - not significant
+f_full_tmp <- 'log(duration) ~ TMS_Type + session + (1|participant_id) + (1|problem_id) + (1|problem_id:TMS_Type)'
+f_red_tmp <- 'log(duration) ~ TMS_Type + session + (1|participant_id) + (1|problem_id)'
+
+m_full_tmp <- lmer(
+  f_full_tmp,
+  data = data,
+  REML = FALSE
+)
+m_reduced_tmp <- lmer(
+  f_red_tmp,
+  data = data,
+  REML = FALSE
+)
+summary(m_full_tmp)
+```

@@ -1,0 +1,40 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(response.time) ~ TMS_Type * session * problem_order + (1 |  
+    participant_id) + (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  -1130.2   -1051.4     577.1   -1154.2      5269 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.3804 -0.6670 -0.1038  0.5473  4.8513 
+
+Random effects:
+ Groups                  Name        Variance  Std.Dev.
+ participant_id:TMS_Type (Intercept) 8.708e-03 0.093316
+ participant_id          (Intercept) 1.527e-02 0.123576
+ shown_letter:TMS_Type   (Intercept) 7.028e-06 0.002651
+ Residual                            4.529e-02 0.212823
+Number of obs: 5281, groups:  participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12
+
+Fixed effects:
+                                    Estimate Std. Error t value
+(Intercept)                       -0.5108222  0.0446128 -11.450
+TMS_TypeWM                         0.0508580  0.0619521   0.821
+session2                          -0.1212138  0.0619337  -1.957
+problem_order                     -0.0003615  0.0002067  -1.749
+TMS_TypeWM:session2                0.0341695  0.1104677   0.309
+TMS_TypeWM:problem_order          -0.0014609  0.0002867  -5.096
+session2:problem_order             0.0003237  0.0002870   1.128
+TMS_TypeWM:session2:problem_order  0.0007715  0.0004058   1.901
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM sessn2 prblm_ TMS_TyWM:2 TMS_TWM:_ sss2:_
+TMS_TypeWM  -0.720                                                   
+session2    -0.720  0.803                                            
+problem_rdr -0.234  0.168    0.168                                   
+TMS_TypWM:2  0.642 -0.892   -0.892 -0.094                            
+TMS_TypWM:_  0.169 -0.234   -0.121 -0.721  0.131                     
+sssn2:prbl_  0.168 -0.121   -0.234 -0.720  0.131      0.519          
+TMS_TWM:2:_ -0.119  0.165    0.165  0.509 -0.186     -0.706    -0.707

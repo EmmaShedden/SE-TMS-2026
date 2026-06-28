@@ -1,0 +1,40 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: 
+correctness ~ TMS_Type * problem_set * problem_order + coding_section_no +  
+    session + pain + physical_symptoms + discomfort + sensations +  
+    (1 | participant_id) + (1 | problem_id)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    363.9     424.1    -165.9     331.9       302 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.5081 -0.5530 -0.1636  0.5633  3.4483 
+
+Random effects:
+ Groups         Name        Variance Std.Dev.
+ participant_id (Intercept) 0.4175   0.6462  
+ problem_id     (Intercept) 3.4640   1.8612  
+Number of obs: 318, groups:  participant_id, 27; problem_id, 12
+
+Fixed effects:
+                                      Estimate Std. Error z value Pr(>|z|)  
+(Intercept)                           -2.33043    1.01907  -2.287   0.0222 *
+TMS_TypeWM                             1.05298    0.73983   1.423   0.1547  
+problem_setb                          -0.01750    1.14195  -0.015   0.9878  
+problem_order                          0.02161    0.17378   0.124   0.9010  
+coding_section_no                      0.22639    0.18670   1.213   0.2253  
+session                                0.42682    0.30023   1.422   0.1551  
+pain                                   0.62665    0.76690   0.817   0.4139  
+physical_symptoms                     -0.80103    0.71669  -1.118   0.2637  
+discomfort                            -1.02885    0.69419  -1.482   0.1383  
+sensations                             1.79621    0.70178   2.560   0.0105 *
+TMS_TypeWM:problem_setb               -0.62528    1.18730  -0.527   0.5984  
+TMS_TypeWM:problem_order               0.06751    0.24017   0.281   0.7786  
+problem_setb:problem_order            -0.03591    0.28024  -0.128   0.8980  
+TMS_TypeWM:problem_setb:problem_order -0.21787    0.36470  -0.597   0.5502  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

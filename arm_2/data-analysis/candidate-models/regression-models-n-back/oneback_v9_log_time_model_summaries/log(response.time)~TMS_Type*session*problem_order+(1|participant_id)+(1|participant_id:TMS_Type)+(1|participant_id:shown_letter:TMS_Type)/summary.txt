@@ -1,0 +1,40 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(response.time) ~ TMS_Type * session * problem_order + (1 |  
+    participant_id) + (1 | participant_id:TMS_Type) + (1 | participant_id:shown_letter:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  -1130.3   -1051.4     577.2   -1154.3      5269 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.3753 -0.6681 -0.1031  0.5474  4.8513 
+
+Random effects:
+ Groups                               Name        Variance  Std.Dev.
+ participant_id:shown_letter:TMS_Type (Intercept) 7.168e-05 0.008466
+ participant_id:TMS_Type              (Intercept) 8.693e-03 0.093239
+ participant_id                       (Intercept) 1.527e-02 0.123565
+ Residual                                         4.524e-02 0.212697
+Number of obs: 5281, groups:  participant_id:shown_letter:TMS_Type, 324; participant_id:TMS_Type, 54; participant_id, 27
+
+Fixed effects:
+                                    Estimate Std. Error t value
+(Intercept)                       -0.5108654  0.0445957 -11.455
+TMS_TypeWM                         0.0508453  0.0619272   0.821
+session2                          -0.1212056  0.0619282  -1.957
+problem_order                     -0.0003627  0.0002067  -1.755
+TMS_TypeWM:session2                0.0341502  0.1104576   0.309
+TMS_TypeWM:problem_order          -0.0014599  0.0002867  -5.092
+session2:problem_order             0.0003243  0.0002870   1.130
+TMS_TypeWM:session2:problem_order  0.0007714  0.0004059   1.901
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM sessn2 prblm_ TMS_TyWM:2 TMS_TWM:_ sss2:_
+TMS_TypeWM  -0.720                                                   
+session2    -0.720  0.803                                            
+problem_rdr -0.234  0.168    0.168                                   
+TMS_TypWM:2  0.642 -0.892   -0.892 -0.094                            
+TMS_TypWM:_  0.169 -0.234   -0.121 -0.721  0.131                     
+sssn2:prbl_  0.168 -0.121   -0.234 -0.720  0.131      0.519          
+TMS_TWM:2:_ -0.119  0.165    0.165  0.509 -0.186     -0.706    -0.707

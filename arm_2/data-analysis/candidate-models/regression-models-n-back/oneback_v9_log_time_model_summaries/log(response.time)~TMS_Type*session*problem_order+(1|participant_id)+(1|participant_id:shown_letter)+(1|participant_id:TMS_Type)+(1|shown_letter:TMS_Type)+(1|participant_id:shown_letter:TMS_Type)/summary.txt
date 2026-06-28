@@ -1,0 +1,47 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(response.time) ~ TMS_Type * session * problem_order + (1 |  
+    participant_id) + (1 | participant_id:shown_letter) + (1 |      participant_id:TMS_Type) + (1 | shown_letter:TMS_Type) +  
+    (1 | participant_id:shown_letter:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  -1126.3   -1034.3     577.2   -1154.3      5267 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.3782 -0.6676 -0.1041  0.5474  4.8528 
+
+Random effects:
+ Groups                               Name        Variance  Std.Dev.
+ participant_id:shown_letter:TMS_Type (Intercept) 6.690e-05 0.008179
+ participant_id:shown_letter          (Intercept) 0.000e+00 0.000000
+ participant_id:TMS_Type              (Intercept) 8.697e-03 0.093260
+ participant_id                       (Intercept) 1.527e-02 0.123582
+ shown_letter:TMS_Type                (Intercept) 4.791e-06 0.002189
+ Residual                                         4.524e-02 0.212696
+Number of obs: 5281, groups:  
+participant_id:shown_letter:TMS_Type, 324; participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12
+
+Fixed effects:
+                                    Estimate Std. Error t value
+(Intercept)                       -0.5108523  0.0446108 -11.451
+TMS_TypeWM                         0.0508138  0.0619488   0.820
+session2                          -0.1211754  0.0619368  -1.956
+problem_order                     -0.0003625  0.0002067  -1.754
+TMS_TypeWM:session2                0.0341236  0.1104730   0.309
+TMS_TypeWM:problem_order          -0.0014596  0.0002867  -5.091
+session2:problem_order             0.0003237  0.0002870   1.128
+TMS_TypeWM:session2:problem_order  0.0007717  0.0004058   1.902
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM sessn2 prblm_ TMS_TyWM:2 TMS_TWM:_ sss2:_
+TMS_TypeWM  -0.720                                                   
+session2    -0.720  0.803                                            
+problem_rdr -0.234  0.168    0.168                                   
+TMS_TypWM:2  0.642 -0.892   -0.892 -0.094                            
+TMS_TypWM:_  0.169 -0.234   -0.121 -0.721  0.131                     
+sssn2:prbl_  0.168 -0.121   -0.234 -0.720  0.131      0.519          
+TMS_TWM:2:_ -0.119  0.165    0.165  0.509 -0.186     -0.706    -0.707
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

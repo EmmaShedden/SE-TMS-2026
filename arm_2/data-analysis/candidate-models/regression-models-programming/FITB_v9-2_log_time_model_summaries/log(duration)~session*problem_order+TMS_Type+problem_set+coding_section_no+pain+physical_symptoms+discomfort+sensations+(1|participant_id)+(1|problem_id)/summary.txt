@@ -1,0 +1,45 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(duration) ~ session * problem_order + TMS_Type + problem_set +  
+    coding_section_no + pain + physical_symptoms + discomfort +      sensations + (1 | participant_id) + (1 | problem_id)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    422.3     477.0    -197.1     394.3       354 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.76838 -0.60678  0.00919  0.56955  2.96805 
+
+Random effects:
+ Groups         Name        Variance Std.Dev.
+ participant_id (Intercept) 0.1185   0.3442  
+ problem_id     (Intercept) 0.1652   0.4065  
+ Residual                   0.1182   0.3438  
+Number of obs: 368, groups:  participant_id, 27; problem_id, 22
+
+Fixed effects:
+                        Estimate Std. Error t value
+(Intercept)             3.920951   0.141526  27.705
+session2               -0.077001   0.065862  -1.169
+problem_order           0.008150   0.015956   0.511
+TMS_TypeWM              0.008682   0.050070   0.173
+problem_setb           -0.113884   0.137195  -0.830
+coding_section_no      -0.067001   0.023410  -2.862
+pain                    0.096034   0.147254   0.652
+physical_symptoms       0.096553   0.109971   0.878
+discomfort             -0.046386   0.110316  -0.420
+sensations              0.199849   0.108157   1.848
+session2:problem_order -0.005895   0.022225  -0.265
+
+Correlation of Fixed Effects:
+            (Intr) sessn2 prblm_r TMS_TW prblm_s cdng__ pain   physc_ dscmfr snstns
+session2    -0.164                                                                 
+problem_rdr -0.207  0.556                                                          
+TMS_TypeWM  -0.085 -0.028  0.014                                                   
+problem_stb -0.399 -0.128 -0.018  -0.111                                           
+cdng_sctn_n -0.307 -0.062 -0.131   0.066 -0.009                                    
+pain        -0.024  0.025 -0.010   0.072 -0.076  -0.027                            
+physcl_symp -0.023  0.085  0.020  -0.436  0.026  -0.036 -0.058                     
+discomfort   0.055  0.023 -0.009  -0.571  0.017  -0.034 -0.457  0.272              
+sensations  -0.081  0.119 -0.011   0.236 -0.162   0.034  0.309 -0.071 -0.409       
+sssn2:prbl_  0.136 -0.807 -0.705   0.004  0.031   0.084  0.004 -0.042  0.025  0.009

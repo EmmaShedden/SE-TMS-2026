@@ -1,0 +1,31 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(response.time) ~ session + problem_order + (1 | shown_letter) +      (1 | shown_letter:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    953.1     992.6    -470.6     941.1      5275 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-7.9422 -0.6874 -0.0743  0.5841  3.7811 
+
+Random effects:
+ Groups                Name        Variance  Std.Dev.
+ shown_letter:TMS_Type (Intercept) 0.000e+00 0.000000
+ shown_letter          (Intercept) 3.677e-05 0.006064
+ Residual                          6.994e-02 0.264464
+Number of obs: 5281, groups:  shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                Estimate Std. Error t value
+(Intercept)   -0.5039383  0.0085492 -58.946
+session2      -0.0669741  0.0072795  -9.200
+problem_order -0.0007461  0.0001260  -5.923
+
+Correlation of Fixed Effects:
+            (Intr) sessn2
+session2    -0.426       
+problem_rdr -0.744  0.001
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

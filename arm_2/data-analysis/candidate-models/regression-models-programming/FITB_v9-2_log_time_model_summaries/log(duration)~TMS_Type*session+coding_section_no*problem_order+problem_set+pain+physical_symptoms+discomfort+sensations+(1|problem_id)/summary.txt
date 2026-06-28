@@ -1,0 +1,46 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(duration) ~ TMS_Type * session + coding_section_no * problem_order +  
+    problem_set + pain + physical_symptoms + discomfort + sensations +      (1 | problem_id)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    599.0     653.7    -285.5     571.0       354 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.9444 -0.6566  0.0162  0.6276  3.3394 
+
+Random effects:
+ Groups     Name        Variance Std.Dev.
+ problem_id (Intercept) 0.2138   0.4623  
+ Residual               0.2359   0.4857  
+Number of obs: 368, groups:  problem_id, 22
+
+Fixed effects:
+                                 Estimate Std. Error t value
+(Intercept)                      3.861281   0.172258  22.416
+TMS_TypeWM                      -0.171968   0.094434  -1.821
+session2                        -0.286741   0.080556  -3.560
+coding_section_no               -0.058838   0.055129  -1.067
+problem_order                    0.012517   0.042729   0.293
+problem_setb                     0.217184   0.151980   1.429
+pain                            -0.122991   0.113191  -1.087
+physical_symptoms                0.088793   0.117443   0.756
+discomfort                       0.057316   0.111288   0.515
+sensations                       0.017324   0.104217   0.166
+TMS_TypeWM:session2              0.365998   0.117694   3.110
+coding_section_no:problem_order -0.001632   0.018898  -0.086
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM sessn2 cdng__ prblm_r prblm_s pain   physc_ dscmfr snstns TMS_TWM:
+TMS_TypeWM  -0.189                                                                            
+session2    -0.161  0.568                                                                     
+cdng_sctn_n -0.605 -0.011   -0.071                                                            
+problem_rdr -0.518 -0.001   -0.067  0.731                                                     
+problem_stb -0.331 -0.164   -0.198 -0.025 -0.031                                              
+pain        -0.095  0.352    0.278  0.042  0.021  -0.114                                      
+physcl_symp  0.043 -0.396   -0.102 -0.026 -0.029   0.033  -0.393                              
+discomfort   0.144 -0.542   -0.212 -0.094 -0.089   0.028  -0.433  0.369                       
+sensations  -0.135  0.428    0.410  0.032  0.040  -0.182   0.373 -0.148 -0.473                
+TMS_TypWM:2  0.147 -0.766   -0.752  0.028 -0.001   0.156  -0.364  0.219  0.342 -0.417         
+cdng_sct_:_  0.489  0.005    0.059 -0.812 -0.931   0.028  -0.049  0.037  0.105 -0.041  0.007  

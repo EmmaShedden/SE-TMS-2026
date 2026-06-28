@@ -1,0 +1,59 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correctness ~ session * problem_set + TMS_Type + coding_section_no +  
+    problem_order + pain + physical_symptoms + discomfort + sensations +  
+    (1 | problem_id)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    362.2     407.3    -169.1     338.2       306 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.6920 -0.6138 -0.1832  0.6075  3.2324 
+
+Random effects:
+ Groups     Name        Variance Std.Dev.
+ problem_id (Intercept) 3.009    1.735   
+Number of obs: 318, groups:  problem_id, 12
+
+Fixed effects:
+                     Estimate Std. Error z value Pr(>|z|)  
+(Intercept)          -1.35321    0.93049  -1.454   0.1459  
+session               0.14465    0.38319   0.377   0.7058  
+problem_setb         -1.48006    1.13362  -1.306   0.1917  
+TMS_TypeWM            0.76154    0.32661   2.332   0.0197 *
+coding_section_no     0.18056    0.17651   1.023   0.3063  
+problem_order        -0.02243    0.08424  -0.266   0.7901  
+pain                  0.33442    0.59788   0.559   0.5759  
+physical_symptoms    -1.07195    0.62279  -1.721   0.0852 .
+discomfort           -1.07271    0.58413  -1.836   0.0663 .
+sensations            1.35357    0.52951   2.556   0.0106 *
+session:problem_setb  0.54153    0.57227   0.946   0.3440  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) sessin prblm_s TMS_TW cdng__ prblm_r pain   physc_ dscmfr
+session     -0.566                                                          
+problem_stb -0.464  0.399                                                   
+TMS_TypeWM  -0.074 -0.077 -0.127                                            
+cdng_sctn_n -0.406  0.010  0.012   0.002                                    
+problem_rdr -0.148 -0.015 -0.031  -0.038 -0.079                             
+pain        -0.049  0.067  0.043   0.114 -0.021 -0.028                      
+physcl_symp -0.090  0.176  0.060  -0.349  0.021 -0.001  -0.245              
+discomfort   0.012  0.052 -0.008  -0.449 -0.014  0.087  -0.390  0.302       
+sensations  -0.101  0.107 -0.092   0.207  0.006 -0.050   0.255 -0.044 -0.399
+sssn:prblm_  0.363 -0.665 -0.708   0.100  0.008  0.002  -0.109 -0.112 -0.030
+            snstns
+session           
+problem_stb       
+TMS_TypeWM        
+cdng_sctn_n       
+problem_rdr       
+pain              
+physcl_symp       
+discomfort        
+sensations        
+sssn:prblm_  0.008

@@ -1,0 +1,44 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(duration) ~ session * problem_order + TMS_Type + problem_set +  
+    coding_section_no + pain + physical_symptoms + discomfort +      sensations + (1 | problem_id)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    606.4     657.2    -290.2     580.4       355 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.0149 -0.7185 -0.0149  0.6106  3.4373 
+
+Random effects:
+ Groups     Name        Variance Std.Dev.
+ problem_id (Intercept) 0.1901   0.436   
+ Residual               0.2440   0.494   
+Number of obs: 368, groups:  problem_id, 22
+
+Fixed effects:
+                        Estimate Std. Error t value
+(Intercept)             3.794491   0.147897  25.656
+session2               -0.083885   0.091838  -0.913
+problem_order           0.011196   0.022487   0.498
+TMS_TypeWM              0.053010   0.061728   0.859
+problem_setb            0.116001   0.147474   0.787
+coding_section_no      -0.068211   0.032721  -2.085
+pain                    0.003453   0.107053   0.032
+physical_symptoms       0.011638   0.116561   0.100
+discomfort             -0.059538   0.105706  -0.563
+sensations              0.150744   0.096395   1.564
+session2:problem_order -0.005101   0.031293  -0.163
+
+Correlation of Fixed Effects:
+            (Intr) sessn2 prblm_r TMS_TW prblm_s cdng__ pain   physc_ dscmfr snstns
+session2    -0.252                                                                 
+problem_rdr -0.286  0.560                                                          
+TMS_TypeWM  -0.147 -0.030  0.007                                                   
+problem_stb -0.424 -0.076 -0.015  -0.066                                           
+cdng_sctn_n -0.416 -0.055 -0.136   0.051 -0.011                                    
+pain        -0.022 -0.007 -0.059   0.123 -0.062   0.029                            
+physcl_symp -0.017  0.092  0.042  -0.366 -0.002  -0.009 -0.343                     
+discomfort   0.058  0.030  0.008  -0.468 -0.033  -0.036 -0.349  0.318              
+sensations  -0.062  0.051 -0.032   0.187 -0.129   0.028  0.259 -0.065 -0.384       
+sssn2:prbl_  0.201 -0.811 -0.708   0.022  0.005   0.073  0.017 -0.045  0.008  0.057

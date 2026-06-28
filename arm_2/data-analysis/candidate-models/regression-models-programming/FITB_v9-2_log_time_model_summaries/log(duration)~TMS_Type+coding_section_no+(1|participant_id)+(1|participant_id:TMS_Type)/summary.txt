@@ -1,0 +1,28 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(duration) ~ TMS_Type + coding_section_no + (1 | participant_id) +      (1 | participant_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    612.2     635.7    -300.1     600.2       362 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.54346 -0.69937  0.02097  0.61373  3.13379 
+
+Random effects:
+ Groups                  Name        Variance Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.01293  0.1137  
+ participant_id          (Intercept) 0.10974  0.3313  
+ Residual                            0.25394  0.5039  
+Number of obs: 368, groups:  participant_id:TMS_Type, 53; participant_id, 27
+
+Fixed effects:
+                  Estimate Std. Error t value
+(Intercept)        3.64720    0.10335  35.291
+TMS_TypeWM        -0.03365    0.06230  -0.540
+coding_section_no -0.02172    0.03320  -0.654
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW
+TMS_TypeWM  -0.321       
+cdng_sctn_n -0.660  0.031

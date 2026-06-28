@@ -1,0 +1,29 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(duration) ~ coding_section_no * discomfort + (1 | participant_id)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    281.5     298.5    -134.7     269.5       119 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.0697 -0.7338  0.1695  0.8214  1.9619 
+
+Random effects:
+ Groups         Name        Variance Std.Dev.
+ participant_id (Intercept) 0.06549  0.2559  
+ Residual                   0.45432  0.6740  
+Number of obs: 125, groups:  participant_id, 26
+
+Fixed effects:
+                             Estimate Std. Error t value
+(Intercept)                    3.9454     0.2210  17.857
+coding_section_no              0.1178     0.0910   1.294
+discomfort                     0.7207     0.5805   1.242
+coding_section_no:discomfort  -0.3544     0.2406  -1.473
+
+Correlation of Fixed Effects:
+            (Intr) cdng__ dscmfr
+cdng_sctn_n -0.924              
+discomfort  -0.367  0.354       
+cdng_sctn_:  0.350 -0.382 -0.940

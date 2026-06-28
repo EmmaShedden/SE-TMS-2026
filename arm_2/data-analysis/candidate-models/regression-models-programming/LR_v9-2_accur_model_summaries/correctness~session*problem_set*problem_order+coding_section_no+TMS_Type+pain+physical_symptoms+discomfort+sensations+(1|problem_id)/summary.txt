@@ -1,0 +1,43 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: 
+correctness ~ session * problem_set * problem_order + coding_section_no +  
+    TMS_Type + pain + physical_symptoms + discomfort + sensations +  
+    (1 | problem_id)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    363.7     420.2    -166.9     333.7       303 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.6050 -0.5957 -0.1947  0.5513  3.4751 
+
+Random effects:
+ Groups     Name        Variance Std.Dev.
+ problem_id (Intercept) 3.196    1.788   
+Number of obs: 318, groups:  problem_id, 12
+
+Fixed effects:
+                                   Estimate Std. Error z value Pr(>|z|)  
+(Intercept)                        -1.64418    1.26508  -1.300   0.1937  
+session                             0.23811    0.65327   0.364   0.7155  
+problem_setb                       -2.99569    1.72280  -1.739   0.0821 .
+problem_order                       0.07520    0.37175   0.202   0.8397  
+coding_section_no                   0.20263    0.17970   1.128   0.2595  
+TMS_TypeWM                          0.73645    0.32930   2.236   0.0253 *
+pain                                0.31599    0.61716   0.512   0.6086  
+physical_symptoms                  -0.93901    0.62604  -1.500   0.1336  
+discomfort                         -1.00522    0.59617  -1.686   0.0918 .
+sensations                          1.34810    0.53840   2.504   0.0123 *
+session:problem_setb                1.69801    1.00569   1.688   0.0913 .
+session:problem_order              -0.03343    0.22806  -0.147   0.8835  
+problem_setb:problem_order          0.61242    0.55507   1.103   0.2699  
+session:problem_setb:problem_order -0.48546    0.34851  -1.393   0.1636  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.0057724 (tol = 0.002, component 1)
+  See ?lme4::convergence and ?lme4::troubleshooting.
+

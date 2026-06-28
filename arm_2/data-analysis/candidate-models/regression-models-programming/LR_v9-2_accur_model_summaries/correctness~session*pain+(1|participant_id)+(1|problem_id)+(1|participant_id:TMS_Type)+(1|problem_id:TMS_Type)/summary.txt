@@ -1,0 +1,36 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: correctness ~ session * pain + (1 | participant_id) + (1 | problem_id) +      (1 | participant_id:TMS_Type) + (1 | problem_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    360.8     390.9    -172.4     344.8       310 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.3811 -0.5629 -0.1913  0.6009  2.2720 
+
+Random effects:
+ Groups                  Name        Variance  Std.Dev.
+ participant_id:TMS_Type (Intercept) 3.510e-01 0.592463
+ participant_id          (Intercept) 3.328e-01 0.576904
+ problem_id:TMS_Type     (Intercept) 8.387e-06 0.002896
+ problem_id              (Intercept) 3.378e+00 1.837986
+Number of obs: 318, groups:  participant_id:TMS_Type, 53; participant_id, 27; problem_id:TMS_Type, 24; problem_id, 12
+
+Fixed effects:
+              Estimate Std. Error z value Pr(>|z|)
+(Intercept)    -0.9783     0.6051  -1.617    0.106
+session2        0.3553     0.3442   1.032    0.302
+pain           -0.3400     0.9674  -0.351    0.725
+session2:pain   0.1496     1.3365   0.112    0.911
+
+Correlation of Fixed Effects:
+            (Intr) sessn2 pain  
+session2    -0.287              
+pain        -0.116  0.198       
+session2:pn  0.077 -0.294 -0.665
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.0057822 (tol = 0.002, component 1)
+  See ?lme4::convergence and ?lme4::troubleshooting.
+

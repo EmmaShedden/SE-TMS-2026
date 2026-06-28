@@ -1,0 +1,454 @@
+---
+title: "FITB RT Analysis"
+output: html_document
+date: "2026-05-19"
+---
+
+## Packages
+
+```{r}
+# import packages
+library(lme4)     # mixed models
+library(dplyr)    # dataframe manipulation
+library(readr)    # reading in the data
+library(emmeans)  # likelihood ratio testing
+library(purrr)    # for map()
+library(lattice)  # for xyplot()
+library(TAF)      # setting up output file directory structure during model fitting
+library(moments)  # skewness for selecting between additive and multiplicative models of response times
+library(stringr)
+
+
+#If you get an error, you likely need to install the packages using the "install.package('insert-package-name-here')" command
+```
+
+## Notebook configurable settings
+
+```{r}
+# name the directories to read data from and write output to
+input_version = 9
+output_version = 'programming'
+program_type = 'short'
+```
+
+make an overall output directory (model summaries, stats, etc. will all go here)
+
+```{r}
+outputdir = sprintf("%s/../journal-candidate-models/regression-models-%s",getwd(), output_version)
+```
+
+```{r}
+mkdir(outputdir)
+```
+
+## Loading Data
+
+```{r}
+input_file = sprintf("%s/../preprocessed-data/full-data-version-%d/programming-full-data.csv", getwd(), input_version)
+data <- read.csv(input_file)
+
+#Transforming the session number such that it is treated as a character and not a value
+data <- transform( 
+  data, session = as.character(session)) 
+
+#data
+```
+
+Removing irrelevant data from dataframe
+
+```{r}
+#remove rows that have no values 
+data <- data[data$duration > 1, ] 
+
+#Removing the one participants that didn't listen to instructions:
+participants_to_remove <- c("5ZCK")
+data <- subset(data, !(participant_id %in% participants_to_remove))
+```
+
+# Looking at FITB and the passed ones only
+
+```{r}
+table(data$accuracy)
+```
+
+```{r}
+data <- data[data$problem_type == program_type, ] 
+```
+
+```{r}
+data <- data[data$accuracy == 'Pass', ]
+```
+
+```{r}
+mean_value <- mean((data$duration))
+print(mean_value)
+```
+
+```{r}
+print(skewness(data$duration))
+print(skewness(log(data$duration)))
+```
+
+```{r}
+hist(log(data$duration))
+```
+
+```{r}
+#Make sure you have n=27 participants
+
+id <- unique(data$participant_id)
+id #all unique IDs
+length(id) #number of participants
+```
+
+distribution of number of problems succesffully completed by participants
+
+```{r}
+count_table <- table(data$TMS_Type, data$participant_id)
+
+print(count_table)
+```
+
+## Select independent variables
+
+1.  `participant_id` (person) : random intercept
+    -   People are drawn from an underlying distribution; we aren't interested in learning coefficients specific to the members of our sample, but rather in what they tell us about that underlying population. Random effects tell us about the distribution rather than the elements observed.
+
+    -   This variable is used to model person-specific attributes, such as a "skill," translating to overall faster or slower response times, that can be different for each person
+2.  `problem_id` (question prompt) : random intercept
+    -   The underlying distribution of stimuli is a little less clear than that of participants. This variable can be thought of as modeling the dispersion of question-specific difficulties.
+3.  `TMS_Type` (TMS treatment condition, i.e. brain region stimulated) : fixed & random intercepts
+    -   Based on previous literature, we hypothesize that the brain region stimulated may have an effect that is systematic (i.e. very consistent between people, topics, etc.), quantitatively heterogeneous (i.e. directionally consistent, but widely varying in magnitude), or even a qualitatively heterogeneous (i.e. varying in direction, possibly in conjunction with magnitude). Therefore, we assess the goodness of fit for candidate models containing `TMS_Type` as a fixed effect, random effect, both, or neither, in order to test this hypothesis.
+4.  `session`and 'coding_section_no' (chronological numbering of the session, per participant) : fixed intercept
+    -   This is used to account for learning/training effect, i.e. participants getting better at test-taking under our specific test instrument over the course of the study. For example, they may become more familiar with the question structure, or become better at recalling old material as they do more practice questions. We expect this to be systematic (uniformly decreasing response time), so we model it as a fixed effect.
+
+## Specify candidate predictor structures for mixed model formulas
+
+```{r}
+fixed_effects = c(
+  # no fixed effects
+  "", 
+  
+  # no interactions
+  "TMS_Type", 
+  "session", 
+  "coding_section_no", 
+  "problem_order", 
+  "problem_set", 
+  
+  "pain",
+  "physical_symptoms",
+  "discomfort", 
+  "sensations",
+  
+  "TMS_Type + session",
+  "TMS_Type + coding_section_no",
+  "TMS_Type + problem_order",
+  "TMS_Type + problem_set",
+  "session + coding_section_no",
+  "session + problem_order",
+  "session + problem_set",
+  "problem_set + coding_section_no",
+  "problem_set + problem_order",
+  "coding_section_no + problem_order",
+  
+  "TMS_Type + pain",
+  "TMS_Type + physical_symptoms",
+  "TMS_Type + discomfort",
+  "TMS_Type + sensations",
+  "session + pain",
+  "session + physical_symptoms",
+  "session + discomfort",
+  "session + sensations",
+  "coding_section_no + pain",
+  "coding_section_no + physical_symptoms",
+  "coding_section_no + discomfort",
+  "coding_section_no + sensations",
+  "problem_order + pain",
+  "problem_order + physical_symptoms",
+  "problem_order + discomfort",
+  "problem_order + sensations",
+  "problem_set + pain",
+  "problem_set + physical_symptoms",
+  "problem_set + discomfort",
+  "problem_set + sensations",
+  
+  "TMS_Type + session + coding_section_no + problem_order + problem_set + pain + physical_symptoms + discomfort + sensations",
+  
+  # 2-way interactions
+  "TMS_Type * session",
+  "TMS_Type * coding_section_no",
+  "TMS_Type * problem_order",
+  "TMS_Type * problem_set",
+  "session * coding_section_no",
+  "session * problem_order",
+  "session * problem_set",
+  "problem_set * coding_section_no",
+  "problem_set * problem_order",
+  "coding_section_no * problem_order",
+
+  "TMS_Type * pain",
+  "TMS_Type * physical_symptoms",
+  "TMS_Type * discomfort",
+  "TMS_Type * sensations", 
+  "session * pain",
+  "session * physical_symptoms",
+  "session * discomfort",
+  "session * sensations",
+  "coding_section_no * pain",
+  "coding_section_no * physical_symptoms",
+  "coding_section_no * discomfort",
+  "coding_section_no * sensations",
+  "problem_order * pain",
+  "problem_order * physical_symptoms",
+  "problem_order * discomfort",
+  "problem_order * sensations",
+  "problem_set * pain",
+  "problem_set * physical_symptoms",
+  "problem_set * discomfort",
+  "problem_set * sensations",
+  
+  # 1- and 2-way interactions
+  "TMS_Type * session + problem_set + coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_set + session + coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * coding_section_no + session + problem_set + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_order + session + problem_set + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "session * problem_set + TMS_Type + coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "session * coding_section_no + TMS_Type + problem_set + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "session * problem_order + TMS_Type + problem_set + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "problem_set * coding_section_no + TMS_Type + session + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "problem_set * problem_order + TMS_Type + session + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "coding_section_no * problem_order + TMS_Type + session + problem_set + pain + physical_symptoms + discomfort + sensations",
+  
+  "TMS_Type * pain + session + problem_set + coding_section_no + problem_order",
+  "TMS_Type * physical_symptoms + session + problem_set + coding_section_no + problem_order",
+  "TMS_Type * discomfort + session + problem_set + coding_section_no + problem_order",
+  "TMS_Type * sensations + session + problem_set + coding_section_no + problem_order", 
+  
+  # multiple 2-way interactions
+  "TMS_Type * session + problem_set * coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * session + problem_set * problem_order + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * session + coding_section_no * problem_order + problem_set + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_set + session * coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_set + session * problem_order + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_set + coding_section_no * problem_order + session + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * coding_section_no + session * problem_set + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * coding_section_no + session * problem_order + problem_set + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * coding_section_no + problem_set * problem_order + session + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_order + session * problem_set + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_order + session * coding_section_no + problem_set + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_order + problem_set * coding_section_no + session + pain + physical_symptoms + discomfort + sensations",
+  "session * problem_set + coding_section_no * problem_order + TMS_Type + pain + physical_symptoms + discomfort + sensations",
+  "session * coding_section_no + problem_set * problem_order + TMS_Type + pain + physical_symptoms + discomfort + sensations",
+  "session * problem_order + problem_set * coding_section_no + TMS_Type + pain + physical_symptoms + discomfort + sensations",
+  
+  # 3-way interactions
+  "TMS_Type * session * problem_set + coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations", 
+  "TMS_Type * session * coding_section_no + problem_set + problem_order + pain + physical_symptoms + discomfort + sensations", 
+  "TMS_Type * session * problem_order + problem_set + coding_section_no + pain + physical_symptoms + discomfort + sensations", 
+  "TMS_Type * problem_set * coding_section_no + problem_order + session + pain + physical_symptoms + discomfort + sensations", 
+  "TMS_Type * problem_set * problem_order + coding_section_no + session + pain + physical_symptoms + discomfort + sensations", 
+  "TMS_Type * coding_section_no * problem_order + session + problem_set + pain + physical_symptoms + discomfort + sensations", 
+  "session * problem_set * coding_section_no + problem_order + TMS_Type + pain + physical_symptoms + discomfort + sensations", 
+  "session * problem_set * problem_order + coding_section_no + TMS_Type + pain + physical_symptoms + discomfort + sensations", 
+  "session * coding_section_no * problem_order + TMS_Type + problem_set + pain + physical_symptoms + discomfort + sensations", 
+  "problem_set * coding_section_no * problem_order + TMS_Type + session + pain + physical_symptoms + discomfort + sensations"
+)
+```
+
+```{r}
+random_effects = c(
+  "participant_id", 
+  "problem_id", 
+  "participant_id:TMS_Type",
+  "problem_id:TMS_Type"
+)
+```
+
+In this first cell, we enumerate random effect structures by taking all combinations of the random effects specified.
+
+```{r}
+random_effects = map(random_effects, function (s) sprintf("(1|%s)", s))
+
+random_exprs = c()
+N_random = length(random_effects)
+for (k in 1:N_random) {
+  iii = combn(1:N_random, k, simplify=FALSE)
+  for (ii in iii) {
+    expr = paste(random_effects[ii], collapse = " + ")
+    random_exprs = append(random_exprs, expr)
+  }
+}
+```
+
+Now, we combine the response variable, fixed effects, and random effects together to generate our candidate model structures.
+
+```{r}
+loglinear_formulae = c()
+for (fe in fixed_effects) {
+  for (re in random_exprs) {
+    f = ""
+    if (fe == "") {
+      f = sprintf("log(duration) ~ %s", re)
+    } else {
+      f = sprintf("log(duration) ~ %s + %s", fe, re)
+    }
+    loglinear_formulae = append(loglinear_formulae, f)
+  }
+}
+
+print(length(loglinear_formulae))
+```
+
+Filter out invalid model specifications
+
+```{r}
+# generate all the boolean index vectors
+
+# formulas with TMS fixed effect
+has_TMS <- grepl('TMS_Type ', loglinear_formulae, fixed = TRUE)
+
+# formulas with participant random effect
+has_participant <- grepl('(1|participant_id)', loglinear_formulae, fixed = TRUE)
+
+# formulas with problem random effect
+has_problem <- grepl('(1|problem_id)', loglinear_formulae, fixed = TRUE)
+
+# formulas with TMS x participant random effect
+has_TMS_participant <- grepl('(1|participant_id:TMS_Type)', loglinear_formulae, fixed = TRUE)
+
+# formulas with TMS x problem random effect
+has_TMS_problem <- grepl('(1|problem_id:TMS_Type)', loglinear_formulae, fixed = TRUE)
+
+# remove them
+
+invalid <- (has_TMS_participant & (!has_TMS | !has_participant)) | (has_TMS_problem & (!has_TMS | !has_problem))
+
+invalid_loglinear_formulae <- loglinear_formulae[invalid]
+loglinear_formulae <- loglinear_formulae[!invalid]
+
+print(length(loglinear_formulae))
+```
+
+### Model fitting (\~2 minutes)
+
+Here, we fit all the models. Of note, we use MLE rather than REML for compatibility with the AIC model selection strategy.
+
+We also store BIC (an alternative model selection criterion) in addition to AIC here. The two have different theoretical properties, both of which may be useful. Both describe the log likelihood of a fitted model, with a penalty for model complexity. The penalty in BIC is higher than that for AIC, so optimal-BIC models tend to be smaller (with fewer parameters) than optimal-AIC models. We have done our analysis relying on AIC, but we provide BIC-based model selection here in case the reader is interested.
+
+```{r cache=TRUE}
+if (TRUE) {
+  # make an output directory for the output of all the candidate linear models
+  logtime_outputdir = 
+    sprintf("%s/FITB_v9-2_log_time_model_summaries", outputdir)
+  mkdir(logtime_outputdir)
+  
+  # make an output file for the AIC and BIC of each model
+  metricsfile = sprintf("%s/metrics.csv", logtime_outputdir)
+  file.create(metricsfile)
+  
+  sink(file = metricsfile,
+       append = FALSE,
+       type = "output",
+       split = FALSE
+       )
+  
+  cat("formula,AIC,BIC\n")
+  
+  sink()
+  
+  for (f in loglinear_formulae) {
+    # make an output directory for the output of this specific candidate model
+    f_outputdir = sprintf("%s/%s", logtime_outputdir, gsub(" ", "", f, fixed = TRUE))
+    mkdir(f_outputdir)
+    
+    # make the individual output file
+    summaryfile = sprintf("%s/summary.txt", f_outputdir)
+    
+    file.create(summaryfile)
+    
+    # print a delimiter for console output
+    cat(sprintf("\n---------------------------------------------\n%s\n", f))
+    
+    # fit the model
+    m = lmer(f, data=data, REML=FALSE)
+    
+    # send the model summary to the summary file
+    sink(file = summaryfile,
+         append = FALSE,
+         type = "output",
+         split = FALSE
+         )
+    
+    print(summary(m))
+    
+    sink()
+    
+    # send the AIC and BIC to the metrics file
+    metrics = sprintf("%s,%f,%f\n", f, AIC(m), BIC(m))
+    
+    sink(file = metricsfile,
+         append = TRUE,
+         type = "output",
+         split = FALSE)
+    
+    cat(metrics)
+    
+    sink()
+  }
+}
+```
+
+### Model selection
+
+```{r}
+# read in the AIC/BIC data
+fin = sprintf("%s/FITB_v9-2_log_time_model_summaries/metrics.csv", outputdir)
+log_time_models_da = read_csv(fin)
+```
+
+```{r}
+head(log_time_models_da[order(log_time_models_da$AIC),], n = 10)
+```
+
+```{r}
+head(log_time_models_da[order(log_time_models_da$BIC),], n = 10)
+```
+
+```{r}
+fA = log_time_models_da[order(log_time_models_da$AIC),]$formula[[1]]
+cat(fA)
+```
+
+```{r}
+fB = log_time_models_da[order(log_time_models_da$BIC),]$formula[[1]]
+cat(fB)
+```
+
+AIC and BIC both choose `log(duration) ~ session + coding_section_no + (1|participant_id) + (1|problem_id)`, which does not have TMS as an effect.
+
+```{r}
+m0 = lmer(fA, data=data, REML=FALSE)
+summary(m0)
+```
+
+Test whether including TMS improves the model.
+
+```{r}
+f1 = paste(fA, ' + TMS_Type')
+
+m1 = lmer(f1, data=data, REML=FALSE)
+summary(m1)
+```
+
+We now check if the difference is statistically significant.
+
+```{r}
+anova(m0,m1)
+```
+
+Adding a TMS fixed effect term does not improve the model fit so our final model is
+
+`log(duration) ~ session + coding_section_no + (1 | participant_id) + (1 | problem_id)`
+
+There is no model (favored by AIC or BIC) with a systematic or non-systematic effect of TMS

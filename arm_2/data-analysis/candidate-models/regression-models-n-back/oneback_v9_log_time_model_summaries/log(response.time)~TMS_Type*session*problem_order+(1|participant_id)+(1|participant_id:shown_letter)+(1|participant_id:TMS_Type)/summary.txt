@@ -1,0 +1,43 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(response.time) ~ TMS_Type * session * problem_order + (1 |  
+    participant_id) + (1 | participant_id:shown_letter) + (1 |      participant_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  -1130.2   -1051.4     577.1   -1154.2      5269 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.3762 -0.6687 -0.1024  0.5475  4.8489 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev. 
+ participant_id:shown_letter (Intercept) 1.269e-11 3.562e-06
+ participant_id:TMS_Type     (Intercept) 8.705e-03 9.330e-02
+ participant_id              (Intercept) 1.527e-02 1.236e-01
+ Residual                                4.530e-02 2.128e-01
+Number of obs: 5281, groups:  participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27
+
+Fixed effects:
+                                    Estimate Std. Error t value
+(Intercept)                       -0.5108392  0.0445989 -11.454
+TMS_TypeWM                         0.0509119  0.0619319   0.822
+session2                          -0.1212653  0.0619325  -1.958
+problem_order                     -0.0003617  0.0002067  -1.750
+TMS_TypeWM:session2                0.0342159  0.1104686   0.310
+TMS_TypeWM:problem_order          -0.0014614  0.0002867  -5.098
+session2:problem_order             0.0003248  0.0002870   1.132
+TMS_TypeWM:session2:problem_order  0.0007710  0.0004058   1.900
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM sessn2 prblm_ TMS_TyWM:2 TMS_TWM:_ sss2:_
+TMS_TypeWM  -0.720                                                   
+session2    -0.720  0.803                                            
+problem_rdr -0.234  0.168    0.168                                   
+TMS_TypWM:2  0.642 -0.892   -0.892 -0.094                            
+TMS_TypWM:_  0.169 -0.234   -0.121 -0.721  0.131                     
+sssn2:prbl_  0.168 -0.121   -0.234 -0.720  0.131      0.519          
+TMS_TWM:2:_ -0.119  0.165    0.165  0.509 -0.186     -0.706    -0.707
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

@@ -1,0 +1,43 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correctness ~ TMS_Type * physical_symptoms + session + problem_set +  
+    coding_section_no + problem_order + (1 | problem_id) + (1 |  
+    problem_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    364.6     398.5    -173.3     346.6       309 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.3136 -0.6427 -0.1940  0.6790  2.3481 
+
+Random effects:
+ Groups              Name        Variance Std.Dev.
+ problem_id:TMS_Type (Intercept) 0.01731  0.1316  
+ problem_id          (Intercept) 2.78494  1.6688  
+Number of obs: 318, groups:  problem_id:TMS_Type, 24; problem_id, 12
+
+Fixed effects:
+                  Estimate Std. Error z value Pr(>|z|)  
+(Intercept)       -1.49770    0.84790  -1.766   0.0773 .
+TMS_TypeWM         0.44445    0.29085   1.528   0.1265  
+physical_symptoms -0.80428    0.56796  -1.416   0.1567  
+session            0.31794    0.27649   1.150   0.2502  
+problem_setb      -0.56039    0.77528  -0.723   0.4698  
+coding_section_no  0.18181    0.17644   1.030   0.3028  
+problem_order     -0.00573    0.08358  -0.069   0.9453  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW physc_ sessin prblm_s cdng__
+TMS_TypeWM  -0.129                                    
+physcl_symp -0.058 -0.255                             
+session     -0.461  0.004  0.121                      
+problem_stb -0.346 -0.105 -0.008 -0.102               
+cdng_sctn_n -0.452  0.000  0.025  0.018  0.038        
+problem_rdr -0.151  0.002 -0.029 -0.022 -0.051  -0.098
+fit warnings:
+fixed-effect model matrix is rank deficient so dropping 1 column / coefficient

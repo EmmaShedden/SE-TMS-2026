@@ -1,0 +1,42 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: correctness ~ TMS_Type * session * coding_section_no + (1 | participant_id) +      (1 | problem_id)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    361.8     399.4    -170.9     341.8       308 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.4670 -0.5621 -0.1910  0.6109  2.5616 
+
+Random effects:
+ Groups         Name        Variance Std.Dev.
+ participant_id (Intercept) 0.445    0.6671  
+ problem_id     (Intercept) 3.140    1.7720  
+Number of obs: 318, groups:  participant_id, 27; problem_id, 12
+
+Fixed effects:
+                                       Estimate Std. Error z value Pr(>|z|)
+(Intercept)                           -1.485590   1.035343  -1.435    0.151
+TMS_TypeWM                            -0.096484   1.216948  -0.079    0.937
+session2                              -0.076375   1.246904  -0.061    0.951
+coding_section_no                      0.266739   0.374533   0.712    0.476
+TMS_TypeWM:session2                    1.320471   1.743010   0.758    0.449
+TMS_TypeWM:coding_section_no          -0.009709   0.511159  -0.019    0.985
+session2:coding_section_no            -0.012710   0.526230  -0.024    0.981
+TMS_TypeWM:session2:coding_section_no -0.191738   0.717451  -0.267    0.789
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM sessn2 cdng__ TMS_TyWM:2 TMS_TWM:_ ss2:__
+TMS_TypeWM  -0.642                                                   
+session2    -0.611  0.555                                            
+cdng_sctn_n -0.797  0.690    0.657                                   
+TMS_TypWM:2  0.459 -0.727   -0.749 -0.478                            
+TMS_TyWM:__  0.595 -0.922   -0.493 -0.745  0.640                     
+sssn2:cdn__  0.561 -0.492   -0.922 -0.706  0.664      0.530          
+TMS_TWM:2:_ -0.418  0.654    0.680  0.528 -0.898     -0.709    -0.738
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.00252373 (tol = 0.002, component 1)
+  See ?lme4::convergence and ?lme4::troubleshooting.
+

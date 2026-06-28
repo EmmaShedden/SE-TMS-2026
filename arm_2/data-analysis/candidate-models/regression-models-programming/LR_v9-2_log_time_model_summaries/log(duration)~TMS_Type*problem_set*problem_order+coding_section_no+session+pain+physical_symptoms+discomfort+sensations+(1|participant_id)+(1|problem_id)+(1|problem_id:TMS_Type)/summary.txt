@@ -1,0 +1,40 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(duration) ~ TMS_Type * problem_set * problem_order + coding_section_no +  
+    session + pain + physical_symptoms + discomfort + sensations +  
+    (1 | participant_id) + (1 | problem_id) + (1 | problem_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    188.4     239.3     -76.2     152.4       107 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.02929 -0.61067 -0.04296  0.58194  2.27614 
+
+Random effects:
+ Groups              Name        Variance Std.Dev.
+ participant_id      (Intercept) 0.16551  0.4068  
+ problem_id:TMS_Type (Intercept) 0.00000  0.0000  
+ problem_id          (Intercept) 0.37496  0.6123  
+ Residual                        0.09544  0.3089  
+Number of obs: 125, groups:  participant_id, 26; problem_id:TMS_Type, 19; problem_id, 10
+
+Fixed effects:
+                                        Estimate Std. Error t value
+(Intercept)                            4.5366494  0.2655300  17.085
+TMS_TypeWM                            -0.1194780  0.2248576  -0.531
+problem_setb                           0.2176441  0.2707983   0.804
+problem_order                         -0.0008238  0.0379129  -0.022
+coding_section_no                     -0.0114834  0.0440371  -0.261
+session2                              -0.2292754  0.0641403  -3.575
+pain                                   0.0209128  0.2371541   0.088
+physical_symptoms                      0.2595725  0.1923451   1.350
+discomfort                            -0.0774189  0.1751119  -0.442
+sensations                            -0.0588130  0.1653264  -0.356
+TMS_TypeWM:problem_setb                0.0180616  0.3924076   0.046
+TMS_TypeWM:problem_order               0.0273414  0.0534893   0.511
+problem_setb:problem_order             0.0324681  0.0602720   0.539
+TMS_TypeWM:problem_setb:problem_order -0.0376420  0.0823753  -0.457
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

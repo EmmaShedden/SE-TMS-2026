@@ -1,0 +1,120 @@
+---
+title: "simulationforTMS3"
+output: html_document
+date: "2025-07-25"
+---
+
+```{r setup, include=FALSE}
+library(lme4)
+library(simr)
+```
+
+## R Markdown
+
+
+```{r sim}
+# R SCRIPT: Power analysis for random effect (participant_id:TMS_Type)
+
+# Load required libraries
+library(lme4)
+library(simr)
+library(dplyr)
+```
+
+
+```{r sim}
+# STEP 0: Get the data
+output_version = 'programming'
+program_type = 'long'
+input_version = 8
+input_file = sprintf("%s/../preprocessed-data/full-data-version-%d/programming-full-data.csv", getwd(), input_version)
+data <- read.csv(input_file)
+
+  #Transforming the session number such that it is treated as a character and not a value
+data <- transform( 
+  data, session = as.character(session)) 
+
+  #Transforming correctness into binaries of 1 or 0
+data$correctness <- as.integer(ifelse(data$accuracy == 'Pass', 1, 0))
+
+participants_to_remove <- c("5ZCK")
+data <- subset(data, !(participant_id %in% participants_to_remove))
+
+
+data <- data[data$problem_type == program_type, ]
+
+# STEP 1: Fit your real model
+# Replace 'your_data' with your actual dataframe name
+model <- glmer(correctness ~ (1 | participant_id:TMS_Type) + (1 | problem_id),
+               data = data, family = binomial)
+
+
+
+
+```
+
+
+
+
+```{r pressure, echo=FALSE}
+# STEP 2: Check variance components to verify random effects
+print(VarCorr(model))
+
+```
+
+
+```{r pressure, echo=FALSE}
+# STEP 3: Power simulations to test detection of the participant_id:TMS_Type random effect
+
+# 
+# STEP: Subset for smaller participant counts
+model_20 <- extend(model, along = "participant_id", n = 20)
+
+# STEP: Remove the random effect for participant_id:TMS_Type
+model_reduced <- update(model_20, . ~ . - (1 | participant_id:TMS_Type))
+
+# STEP: Compare models using simr
+powerSim(model_20, test = compare(model_reduced), nsim = 100)
+```
+
+```{r pressure, echo=FALSE}
+# Simulate for 15 participants
+model_15 <- extend(model, along = "participant_id", n = 15)
+
+# STEP: Remove the random effect for participant_id:TMS_Type
+model_reduced <- update(model_15, . ~ . - (1 | participant_id:TMS_Type))
+
+# STEP: Compare models using simr
+powerSim(model_15, test = compare(model_reduced), nsim = 100)
+```
+
+```{r pressure, echo=FALSE}
+# Simulate for 10 participants
+model_10 <- extend(model, along = "participant_id", n = 10)
+
+# STEP: Remove the random effect for participant_id:TMS_Type
+model_reduced <- update(model_10, . ~ . - (1 | participant_id:TMS_Type))
+
+# STEP: Compare models using simr
+powerSim(model_10, test = compare(model_reduced), nsim = 100)
+```
+
+
+```{r pressure, echo=FALSE}
+
+mean_per_task <- mean(data$duration, na.rm = TRUE)
+
+cat("Average time to complete one task:", round(mean_per_task, 2), "seconds\n")
+```
+
+
+
+
+
+
+
+
+
+
+
+

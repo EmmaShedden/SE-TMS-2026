@@ -1,0 +1,39 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(duration) ~ problem_set * coding_section_no * problem_order +  
+    TMS_Type + session + pain + physical_symptoms + discomfort +  
+    sensations + (1 | participant_id) + (1 | participant_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    299.0     347.1    -132.5     265.0       108 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.2793 -0.7134  0.1099  0.7020  2.3924 
+
+Random effects:
+ Groups                  Name        Variance Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.00000  0.0000  
+ participant_id          (Intercept) 0.05193  0.2279  
+ Residual                            0.44567  0.6676  
+Number of obs: 125, groups:  participant_id:TMS_Type, 51; participant_id, 26
+
+Fixed effects:
+                                             Estimate Std. Error t value
+(Intercept)                                   4.11098    0.50315   8.171
+problem_setb                                  0.03500    0.67343   0.052
+coding_section_no                             0.17376    0.20833   0.834
+problem_order                                 0.05118    0.18061   0.283
+TMS_TypeWM                                   -0.02431    0.14786  -0.164
+session2                                     -0.11319    0.12792  -0.885
+pain                                         -0.28643    0.32400  -0.884
+physical_symptoms                             0.33213    0.33332   0.996
+discomfort                                    0.03519    0.28649   0.123
+sensations                                    0.06340    0.26058   0.243
+problem_setb:coding_section_no               -0.11938    0.28291  -0.422
+problem_setb:problem_order                   -0.11731    0.24320  -0.482
+coding_section_no:problem_order              -0.05239    0.07021  -0.746
+problem_setb:coding_section_no:problem_order  0.06662    0.09703   0.687
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

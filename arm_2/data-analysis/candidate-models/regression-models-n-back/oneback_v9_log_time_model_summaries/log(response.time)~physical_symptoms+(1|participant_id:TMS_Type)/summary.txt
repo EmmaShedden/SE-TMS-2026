@@ -1,0 +1,25 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(response.time) ~ physical_symptoms + (1 | participant_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  -1035.5   -1009.2     521.8   -1043.5      5277 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.2870 -0.6726 -0.1023  0.5608  4.7461 
+
+Random effects:
+ Groups                  Name        Variance Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.02337  0.1529  
+ Residual                            0.04616  0.2149  
+Number of obs: 5281, groups:  participant_id:TMS_Type, 54
+
+Fixed effects:
+                  Estimate Std. Error t value
+(Intercept)       -0.58856    0.02184 -26.952
+physical_symptoms  0.17769    0.08024   2.215
+
+Correlation of Fixed Effects:
+            (Intr)
+physcl_symp -0.272

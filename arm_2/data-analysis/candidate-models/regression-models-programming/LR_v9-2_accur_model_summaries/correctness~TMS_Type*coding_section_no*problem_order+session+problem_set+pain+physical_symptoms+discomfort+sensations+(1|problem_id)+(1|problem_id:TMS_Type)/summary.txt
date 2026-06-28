@@ -1,0 +1,54 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correctness ~ TMS_Type * coding_section_no * problem_order +  
+    session + problem_set + pain + physical_symptoms + discomfort +  
+    sensations + (1 | problem_id) + (1 | problem_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    370.8     431.0    -169.4     338.8       302 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.5646 -0.6234 -0.1907  0.6346  3.2189 
+
+Random effects:
+ Groups              Name        Variance  Std.Dev.
+ problem_id:TMS_Type (Intercept) 0.0001757 0.01325 
+ problem_id          (Intercept) 3.0287656 1.74033 
+Number of obs: 318, groups:  problem_id:TMS_Type, 24; problem_id, 12
+
+Fixed effects:
+                                            Estimate Std. Error z value
+(Intercept)                                -1.807866   1.328542  -1.361
+TMS_TypeWM                                  1.121669   1.395611   0.804
+coding_section_no                           0.221318   0.444290   0.498
+problem_order                              -0.051783   0.381259  -0.136
+session                                     0.383514   0.287993   1.332
+problem_setb                               -0.728225   0.805502  -0.904
+pain                                        0.405828   0.599000   0.678
+physical_symptoms                          -1.012017   0.622201  -1.627
+discomfort                                 -1.072138   0.590789  -1.815
+sensations                                  1.382697   0.539288   2.564
+TMS_TypeWM:coding_section_no               -0.148232   0.591960  -0.250
+TMS_TypeWM:problem_order                   -0.007284   0.508489  -0.014
+coding_section_no:problem_order             0.021410   0.156122   0.137
+TMS_TypeWM:coding_section_no:problem_order -0.009593   0.208611  -0.046
+                                           Pr(>|z|)  
+(Intercept)                                  0.1736  
+TMS_TypeWM                                   0.4216  
+coding_section_no                            0.6184  
+problem_order                                0.8920  
+session                                      0.1830  
+problem_setb                                 0.3660  
+pain                                         0.4981  
+physical_symptoms                            0.1038  
+discomfort                                   0.0696 .
+sensations                                   0.0103 *
+TMS_TypeWM:coding_section_no                 0.8023  
+TMS_TypeWM:problem_order                     0.9886  
+coding_section_no:problem_order              0.8909  
+TMS_TypeWM:coding_section_no:problem_order   0.9633  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

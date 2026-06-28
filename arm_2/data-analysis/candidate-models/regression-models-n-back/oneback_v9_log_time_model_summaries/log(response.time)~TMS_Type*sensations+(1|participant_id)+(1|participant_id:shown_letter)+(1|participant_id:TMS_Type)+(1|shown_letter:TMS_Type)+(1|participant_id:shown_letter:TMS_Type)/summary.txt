@@ -1,0 +1,40 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(response.time) ~ TMS_Type * sensations + (1 | participant_id) +  
+    (1 | participant_id:shown_letter) + (1 | participant_id:TMS_Type) +  
+    (1 | shown_letter:TMS_Type) + (1 | participant_id:shown_letter:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  -1032.2    -966.5     526.1   -1052.2      5271 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.2920 -0.6746 -0.0991  0.5596  4.7348 
+
+Random effects:
+ Groups                               Name        Variance  Std.Dev. 
+ participant_id:shown_letter:TMS_Type (Intercept) 8.188e-05 9.049e-03
+ participant_id:shown_letter          (Intercept) 5.659e-09 7.522e-05
+ participant_id:TMS_Type              (Intercept) 9.887e-03 9.943e-02
+ participant_id                       (Intercept) 1.483e-02 1.218e-01
+ shown_letter:TMS_Type                (Intercept) 1.590e-05 3.988e-03
+ Residual                                         4.608e-02 2.147e-01
+Number of obs: 5281, groups:  
+participant_id:shown_letter:TMS_Type, 324; participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12
+
+Fixed effects:
+                      Estimate Std. Error t value
+(Intercept)           -0.59705    0.03185 -18.748
+TMS_TypeWM             0.03531    0.03011   1.173
+sensations             0.12202    0.07947   1.535
+TMS_TypeWM:sensations -0.17310    0.10379  -1.668
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM snstns
+TMS_TypeWM  -0.473                
+sensations  -0.277  0.250         
+TMS_TypWM:s  0.181 -0.383   -0.653
+optimizer (nloptwrap) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.0123266 (tol = 0.002, component 1)
+  See ?lme4::convergence and ?lme4::troubleshooting.
+

@@ -1,0 +1,37 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(response.time) ~ session * problem_order + (1 | participant_id) +  
+    (1 | participant_id:shown_letter) + (1 | participant_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  -1105.8   -1053.3     560.9   -1121.8      5273 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.4270 -0.6696 -0.0966  0.5523  4.8027 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev.
+ participant_id:shown_letter (Intercept) 2.717e-06 0.001648
+ participant_id:TMS_Type     (Intercept) 8.799e-03 0.093801
+ participant_id              (Intercept) 1.560e-02 0.124919
+ Residual                                4.557e-02 0.213476
+Number of obs: 5281, groups:  participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27
+
+Fixed effects:
+                         Estimate Std. Error t value
+(Intercept)            -0.4843812  0.0312052 -15.522
+session2               -0.1067808  0.0281382  -3.795
+problem_order          -0.0011212  0.0001437  -7.804
+session2:problem_order  0.0007523  0.0002034   3.699
+
+Correlation of Fixed Effects:
+            (Intr) sessn2 prblm_
+session2    -0.451              
+problem_rdr -0.233  0.258       
+sssn2:prbl_  0.164 -0.365 -0.706
+optimizer (nloptwrap) convergence code: 0 (OK)
+unable to evaluate scaled gradient
+Model failed to converge: degenerate  Hessian with 1 negative eigenvalues
+  See ?lme4::convergence and ?lme4::troubleshooting.
+

@@ -1,0 +1,42 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correctness ~ TMS_Type * session * coding_section_no + problem_set +  
+    problem_order + pain + physical_symptoms + discomfort + sensations +  
+    (1 | problem_id)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    368.6     425.1    -169.3     338.6       303 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.4871 -0.6093 -0.1860  0.6301  3.4526 
+
+Random effects:
+ Groups     Name        Variance Std.Dev.
+ problem_id (Intercept) 3.021    1.738   
+Number of obs: 318, groups:  problem_id, 12
+
+Fixed effects:
+                                     Estimate Std. Error z value Pr(>|z|)  
+(Intercept)                          -2.04881    2.06128  -0.994   0.3202  
+TMS_TypeWM                            0.65656    2.70988   0.242   0.8086  
+session                               0.48140    1.19944   0.401   0.6882  
+coding_section_no                     0.38523    0.82440   0.467   0.6403  
+problem_setb                         -0.68432    0.81151  -0.843   0.3991  
+problem_order                        -0.01700    0.08546  -0.199   0.8424  
+pain                                  0.34493    0.63095   0.547   0.5846  
+physical_symptoms                    -0.98276    0.63770  -1.541   0.1233  
+discomfort                           -1.00757    0.61497  -1.638   0.1013  
+sensations                            1.31882    0.57710   2.285   0.0223 *
+TMS_TypeWM:session                    0.30010    1.66511   0.180   0.8570  
+TMS_TypeWM:coding_section_no         -0.06411    1.13662  -0.056   0.9550  
+session:coding_section_no            -0.07497    0.51244  -0.146   0.8837  
+TMS_TypeWM:session:coding_section_no -0.07664    0.70666  -0.108   0.9136  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.0233151 (tol = 0.002, component 1)
+  See ?lme4::convergence and ?lme4::troubleshooting.
+

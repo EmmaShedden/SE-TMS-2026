@@ -1,0 +1,35 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: correctness ~ session * physical_symptoms + (1 | participant_id) +      (1 | problem_id) + (1 | participant_id:TMS_Type) + (1 | problem_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    359.8     389.9    -171.9     343.8       310 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.1243 -0.5614 -0.1921  0.5854  2.7362 
+
+Random effects:
+ Groups                  Name        Variance  Std.Dev. 
+ participant_id:TMS_Type (Intercept) 4.360e-01 6.603e-01
+ participant_id          (Intercept) 1.996e-01 4.467e-01
+ problem_id:TMS_Type     (Intercept) 1.393e-09 3.732e-05
+ problem_id              (Intercept) 3.366e+00 1.835e+00
+Number of obs: 318, groups:  participant_id:TMS_Type, 53; participant_id, 27; problem_id:TMS_Type, 24; problem_id, 12
+
+Fixed effects:
+                           Estimate Std. Error z value Pr(>|z|)
+(Intercept)                 -0.9051     0.5995  -1.510    0.131
+session2                     0.2641     0.3452   0.765    0.444
+physical_symptoms           -0.9258     0.8456  -1.095    0.274
+session2:physical_symptoms   1.3165     1.6254   0.810    0.418
+
+Correlation of Fixed Effects:
+            (Intr) sessn2 physc_
+session2    -0.299              
+physcl_symp -0.134  0.227       
+sssn2:phys_  0.068 -0.238 -0.534
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

@@ -1,0 +1,48 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: 
+correctness ~ session * problem_set * coding_section_no + problem_order +  
+    TMS_Type + pain + physical_symptoms + discomfort + sensations +  
+    (1 | participant_id) + (1 | problem_id) + (1 | participant_id:TMS_Type) +  
+    (1 | problem_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    369.7     437.5    -166.9     333.7       300 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.3778 -0.5540 -0.1853  0.5797  3.6302 
+
+Random effects:
+ Groups                  Name        Variance  Std.Dev.
+ participant_id:TMS_Type (Intercept) 1.794e-01 0.423517
+ participant_id          (Intercept) 3.034e-01 0.550828
+ problem_id:TMS_Type     (Intercept) 8.273e-06 0.002876
+ problem_id              (Intercept) 3.564e+00 1.887928
+Number of obs: 318, groups:  
+participant_id:TMS_Type, 53; participant_id, 27; problem_id:TMS_Type, 24; problem_id, 12
+
+Fixed effects:
+                                        Estimate Std. Error z value Pr(>|z|)  
+(Intercept)                            -2.589086   1.930877  -1.341   0.1800  
+session                                 0.642733   1.119370   0.574   0.5658  
+problem_setb                            0.073893   2.945006   0.025   0.9800  
+coding_section_no                       0.633476   0.750018   0.845   0.3983  
+problem_order                          -0.011882   0.090421  -0.131   0.8955  
+TMS_TypeWM                              0.795908   0.381890   2.084   0.0371 *
+pain                                    0.315694   0.768280   0.411   0.6811  
+physical_symptoms                      -0.976609   0.791595  -1.234   0.2173  
+discomfort                             -1.164854   0.713053  -1.634   0.1023  
+sensations                              1.689872   0.704336   2.399   0.0164 *
+session:problem_setb                   -0.003354   1.794729  -0.002   0.9985  
+session:coding_section_no              -0.219621   0.475641  -0.462   0.6443  
+problem_setb:coding_section_no         -0.640450   1.173209  -0.546   0.5851  
+session:problem_setb:coding_section_no  0.254106   0.741607   0.343   0.7319  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.00739471 (tol = 0.002, component 1)
+  See ?lme4::convergence and ?lme4::troubleshooting.
+

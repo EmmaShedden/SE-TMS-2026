@@ -1,0 +1,43 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(duration) ~ TMS_Type + session + coding_section_no + problem_order +  
+    problem_set + pain + physical_symptoms + discomfort + sensations +      (1 | problem_id) + (1 | problem_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    606.3     657.1    -290.2     580.3       355 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.0098 -0.7046 -0.0126  0.5904  3.4204 
+
+Random effects:
+ Groups              Name        Variance Std.Dev.
+ problem_id:TMS_Type (Intercept) 0.003412 0.05841 
+ problem_id          (Intercept) 0.188312 0.43395 
+ Residual                        0.242300 0.49224 
+Number of obs: 368, groups:  problem_id:TMS_Type, 44; problem_id, 22
+
+Fixed effects:
+                   Estimate Std. Error t value
+(Intercept)        3.798284   0.145017  26.192
+TMS_TypeWM         0.062661   0.064682   0.969
+session2          -0.097187   0.053556  -1.815
+coding_section_no -0.068115   0.032562  -2.092
+problem_order      0.009192   0.015887   0.579
+problem_setb       0.114088   0.147251   0.775
+pain              -0.006595   0.107054  -0.062
+physical_symptoms  0.010320   0.116106   0.089
+discomfort        -0.069507   0.105633  -0.658
+sensations         0.150329   0.096021   1.566
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW sessn2 cdng__ prblm_r prblm_s pain   physc_ dscmfr
+TMS_TypeWM  -0.166                                                          
+session2    -0.153 -0.019                                                   
+cdng_sctn_n -0.440  0.045  0.008                                            
+problem_rdr -0.207  0.032 -0.036 -0.119                                     
+problem_stb -0.433 -0.063 -0.124 -0.011 -0.018                              
+pain        -0.026  0.112  0.013  0.028 -0.066  -0.060                      
+physcl_symp -0.008 -0.349  0.094 -0.005  0.014  -0.003  -0.342              
+discomfort   0.056 -0.449  0.064 -0.036  0.018  -0.032  -0.341  0.318       
+sensations  -0.075  0.179  0.166  0.023  0.011  -0.129   0.258 -0.063 -0.383

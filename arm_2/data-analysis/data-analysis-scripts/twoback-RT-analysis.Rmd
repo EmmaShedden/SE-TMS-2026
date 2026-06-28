@@ -1,0 +1,412 @@
+---
+title: "2-back Reaction Time Analysis"
+output: html_document
+date: "2025-1-29"
+---
+
+## Packages
+
+```{r}
+# import packages
+library(lme4)     # mixed models
+library(dplyr)    # dataframe manipulation
+library(readr)    # reading in the data
+library(emmeans)  # likelihood ratio testing
+library(purrr)    # for map()
+library(lattice)  # for xyplot()
+library(TAF)      # setting up output file directory structure during model fitting
+library(moments)  # skewness for selecting between additive and multiplicative models of response times
+
+
+
+#If you get an error, you likely need to install the packages using the "install.package('insert-package-name-here')" command
+```
+
+## Notebook configurable settings
+
+```{r}
+# name the directories to read data from and write output to
+input_version = 9
+output_version = 'n-back'
+nback_version = '2-back'
+```
+
+make an overall output directory (model summaries, stats, etc. will all go here)
+
+```{r}
+#setwd("..")
+outputdir = sprintf("%s/../journal-candidate-models/regression-models-%s",getwd(), output_version)
+```
+
+```{r eval=FALSE}
+
+mkdir(outputdir)
+```
+
+## Loading Data
+
+```{r}
+#setwd("..")
+input_file = sprintf("%s/../preprocessed-data/full-data-version-%d/nback-full-data.csv", getwd(), input_version)
+data <- read.csv(input_file)
+
+
+#Transforming the session number such that it is treated as a character and not a value
+data <- transform( 
+  data, session = as.character(session)) 
+
+head(data)
+```
+
+Removing irrelevant data from dataframe
+
+```{r Nans}
+#remove rows that have no values - nothing actually happens here. Everyone saw the stimuli
+#data <- data[data$response.time != 0, ] 
+
+
+#Removing the one participants who didn't listen to instructions for n-back or programming:
+participants_to_remove <- c("5ZCK")
+data <- subset(data, !(participant_id %in% participants_to_remove))
+```
+
+Making sure we are only looking at one type of n-back at a time and only instance of correct response
+
+```{r}
+data <- data[data$correct_answer == 'True', ] #only counting the onces they got correct
+
+
+data <- data[data$nback_type == nback_version, ] #1-back , 2-back , or 3-back
+
+```
+
+Determining what is the mean response.time
+
+```{r}
+mean_value <- mean((data$response.time))
+print(mean_value)
+
+```
+
+Centralizing the response.time so that it is more normally distributed. Two-back is generally normally distributed as seen in the bottom graph so no transformation is required
+
+```{r}
+hist((data$response.time))
+```
+
+Checking number of participants is n=27
+
+```{r}
+
+id <- unique(data$participant_id)
+id #all unique IDs
+length(id) #number of participants
+```
+
+Checking distribution of of observartions per factor load in n-back
+
+```{r}
+count_table <- table(data$TMS_Type, data$nback_type)
+
+# Print the result
+print(count_table)
+```
+
+## 3. Select independent variables
+
+1.  `participant_id` (person) : random intercept
+    -   People are drawn from an underlying distribution; we aren't interested in learning coefficients specific to the members of our sample, but rather in what they tell us about that underlying population. Random effects tell us about the distribution rather than the elements observed.
+
+    -   This variable is used to model person-specific attributes, such as a "skill," translating to overall faster or slower response times, that can be different for each person
+2.  `shown_letter` (letter presented) : random intercept
+    -   The underlying distribution of stimuli is a little less clear than that of participants: specifically since stimuli in N-back are just a random fixed set of letters. However, prior work on N-back have found that some letters may be easier to remember than others. We control for that here.
+3.  `TMS_Type` (TMS treatment condition, i.e. brain region stimulated) : fixed & random intercepts
+    -   Based on previous literature, we hypothesize that the brain region stimulated may have an effect that is systematic (i.e. very consistent between people, topics, etc.), quantitatively heterogeneous (i.e. directionally consistent, but widely varying in magnitude), or even a qualitatively heterogeneous (i.e. varying in direction, possibly in conjunction with magnitude). Therefore, we assess the goodness of fit for candidate models containing `TMS_Type` as a fixed effect, random effect, both, or neither, in order to test this hypothesis.
+4.  `session` (chronological numbering of the session, per participant) : fixed intercept
+    -   This is used to account for learning/training effect, i.e. participants getting better at test-taking under our specific test instrument over the course of the study. For example, they may become more familiar with the question structure, or become better at recalling old material as they do more practice questions. We expect this to be systematic (uniformly decreasing response time), so we model it as a fixed effect.
+
+## 4. Specify candidate predictor structures for mixed model formulas
+
+```{r}
+fixed_effects = c(# no fixed effects
+                  "", 
+                  
+                  # no interactions
+                  "TMS_Type", 
+                  "session",
+                  #"TMS_Type + session", 
+                  "problem_order", #the letter that they saw at what time
+                  
+                   "pain",
+                  "physical_symptoms",
+                  "discomfort", 
+                  "sensations",
+                  
+                  # 2-way interactions
+                  #"TMS_Type * nback_type", 
+                  #"nback_type * session", 
+                  "TMS_Type * session", 
+                  "TMS_Type * problem_order",
+                  "session * problem_order",
+                  "TMS_Type * session * problem_order",
+                  
+                  "TMS_Type * pain",
+                  "TMS_Type * physical_symptoms",
+                  "TMS_Type * discomfort",
+                  "TMS_Type * sensations", 
+                  
+                  # 1- and 2-way interactions
+                  "TMS_Type * session + coding_section_no", 
+                  "TMS_Type * coding_section_no + session",
+                  "session * coding_section_no + TMS_Type", 
+                  
+                  "TMS_Type * pain + session",
+                  "TMS_Type * physical_symptoms + session",
+                  "TMS_Type * discomfort + session",
+                  "TMS_Type * sensations + session", 
+                  
+                  "TMS_Type * pain + coding_section_no",
+                  "TMS_Type * physical_symptoms + coding_section_no",
+                  "TMS_Type * discomfort + coding_section_no",
+                  "TMS_Type * sensations + coding_section_no", 
+                  
+                  # multiple 2-way interactions
+                  #"TMS_Type * nback_type + nback_type * session" #,
+                  #"condition * domain + condition * session_num",
+                  #"domain * session_num + condition * session_num",
+                  #"condition * domain + domain * session_num + condition * session_num",
+                  
+                  # 3-way interactions
+                  #"condition * domain * session_num"
+                  "TMS_Type * session * coding_section_no" 
+                  )
+```
+
+```{r}
+random_effects = c(#"",                                   # (1)
+                   "participant_id", 
+                   "shown_letter",                    
+                   #"condition",                          # (2)
+                   "participant_id:shown_letter",                   
+                   #"participant_id:nback_type",          # We are only looking at one n-back type
+                   "participant_id:TMS_Type",
+                   "shown_letter:TMS_Type",          
+                   "participant_id:shown_letter:TMS_Type"#,          
+                   #"participant_id:nback_type:TMS_Type"  # We are only looking at one n-back type
+                   )
+
+
+```
+
+In this first cell, we enumerate random effect structures by taking all combinations of the random effects specified.
+
+```{r}
+random_effects = map(random_effects, function (s) sprintf("(1|%s)", s))
+
+random_exprs = c()
+N_random = length(random_effects)
+for (k in 1:N_random) {
+  iii = combn(1:N_random, k, simplify=FALSE)
+  for (ii in iii) {
+    expr = paste(random_effects[ii], collapse = " + ")
+    random_exprs = append(random_exprs, expr)
+  }
+}
+```
+
+Now, we combine the response variable, fixed effects, and random effects together to generate our candidate model structures.
+
+```{r}
+loglinear_formulae = c()
+for (fe in fixed_effects) {
+  for (re in random_exprs) {
+    f = ""
+    if (fe == "") {
+      f = sprintf("(response.time) ~ %s", re)
+    } else {
+      f = sprintf("(response.time) ~ %s + %s", fe, re)
+    }
+    loglinear_formulae = append(loglinear_formulae, f)
+  }
+}
+
+print(length(loglinear_formulae))
+```
+
+### Model fitting (\~2 minutes)
+
+Here, we fit all the models. Of note, we use MLE rather than REML for compatibility with the AIC model selection strategy.
+
+We also store BIC (an alternative model selection criterion) in addition to AIC here. The two have different theoretical properties, both of which may be useful. Both describe the log likelihood of a fitted model, with a penalty for model complexity. The penalty in BIC is higher than that for AIC, so optimal-BIC models tend to be smaller (with fewer parameters) than optimal-AIC models. We have done our analysis relying on AIC, but we provide BIC-based model selection here in case the reader is interested.
+
+```{r eval=FALSE}
+if (TRUE) {
+  # make an output directory for the output of all the candidate linear models
+  logtime_outputdir = 
+    sprintf("%s/twoback_v2_time_model_summaries", outputdir)
+  mkdir(logtime_outputdir)
+  
+  # make an output file for the AIC and BIC of each model
+  metricsfile = sprintf("%s/metrics.csv", logtime_outputdir)
+  file.create(metricsfile)
+  
+  sink(file = metricsfile,
+       append = FALSE,
+       type = "output",
+       split = FALSE
+       )
+  
+  cat("formula,AIC,BIC\n")
+  
+  sink()
+  
+  for (f in loglinear_formulae) {
+    # make an output directory for the output of this specific candidate model
+    f_outputdir = sprintf("%s/%s", logtime_outputdir, gsub(" ", "", f, fixed = TRUE))
+    mkdir(f_outputdir)
+    
+    # make the individual output file
+    summaryfile = sprintf("%s/summary.txt", f_outputdir)
+    
+    file.create(summaryfile)
+    
+    # print a delimiter for console output
+    cat(sprintf("\n---------------------------------------------\n%s\n", f))
+    
+    # fit the model
+    m = lmer(f, data=data, REML=FALSE)
+    
+    # send the model summary to the summary file
+    sink(file = summaryfile,
+         append = FALSE,
+         type = "output",
+         split = FALSE
+         )
+    
+    print(summary(m))
+    
+    sink()
+    
+    # send the AIC and BIC to the metrics file
+    metrics = sprintf("%s,%f,%f\n", f, AIC(m), BIC(m))
+    
+    sink(file = metricsfile,
+         append = TRUE,
+         type = "output",
+         split = FALSE)
+    
+    cat(metrics)
+    
+    sink()
+  }
+}
+```
+
+### Model selection
+
+```{r}
+# read in the AIC/BIC data
+fin = sprintf("%s/twoback_v2_time_model_summaries/metrics.csv", outputdir)
+log_time_models_da = read_csv(fin)
+```
+
+```{r}
+head(log_time_models_da[order(log_time_models_da$AIC),], n = 10)
+```
+
+```{r}
+head(log_time_models_da[order(log_time_models_da$BIC),], n = 10)
+```
+
+### Optimal AIC
+
+```{r}
+fA = log_time_models_da[order(log_time_models_da$AIC),]$formula[[1]]
+cat(fA)
+```
+
+We find our optinmal model to be '(response.time) \~ session \* problem_order + (1\|participant_id) + (1\|shown_letter) + (1\|participant_id:TMS_Type)'
+
+```{r}
+fB = log_time_models_da[order(log_time_models_da$BIC),]$formula[[1]]
+cat(fB)
+```
+
+However we spot that BIC favors a different model so we check.
+
+```{r}
+m1 = lmer(fA, data=data, REML=FALSE)
+summary(m1)
+```
+
+```{r}
+m0 = lmer(fB, data=data, REML=FALSE)
+summary(m0)
+```
+
+If Pr(\>Chisq) \< 0.05 → m1 is significantly better than m0 ✅ Keep m1, since the extra parameter improves model fit. If Pr(\>Chisq) \> 0.05 → No significant difference ❌ Prefer m0 (simpler model), since m1 doesn’t improve fit enough. If AIC is lower in m1 but p \> 0.05 If the AIC difference is ≥ 2, consider m1. If ΔAIC \< 2, prefer the simpler m0.
+
+We use an ANOVA to compare models.
+
+```{r}
+anova(m0,m1)
+
+```
+
+We choose the more complext model m1 '(response.time) \~ physical_symptoms + (1 \| participant_id) + (1 \| shown_letter) + (1 \| participant_id:TMS_Type)' since p\>0.05
+
+```{r eval= FALSE}
+#emm_options(pbkrtest.limit = 4687)
+e2 = emmeans(m1, ~ physical_symptoms )
+pairs(e2, adjust="BH")
+```
+
+However, phsysical_symptoms as a systematic effect does not survive statistical significance
+
+```{r}
+if (TRUE) {
+  pp0 = profile(m0)
+}
+```
+
+```{r}
+confint(pp0)
+```
+
+We find that that the random effect "participant_id:TMS_Type" confidence interval excludes zero so it is significant.
+
+### Point estimate PVE
+
+```{r}
+get_pve = function(m, effect) {
+  random_effects = as.data.frame(VarCorr(m)) %>% 
+    rename(Groups = grp, Name = var1, Variance = vcov, Std.Dev. = sdcor) %>% 
+    select(-var2)
+  
+  num = (random_effects %>% filter(Groups == effect))$Variance
+  
+  denom = sum(random_effects$Variance)
+  
+  return (c(num / denom))
+}
+
+
+get_pve(m1, "participant_id:TMS_Type")
+```
+
+We find that that the random effect "participant_id:TMS_Type" contribute 13% of the PVE.
+
+### PVE confidence interval (\~5 minutes)
+
+```{r eval = FALSE}
+if (TRUE) {
+  b0 = bootMer(m1, 
+               FUN = function (m) {return(get_pve(m, "participant_id:TMS_Type"))}, 
+               nsim = 1000,
+               .progress = "txt")
+}
+```
+
+```{r eval = FALSE}
+quantile(b0$t, c(0.025, 0.975))
+```

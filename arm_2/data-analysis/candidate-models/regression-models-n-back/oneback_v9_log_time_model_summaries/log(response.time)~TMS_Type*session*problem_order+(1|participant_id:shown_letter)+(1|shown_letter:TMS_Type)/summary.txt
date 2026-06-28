@@ -1,0 +1,42 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(response.time) ~ TMS_Type * session * problem_order + (1 |  
+    participant_id:shown_letter) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   -415.4    -343.1     218.7    -437.4      5270 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.7894 -0.6782 -0.0861  0.5565  4.3771 
+
+Random effects:
+ Groups                      Name        Variance Std.Dev.
+ participant_id:shown_letter (Intercept) 0.01940  0.1393  
+ shown_letter:TMS_Type       (Intercept) 0.00000  0.0000  
+ Residual                                0.04975  0.2231  
+Number of obs: 5281, groups:  participant_id:shown_letter, 162; shown_letter:TMS_Type, 12
+
+Fixed effects:
+                                    Estimate Std. Error t value
+(Intercept)                       -0.5090975  0.0202988 -25.080
+TMS_TypeWM                         0.0467843  0.0281668   1.661
+session2                          -0.1221895  0.0281860  -4.335
+problem_order                     -0.0004365  0.0002197  -1.987
+TMS_TypeWM:session2                0.0385811  0.0504726   0.764
+TMS_TypeWM:problem_order          -0.0013767  0.0003043  -4.524
+session2:problem_order             0.0003984  0.0003053   1.305
+TMS_TypeWM:session2:problem_order  0.0006635  0.0004314   1.538
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM sessn2 prblm_ TMS_TyWM:2 TMS_TWM:_ sss2:_
+TMS_TypeWM  -0.721                                                   
+session2    -0.720  0.810                                            
+problem_rdr -0.547  0.394    0.394                                   
+TMS_TypWM:2  0.645 -0.895   -0.896 -0.220                            
+TMS_TypWM:_  0.395 -0.546   -0.284 -0.722  0.304                     
+sssn2:prbl_  0.393 -0.284   -0.547 -0.720  0.305      0.520          
+TMS_TWM:2:_ -0.279  0.385    0.387  0.509 -0.431     -0.705    -0.708
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

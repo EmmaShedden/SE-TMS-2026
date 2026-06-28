@@ -1,0 +1,37 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: correctness ~ coding_section_no * physical_symptoms + (1 | participant_id) +      (1 | participant_id:TMS_Type) + (1 | problem_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    370.7     397.1    -178.4     356.7       311 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.2193 -0.5656 -0.2358  0.6285  2.3597 
+
+Random effects:
+ Groups                  Name        Variance Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.4562   0.6755  
+ participant_id          (Intercept) 0.1631   0.4038  
+ problem_id:TMS_Type     (Intercept) 3.1388   1.7717  
+Number of obs: 318, groups:  participant_id:TMS_Type, 53; participant_id, 27; problem_id:TMS_Type, 24
+
+Fixed effects:
+                                     Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                         -1.197657   0.001939  -617.7   <2e-16 ***
+coding_section_no                    0.221473   0.001939   114.2   <2e-16 ***
+physical_symptoms                   -2.343731   0.001938 -1209.1   <2e-16 ***
+coding_section_no:physical_symptoms  0.685168   0.001938   353.5   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) cdng__ physc_
+cdng_sctn_n 0.000               
+physcl_symp 0.000  0.000        
+cdng_sct_:_ 0.000  0.000  0.000 
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.0366122 (tol = 0.002, component 1)
+  See ?lme4::convergence and ?lme4::troubleshooting.
+

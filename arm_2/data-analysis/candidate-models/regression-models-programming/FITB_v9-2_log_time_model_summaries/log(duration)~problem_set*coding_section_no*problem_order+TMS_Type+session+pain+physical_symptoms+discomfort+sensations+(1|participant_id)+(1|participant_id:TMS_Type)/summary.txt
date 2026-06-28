@@ -1,0 +1,39 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(duration) ~ problem_set * coding_section_no * problem_order +  
+    TMS_Type + session + pain + physical_symptoms + discomfort +  
+    sensations + (1 | participant_id) + (1 | participant_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    606.7     673.2    -286.4     572.7       351 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.3433 -0.6561 -0.0491  0.6221  3.5350 
+
+Random effects:
+ Groups                  Name        Variance Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.0000   0.0000  
+ participant_id          (Intercept) 0.1192   0.3453  
+ Residual                            0.2394   0.4893  
+Number of obs: 368, groups:  participant_id:TMS_Type, 53; participant_id, 27
+
+Fixed effects:
+                                              Estimate Std. Error t value
+(Intercept)                                   3.802254   0.173601  21.902
+problem_setb                                 -0.422842   0.240295  -1.760
+coding_section_no                            -0.032921   0.074017  -0.445
+problem_order                                -0.003750   0.058033  -0.065
+TMS_TypeWM                                   -0.012084   0.069040  -0.175
+session2                                     -0.042510   0.054514  -0.780
+pain                                         -0.049029   0.192961  -0.254
+physical_symptoms                             0.086332   0.149641   0.577
+discomfort                                   -0.025930   0.150299  -0.173
+sensations                                    0.230508   0.144520   1.595
+problem_setb:coding_section_no                0.007991   0.111103   0.072
+problem_setb:problem_order                    0.042758   0.085968   0.497
+coding_section_no:problem_order              -0.003628   0.025579  -0.142
+problem_setb:coding_section_no:problem_order  0.007654   0.037850   0.202
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

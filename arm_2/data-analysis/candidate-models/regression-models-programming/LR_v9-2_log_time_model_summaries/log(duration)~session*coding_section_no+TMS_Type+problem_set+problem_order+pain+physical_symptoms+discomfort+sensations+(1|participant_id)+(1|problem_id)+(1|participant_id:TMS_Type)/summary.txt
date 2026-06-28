@@ -1,0 +1,50 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(duration) ~ session * coding_section_no + TMS_Type + problem_set +  
+    problem_order + pain + physical_symptoms + discomfort + sensations +  
+    (1 | participant_id) + (1 | problem_id) + (1 | participant_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    182.4     224.8     -76.2     152.4       110 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.0971 -0.5769 -0.0631  0.5802  2.2626 
+
+Random effects:
+ Groups                  Name        Variance Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.00000  0.0000  
+ participant_id          (Intercept) 0.16206  0.4026  
+ problem_id              (Intercept) 0.38591  0.6212  
+ Residual                            0.09563  0.3092  
+Number of obs: 125, groups:  participant_id:TMS_Type, 51; participant_id, 26; problem_id, 10
+
+Fixed effects:
+                           Estimate Std. Error t value
+(Intercept)                 4.44058    0.26990  16.453
+session2                   -0.10845    0.19269  -0.563
+coding_section_no           0.01331    0.05911   0.225
+TMS_TypeWM                 -0.08979    0.07968  -1.127
+problem_setb                0.29658    0.22352   1.327
+problem_order               0.01754    0.01911   0.918
+pain                        0.03090    0.23560   0.131
+physical_symptoms           0.24864    0.19335   1.286
+discomfort                 -0.08582    0.17319  -0.496
+sensations                 -0.06322    0.16385  -0.386
+session2:coding_section_no -0.05447    0.08323  -0.654
+
+Correlation of Fixed Effects:
+            (Intr) sessn2 cdng__ TMS_TW prblm_s prblm_r pain   physc_ dscmfr snstns
+session2    -0.350                                                                 
+cdng_sctn_n -0.488  0.667                                                          
+TMS_TypeWM  -0.057 -0.016 -0.012                                                   
+problem_stb -0.258 -0.046  0.026 -0.203                                            
+problem_rdr -0.108 -0.064 -0.088  0.002 -0.052                                     
+pain        -0.085  0.142  0.099  0.096 -0.133   0.042                             
+physcl_symp  0.029 -0.109 -0.110 -0.351  0.083  -0.024  -0.150                     
+discomfort   0.021 -0.036  0.007 -0.566  0.122  -0.001  -0.454  0.256              
+sensations  -0.014  0.125 -0.030  0.261 -0.236  -0.075   0.353 -0.112 -0.484       
+sssn2:cdn__  0.347 -0.944 -0.698  0.011 -0.050   0.081  -0.104  0.118  0.030 -0.052
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

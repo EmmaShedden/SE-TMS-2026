@@ -1,0 +1,43 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: 
+correctness ~ TMS_Type * pain + session + problem_set + coding_section_no +  
+    problem_order + (1 | problem_id) + (1 | problem_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    368.1     405.8    -174.1     348.1       308 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.3945 -0.6325 -0.1976  0.6940  2.2709 
+
+Random effects:
+ Groups              Name        Variance  Std.Dev.
+ problem_id:TMS_Type (Intercept) 2.373e-06 0.00154 
+ problem_id          (Intercept) 2.784e+00 1.66859 
+Number of obs: 318, groups:  problem_id:TMS_Type, 24; problem_id, 12
+
+Fixed effects:
+                  Estimate Std. Error z value Pr(>|z|)  
+(Intercept)       -1.62430    0.84395  -1.925   0.0543 .
+TMS_TypeWM         0.38492    0.28498   1.351   0.1768  
+pain               0.14461    1.01855   0.142   0.8871  
+session            0.39452    0.27787   1.420   0.1557  
+problem_setb      -0.54583    0.77299  -0.706   0.4801  
+coding_section_no  0.18430    0.17287   1.066   0.2864  
+problem_order     -0.00684    0.08243  -0.083   0.9339  
+TMS_TypeWM:pain   -0.61874    1.23022  -0.503   0.6150  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM pain   sessin prblm_s cdng__ prblm_r
+TMS_TypeWM  -0.170                                              
+pain        -0.108  0.155                                       
+session     -0.471  0.085    0.152                              
+problem_stb -0.338 -0.102   -0.008 -0.101                       
+cdng_sctn_n -0.426 -0.011   -0.059 -0.002  0.019                
+problem_rdr -0.179  0.010    0.057  0.001 -0.038  -0.082        
+TMS_TypWM:p  0.129 -0.251   -0.853 -0.176 -0.024   0.055 -0.062 
