@@ -4,7 +4,10 @@ Statistical analysis replication package for this paper submission. Arm 1 (spati
 
 This repository contains experiment stimuli, participant surveys, anonymized datasets, and data analysis scripts.
 
-Preprocessed data is provided for both arms, so you can run our statistical analysis scripts. However, raw data may be partially or completely redacted to protect human subjects' anonymity. For access to redacted raw data, please contact the authors.
+Preprocessed data is provided for both arms, so you can run our statistical analysis scripts. However, raw data may be partially or completely redacted to protect human subjects' privacy. For access to redacted raw data, please contact the authors.
+
+### Usage
+Refer to instructions in subdirectory READMEs.
 
 ### Contact
 Emma Shedden (eshedden@seas.upenn.edu)
