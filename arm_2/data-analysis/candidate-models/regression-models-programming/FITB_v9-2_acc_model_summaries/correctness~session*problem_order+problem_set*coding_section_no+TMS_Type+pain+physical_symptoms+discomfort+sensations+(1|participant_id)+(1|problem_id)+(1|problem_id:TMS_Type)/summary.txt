@@ -1,0 +1,70 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: 
+correctness ~ session * problem_order + problem_set * coding_section_no +  
+    TMS_Type + pain + physical_symptoms + discomfort + sensations +  
+    (1 | participant_id) + (1 | problem_id) + (1 | problem_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    484.2     548.4    -227.1     454.2       518 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-4.9100 -0.1592  0.1806  0.4159  2.6985 
+
+Random effects:
+ Groups              Name        Variance  Std.Dev. 
+ problem_id:TMS_Type (Intercept) 2.120e-08 0.0001456
+ participant_id      (Intercept) 1.611e+00 1.2691310
+ problem_id          (Intercept) 6.126e+00 2.4751215
+Number of obs: 533, groups:  
+problem_id:TMS_Type, 48; participant_id, 27; problem_id, 24
+
+Fixed effects:
+                               Estimate Std. Error z value Pr(>|z|)  
+(Intercept)                    -0.16436    0.94876  -0.173   0.8625  
+session2                        0.32980    0.50034   0.659   0.5098  
+problem_order                  -0.03701    0.11999  -0.308   0.7577  
+problem_setb                   -0.80967    1.18196  -0.685   0.4933  
+coding_section_no               0.69379    0.27683   2.506   0.0122 *
+TMS_TypeWM                      0.23708    0.36312   0.653   0.5138  
+pain                           -0.21883    0.87404  -0.250   0.8023  
+physical_symptoms               0.15671    0.72807   0.215   0.8296  
+discomfort                     -1.18041    0.76581  -1.541   0.1232  
+sensations                      2.01825    0.79352   2.543   0.0110 *
+session2:problem_order          0.18499    0.17414   1.062   0.2881  
+problem_setb:coding_section_no -0.13623    0.36258  -0.376   0.7071  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) sessn2 prblm_r prblm_s cdng__ TMS_TW pain   physc_ dscmfr
+session2    -0.217                                                          
+problem_rdr -0.240  0.547                                                   
+problem_stb -0.580 -0.064 -0.048                                            
+cdng_sctn_n -0.496 -0.009 -0.086   0.395                                    
+TMS_TypeWM  -0.129 -0.001  0.020  -0.060   0.015                            
+pain         0.009 -0.019 -0.022  -0.058  -0.032  0.064                     
+physcl_symp -0.040  0.166  0.041   0.005   0.005 -0.404 -0.148              
+discomfort   0.036 -0.029 -0.012   0.016   0.019 -0.509 -0.472  0.250       
+sensations  -0.092  0.160  0.015  -0.140   0.009  0.331  0.182 -0.028 -0.387
+sssn2:prbl_  0.165 -0.798 -0.674   0.003   0.033  0.064 -0.033 -0.070  0.001
+prblm_st:__  0.376  0.002  0.051  -0.563  -0.753  0.001  0.030  0.005 -0.039
+            snstns sss2:_
+session2                 
+problem_rdr              
+problem_stb              
+cdng_sctn_n              
+TMS_TypeWM               
+pain                     
+physcl_symp              
+discomfort               
+sensations               
+sssn2:prbl_  0.029       
+prblm_st:__  0.056  0.018
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.00260168 (tol = 0.002, component 1)
+  See ?lme4::convergence and ?lme4::troubleshooting.
+

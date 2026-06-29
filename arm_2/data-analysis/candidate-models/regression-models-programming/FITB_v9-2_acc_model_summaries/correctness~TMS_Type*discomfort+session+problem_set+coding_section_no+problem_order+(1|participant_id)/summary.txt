@@ -1,0 +1,41 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correctness ~ TMS_Type * discomfort + session + problem_set +  
+    coding_section_no + problem_order + (1 | participant_id)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    655.8     690.0    -319.9     639.8       525 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.5720 -1.1269  0.5292  0.6766  1.2704 
+
+Random effects:
+ Groups         Name        Variance Std.Dev.
+ participant_id (Intercept) 0.2109   0.4592  
+Number of obs: 533, groups:  participant_id, 27
+
+Fixed effects:
+                  Estimate Std. Error z value Pr(>|z|)   
+(Intercept)        0.08312    0.33488   0.248  0.80396   
+TMS_TypeWM        -0.11236    0.21533  -0.522  0.60181   
+discomfort        -0.16680    0.37957  -0.439  0.66034   
+session2           0.23297    0.19483   1.196  0.23180   
+problem_setb      -0.18353    0.20826  -0.881  0.37819   
+coding_section_no  0.39376    0.12294   3.203  0.00136 **
+problem_order      0.02830    0.05948   0.476  0.63427   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW dscmfr sessn2 prblm_s cdng__
+TMS_TypeWM  -0.309                                    
+discomfort   0.083 -0.423                             
+session2    -0.265  0.026  0.050                      
+problem_stb -0.260  0.064 -0.340 -0.061               
+cdng_sctn_n -0.661  0.008 -0.006  0.004  0.004        
+problem_rdr -0.362  0.037 -0.038 -0.032 -0.006  -0.057
+fit warnings:
+fixed-effect model matrix is rank deficient so dropping 1 column / coefficient

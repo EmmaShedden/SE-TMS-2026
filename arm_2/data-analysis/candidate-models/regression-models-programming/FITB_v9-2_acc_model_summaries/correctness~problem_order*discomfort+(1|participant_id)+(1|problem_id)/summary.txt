@@ -1,0 +1,32 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correctness ~ problem_order * discomfort + (1 | participant_id) +  
+    (1 | problem_id)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    489.5     515.1    -238.7     477.5       527 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-4.2832 -0.1949  0.2283  0.4594  2.9533 
+
+Random effects:
+ Groups         Name        Variance Std.Dev.
+ participant_id (Intercept) 1.185    1.089   
+ problem_id     (Intercept) 5.243    2.290   
+Number of obs: 533, groups:  participant_id, 27; problem_id, 24
+
+Fixed effects:
+                         Estimate Std. Error z value Pr(>|z|)
+(Intercept)               0.94170    0.57476   1.638    0.101
+problem_order             0.09817    0.08413   1.167    0.243
+discomfort               -0.08382    0.76690  -0.109    0.913
+problem_order:discomfort -0.34103    0.24000  -1.421    0.155
+
+Correlation of Fixed Effects:
+            (Intr) prblm_ dscmfr
+problem_rdr -0.338              
+discomfort  -0.163  0.242       
+prblm_rdr:d  0.095 -0.314 -0.762

@@ -1,0 +1,50 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correctness ~ TMS_Type * physical_symptoms + session + problem_set +  
+    coding_section_no + problem_order + (1 | participant_id) +  
+    (1 | problem_id) + (1 | participant_id:TMS_Type) + (1 | problem_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    479.1     526.2    -228.6     457.1       522 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.2130 -0.1684  0.1896  0.4012  3.3106 
+
+Random effects:
+ Groups                  Name        Variance  Std.Dev.
+ participant_id:TMS_Type (Intercept) 1.081e+00 1.039783
+ problem_id:TMS_Type     (Intercept) 1.969e-05 0.004437
+ participant_id          (Intercept) 7.579e-01 0.870573
+ problem_id              (Intercept) 6.347e+00 2.519236
+Number of obs: 533, groups:  
+participant_id:TMS_Type, 54; problem_id:TMS_Type, 48; participant_id, 27; problem_id, 24
+
+Fixed effects:
+                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)        0.17232    0.90355   0.191 0.848751    
+TMS_TypeWM        -0.13483    0.44049  -0.306 0.759542    
+physical_symptoms -0.12848    0.95098  -0.135 0.892528    
+session2           0.56704    0.41799   1.357 0.174911    
+problem_setb      -1.05950    1.03955  -1.019 0.308112    
+coding_section_no  0.61391    0.18617   3.298 0.000975 ***
+problem_order      0.04724    0.09058   0.521 0.602019    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW physc_ sessn2 prblm_s cdng__
+TMS_TypeWM  -0.172                                    
+physcl_symp -0.040 -0.356                             
+session2    -0.197 -0.011  0.155                      
+problem_stb -0.524 -0.096  0.039 -0.074               
+cdng_sctn_n -0.351  0.005 -0.020  0.041 -0.040        
+problem_rdr -0.211  0.053 -0.030 -0.017 -0.018  -0.040
+fit warnings:
+fixed-effect model matrix is rank deficient so dropping 1 column / coefficient
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.0155244 (tol = 0.002, component 1)
+  See ?lme4::convergence and ?lme4::troubleshooting.
+

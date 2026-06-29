@@ -1,0 +1,50 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correctness ~ TMS_Type * sensations + session + problem_set +  
+    coding_section_no + problem_order + (1 | participant_id) +  
+    (1 | problem_id) + (1 | participant_id:TMS_Type) + (1 | problem_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    478.6     529.9    -227.3     454.6       521 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.6212 -0.1625  0.1868  0.3848  3.1612 
+
+Random effects:
+ Groups                  Name        Variance  Std.Dev.
+ participant_id:TMS_Type (Intercept) 8.147e-01 0.902580
+ problem_id:TMS_Type     (Intercept) 6.515e-05 0.008071
+ participant_id          (Intercept) 9.703e-01 0.985023
+ problem_id              (Intercept) 6.351e+00 2.520173
+Number of obs: 533, groups:  
+participant_id:TMS_Type, 54; problem_id:TMS_Type, 48; participant_id, 27; problem_id, 24
+
+Fixed effects:
+                      Estimate Std. Error z value Pr(>|z|)    
+(Intercept)            0.03930    0.91326   0.043 0.965672    
+TMS_TypeWM            -0.12725    0.41853  -0.304 0.761103    
+sensations             1.11316    1.09435   1.017 0.309064    
+session2               0.66591    0.41371   1.610 0.107487    
+problem_setb          -1.25651    1.03810  -1.210 0.226127    
+coding_section_no      0.61997    0.18644   3.325 0.000883 ***
+problem_order          0.05215    0.09051   0.576 0.564489    
+TMS_TypeWM:sensations  0.44330    1.50036   0.295 0.767639    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM snstns sessn2 prblm_s cdng__ prblm_r
+TMS_TypeWM  -0.240                                              
+sensations  -0.189  0.338                                       
+session2    -0.233  0.177    0.347                              
+problem_stb -0.490 -0.102   -0.117 -0.108                       
+cdng_sctn_n -0.355  0.008    0.054  0.059 -0.049                
+problem_rdr -0.211  0.044    0.027 -0.010 -0.021  -0.041        
+TMS_TypWM:s  0.150 -0.370   -0.623 -0.279  0.011  -0.010  0.003 
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.0280307 (tol = 0.002, component 1)
+  See ?lme4::convergence and ?lme4::troubleshooting.
+

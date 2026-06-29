@@ -1,0 +1,47 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: 
+correctness ~ TMS_Type + session + coding_section_no + problem_order +  
+    problem_set + pain + physical_symptoms + discomfort + sensations +  
+    (1 | participant_id)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    657.8     704.9    -317.9     635.8       522 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.4546 -1.0404  0.5236  0.6703  1.2940 
+
+Random effects:
+ Groups         Name        Variance Std.Dev.
+ participant_id (Intercept) 0.249    0.499   
+Number of obs: 533, groups:  participant_id, 27
+
+Fixed effects:
+                  Estimate Std. Error z value Pr(>|z|)   
+(Intercept)       -0.03908    0.34394  -0.114  0.90954   
+TMS_TypeWM        -0.01156    0.24308  -0.048  0.96208   
+session2           0.31306    0.20325   1.540  0.12349   
+coding_section_no  0.39820    0.12366   3.220  0.00128 **
+problem_order      0.03535    0.06010   0.588  0.55642   
+problem_setb      -0.26536    0.21542  -1.232  0.21802   
+pain              -0.11619    0.50658  -0.229  0.81859   
+physical_symptoms  0.04255    0.47550   0.089  0.92869   
+discomfort        -0.37063    0.46976  -0.789  0.43012   
+sensations         0.82829    0.46567   1.779  0.07529 . 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW sessn2 cdng__ prblm_r prblm_s pain   physc_ dscmfr
+TMS_TypeWM  -0.301                                                          
+session2    -0.291  0.016                                                   
+cdng_sctn_n -0.652  0.009  0.012                                            
+problem_rdr -0.360  0.039 -0.023 -0.054                                     
+problem_stb -0.203  0.015 -0.110 -0.001 -0.008                              
+pain        -0.004  0.093 -0.039 -0.025 -0.062  -0.127                      
+physcl_symp -0.024 -0.384  0.159  0.008  0.006  -0.036  -0.205              
+discomfort   0.114 -0.497  0.035 -0.001 -0.022  -0.164  -0.434  0.285       
+sensations  -0.182  0.247  0.189  0.026  0.035  -0.223   0.230 -0.026 -0.383

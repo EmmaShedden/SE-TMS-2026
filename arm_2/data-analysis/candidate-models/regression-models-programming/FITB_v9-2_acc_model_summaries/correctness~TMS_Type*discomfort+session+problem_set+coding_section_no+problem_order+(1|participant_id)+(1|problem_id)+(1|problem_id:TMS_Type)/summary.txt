@@ -1,0 +1,51 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correctness ~ TMS_Type * discomfort + session + problem_set +  
+    coding_section_no + problem_order + (1 | participant_id) +  
+    (1 | problem_id) + (1 | problem_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    484.1     526.8    -232.0     464.1       523 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.8424 -0.1756  0.2028  0.4398  2.2876 
+
+Random effects:
+ Groups              Name        Variance  Std.Dev. 
+ problem_id:TMS_Type (Intercept) 7.082e-07 0.0008416
+ participant_id      (Intercept) 1.238e+00 1.1124795
+ problem_id          (Intercept) 5.654e+00 2.3778232
+Number of obs: 533, groups:  
+problem_id:TMS_Type, 48; participant_id, 27; problem_id, 24
+
+Fixed effects:
+                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)        0.117980   0.001120  105.38   <2e-16 ***
+TMS_TypeWM        -0.049175   0.001120  -43.92   <2e-16 ***
+discomfort        -0.741414   0.001120 -662.18   <2e-16 ***
+session2           0.511380   0.001120  456.60   <2e-16 ***
+problem_setb      -0.768159   0.001120 -686.12   <2e-16 ***
+coding_section_no  0.583376   0.001121  520.47   <2e-16 ***
+problem_order      0.037015   0.001120   33.05   <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW dscmfr sessn2 prblm_s cdng__
+TMS_TypeWM  0.000                                     
+discomfort  0.000  0.000                              
+session2    0.000  0.000  0.000                       
+problem_stb 0.000  0.000  0.000  0.000                
+cdng_sctn_n 0.000  0.000  0.000  0.000  0.000         
+problem_rdr 0.000  0.000  0.000  0.000  0.000   0.001 
+fit warnings:
+fixed-effect model matrix is rank deficient so dropping 1 column / coefficient
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.0632171 (tol = 0.002, component 1)
+  See ?lme4::convergence and ?lme4::troubleshooting.
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+

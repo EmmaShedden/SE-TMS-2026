@@ -22,7 +22,6 @@ library(moments)  # skewness for selecting between additive and multiplicative m
 #If you get an error, you likely need to install the packages using the "install.package('insert-package-name-here')" command
 ```
 
-
 ## Notebook configurable settings
 
 ```{r}
@@ -34,10 +33,12 @@ program_type = 'short'
 ```
 
 make an overall output directory (model summaries, stats, etc. will all go here)
+
 ```{r}
 #setwd("..")
 outputdir = sprintf("%s/../candidate-models/regression-models-%s",getwd(), output_version)
 ```
+
 ```{r eval=FALSE}
 
 mkdir(outputdir)
@@ -58,8 +59,8 @@ data
 
 ```
 
-
 Removing irrelevant data from dataframe
+
 ```{r Nans}
 #remove rows that have no values 
 data <- data[data$duration > 1, ] 
@@ -70,9 +71,8 @@ participants_to_remove <- c("REDACTED_20")
 data <- subset(data, !(participant_id %in% participants_to_remove))
 ```
 
-
-
 #Looking at FITB and the passed ones only
+
 ```{r}
 
 data <- data[data$problem_type == program_type, ] 
@@ -81,9 +81,8 @@ data <- data[data$accuracy == 'Pass', ]
 
 ```
 
-
-
 Centralizing dureciton/reaction times where not normally distrubuted so that were transformed
+
 ```{r}
 mean_value <- mean((data$keypress_rate..keypresses.per.second.))
 print(mean_value)
@@ -94,8 +93,6 @@ print(mean_value)
 hist(sqrt(data$keypress_rate..keypresses.per.second.))
 ```
 
-
-
 ```{r}
 #Make sure you have n=27 participants
 
@@ -104,38 +101,30 @@ id #all unique IDs
 length(id) #number of participants
 ```
 
-
-
-
 distribution of number of problems succesffully completed by participants
+
 ```{r}
 count_table <- table(data$TMS_Type, data$participant_id)
 
 print(count_table)
 ```
 
-
 ## Select independent variables
 
 1.  `participant_id` (person) : random intercept
     -   People are drawn from an underlying distribution; we aren't interested in learning coefficients specific to the members of our sample, but rather in what they tell us about that underlying population. Random effects tell us about the distribution rather than the elements observed.
 
-    -   This variable is used to model person-specific attributes, such as a "skill," translating to overall faster or slower response times, that can be different for each person 
-    
+    -   This variable is used to model person-specific attributes, such as a "skill," translating to overall faster or slower response times, that can be different for each person
 2.  `problem_id` (question prompt) : random intercept
-    -   The underlying distribution of stimuli is a little less clear than that of participants. This variable can be thought of as modeling the dispersion of question-specific difficulties. 
-
+    -   The underlying distribution of stimuli is a little less clear than that of participants. This variable can be thought of as modeling the dispersion of question-specific difficulties.
 3.  `TMS_Type` (TMS treatment condition, i.e. brain region stimulated) : fixed & random intercepts
     -   Based on previous literature, we hypothesize that the brain region stimulated may have an effect that is systematic (i.e. very consistent between people, topics, etc.), quantitatively heterogeneous (i.e. directionally consistent, but widely varying in magnitude), or even a qualitatively heterogeneous (i.e. varying in direction, possibly in conjunction with magnitude). Therefore, we assess the goodness of fit for candidate models containing `TMS_Type` as a fixed effect, random effect, both, or neither, in order to test this hypothesis.
-
-    
 4.  `session`and 'coding_section_no' (chronological numbering of the session, per participant) : fixed intercept
     -   This is used to account for learning/training effect, i.e. participants getting better at test-taking under our specific test instrument over the course of the study. For example, they may become more familiar with the question structure, or become better at recalling old material as they do more practice questions. We expect this to be systematic (uniformly decreasing response time), so we model it as a fixed effect.
 
 ## Specify candidate predictor structures for mixed model formulas
 
-
-```{r eval=FALSE}
+```{r}
 fixed_effects = c(# no fixed effects
                   "", 
                   
@@ -184,8 +173,7 @@ fixed_effects = c(# no fixed effects
                   )
 ```
 
-
-```{r eval=FALSE}
+```{r}
 random_effects = c(#"",                               # (1)
                    "participant_id", 
                    "problem_id", 
@@ -207,7 +195,7 @@ random_effects = c(#"",                               # (1)
 
 In this first cell, we enumerate random effect structures by taking all combinations of the random effects specified.
 
-```{r eval=FALSE}
+```{r}
 random_effects = map(random_effects, function (s) sprintf("(1|%s)", s))
 
 random_exprs = c()
@@ -223,7 +211,7 @@ for (k in 1:N_random) {
 
 Now, we combine the response variable, fixed effects, and random effects together to generate our candidate model structures.
 
-```{r eval=FALSE}
+```{r}
 loglinear_formulae = c()
 for (fe in fixed_effects) {
   for (re in random_exprs) {
@@ -240,14 +228,13 @@ for (fe in fixed_effects) {
 print(length(loglinear_formulae))
 ```
 
-
 ### Model fitting (\~2 minutes)
 
 Here, we fit all the models. Of note, we use MLE rather than REML for compatibility with the AIC model selection strategy.
 
 We also store BIC (an alternative model selection criterion) in addition to AIC here. The two have different theoretical properties, both of which may be useful. Both describe the log likelihood of a fitted model, with a penalty for model complexity. The penalty in BIC is higher than that for AIC, so optimal-BIC models tend to be smaller (with fewer parameters) than optimal-AIC models. We have done our analysis relying on AIC, but we provide BIC-based model selection here in case the reader is interested.
 
-```{r eval=FALSE}
+```{r fit_all_models, cache=TRUE}
 if (TRUE) {
   # make an output directory for the output of all the candidate linear models
   logtime_outputdir = 
@@ -310,7 +297,6 @@ if (TRUE) {
 }
 ```
 
-
 ### Model selection
 
 ```{r}
@@ -318,33 +304,25 @@ if (TRUE) {
 fin = sprintf("%s/FITB_v9-2_sqrt_keypress_model_summaries/metrics.csv", outputdir)
 log_time_models_da = read_csv(fin)
 ```
+
 ```{r}
 head(log_time_models_da[order(log_time_models_da$AIC),], n = 10)
 ```
+
 ```{r}
 head(log_time_models_da[order(log_time_models_da$BIC),], n = 10)
 ```
-
-
 
 ```{r}
 fA = log_time_models_da[order(log_time_models_da$AIC),]$formula[[1]]
 cat(fA)
 ```
 
-
 ```{r}
 fB = log_time_models_da[order(log_time_models_da$AIC),]$formula[[2]]
 cat(fB)
 ```
 
-AIC favors 'log(duration) ~ session * coding_section_no + (1|participant_id) + (1|problem_id)'. Which does not have TMS as an effect
-
-
-
-
+AIC favors 'log(duration) \~ session \* coding_section_no + (1\|participant_id) + (1\|problem_id)'. Which does not have TMS as an effect
 
 There is no model (favored by AIC or BIC) with a systematic or non-systematic effect of TMS
-
-
-

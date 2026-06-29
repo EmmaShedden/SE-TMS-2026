@@ -1,0 +1,47 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correctness ~ TMS_Type * sensations + session + problem_set +  
+    coding_section_no + problem_order + (1 | participant_id) +  
+    (1 | problem_id)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    480.0     522.8    -230.0     460.0       523 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-4.0993 -0.1891  0.1957  0.4260  1.9901 
+
+Random effects:
+ Groups         Name        Variance Std.Dev.
+ participant_id (Intercept) 1.239    1.113   
+ problem_id     (Intercept) 5.743    2.396   
+Number of obs: 533, groups:  participant_id, 27; problem_id, 24
+
+Fixed effects:
+                      Estimate Std. Error z value Pr(>|z|)    
+(Intercept)           -0.06587    0.83697  -0.079 0.937268    
+TMS_TypeWM            -0.08939    0.29895  -0.299 0.764941    
+sensations             1.52465    0.84710   1.800 0.071886 .  
+session2               0.68311    0.29744   2.297 0.021641 *  
+problem_setb          -1.18774    0.94312  -1.259 0.207895    
+coding_section_no      0.60585    0.17904   3.384 0.000715 ***
+problem_order          0.04575    0.08612   0.531 0.595263    
+TMS_TypeWM:sensations  0.11158    1.17687   0.095 0.924466    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM snstns sessn2 prblm_s cdng__ prblm_r
+TMS_TypeWM  -0.197                                              
+sensations  -0.155  0.378                                       
+session2    -0.171  0.203    0.393                              
+problem_stb -0.490 -0.110   -0.135 -0.119                       
+cdng_sctn_n -0.374  0.027    0.080  0.070 -0.052                
+problem_rdr -0.216  0.068    0.039 -0.026 -0.024  -0.048        
+TMS_TypWM:s  0.103 -0.365   -0.552 -0.270  0.023  -0.023 -0.002 
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.0139297 (tol = 0.002, component 1)
+  See ?lme4::convergence and ?lme4::troubleshooting.
+

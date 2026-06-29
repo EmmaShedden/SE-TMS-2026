@@ -1,0 +1,38 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correctness ~ TMS_Type * session * problem_set + coding_section_no +  
+    problem_order + pain + physical_symptoms + discomfort + sensations +  
+    (1 | participant_id)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    665.3     729.5    -317.6     635.3       518 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.3315 -1.0439  0.5199  0.6653  1.2592 
+
+Random effects:
+ Groups         Name        Variance Std.Dev.
+ participant_id (Intercept) 0.2384   0.4882  
+Number of obs: 533, groups:  participant_id, 27
+
+Fixed effects:
+                                 Estimate Std. Error z value Pr(>|z|)   
+(Intercept)                      -0.02745    0.41541  -0.066  0.94731   
+TMS_TypeWM                        0.07069    0.51150   0.138  0.89008   
+session2                          0.14178    0.46813   0.303  0.76200   
+problem_setb                     -0.33924    0.51181  -0.663  0.50745   
+coding_section_no                 0.40045    0.12374   3.236  0.00121 **
+problem_order                     0.03524    0.06019   0.585  0.55821   
+pain                             -0.08046    0.53431  -0.151  0.88030   
+physical_symptoms                 0.04211    0.49660   0.085  0.93243   
+discomfort                       -0.33982    0.49425  -0.688  0.49173   
+sensations                        0.86790    0.50907   1.705  0.08822 . 
+TMS_TypeWM:session2               0.10053    0.71566   0.140  0.88829   
+TMS_TypeWM:problem_setb          -0.14093    0.69852  -0.202  0.84011   
+session2:problem_setb             0.38627    0.69765   0.554  0.57980   
+TMS_TypeWM:session2:problem_setb -0.25874    0.83862  -0.309  0.75768   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

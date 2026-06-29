@@ -26,7 +26,7 @@ library(stringr)
 
 ```{r}
 # name the directories to read data from and write output to
-input_version = 9 # why 7 - TODO 
+input_version = 9
 output_version = 'programming'
 program_type = 'long'
 ```
@@ -324,7 +324,7 @@ Here, we fit all the models. Of note, we use MLE rather than REML for compatibil
 
 We also store BIC (an alternative model selection criterion) in addition to AIC here. The two have different theoretical properties, both of which may be useful. Both describe the log likelihood of a fitted model, with a penalty for model complexity. The penalty in BIC is higher than that for AIC, so optimal-BIC models tend to be smaller (with fewer parameters) than optimal-AIC models. We have done our analysis relying on AIC, but we provide BIC-based model selection here in case the reader is interested.
 
-```{r cache=TRUE}
+```{r fit_all_models, cache=TRUE}
 if (TRUE) {
   # make an output directory for the output of all the candidate linear models
   logtime_outputdir = 
@@ -391,7 +391,6 @@ if (TRUE) {
 
 ```{r}
 # read in the AIC/BIC data
-# fin = sprintf("%s/LR_MWP_babytest3_log_time_model_summaries/metrics.csv", outputdir)
 fin = sprintf("%s/LR_v9-2_log_time_model_summaries/metrics.csv", outputdir)
 log_time_models_da <- read_csv(fin)
 ```

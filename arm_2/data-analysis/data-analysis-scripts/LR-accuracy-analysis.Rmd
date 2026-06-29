@@ -362,7 +362,7 @@ Here, we fit all the models. Of note, we use MLE rather than REML for compatibil
 
 We also store BIC (an alternative model selection criterion) in addition to AIC here. The two have different theoretical properties, both of which may be useful. Both describe the log likelihood of a fitted model, with a penalty for model complexity. The penalty in BIC is higher than that for AIC, so optimal-BIC models tend to be smaller (with fewer parameters) than optimal-AIC models. We have done our analysis relying on AIC, but we provide BIC-based model selection here in case the reader is interested.
 
-```{r cache=TRUE}
+```{r fit_all_models, cache=TRUE}
 if (TRUE) {
   # make an output directory for the output of all the candidate linear models
   model_outputdir = 
@@ -441,7 +441,6 @@ Read in AIC and BIC data
 
 ```{r}
 # read in the AIC/BIC data
-#fin = sprintf("%s/LR_MWP_babytest3_accur_model_summaries/metrics.csv", outputdir) #from original submission
 fin = sprintf("%s/LR_v9-2_accur_model_summaries/metrics.csv", outputdir)
 correctness_models_da = read_csv(fin)
 ```
@@ -504,8 +503,6 @@ cat(fA)
 
 m_reduced <- glmer(
   fA, 
-  #correctness ~ sensations + (1|problem_id) + (1|participant_id), # revised version
-  #correctness ~ sensations + (1|problem_id), # original version
   data = data,
   family = binomial
 )
@@ -517,8 +514,6 @@ f_full = paste(fA, ' + TMS_Type + (1|participant_id:TMS_Type)')
 
 m_full <- glmer(
   f_full, 
-  #correctness ~ sensations + TMS_Type + (1|problem_id) + (1|participant_id) + (1|participant_id:TMS_Type), # revised version
-  #correctness ~ sensations + (1|problem_id) + (1|participant_id:TMS_Type), # original version
   data = data,
   family = binomial
 )
@@ -532,16 +527,11 @@ anova(m_reduced, m_full)
 
 `TMS_Type` does not survive so is not included in the model.
 
-~~We compared two models differing only in the inclusion of a random intercept for participants nested within TMS condition. The model including participant_id:TMS_Type provided a significantly better fit, χ²(1) = 5.74, p = .017, supporting the inclusion of this grouping structure to capture individual variability in response to stimulation.~~
-
-**Below demonstrates why the interaction term appeared to improve the model fit:**
-
-~~I hardcoded these before adding extra interactions in the candidate model formulas, which is why `session` is missing in this section, but adding that in shouldn't change the overall results.~~ Corrected 5/18, and it didn't change the results.
+**Below demonstrates that including random participant effect improves the model fit:**
 
 ```{r}
 m_reduced_demo <- glmer( # remove participant
-  correctness ~ problem_set * sensations + (1|problem_id), # revised version 5/18
-  #correctness ~ sensations + (1|problem_id), # original version
+  correctness ~ problem_set * sensations + (1|problem_id), 
   data = data,
   family = binomial
 )
@@ -549,8 +539,7 @@ m_reduced_demo <- glmer( # remove participant
 
 ```{r}
 m_full_demo <- glmer( # add participant back
-  correctness ~ problem_set * sensations + (1|participant_id) + (1|problem_id), # revised version 5/18
-  #correctness ~ sensations + (1|problem_id) + (1|participant_id), # original version
+  correctness ~ problem_set * sensations + (1|participant_id) + (1|problem_id), 
   data = data,
   family = binomial
 )
@@ -581,13 +570,11 @@ m_reduced_2 <- m_full_demo # revised version 5/18
 
 ```{r}
 m_full_2 <- glmer(
-  correctness ~ problem_set * sensations + TMS_Type + (1|problem_id) + (1+TMS_Type_WM|participant_id), # revised version 5/18
-  #correctness ~ sensations + TMS_Type + (1|problem_id) + (1+TMS_Type_WM|participant_id), # original version
+  correctness ~ problem_set * sensations + TMS_Type + (1|problem_id) + (1+TMS_Type_WM|participant_id), 
   data = data,
   family = binomial
 )
 summary(m_full_2)
-# your innate ability and your TMS effect are uncorrelated (-0.01) <-- original version
 ```
 
 ```{r}
@@ -597,12 +584,11 @@ anova(m_reduced_2, m_full_2)
 
 Conclusion: adding `TMS_Type` (as random slope) doesn't improve the model fit (statistically significantly).
 
-The final change to the model that we will try is separating out the random intercept and slope. This enforces that they are uncorrelated, reducing the DoF of the model by 1 compared to the previous version (no learned correlation between the random intercept and slope distributions). ~~This assumption is supported by the fact that the previous test `m_full_2` already demonstrated that these two are basically uncorrelated (correlation coefficient -0.01).~~ Corrected 5/18, the correlation increased but there's no harm in trying it anyway.
+The final change to the model that we will try is separating out the random intercept and slope. This enforces that they are uncorrelated, reducing the DoF of the model by 1 compared to the previous version (no learned correlation between the random intercept and slope distributions).
 
 ```{r}
 m_full_3 <- glmer(
-  correctness ~ problem_set * sensations + TMS_Type + (1|problem_id) + (1|participant_id) + (0+TMS_Type_WM|participant_id), # revised version 5/18
-  #correctness ~ sensations + TMS_Type + (1|problem_id) + (1|participant_id) + (0+TMS_Type_WM|participant_id), # original version
+  correctness ~ problem_set * sensations + TMS_Type + (1|problem_id) + (1|participant_id) + (0+TMS_Type_WM|participant_id),
   data = data,
   family = binomial
 )
@@ -620,8 +606,7 @@ For completeness/fun, we'll try the same thing but with the `TMS_Type` random ef
 ```{r}
 # with correlation
 m_full_4 <- glmer(
-  correctness ~ problem_set * sensations + TMS_Type + (1+TMS_Type_WM|problem_id) + (1|participant_id), # revised version 5/18
-  #correctness ~ sensations + TMS_Type + (1+TMS_Type_WM|problem_id) + (1|participant_id), # original version
+  correctness ~ problem_set * sensations + TMS_Type + (1+TMS_Type_WM|problem_id) + (1|participant_id), 
   data = data,
   family = binomial
 )
@@ -632,8 +617,7 @@ anova(m_reduced_2, m_full_4)
 ```{r}
 # without correlation
 m_full_5 <- glmer(
-  correctness ~ problem_set * sensations + TMS_Type + (1|problem_id) + (1|participant_id) + (0+TMS_Type_WM|problem_id), # revised version 5/18
-  #correctness ~ sensations + TMS_Type + (1|problem_id) + (1|participant_id) + (0+TMS_Type_WM|problem_id), # original version
+  correctness ~ problem_set * sensations + TMS_Type + (1|problem_id) + (1|participant_id) + (0+TMS_Type_WM|problem_id),
   data = data,
   family = binomial
 )
@@ -665,7 +649,7 @@ summary(m_full_refit)
 VarCorr(m_full_refit)
 ```
 
-```{r cache=TRUE}
+```{r profile_pp0, cache=TRUE}
 #profiling to get confidence intervals
 pp0 = profile(m_full_refit)
 ```
@@ -679,9 +663,7 @@ confint(pp0)
 xyplot(pp0)
 ```
 
-~~Both random effects (sig01, sig02) are significant because both rejects zero in CI.~~
-
-```{r cache=TRUE}
+```{r profile_pp1, cache=TRUE}
 m0_refit <- glmer(
   fA, 
   family=binomial, 
@@ -726,8 +708,6 @@ We find that (1 \| problem_id) has a PVE of 86% (0.86). Meaning, problem difficu
 ```{r}
 get_pve(m_full, "participant_id:TMS_Type")
 ```
-
-~~We find that (1 \| participant_id:TMS_Type) has a PVE of 15% (0.15). Meaning, problem person-dependent TMS effect plays about 24% of the point varience estimate of the acurracy outcome.~~
 
 PVE is 3.7% by point estimate, however, CI doesn't exclude zero.
 

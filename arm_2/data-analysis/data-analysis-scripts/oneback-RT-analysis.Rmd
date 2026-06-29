@@ -249,7 +249,7 @@ Here, we fit all the models. Of note, we use MLE rather than REML for compatibil
 
 We also store BIC (an alternative model selection criterion) in addition to AIC here. The two have different theoretical properties, both of which may be useful. Both describe the log likelihood of a fitted model, with a penalty for model complexity. The penalty in BIC is higher than that for AIC, so optimal-BIC models tend to be smaller (with fewer parameters) than optimal-AIC models. We have done our analysis relying on AIC, but we provide BIC-based model selection here in case the reader is interested.
 
-```{r}
+```{r fit_all_models, cache=TRUE}
 if (TRUE) {
   # make an output directory for the output of all the candidate linear models
   logtime_outputdir = 
@@ -428,7 +428,7 @@ Ther person randome effect explains 18.2% of the varience in the data.
 
 ### PVE confidence interval (\~5 minutes)
 
-```{r}
+```{r bootmer_b0, cache=TRUE}
 if (TRUE) {
   b0 = bootMer(m1, 
                FUN = function (m) {return(get_pve(m, "participant_id:TMS_Type"))}, 
@@ -437,6 +437,6 @@ if (TRUE) {
 }
 ```
 
-```{r eval = FALSE}
+```{r}
 quantile(b0$t, c(0.025, 0.975))
 ```

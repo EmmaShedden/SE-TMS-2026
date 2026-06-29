@@ -22,7 +22,6 @@ library(moments)  # skewness for selecting between additive and multiplicative m
 #If you get an error, you likely need to install the packages using the "install.package('insert-package-name-here')" command
 ```
 
-
 ## 1. Notebook configurable settings
 
 ```{r}
@@ -36,13 +35,14 @@ nback_version = '1-back'
 #setwd("..")
 outputdir = sprintf("%s/../candidate-models/regression-models-%s",getwd(), output_version)
 ```
+
 ```{r eval=FALSE}
 
 mkdir(outputdir)
 ```
 
-
 ## Loading Data
+
 ```{r}
 #setwd("..")
 input_file = sprintf("%s/../preprocessed-data/full-data-version-%d/nback-full-data.csv", getwd(), input_version)
@@ -61,8 +61,8 @@ data <- transform(
 head(data)
 ```
 
+### Removing irrelevant data from dataframe
 
-#Removing irrelevant data from dataframe
 ```{r Nans}
 #remove rows that have no values - nothing actually happens here. Everyone saw the stimuli
 data <- data[data$response.time != 0, ] 
@@ -73,28 +73,23 @@ participants_to_remove <- c("REDACTED_20")
 data <- subset(data, !(participant_id %in% participants_to_remove))
 ```
 
+### Making sure we are only looking at one type of n-back at a time
 
-
-
-#Making sure we are only looking at one type of n-back at a time 
 ```{r}
 data <- data[data$nback_type == nback_version, ] #1-back , 2-back , or 3-back
 
 ```
 
+### Determining what is the mean response.time
 
-#Determining what is the mean response.time
 ```{r}
 mean_value <- mean((data$response.time))
 print(mean_value)
 
 ```
 
+### Checking number of participants is n=27
 
-
-
-
-#Checking number of participants is n=27
 ```{r}
 
 id <- unique(data$participant_id)
@@ -102,14 +97,15 @@ id #all unique IDs
 length(id) #number of participants
 ```
 
+### Checking distribution of of observartions per factor load in n-back
 
-#Checking distribution of of observartions per factor load in n-back
 ```{r}
 count_table <- table(data$TMS_Type, data$nback_type)
 
 # Print the result
 print(count_table)
 ```
+
 ```{r}
 fixed_effects = c(# no fixed effects
                   "", 
@@ -158,7 +154,6 @@ fixed_effects = c(# no fixed effects
                   #"condition * domain * session_num"
                   )
 ```
-
 
 ```{r}
 random_effects = c(#"",                                   # (1)
@@ -211,14 +206,13 @@ for (fe in fixed_effects) {
 print(length(loglinear_formulae))
 ```
 
-
 ### Model fitting (\~2 minutes)
 
 Here, we fit all the models. Of note, we use MLE rather than REML for compatibility with the AIC model selection strategy.
 
 We also store BIC (an alternative model selection criterion) in addition to AIC here. The two have different theoretical properties, both of which may be useful. Both describe the log likelihood of a fitted model, with a penalty for model complexity. The penalty in BIC is higher than that for AIC, so optimal-BIC models tend to be smaller (with fewer parameters) than optimal-AIC models. We have done our analysis relying on AIC, but we provide BIC-based model selection here in case the reader is interested.
 
-```{r eval=FALSE}
+```{r fit_all_models, cache=TRUE}
 if (TRUE) {
   # make an output directory for the output of all the candidate linear models
   logtime_outputdir = 
@@ -291,7 +285,6 @@ if (TRUE) {
 }
 ```
 
-
 ### Model selection
 
 ```{r}
@@ -320,7 +313,6 @@ fB = log_time_models_da[order(log_time_models_da$BIC),]$formula[[1]]
 cat(fB)
 ```
 
-
 The variance point estimates shown here feed directly into the PVE below.
 
 ```{r}
@@ -329,27 +321,24 @@ summary(m0)
 ```
 
 ## P-Values for Fixed effects
+
 ```{r}
 e2 = emmeans(m0, ~ pain)
 pairs(e2, adjust="BH")
 ```
-pain symptoms does not survive statisitcal significance (p>0.1)
 
-In addition, AIC does not favor a model with TMS_type as effect. 
+pain symptoms does not survive statisitcal significance (p\>0.1)
 
+In addition, AIC does not favor a model with TMS_type as effect.
 
-```{r}
+```{r profile_pp0, cache=TRUE}
 if (TRUE) {
   pp0 = profile(m0)
 }
 ```
-
 
 ```{r}
 confint(pp0)
 ```
 
 The random effect does not survive statisical significance
-
-
-

@@ -1,0 +1,43 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: 
+correctness ~ TMS_Type * problem_set * problem_order + coding_section_no +  
+    session + pain + physical_symptoms + discomfort + sensations +  
+    (1 | problem_id)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    509.4     573.6    -239.7     479.4       518 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-6.3750 -0.1880  0.2545  0.5057  1.9600 
+
+Random effects:
+ Groups     Name        Variance Std.Dev.
+ problem_id (Intercept) 4.137    2.034   
+Number of obs: 533, groups:  problem_id, 24
+
+Fixed effects:
+                                       Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                           -0.242324   0.729834  -0.332 0.739870    
+TMS_TypeWM                             1.106320   0.652273   1.696 0.089867 .  
+problem_setb                          -0.888869   0.910450  -0.976 0.328918    
+problem_order                          0.111299   0.148029   0.752 0.452128    
+coding_section_no                      0.549849   0.158312   3.473 0.000514 ***
+session2                               0.485220   0.246675   1.967 0.049179 *  
+pain                                   0.364747   0.471593   0.773 0.439265    
+physical_symptoms                     -0.312528   0.498317  -0.627 0.530550    
+discomfort                            -0.473020   0.472768  -1.001 0.317052    
+sensations                             1.032404   0.463209   2.229 0.025827 *  
+TMS_TypeWM:problem_setb               -1.548038   0.861206  -1.798 0.072252 .  
+TMS_TypeWM:problem_order              -0.335272   0.219261  -1.529 0.126240    
+problem_setb:problem_order             0.004418   0.210798   0.021 0.983279    
+TMS_TypeWM:problem_setb:problem_order  0.405591   0.301225   1.346 0.178150    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.00837124 (tol = 0.002, component 1)
+  See ?lme4::convergence and ?lme4::troubleshooting.
+
