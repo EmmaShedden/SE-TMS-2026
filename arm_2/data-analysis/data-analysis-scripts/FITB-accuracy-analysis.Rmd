@@ -68,7 +68,7 @@ data <- data[data$duration > 1, ]
 
 
 #Removing the one participants that didn't listen to instructions (2 SD below the mean in N-back):
-participants_to_remove <- c("5ZCK")
+participants_to_remove <- c("REDACTED_20")
 data <- subset(data, !(participant_id %in% participants_to_remove))
 ```
 
@@ -125,7 +125,7 @@ print(count_table)
     -   The underlying distribution of stimuli is a little less clear than that of participants. This variable can be thought of as modeling the dispersion of question-specific difficulties.
 3.  `TMS_Type` (TMS treatment condition, i.e. brain region stimulated) : fixed & random intercepts
     -   Based on previous literature, we hypothesize that the brain region stimulated may have an effect that is systematic (i.e. very consistent between people, topics, etc.), quantitatively heterogeneous (i.e. directionally consistent, but widely varying in magnitude), or even a qualitatively heterogeneous (i.e. varying in direction, possibly in conjunction with magnitude). Therefore, we assess the goodness of fit for candidate models containing `TMS_Type` as a fixed effect, random effect, both, or neither, in order to test this hypothesis.
-4.  `session`and 'coding_section_no' (chronological numbering of the session, per participant) : fixed intercept
+4.  `session`and `coding_section_no` (chronological numbering of the session, per participant) : fixed intercept
     -   This is used to account for learning/training effect, i.e. participants getting better at test-taking under our specific test instrument over the course of the study. For example, they may become more familiar with the question structure, or become better at recalling old material as they do more practice questions. We expect this to be systematic (uniformly decreasing response time), so we model it as a fixed effect.
 
 ## Specify candidate predictor structures for mixed model formulas

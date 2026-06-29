@@ -37,7 +37,7 @@ data <- transform(
   #Transforming correctness into binaries of 1 or 0
 data$correctness <- as.integer(ifelse(data$accuracy == 'Pass', 1, 0))
 
-participants_to_remove <- c("5ZCK")
+participants_to_remove <- c("REDACTED_20")
 data <- subset(data, !(participant_id %in% participants_to_remove))
 
 
