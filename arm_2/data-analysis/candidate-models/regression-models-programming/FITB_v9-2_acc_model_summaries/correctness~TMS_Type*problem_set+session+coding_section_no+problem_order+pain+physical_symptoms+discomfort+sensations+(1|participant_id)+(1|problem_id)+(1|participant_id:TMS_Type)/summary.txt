@@ -6,34 +6,34 @@ Formula: correctness ~ TMS_Type * problem_set + session + coding_section_no +
     (1 | participant_id) + (1 | problem_id) + (1 | participant_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    480.9     540.8    -226.5     452.9       519 
+     AIC      BIC   logLik deviance df.resid 
+   480.9    540.8   -226.5    452.9      519 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--4.1657 -0.1565  0.1899  0.3872  3.2099 
+-4.1641 -0.1565  0.1899  0.3874  3.2119 
 
 Random effects:
  Groups                  Name        Variance Std.Dev.
- participant_id:TMS_Type (Intercept) 0.5741   0.7577  
- participant_id          (Intercept) 1.2328   1.1103  
+ participant_id:TMS_Type (Intercept) 0.5743   0.7579  
+ participant_id          (Intercept) 1.2349   1.1112  
  problem_id              (Intercept) 6.4395   2.5376  
 Number of obs: 533, groups:  
 participant_id:TMS_Type, 54; participant_id, 27; problem_id, 24
 
 Fixed effects:
-                        Estimate Std. Error z value Pr(>|z|)    
-(Intercept)             -0.22233    0.93352  -0.238 0.811754    
-TMS_TypeWM               0.44834    0.71746   0.625 0.532032    
-problem_setb            -0.93078    1.14032  -0.816 0.414363    
-session2                 0.71997    0.38231   1.883 0.059676 .  
-coding_section_no        0.62251    0.18625   3.342 0.000831 ***
-problem_order            0.05473    0.09079   0.603 0.546626    
-pain                     0.09567    1.02212   0.094 0.925426    
-physical_symptoms       -0.01038    0.91156  -0.011 0.990915    
-discomfort              -0.94262    0.92583  -1.018 0.308614    
-sensations               1.74615    0.93643   1.865 0.062225 .  
-TMS_TypeWM:problem_setb -0.58291    1.17645  -0.495 0.620258    
+                         Estimate Std. Error z value Pr(>|z|)    
+(Intercept)             -0.222900   0.933598  -0.239 0.811297    
+TMS_TypeWM               0.448878   0.717701   0.625 0.531683    
+problem_setb            -0.928534   1.140390  -0.814 0.415516    
+session2                 0.720002   0.382351   1.883 0.059688 .  
+coding_section_no        0.622044   0.186246   3.340 0.000838 ***
+problem_order            0.054992   0.090797   0.606 0.544740    
+pain                     0.094392   1.022439   0.092 0.926443    
+physical_symptoms       -0.009758   0.911659  -0.011 0.991460    
+discomfort              -0.941417   0.926032  -1.017 0.309337    
+sensations               1.745844   0.936640   1.864 0.062330 .  
+TMS_TypeWM:problem_setb -0.585444   1.176958  -0.497 0.618892    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -41,13 +41,13 @@ Correlation of Fixed Effects:
             (Intr) TMS_TyWM prblm_s sessn2 cdng__ prblm_r pain   physc_ dscmfr
 TMS_TypeWM  -0.297                                                            
 problem_stb -0.539  0.284                                                     
-session2    -0.183 -0.002   -0.105                                            
-cdng_sctn_n -0.350  0.026   -0.037   0.058                                    
+session2    -0.184 -0.001   -0.105                                            
+cdng_sctn_n -0.351  0.026   -0.037   0.058                                    
 problem_rdr -0.212  0.045   -0.011  -0.012 -0.036                             
 pain        -0.045  0.193    0.019  -0.072  0.005 -0.044                      
-physcl_symp -0.033 -0.264   -0.002   0.205 -0.009 -0.014  -0.230              
+physcl_symp -0.033 -0.264   -0.002   0.205 -0.009 -0.014  -0.229              
 discomfort   0.050 -0.206    0.033  -0.037 -0.017 -0.004  -0.338  0.195       
-sensations  -0.140  0.159   -0.113   0.258  0.061  0.034   0.141  0.056 -0.433
+sensations  -0.140  0.160   -0.113   0.258  0.061  0.034   0.141  0.056 -0.433
 TMS_TypWM:_  0.239 -0.771   -0.414   0.032 -0.020 -0.009  -0.190  0.040 -0.153
             snstns
 TMS_TypeWM        
@@ -61,6 +61,5 @@ discomfort
 sensations        
 TMS_TypWM:_  0.031
 optimizer (Nelder_Mead) convergence code: 0 (OK)
-Model failed to converge with max|grad| = 0.0161313 (tol = 0.002, component 1)
-  See ?lme4::convergence and ?lme4::troubleshooting.
+Model failed to converge with max|grad| = 0.020995 (tol = 0.002, component 1)
 

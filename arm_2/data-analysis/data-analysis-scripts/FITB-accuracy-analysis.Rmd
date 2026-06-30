@@ -17,6 +17,7 @@ library(lattice)  # for xyplot()
 library(TAF)      # setting up output file directory structure during model fitting
 library(moments)  # skewness for selecting between additive and multiplicative models of response times
 library(stringr)
+library(filelock)
 
 
 #If you get an error, you likely need to install the packages using the "install.package('insert-package-name-here')" command
@@ -36,7 +37,7 @@ make an overall output directory (model summaries, stats, etc. will all go here)
 
 ```{r}
 #setwd("..")
-outputdir = sprintf("%s/../candidate-models/regression-models-%s",getwd(), output_version)
+outputdir = sprintf("%s/../candidate-models/regression-models-%s", getwd(), output_version)
 ```
 
 ```{r}
@@ -447,7 +448,7 @@ head(correctness_models_da[order(correctness_models_da$AIC),], n = 10)
 head(correctness_models_da[order(correctness_models_da$BIC),], n = 10)
 ```
 
-Our selection process pulls `correctness ~ TMS_Type + coding_section_no + (1|problem_id) + (1|participant_id:TMS_Type)` as the best model to represent the data by AIC (and 2nd-best by BIC).
+Our selection process pulls `correctness ~ TMS_Type + coding_section_no + (1|participant_id) + (1|problem_id) + (1|participant_id:TMS_Type)` as the best model to represent the data by AIC (and 2nd-best by BIC).
 
 ```{r}
 fA <- correctness_models_da[order(correctness_models_da$AIC),]$formula[[1]]
@@ -522,7 +523,7 @@ m2 <- glmer(
 anova(m0, m2)
 ```
 
-This is actually a stronger p-value than the 'omnibus' test removing both terms. So the random interaction intercept is significant (although the confint below should be reported, rather than this p-value).
+This is actually a stronger p-value than the 'omnibus' test removing both terms. So the random interaction intercept is significant (although the bootstrapping-based confint should be reported, rather than this p-value, because likelihood-based methods are anti-conservative for glmer modle random intercepts).
 
 ## Confidence Intervals and PSVE
 
@@ -547,45 +548,57 @@ xyplot(pp0)
 $\sigma_1$ excludes zero, so this further confirms the likelihood ratio test above.
 
 ### Percentage of Structural Variance Explained
+For the structural ICC statistic presented in the paper, see the separate bootstrapping scripts in `arm_2_bootstrap/`.
+This PSVE statistic is fine for looking at one experiment in isolation, but is problematic for comparing between different experiments with different stimulus variance (e.g., our two study arms, discussed in Section 4.2.3).
 
 ```{r}
-get_psve = function(m, effect, save=FALSE, fout, effect_order) {
-  # m is a glmer object so residual variance isn't well-defined, hence 'structural'
-  # The lower confidence bound returned by bootMer is within standard tolerance of zero, 
-  # even though the lower confidence bound of the variance estimate alone is far from 
-  # zero. To understand why, I want to examine the variance estimates for each intercept 
-  # and simulation, but because dataframes are copy-on-modify in R, I have to write them 
-  # to a file to store them.
-  random_effects = as.data.frame(VarCorr(m)) %>% 
-    rename(Groups = grp, Name = var1, Variance = vcov, Std.Dev. = sdcor) %>% 
+# Simple thread-safe append function
+safe_write <- function(row, fout, lock_file) {
+  lck <- lock(lock_file) # Acquire lock
+  # on.exit(unlock(lck))  # Ensure unlock on finish or error
+
+  sink(
+    file = fout,
+    append = TRUE,
+    type = "output",
+    split = FALSE
+  )
+  cat(row, " \n")
+  sink()
+  unlock(lck) # Release lock
+}
+```
+
+```{r}
+# Callback function for each bootstrap simulation
+get_psve <- function(m, effect, save = FALSE, fout, effect_order, f_lock) {
+  # m is a glmer object so residual variance isn"t well-defined, hence "structural"
+  # Store variance estimates for all random effects
+  random_effects <- as.data.frame(VarCorr(m)) %>%
+    rename(Groups = grp, Name = var1, Variance = vcov, Std.Dev. = sdcor) %>%
     select(-var2)
-  
-  num = (random_effects %>% filter(Groups == effect))$Variance
-  denom = sum(random_effects$Variance)
-  
-  ## side effect
+
+  num <- (random_effects %>% filter(Groups == effect))$Variance
+  denom <- sum(random_effects$Variance)
+
   if (save) {
     if (missing(fout) || missing(effect_order)) {
       warning(sprintf(
-        'get_psve(m, effect=%s, save=TRUE) failed to save: fout or effect_order not provided', 
-        effect))
+        paste0(
+          "get_psve(m, effect=%s, save=TRUE) failed to save: ",
+          "fout or effect_order not provided"
+        ),
+        effect
+      ))
     } else {
       vv <- sapply(effect_order, function(eff) {
         (random_effects %>% filter(Groups == eff))$Variance
       }) # this is to ensure that they appear in the same order every time
-      sink(
-        file = fout,
-        append = TRUE,
-        type = "output",
-        split = FALSE
-      )
-      cat(paste0(vv, collapse=','), '\n')
-      sink()
+      safe_write(paste0(vv, collapse = ", "), fout, f_lock)
     }
   }
-  ##
-  
-  return (c(num / denom))
+
+  return(c(num / denom))
 }
 
 get_psve(m0, "participant_id:TMS_Type")
@@ -598,38 +611,40 @@ VarCorr(m0)
 ```
 
 ### PSVE confint
+Of the three significance tests here, this one (bootstrapping) is the most robust when `nsim` is big enough.
+[source](https://stats.stackexchange.com/questions/351164/confidence-intervals-for-glmm-bootstrap-vs-likelihood-profile/351171#351171), 
+[source](https://www.ssc.wisc.edu/sscc/pubs/MM/MM_TestEffects.html#test-of-random-parameters)
 
 ```{r bootmer_b0, cache=TRUE}
 ordered_factors <- as.data.frame(VarCorr(m0))$grp
 nsim <- 10000
 # 10k sims took about 2.5 hrs
 
-for (nsim in c(8000, 9000, 11000, 12000)) {
-  
-}
 psve_log <- sprintf("%s/psve_bootstrap_%i.csv", correctness_outputdir, nsim)
 file.create(psve_log)
+lock_file <- paste0(psve_log, ".lock") # Define a lock file
 cat(psve_log, "\n")
+
 # write the header
-sink(
-  file = psve_log,
-  append = FALSE,
-  type = "output",
-  split = FALSE
-)
-cat(paste0(ordered_factors, collapse=","), "\n")
-sink()
+cat(paste0(ordered_factors, collapse = ","), "\n", file = psve_log)
 
-b0 = bootMer(
-  m0, 
-  FUN = function (m) {return(get_psve(m, "participant_id:TMS_Type", save=TRUE, psve_log, ordered_factors))}, 
+b0 <- bootMer(
+  m0,
+  FUN = function(m) {
+    get_psve(
+      m,
+      "participant_id:TMS_Type",
+      save = TRUE,
+      psve_log,
+      ordered_factors,
+      lock_file
+    )
+  },
   nsim = nsim,
-  .progress = "txt"
+  #.progress = "txt"
+  parallel = "multicore",
+  ncpus = 64
 )
-```
-
-```{r}
-
 ```
 
 ```{r}
@@ -716,61 +731,9 @@ lines(bootstrap_sims[1:bottom_percentile_idx,]$problem_id, type="o")
 abline(v = 0.025*nsim, col = "red", lwd = 2, lty = 2) # 2.5 percentile
 ```
 
-### Other thing
-
-```{r}
-VarCorr(m0)
-```
-
-Manual Calculation of CI We needed to do this since the profiler function went to error.
-
-```{r}
-# Check the summary of the model
-model_summary <- summary(m0)
-
-# Extract the random effects variance estimates
-random_effects_var <- as.data.frame(VarCorr(m0))
-
-# View the variance components
-#print(random_effects_var)
-
-# Calculate confidence intervals for the random effects
-# Can calculate the CI based on a normal approximation:
-z_value <- 1.96  # For 95% confidence intervals
-
-# Create a data frame to hold CI results
-ci_results <- data.frame(
-  Group = random_effects_var$grp,
-  Var_Estimate = random_effects_var$vcov,
-  CI_Lower = random_effects_var$vcov - z_value * sqrt(random_effects_var$vcov),
-  CI_Upper = random_effects_var$vcov + z_value * sqrt(random_effects_var$vcov)
-)
-
-# Print the confidence intervals for random effects
-print(ci_results)
-```
-
-'participant_id:TMS_Type' effect does not exclude zero which means it is not significant
-
-We may also be interested in assessing the differences in accuracy outcome fom control to treatment
-
-```{r}
-#How often did people get an answer right in the Control group vs Treatment group?
-df_summary <- data %>%
-  group_by(TMS_Type) %>%
-  summarise(
-    mean_correct = mean(correctness, na.rm = TRUE),
-    sd_correct = sd(correctness, na.rm = TRUE),
-    count = n()
-  )
-
-print(df_summary)
-
-```
-
-Since correctness is typically represented as 0 (incorrect) or 1 (correct) in binary data. Mean correctness is 0.71 in control and 0.67 in WM with SD of 0.4 in both an SD of 0.4 is quite large. This suggests that some participants answered almost all questions correctly (near 1.0), while others answered very few correctly (near 0.3 or lower). The variation might be due to individual differences, task difficulty, or randomness in responses.
-
 ## Test other model candidates
+
+For completeness, we will try the likelihood ratio test with all low-AIC model formulas.
 
 ```{r}
 best_AIC <- correctness_models_da[order(correctness_models_da$AIC),]$AIC[[1]]

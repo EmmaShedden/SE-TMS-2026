@@ -1,0 +1,42 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: sqrt(keypress_rate..keypresses.per.second.) ~ session * problem_set *  
+    problem_order + coding_section_no + TMS_Type + pain + physical_symptoms +  
+    discomfort + sensations + (1 | participant_id) + (1 | problem_id) +  
+    (1 | problem_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  -129.5    -59.2     82.8   -165.5      350 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.55796 -0.65536  0.02865  0.65815  2.98308 
+
+Random effects:
+ Groups              Name        Variance Std.Dev.
+ problem_id:TMS_Type (Intercept) 0.00000  0.0000  
+ participant_id      (Intercept) 0.03682  0.1919  
+ problem_id          (Intercept) 0.03258  0.1805  
+ Residual                        0.02530  0.1591  
+Number of obs: 368, groups:  
+problem_id:TMS_Type, 44; participant_id, 27; problem_id, 22
+
+Fixed effects:
+                                     Estimate Std. Error t value
+(Intercept)                          0.956555   0.070512  13.566
+session2                             0.083931   0.073645   1.140
+problem_setb                        -0.022784   0.082091  -0.278
+problem_order                       -0.006706   0.009761  -0.687
+coding_section_no                    0.030100   0.010853   2.774
+TMS_TypeWM                           0.029511   0.023523   1.255
+pain                                -0.070456   0.070383  -1.001
+physical_symptoms                   -0.035453   0.051909  -0.683
+discomfort                          -0.010317   0.051934  -0.199
+sensations                          -0.052799   0.051117  -1.033
+session2:problem_setb               -0.040889   0.139797  -0.292
+session2:problem_order              -0.015685   0.014191  -1.105
+problem_setb:problem_order          -0.012801   0.014864  -0.861
+session2:problem_setb:problem_order  0.018262   0.020873   0.875
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

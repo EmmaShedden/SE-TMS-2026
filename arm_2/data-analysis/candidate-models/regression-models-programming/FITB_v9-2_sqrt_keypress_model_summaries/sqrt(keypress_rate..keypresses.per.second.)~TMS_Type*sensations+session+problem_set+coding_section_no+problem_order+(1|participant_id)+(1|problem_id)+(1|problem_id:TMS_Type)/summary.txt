@@ -1,0 +1,45 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: sqrt(keypress_rate..keypresses.per.second.) ~ TMS_Type * sensations +  
+    session + problem_set + coding_section_no + problem_order +  
+    (1 | participant_id) + (1 | problem_id) + (1 | problem_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  -138.8    -91.9     81.4   -162.8      356 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.52325 -0.65541  0.01682  0.64116  3.00274 
+
+Random effects:
+ Groups              Name        Variance  Std.Dev. 
+ problem_id:TMS_Type (Intercept) 6.096e-11 7.808e-06
+ participant_id      (Intercept) 3.680e-02 1.918e-01
+ problem_id          (Intercept) 3.258e-02 1.805e-01
+ Residual                        2.551e-02 1.597e-01
+Number of obs: 368, groups:  
+problem_id:TMS_Type, 44; participant_id, 27; problem_id, 22
+
+Fixed effects:
+                       Estimate Std. Error t value
+(Intercept)            0.978017   0.067220  14.550
+TMS_TypeWM             0.010889   0.019329   0.563
+sensations            -0.074289   0.059706  -1.244
+session2               0.047517   0.018826   2.524
+problem_setb          -0.051705   0.062513  -0.827
+coding_section_no      0.029537   0.010845   2.724
+problem_order         -0.016049   0.005262  -3.050
+TMS_TypeWM:sensations  0.052157   0.075511   0.691
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM snstns sessn2 prblm_s cdng__ prblm_r
+TMS_TypeWM  -0.123                                              
+sensations  -0.114  0.325                                       
+session2    -0.120  0.179    0.386                              
+problem_stb -0.378 -0.166   -0.179 -0.187                       
+cdng_sctn_n -0.319  0.065    0.066  0.039 -0.019                
+problem_rdr -0.152  0.027   -0.003 -0.030  0.005  -0.102        
+TMS_TypWM:s  0.098 -0.446   -0.635 -0.307  0.080  -0.068  0.004 
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

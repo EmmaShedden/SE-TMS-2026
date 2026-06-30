@@ -1,0 +1,40 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: sqrt(keypress_rate..keypresses.per.second.) ~ TMS_Type * session *  
+    problem_order + problem_set + coding_section_no + pain +  
+    physical_symptoms + discomfort + sensations + (1 | participant_id) +  
+    (1 | problem_id) + (1 | participant_id:TMS_Type) + (1 | problem_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  -127.9    -53.6     82.9   -165.9      349 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.55290 -0.63942  0.03013  0.62650  2.94420 
+
+Random effects:
+ Groups                  Name        Variance  Std.Dev.
+ participant_id:TMS_Type (Intercept) 3.966e-04 0.01991 
+ problem_id:TMS_Type     (Intercept) 3.806e-05 0.00617 
+ participant_id          (Intercept) 3.657e-02 0.19124 
+ problem_id              (Intercept) 3.226e-02 0.17962 
+ Residual                            2.507e-02 0.15833 
+Number of obs: 368, groups:  
+participant_id:TMS_Type, 53; problem_id:TMS_Type, 44; participant_id, 27; problem_id, 22
+
+Fixed effects:
+                                   Estimate Std. Error t value
+(Intercept)                        0.953977   0.079629  11.980
+TMS_TypeWM                         0.067616   0.088835   0.761
+session2                           0.079023   0.086860   0.910
+problem_order                     -0.005585   0.009715  -0.575
+problem_setb                      -0.053625   0.063701  -0.842
+coding_section_no                  0.028842   0.010852   2.658
+pain                              -0.065033   0.073803  -0.881
+physical_symptoms                 -0.036523   0.054596  -0.669
+discomfort                        -0.009688   0.054363  -0.178
+sensations                        -0.055412   0.054044  -1.025
+TMS_TypeWM:session2               -0.030782   0.161717  -0.190
+TMS_TypeWM:problem_order          -0.015337   0.014821  -1.035
+session2:problem_order            -0.011457   0.013819  -0.829
+TMS_TypeWM:session2:problem_order  0.010665   0.020785   0.513

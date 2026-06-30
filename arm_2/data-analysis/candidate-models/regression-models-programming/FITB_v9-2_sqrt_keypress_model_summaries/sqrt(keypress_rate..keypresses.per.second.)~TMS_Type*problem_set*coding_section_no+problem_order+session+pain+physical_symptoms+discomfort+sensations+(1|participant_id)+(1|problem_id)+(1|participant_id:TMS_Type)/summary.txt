@@ -1,0 +1,40 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: 
+sqrt(keypress_rate..keypresses.per.second.) ~ TMS_Type * problem_set *  
+    coding_section_no + problem_order + session + pain + physical_symptoms +  
+    discomfort + sensations + (1 | participant_id) + (1 | problem_id) +  
+    (1 | participant_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  -130.9    -60.5     83.4   -166.9      350 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.56597 -0.62892 -0.01356  0.65957  2.82894 
+
+Random effects:
+ Groups                  Name        Variance Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.000465 0.02156 
+ participant_id          (Intercept) 0.036595 0.19130 
+ problem_id              (Intercept) 0.032817 0.18116 
+ Residual                            0.024952 0.15796 
+Number of obs: 368, groups:  
+participant_id:TMS_Type, 53; participant_id, 27; problem_id, 22
+
+Fixed effects:
+                                           Estimate Std. Error t value
+(Intercept)                                0.931395   0.076555  12.166
+TMS_TypeWM                                 0.108062   0.090397   1.195
+problem_setb                              -0.003105   0.097867  -0.032
+coding_section_no                          0.049560   0.020328   2.438
+problem_order                             -0.016264   0.005235  -3.107
+session2                                   0.045126   0.019154   2.356
+pain                                      -0.069923   0.073841  -0.947
+physical_symptoms                         -0.038965   0.054852  -0.710
+discomfort                                -0.002447   0.054610  -0.045
+sensations                                -0.062161   0.054038  -1.150
+TMS_TypeWM:problem_setb                   -0.055682   0.158124  -0.352
+TMS_TypeWM:coding_section_no              -0.021906   0.029407  -0.745
+problem_setb:coding_section_no            -0.012807   0.030550  -0.419
+TMS_TypeWM:problem_setb:coding_section_no -0.008638   0.042934  -0.201

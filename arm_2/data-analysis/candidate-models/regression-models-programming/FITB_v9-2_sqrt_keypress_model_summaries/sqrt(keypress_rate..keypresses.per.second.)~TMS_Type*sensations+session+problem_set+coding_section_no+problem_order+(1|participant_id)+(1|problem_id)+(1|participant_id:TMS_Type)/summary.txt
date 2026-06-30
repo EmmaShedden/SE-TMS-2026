@@ -1,0 +1,42 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: sqrt(keypress_rate..keypresses.per.second.) ~ TMS_Type * sensations +  
+    session + problem_set + coding_section_no + problem_order +  
+    (1 | participant_id) + (1 | problem_id) + (1 | participant_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  -139.0    -92.2     81.5   -163.0      356 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.51182 -0.63843  0.01765  0.63768  2.99416 
+
+Random effects:
+ Groups                  Name        Variance  Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.0006321 0.02514 
+ participant_id          (Intercept) 0.0363491 0.19065 
+ problem_id              (Intercept) 0.0326308 0.18064 
+ Residual                            0.0251934 0.15872 
+Number of obs: 368, groups:  
+participant_id:TMS_Type, 53; participant_id, 27; problem_id, 22
+
+Fixed effects:
+                       Estimate Std. Error t value
+(Intercept)            0.979345   0.067725  14.461
+TMS_TypeWM             0.011532   0.020794   0.555
+sensations            -0.071847   0.063839  -1.125
+session2               0.048510   0.020226   2.398
+problem_setb          -0.056219   0.064511  -0.871
+coding_section_no      0.029122   0.010806   2.695
+problem_order         -0.015622   0.005243  -2.980
+TMS_TypeWM:sensations  0.049500   0.080320   0.616
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM snstns sessn2 prblm_s cdng__ prblm_r
+TMS_TypeWM  -0.131                                              
+sensations  -0.119  0.321                                       
+session2    -0.130  0.175    0.381                              
+problem_stb -0.387 -0.163   -0.178 -0.181                       
+cdng_sctn_n -0.316  0.059    0.062  0.036 -0.017                
+problem_rdr -0.149  0.025   -0.005 -0.028  0.002  -0.103        
+TMS_TypWM:s  0.103 -0.444   -0.635 -0.305  0.076  -0.063  0.006 

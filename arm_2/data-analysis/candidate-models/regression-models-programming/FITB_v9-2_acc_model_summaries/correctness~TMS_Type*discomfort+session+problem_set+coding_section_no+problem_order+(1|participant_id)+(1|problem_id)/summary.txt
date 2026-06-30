@@ -6,43 +6,43 @@ Formula: correctness ~ TMS_Type * discomfort + session + problem_set +
     (1 | problem_id)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    482.1     520.6    -232.0     464.1       524 
+     AIC      BIC   logLik deviance df.resid 
+   482.1    520.6   -232.0    464.1      524 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--3.8419 -0.1756  0.2027  0.4398  2.2849 
+-3.8420 -0.1756  0.2027  0.4398  2.2846 
 
 Random effects:
  Groups         Name        Variance Std.Dev.
- participant_id (Intercept) 1.238    1.113   
- problem_id     (Intercept) 5.642    2.375   
+ participant_id (Intercept) 1.237    1.112   
+ problem_id     (Intercept) 5.641    2.375   
 Number of obs: 533, groups:  participant_id, 27; problem_id, 24
 
 Fixed effects:
-                  Estimate Std. Error z value Pr(>|z|)    
-(Intercept)        0.12022    0.80768   0.149 0.881672    
-TMS_TypeWM        -0.05129    0.28891  -0.178 0.859082    
-discomfort        -0.73899    0.54743  -1.350 0.177044    
-session2           0.51242    0.25967   1.973 0.048452 *  
-problem_setb      -0.77287    0.90679  -0.852 0.394042    
-coding_section_no  0.58404    0.16939   3.448 0.000565 ***
-problem_order      0.03701    0.08247   0.449 0.653607    
+                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)        0.121258   0.001121  108.13   <2e-16 ***
+TMS_TypeWM        -0.051208   0.001122  -45.66   <2e-16 ***
+discomfort        -0.738896   0.001121 -658.87   <2e-16 ***
+session2           0.512358   0.001122  456.74   <2e-16 ***
+problem_setb      -0.775956   0.001121 -691.98   <2e-16 ***
+coding_section_no  0.583965   0.001123  520.16   <2e-16 ***
+problem_order      0.037001   0.001122   32.98   <2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Correlation of Fixed Effects:
             (Intr) TMS_TW dscmfr sessn2 prblm_s cdng__
-TMS_TypeWM  -0.153                                    
-discomfort   0.027 -0.439                             
-session2    -0.129  0.035  0.005                      
-problem_stb -0.522 -0.026 -0.091 -0.056               
-cdng_sctn_n -0.368 -0.009  0.034  0.039 -0.029        
-problem_rdr -0.216  0.078 -0.025 -0.040 -0.011  -0.048
+TMS_TypeWM  0.000                                     
+discomfort  0.000  0.000                              
+session2    0.000  0.000  0.000                       
+problem_stb 0.000  0.000  0.000  0.000                
+cdng_sctn_n 0.000  0.000  0.000  0.000  0.000         
+problem_rdr 0.000  0.000  0.000  0.000  0.000   0.001 
 fit warnings:
 fixed-effect model matrix is rank deficient so dropping 1 column / coefficient
 optimizer (Nelder_Mead) convergence code: 0 (OK)
-unable to evaluate scaled gradient
-Model failed to converge: degenerate  Hessian with 2 negative eigenvalues
-  See ?lme4::convergence and ?lme4::troubleshooting.
+Model failed to converge with max|grad| = 0.0630947 (tol = 0.002, component 1)
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
 

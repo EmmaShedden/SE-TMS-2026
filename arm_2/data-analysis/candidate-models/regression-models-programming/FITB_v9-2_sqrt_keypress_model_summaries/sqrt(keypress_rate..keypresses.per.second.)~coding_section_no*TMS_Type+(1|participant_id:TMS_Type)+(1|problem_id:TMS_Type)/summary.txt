@@ -1,0 +1,32 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: sqrt(keypress_rate..keypresses.per.second.) ~ coding_section_no *  
+    TMS_Type + (1 | participant_id:TMS_Type) + (1 | problem_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+   -70.2    -42.8     42.1    -84.2      361 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.22452 -0.57165 -0.03862  0.65302  2.52314 
+
+Random effects:
+ Groups                  Name        Variance Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.03961  0.1990  
+ problem_id:TMS_Type     (Intercept) 0.03403  0.1845  
+ Residual                            0.02535  0.1592  
+Number of obs: 368, groups:  
+participant_id:TMS_Type, 53; problem_id:TMS_Type, 44
+
+Fixed effects:
+                             Estimate Std. Error t value
+(Intercept)                   0.92562    0.06571  14.087
+coding_section_no             0.04075    0.01576   2.585
+TMS_TypeWM                    0.05711    0.09330   0.612
+coding_section_no:TMS_TypeWM -0.02941    0.02225  -1.322
+
+Correlation of Fixed Effects:
+            (Intr) cdng__ TMS_TW
+cdng_sctn_n -0.489              
+TMS_TypeWM  -0.704  0.345       
+c__:TMS_TWM  0.347 -0.708 -0.495

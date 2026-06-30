@@ -5,8 +5,8 @@ Formula: correctness ~ TMS_Type + sensations + (1 | participant_id) +
     (1 | problem_id) + (1 | participant_id:TMS_Type) + (1 | problem_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    484.9     514.9    -235.5     470.9       526 
+     AIC      BIC   logLik deviance df.resid 
+   484.9    514.9   -235.5    470.9      526 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -23,16 +23,16 @@ participant_id:TMS_Type, 54; problem_id:TMS_Type, 48; participant_id, 27; proble
 
 Fixed effects:
             Estimate Std. Error z value Pr(>|z|)  
-(Intercept)   1.1318     0.6091   1.858   0.0632 .
-TMS_TypeWM   -0.1901     0.3869  -0.491   0.6232  
-sensations    0.7597     0.7701   0.987   0.3239  
+(Intercept)   1.1318     0.6070   1.864   0.0623 .
+TMS_TypeWM   -0.1901     0.3843  -0.495   0.6208  
+sensations    0.7597     0.7732   0.983   0.3258  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Correlation of Fixed Effects:
            (Intr) TMS_TW
-TMS_TypeWM -0.334       
-sensations -0.161  0.096
+TMS_TypeWM -0.328       
+sensations -0.156  0.078
 optimizer (Nelder_Mead) convergence code: 0 (OK)
 boundary (singular) fit: see help('isSingular')
 

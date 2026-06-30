@@ -6,27 +6,27 @@ correctness ~ TMS_Type * pain + (1 | participant_id) + (1 | problem_id) +
     (1 | participant_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    485.6     515.6    -235.8     471.6       526 
+     AIC      BIC   logLik deviance df.resid 
+   485.6    515.6   -235.8    471.6      526 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--3.3282 -0.1776  0.2110  0.4088  3.2590 
+-3.3281 -0.1777  0.2111  0.4089  3.2576 
 
 Random effects:
  Groups                  Name        Variance Std.Dev.
- participant_id:TMS_Type (Intercept) 1.0825   1.0404  
- participant_id          (Intercept) 0.7581   0.8707  
- problem_id              (Intercept) 5.9651   2.4423  
+ participant_id:TMS_Type (Intercept) 1.0816   1.0400  
+ participant_id          (Intercept) 0.7573   0.8702  
+ problem_id              (Intercept) 5.9587   2.4410  
 Number of obs: 533, groups:  
 participant_id:TMS_Type, 54; participant_id, 27; problem_id, 24
 
 Fixed effects:
                 Estimate Std. Error z value Pr(>|z|)  
-(Intercept)      1.22808    0.60421   2.033   0.0421 *
-TMS_TypeWM      -0.15804    0.41101  -0.385   0.7006  
-pain             0.08912    1.69421   0.053   0.9580  
-TMS_TypeWM:pain -0.57375    1.81330  -0.316   0.7517  
+(Intercept)      1.22780    0.60391   2.033    0.042 *
+TMS_TypeWM      -0.15816    0.41090  -0.385    0.700  
+pain             0.08891    1.69352   0.053    0.958  
+TMS_TypeWM:pain -0.57314    1.81257  -0.316    0.752  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -35,3 +35,6 @@ Correlation of Fixed Effects:
 TMS_TypeWM  -0.320                
 pain        -0.113  0.112         
 TMS_TypWM:p  0.093 -0.250   -0.844
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.00350556 (tol = 0.002, component 1)
+

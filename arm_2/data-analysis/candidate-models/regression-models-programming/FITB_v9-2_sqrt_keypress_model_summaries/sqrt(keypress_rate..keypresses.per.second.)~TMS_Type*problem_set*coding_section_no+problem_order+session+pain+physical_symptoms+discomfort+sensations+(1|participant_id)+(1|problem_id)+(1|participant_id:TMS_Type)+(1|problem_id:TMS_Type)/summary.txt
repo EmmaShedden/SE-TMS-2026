@@ -1,0 +1,41 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: 
+sqrt(keypress_rate..keypresses.per.second.) ~ TMS_Type * problem_set *  
+    coding_section_no + problem_order + session + pain + physical_symptoms +  
+    discomfort + sensations + (1 | participant_id) + (1 | problem_id) +  
+    (1 | participant_id:TMS_Type) + (1 | problem_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  -128.9    -54.6     83.4   -166.9      349 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.55818 -0.63747 -0.01106  0.66441  2.82154 
+
+Random effects:
+ Groups                  Name        Variance  Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.0004865 0.02206 
+ problem_id:TMS_Type     (Intercept) 0.0001274 0.01129 
+ participant_id          (Intercept) 0.0366011 0.19131 
+ problem_id              (Intercept) 0.0327552 0.18098 
+ Residual                            0.0248746 0.15772 
+Number of obs: 368, groups:  
+participant_id:TMS_Type, 53; problem_id:TMS_Type, 44; participant_id, 27; problem_id, 22
+
+Fixed effects:
+                                           Estimate Std. Error t value
+(Intercept)                                0.931175   0.076584  12.159
+TMS_TypeWM                                 0.108457   0.090534   1.198
+problem_setb                              -0.002921   0.097898  -0.030
+coding_section_no                          0.049793   0.020316   2.451
+problem_order                             -0.016304   0.005238  -3.113
+session2                                   0.045129   0.019180   2.353
+pain                                      -0.069931   0.073934  -0.946
+physical_symptoms                         -0.038844   0.054951  -0.707
+discomfort                                -0.002415   0.054672  -0.044
+sensations                                -0.062635   0.054114  -1.157
+TMS_TypeWM:problem_setb                   -0.055612   0.158264  -0.351
+TMS_TypeWM:coding_section_no              -0.022303   0.029390  -0.759
+problem_setb:coding_section_no            -0.012938   0.030538  -0.424
+TMS_TypeWM:problem_setb:coding_section_no -0.008438   0.042919  -0.197

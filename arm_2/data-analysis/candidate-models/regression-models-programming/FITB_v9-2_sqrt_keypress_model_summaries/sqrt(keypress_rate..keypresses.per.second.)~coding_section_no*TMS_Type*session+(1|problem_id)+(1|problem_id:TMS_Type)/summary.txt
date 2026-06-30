@@ -1,0 +1,42 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: sqrt(keypress_rate..keypresses.per.second.) ~ coding_section_no *  
+    TMS_Type * session + (1 | problem_id) + (1 | problem_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+   108.1    151.1    -43.1     86.1      357 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.0454 -0.7319 -0.1245  0.6545  3.0336 
+
+Random effects:
+ Groups              Name        Variance Std.Dev.
+ problem_id:TMS_Type (Intercept) 0.00000  0.0000  
+ problem_id          (Intercept) 0.03811  0.1952  
+ Residual                        0.06465  0.2543  
+Number of obs: 368, groups:  problem_id:TMS_Type, 44; problem_id, 22
+
+Fixed effects:
+                                        Estimate Std. Error t value
+(Intercept)                            8.974e-01  8.435e-02  10.638
+coding_section_no                      2.782e-02  3.353e-02   0.830
+TMS_TypeWM                             3.249e-02  1.029e-01   0.316
+session2                               1.386e-01  1.049e-01   1.321
+coding_section_no:TMS_TypeWM           2.241e-05  4.684e-02   0.000
+coding_section_no:session2            -3.122e-02  4.735e-02  -0.659
+TMS_TypeWM:session2                   -1.253e-01  1.446e-01  -0.866
+coding_section_no:TMS_TypeWM:session2  3.612e-02  6.615e-02   0.546
+
+Correlation of Fixed Effects:
+             (Intr) cdng__ TMS_TyWM sessn2 cd__:TMS_TWM cd__:2 TMS_TWM:
+cdng_sctn_n  -0.800                                                    
+TMS_TypeWM   -0.596  0.647                                             
+session2     -0.607  0.651  0.487                                      
+cd__:TMS_TWM  0.559 -0.708 -0.928   -0.460                             
+cdng_sct_:2   0.572 -0.716 -0.463   -0.934  0.509                      
+TMS_TypWM:2   0.427 -0.460 -0.709   -0.710  0.659        0.663         
+c__:TMS_TWM: -0.396  0.500  0.656    0.654 -0.708       -0.702 -0.929  
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

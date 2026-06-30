@@ -1,0 +1,34 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: 
+sqrt(keypress_rate..keypresses.per.second.) ~ TMS_Type + problem_order +  
+    (1 | problem_id) + (1 | problem_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+   101.4    124.9    -44.7     89.4      362 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.0311 -0.6943 -0.1492  0.6011  3.1834 
+
+Random effects:
+ Groups              Name        Variance  Std.Dev. 
+ problem_id:TMS_Type (Intercept) 5.211e-08 0.0002283
+ problem_id          (Intercept) 3.632e-02 0.1905733
+ Residual                        6.543e-02 0.2557985
+Number of obs: 368, groups:  problem_id:TMS_Type, 44; problem_id, 22
+
+Fixed effects:
+               Estimate Std. Error t value
+(Intercept)    1.033916   0.049871  20.732
+TMS_TypeWM     0.001743   0.026866   0.065
+problem_order -0.014732   0.008118  -1.815
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW
+TMS_TypeWM  -0.272       
+problem_rdr -0.417  0.046
+optimizer (nloptwrap) convergence code: 0 (OK)
+unable to evaluate scaled gradient
+Model failed to converge: degenerate  Hessian with 1 negative eigenvalues
+

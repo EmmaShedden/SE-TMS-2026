@@ -1,0 +1,28 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: sqrt(keypress_rate..keypresses.per.second.) ~ problem_order +  
+    physical_symptoms + (1 | participant_id)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+    79.3     98.8    -34.6     69.3      363 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.49720 -0.66155 -0.07982  0.62160  3.16096 
+
+Random effects:
+ Groups         Name        Variance Std.Dev.
+ participant_id (Intercept) 0.03779  0.1944  
+ Residual                   0.06003  0.2450  
+Number of obs: 368, groups:  participant_id, 27
+
+Fixed effects:
+                  Estimate Std. Error t value
+(Intercept)        1.06092    0.04392  24.153
+problem_order     -0.01318    0.00772  -1.707
+physical_symptoms -0.02348    0.06810  -0.345
+
+Correlation of Fixed Effects:
+            (Intr) prblm_
+problem_rdr -0.408       
+physcl_symp -0.125  0.004

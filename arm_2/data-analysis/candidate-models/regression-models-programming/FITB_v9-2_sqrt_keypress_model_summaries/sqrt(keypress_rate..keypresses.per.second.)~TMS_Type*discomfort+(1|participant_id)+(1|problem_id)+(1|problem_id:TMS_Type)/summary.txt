@@ -1,0 +1,36 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: sqrt(keypress_rate..keypresses.per.second.) ~ TMS_Type * discomfort +  
+    (1 | participant_id) + (1 | problem_id) + (1 | problem_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  -123.8    -96.5     68.9   -137.8      361 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.39857 -0.64847  0.01712  0.65774  2.85906 
+
+Random effects:
+ Groups              Name        Variance Std.Dev.
+ problem_id:TMS_Type (Intercept) 0.00000  0.0000  
+ participant_id      (Intercept) 0.03725  0.1930  
+ problem_id          (Intercept) 0.03260  0.1806  
+ Residual                        0.02754  0.1659  
+Number of obs: 368, groups:  
+problem_id:TMS_Type, 44; participant_id, 27; problem_id, 22
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)  0.99210    0.05534  17.928
+TMS_TypeWM   0.02816    0.02108   1.336
+discomfort  -0.05128    0.04281  -1.198
+
+Correlation of Fixed Effects:
+           (Intr) TMS_TW
+TMS_TypeWM -0.134       
+discomfort  0.010 -0.541
+fit warnings:
+fixed-effect model matrix is rank deficient so dropping 1 column / coefficient
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

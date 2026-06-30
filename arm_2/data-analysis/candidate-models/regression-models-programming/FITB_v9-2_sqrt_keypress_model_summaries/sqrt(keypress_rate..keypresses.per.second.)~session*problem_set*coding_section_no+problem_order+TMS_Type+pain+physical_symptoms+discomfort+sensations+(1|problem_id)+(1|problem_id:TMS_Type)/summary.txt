@@ -1,0 +1,36 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: sqrt(keypress_rate..keypresses.per.second.) ~ session * problem_set *  
+    coding_section_no + problem_order + TMS_Type + pain + physical_symptoms +  
+    discomfort + sensations + (1 | problem_id) + (1 | problem_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+    94.7    161.2    -30.4     60.7      351 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.20416 -0.71163 -0.07942  0.65297  3.08610 
+
+Random effects:
+ Groups              Name        Variance  Std.Dev.
+ problem_id:TMS_Type (Intercept) 0.0008067 0.0284  
+ problem_id          (Intercept) 0.0522106 0.2285  
+ Residual                        0.0586204 0.2421  
+Number of obs: 368, groups:  problem_id:TMS_Type, 44; problem_id, 22
+
+Fixed effects:
+                                         Estimate Std. Error t value
+(Intercept)                              1.112182   0.088256  12.602
+session2                                 0.023201   0.099319   0.234
+problem_setb                            -0.433528   0.122767  -3.531
+coding_section_no                        0.021298   0.029753   0.716
+problem_order                           -0.016974   0.007856  -2.161
+TMS_TypeWM                               0.023698   0.032107   0.738
+pain                                     0.076387   0.052812   1.446
+physical_symptoms                       -0.088057   0.058490  -1.506
+discomfort                              -0.014597   0.052184  -0.280
+sensations                               0.039519   0.047653   0.829
+session2:problem_setb                    0.180862   0.145050   1.247
+session2:coding_section_no               0.014375   0.044241   0.325
+problem_setb:coding_section_no           0.043189   0.046439   0.930
+session2:problem_setb:coding_section_no -0.077867   0.065284  -1.193

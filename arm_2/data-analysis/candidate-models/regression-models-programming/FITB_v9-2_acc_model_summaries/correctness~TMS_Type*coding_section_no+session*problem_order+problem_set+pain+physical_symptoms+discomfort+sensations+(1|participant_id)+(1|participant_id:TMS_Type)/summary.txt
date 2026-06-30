@@ -7,8 +7,8 @@ correctness ~ TMS_Type * coding_section_no + session * problem_order +
     (1 | participant_id) + (1 | participant_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    661.5     721.4    -316.7     633.5       519 
+     AIC      BIC   logLik deviance df.resid 
+   661.5    721.4   -316.7    633.5      519 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -23,14 +23,14 @@ Number of obs: 533, groups:  participant_id:TMS_Type, 54; participant_id, 27
 Fixed effects:
                              Estimate Std. Error z value Pr(>|z|)   
 (Intercept)                  -0.09500    0.42841  -0.222  0.82450   
-TMS_TypeWM                    0.39495    0.52061   0.759  0.44807   
+TMS_TypeWM                    0.39495    0.52061   0.759  0.44808   
 coding_section_no             0.52024    0.18041   2.884  0.00393 **
 session2                     -0.05169    0.34251  -0.151  0.88003   
 problem_order                -0.04144    0.08279  -0.501  0.61668   
 problem_setb                 -0.25398    0.21646  -1.173  0.24066   
 pain                         -0.10742    0.51058  -0.210  0.83336   
 physical_symptoms             0.01143    0.47596   0.024  0.98084   
-discomfort                   -0.37060    0.47214  -0.785  0.43248   
+discomfort                   -0.37060    0.47213  -0.785  0.43248   
 sensations                    0.83942    0.46954   1.788  0.07382 . 
 TMS_TypeWM:coding_section_no -0.21308    0.24758  -0.861  0.38944   
 session2:problem_order        0.15560    0.11987   1.298  0.19426   
@@ -63,6 +63,5 @@ sensations
 TMS_TyWM:__  0.031         
 sssn2:prbl_  0.048 -0.027  
 optimizer (Nelder_Mead) convergence code: 0 (OK)
-Model failed to converge with max|grad| = 0.00620033 (tol = 0.002, component 1)
-  See ?lme4::convergence and ?lme4::troubleshooting.
+Model failed to converge with max|grad| = 0.00620067 (tol = 0.002, component 1)
 

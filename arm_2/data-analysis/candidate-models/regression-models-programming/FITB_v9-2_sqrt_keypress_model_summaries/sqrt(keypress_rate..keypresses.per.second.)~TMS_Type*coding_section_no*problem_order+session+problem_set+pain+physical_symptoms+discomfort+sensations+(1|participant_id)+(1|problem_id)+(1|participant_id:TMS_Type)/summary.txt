@@ -1,0 +1,40 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: 
+sqrt(keypress_rate..keypresses.per.second.) ~ TMS_Type * coding_section_no *  
+    problem_order + session + problem_set + pain + physical_symptoms +  
+    discomfort + sensations + (1 | participant_id) + (1 | problem_id) +  
+    (1 | participant_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  -138.9    -68.6     87.5   -174.9      350 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.49964 -0.65551 -0.03202  0.64094  2.57726 
+
+Random effects:
+ Groups                  Name        Variance  Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.0004672 0.02161 
+ participant_id          (Intercept) 0.0374315 0.19347 
+ problem_id              (Intercept) 0.0326532 0.18070 
+ Residual                            0.0242940 0.15587 
+Number of obs: 368, groups:  
+participant_id:TMS_Type, 53; participant_id, 27; problem_id, 22
+
+Fixed effects:
+                                            Estimate Std. Error t value
+(Intercept)                                 1.049430   0.080622  13.017
+TMS_TypeWM                                  0.036031   0.078709   0.458
+coding_section_no                          -0.013797   0.025733  -0.536
+problem_order                              -0.060315   0.019071  -3.163
+session2                                    0.050440   0.018914   2.667
+problem_setb                               -0.043011   0.063689  -0.675
+pain                                       -0.079571   0.073204  -1.087
+physical_symptoms                          -0.037972   0.054304  -0.699
+discomfort                                 -0.004816   0.053857  -0.089
+sensations                                 -0.068393   0.053538  -1.277
+TMS_TypeWM:coding_section_no                0.008952   0.036220   0.247
+TMS_TypeWM:problem_order                    0.018914   0.028023   0.675
+coding_section_no:problem_order             0.022889   0.008454   2.708
+TMS_TypeWM:coding_section_no:problem_order -0.013211   0.012420  -1.064

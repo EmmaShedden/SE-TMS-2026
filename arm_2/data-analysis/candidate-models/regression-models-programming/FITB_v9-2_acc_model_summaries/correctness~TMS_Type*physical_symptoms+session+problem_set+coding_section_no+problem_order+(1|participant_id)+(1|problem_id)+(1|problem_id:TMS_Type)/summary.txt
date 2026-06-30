@@ -6,8 +6,8 @@ Formula: correctness ~ TMS_Type * physical_symptoms + session + problem_set +
     (1 | problem_id) + (1 | problem_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    485.3     528.1    -232.6     465.3       523 
+     AIC      BIC   logLik deviance df.resid 
+   485.3    528.1   -232.6    465.3      523 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -15,21 +15,21 @@ Scaled residuals:
 
 Random effects:
  Groups              Name        Variance  Std.Dev. 
- problem_id:TMS_Type (Intercept) 1.534e-07 0.0003917
- participant_id      (Intercept) 1.165e+00 1.0793799
- problem_id          (Intercept) 5.521e+00 2.3497568
+ problem_id:TMS_Type (Intercept) 1.477e-07 0.0003843
+ participant_id      (Intercept) 1.165e+00 1.0793836
+ problem_id          (Intercept) 5.521e+00 2.3497716
 Number of obs: 533, groups:  
 problem_id:TMS_Type, 48; participant_id, 27; problem_id, 24
 
 Fixed effects:
                    Estimate Std. Error z value Pr(>|z|)    
-(Intercept)        0.123307   0.001118  110.27   <2e-16 ***
-TMS_TypeWM        -0.281802   0.001118 -251.99   <2e-16 ***
-physical_symptoms  0.405516   0.001118  362.66   <2e-16 ***
-session2           0.540283   0.001119  483.02   <2e-16 ***
-problem_setb      -0.868868   0.001118 -777.07   <2e-16 ***
-coding_section_no  0.589494   0.001119  526.60   <2e-16 ***
-problem_order      0.035291   0.001119   31.55   <2e-16 ***
+(Intercept)        0.123272   0.001118  110.24   <2e-16 ***
+TMS_TypeWM        -0.281787   0.001118 -251.98   <2e-16 ***
+physical_symptoms  0.405501   0.001118  362.64   <2e-16 ***
+session2           0.540283   0.001119  483.03   <2e-16 ***
+problem_setb      -0.868878   0.001118 -777.08   <2e-16 ***
+coding_section_no  0.589500   0.001119  526.60   <2e-16 ***
+problem_order      0.035284   0.001119   31.54   <2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -44,8 +44,7 @@ problem_rdr 0.000  0.000  0.000  0.000  0.000   0.001
 fit warnings:
 fixed-effect model matrix is rank deficient so dropping 1 column / coefficient
 optimizer (Nelder_Mead) convergence code: 0 (OK)
-Model failed to converge with max|grad| = 0.0632655 (tol = 0.002, component 1)
-  See ?lme4::convergence and ?lme4::troubleshooting.
+Model failed to converge with max|grad| = 0.0632657 (tol = 0.002, component 1)
 Model is nearly unidentifiable: very large eigenvalue
  - Rescale variables?
 

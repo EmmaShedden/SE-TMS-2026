@@ -16,7 +16,7 @@ library(purrr)    # for map()
 library(lattice)  # for xyplot()
 library(TAF)      # setting up output file directory structure during model fitting
 library(moments)  # skewness for selecting between additive and multiplicative models of response times
-
+library(stringr)
 
 
 #If you get an error, you likely need to install the packages using the "install.package('insert-package-name-here')" command
@@ -39,8 +39,7 @@ make an overall output directory (model summaries, stats, etc. will all go here)
 outputdir = sprintf("%s/../candidate-models/regression-models-%s",getwd(), output_version)
 ```
 
-```{r eval=FALSE}
-
+```{r}
 mkdir(outputdir)
 ```
 
@@ -48,22 +47,20 @@ mkdir(outputdir)
 
 ```{r}
 #setwd("..")
-input_file = sprintf("%s/../preprocessed-data/full-data-version-%d/programming-full-data.csv", getwd(), input_version)
+input_file <- sprintf("%s/../preprocessed-data/full-data-version-%d/programming-full-data.csv", getwd(), input_version)
 data <- read.csv(input_file)
 
 #Transforming the session number such that it is treated as a character and not a value
-data <- transform( 
-  data, session = as.character(session)) 
+data <- transform(data, session = as.character(session))
 
-data
-
+#data
 ```
 
 Removing irrelevant data from dataframe
 
 ```{r Nans}
-#remove rows that have no values 
-data <- data[data$duration > 1, ] 
+#remove rows that have no values
+data <- data[data$duration > 1, ]
 
 
 #Removing the one participants that didn't listen to instructions:
@@ -71,13 +68,13 @@ participants_to_remove <- c("REDACTED_20")
 data <- subset(data, !(participant_id %in% participants_to_remove))
 ```
 
-#Looking at FITB and the passed ones only
+Looking at FITB and the passed ones only
 
 ```{r}
 
-data <- data[data$problem_type == program_type, ] 
+data <- data[data$problem_type == program_type, ]
 
-data <- data[data$accuracy == 'Pass', ] 
+data <- data[data$accuracy == 'Pass', ]
 
 ```
 
@@ -90,7 +87,15 @@ print(mean_value)
 ```
 
 ```{r}
+cat('Original skewness:', skewness(data$keypress_rate..keypresses.per.second.))
+cat('Sqrt skewness:', skewness(sqrt(data$keypress_rate..keypresses.per.second.)))
+cat('Log skewness:', skewness(log(data$keypress_rate..keypresses.per.second.)))
+```
+
+```{r}
+hist(data$keypress_rate..keypresses.per.second.)
 hist(sqrt(data$keypress_rate..keypresses.per.second.))
+hist(log(data$keypress_rate..keypresses.per.second.))
 ```
 
 ```{r}
@@ -119,78 +124,151 @@ print(count_table)
     -   The underlying distribution of stimuli is a little less clear than that of participants. This variable can be thought of as modeling the dispersion of question-specific difficulties.
 3.  `TMS_Type` (TMS treatment condition, i.e. brain region stimulated) : fixed & random intercepts
     -   Based on previous literature, we hypothesize that the brain region stimulated may have an effect that is systematic (i.e. very consistent between people, topics, etc.), quantitatively heterogeneous (i.e. directionally consistent, but widely varying in magnitude), or even a qualitatively heterogeneous (i.e. varying in direction, possibly in conjunction with magnitude). Therefore, we assess the goodness of fit for candidate models containing `TMS_Type` as a fixed effect, random effect, both, or neither, in order to test this hypothesis.
-4.  `session`and 'coding_section_no' (chronological numbering of the session, per participant) : fixed intercept
+4.  `session`and `coding_section_no` (chronological numbering of the session, per participant) : fixed intercept
     -   This is used to account for learning/training effect, i.e. participants getting better at test-taking under our specific test instrument over the course of the study. For example, they may become more familiar with the question structure, or become better at recalling old material as they do more practice questions. We expect this to be systematic (uniformly decreasing response time), so we model it as a fixed effect.
 
 ## Specify candidate predictor structures for mixed model formulas
 
 ```{r}
-fixed_effects = c(# no fixed effects
-                  "", 
-                  
-                  # no interactions
-                  "TMS_Type", 
-                  ##"problem_type", 
-                  "session", 
-                  ##"TMS_Type + problem_type", 
-                  ##"problem_type + session", 
-                  #"session_section", 
-                  "coding_section_no",
-                  ##"TMS_Type + problem_type + session",
-                  
-                  "pain",
-                  "physical_symptoms",
-                  "discomfort", 
-                  "sensations",
-                  
-                  # 2-way interactions
-                  ##"TMS_Type * problem_type", 
-                  ##"problem_type * session", 
-                  "TMS_Type * session", 
-                  "session * coding_section_no", 
-                  "coding_section_no * TMS_Type",
-                  "coding_section_no * TMS_Type * session",
-                
-                  
-                  "TMS_Type * pain",
-                  "TMS_Type * physical_symptoms",
-                  "TMS_Type * discomfort",
-                  "TMS_Type * sensations"
-                  
-                  # 1- and 2-way interactions
-                  ##"TMS_Type * problem_type + session", 
-                  ##"problem_type * session + TMS_Type", 
-                  #"condition * session_num + domain", 
-                  
-                  # multiple 2-way interactions
-                  ##"TMS_Type * problem_type + problem_type * session" #,
-                  #"condition * domain + condition * session_num",
-                  #"domain * session_num + condition * session_num",
-                  #"condition * domain + domain * session_num + condition * session_num",
-                  # 3-way interactions
-                  #"condition * domain * session_num"
-                  
-                  )
+fixed_effects <- c(
+  # no fixed effects
+  "", 
+  
+  # no interactions
+  "TMS_Type", 
+  "session", 
+  "coding_section_no", 
+  "problem_order", 
+  "problem_set", 
+  
+  "pain",
+  "physical_symptoms",
+  "discomfort", 
+  "sensations",
+  
+  "TMS_Type + session",
+  "TMS_Type + coding_section_no",
+  "TMS_Type + problem_order",
+  "TMS_Type + problem_set",
+  "session + coding_section_no",
+  "session + problem_order",
+  "session + problem_set",
+  "problem_set + coding_section_no",
+  "problem_set + problem_order",
+  "coding_section_no + problem_order",
+  
+  "TMS_Type + pain",
+  "TMS_Type + physical_symptoms",
+  "TMS_Type + discomfort",
+  "TMS_Type + sensations",
+  "session + pain",
+  "session + physical_symptoms",
+  "session + discomfort",
+  "session + sensations",
+  "coding_section_no + pain",
+  "coding_section_no + physical_symptoms",
+  "coding_section_no + discomfort",
+  "coding_section_no + sensations",
+  "problem_order + pain",
+  "problem_order + physical_symptoms",
+  "problem_order + discomfort",
+  "problem_order + sensations",
+  "problem_set + pain",
+  "problem_set + physical_symptoms",
+  "problem_set + discomfort",
+  "problem_set + sensations",
+  
+  "TMS_Type + session + coding_section_no + problem_order + problem_set + pain + physical_symptoms + discomfort + sensations",
+  
+  # 2-way interactions
+  "TMS_Type * session",
+  "TMS_Type * coding_section_no",
+  "TMS_Type * problem_order",
+  "TMS_Type * problem_set",
+  "session * coding_section_no",
+  "session * problem_order",
+  "session * problem_set",
+  "problem_set * coding_section_no",
+  "problem_set * problem_order",
+  "coding_section_no * problem_order",
+
+  "TMS_Type * pain",
+  "TMS_Type * physical_symptoms",
+  "TMS_Type * discomfort",
+  "TMS_Type * sensations", 
+  "session * pain",
+  "session * physical_symptoms",
+  "session * discomfort",
+  "session * sensations",
+  "coding_section_no * pain",
+  "coding_section_no * physical_symptoms",
+  "coding_section_no * discomfort",
+  "coding_section_no * sensations",
+  "problem_order * pain",
+  "problem_order * physical_symptoms",
+  "problem_order * discomfort",
+  "problem_order * sensations",
+  "problem_set * pain",
+  "problem_set * physical_symptoms",
+  "problem_set * discomfort",
+  "problem_set * sensations",
+  
+  # 1- and 2-way interactions
+  "TMS_Type * session + problem_set + coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_set + session + coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * coding_section_no + session + problem_set + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_order + session + problem_set + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "session * problem_set + TMS_Type + coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "session * coding_section_no + TMS_Type + problem_set + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "session * problem_order + TMS_Type + problem_set + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "problem_set * coding_section_no + TMS_Type + session + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "problem_set * problem_order + TMS_Type + session + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "coding_section_no * problem_order + TMS_Type + session + problem_set + pain + physical_symptoms + discomfort + sensations",
+  
+  "TMS_Type * pain + session + problem_set + coding_section_no + problem_order",
+  "TMS_Type * physical_symptoms + session + problem_set + coding_section_no + problem_order",
+  "TMS_Type * discomfort + session + problem_set + coding_section_no + problem_order",
+  "TMS_Type * sensations + session + problem_set + coding_section_no + problem_order", 
+  
+  # multiple 2-way interactions
+  "TMS_Type * session + problem_set * coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * session + problem_set * problem_order + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * session + coding_section_no * problem_order + problem_set + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_set + session * coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_set + session * problem_order + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_set + coding_section_no * problem_order + session + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * coding_section_no + session * problem_set + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * coding_section_no + session * problem_order + problem_set + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * coding_section_no + problem_set * problem_order + session + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_order + session * problem_set + coding_section_no + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_order + session * coding_section_no + problem_set + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_order + problem_set * coding_section_no + session + pain + physical_symptoms + discomfort + sensations",
+  "session * problem_set + coding_section_no * problem_order + TMS_Type + pain + physical_symptoms + discomfort + sensations",
+  "session * coding_section_no + problem_set * problem_order + TMS_Type + pain + physical_symptoms + discomfort + sensations",
+  "session * problem_order + problem_set * coding_section_no + TMS_Type + pain + physical_symptoms + discomfort + sensations",
+  
+  # 3-way interactions
+  "TMS_Type * session * problem_set + coding_section_no + problem_order + pain + physical_symptoms + discomfort + sensations", 
+  "TMS_Type * session * coding_section_no + problem_set + problem_order + pain + physical_symptoms + discomfort + sensations", 
+  "TMS_Type * session * problem_order + problem_set + coding_section_no + pain + physical_symptoms + discomfort + sensations", 
+  "TMS_Type * problem_set * coding_section_no + problem_order + session + pain + physical_symptoms + discomfort + sensations", 
+  "TMS_Type * problem_set * problem_order + coding_section_no + session + pain + physical_symptoms + discomfort + sensations", 
+  "TMS_Type * coding_section_no * problem_order + session + problem_set + pain + physical_symptoms + discomfort + sensations", 
+  "session * problem_set * coding_section_no + problem_order + TMS_Type + pain + physical_symptoms + discomfort + sensations", 
+  "session * problem_set * problem_order + coding_section_no + TMS_Type + pain + physical_symptoms + discomfort + sensations", 
+  "session * coding_section_no * problem_order + TMS_Type + problem_set + pain + physical_symptoms + discomfort + sensations", 
+  "problem_set * coding_section_no * problem_order + TMS_Type + session + pain + physical_symptoms + discomfort + sensations"
+)
 ```
 
 ```{r}
-random_effects = c(#"",                               # (1)
-                   "participant_id", 
-                   "problem_id", 
-                   #"domain",                         # (2)
-                   #"condition",                      # (2)
-                   #"id:stimulus",                    # (3)
-                   ##"participant_id:problem_type",
-                   "participant_id:TMS_Type",
-                   #"stimulus:domain",                # (4)
-                   "problem_id:TMS_Type"#, 
-                   #"domain:condition",               # (2)
-                   #"id:stimulus:domain",             # (3), (4)
-                   #"id:stimulus:condition",          # (3)
-                   ##"participant_id:problem_type:TMS_Type"
-                   #"stimulus:domain:condition",      # (2), (4)
-                   #"id:stimulus:domain:condition"    # (2), (3), (4)
-                   )
+random_effects <- c(
+  #"",                               # (1)
+  "participant_id",
+  "problem_id",
+  "participant_id:TMS_Type",
+  "problem_id:TMS_Type"
+)
 ```
 
 In this first cell, we enumerate random effect structures by taking all combinations of the random effects specified.
@@ -212,7 +290,7 @@ for (k in 1:N_random) {
 Now, we combine the response variable, fixed effects, and random effects together to generate our candidate model structures.
 
 ```{r}
-loglinear_formulae = c()
+sqrtlinear_formulae = c()
 for (fe in fixed_effects) {
   for (re in random_exprs) {
     f = ""
@@ -221,11 +299,41 @@ for (fe in fixed_effects) {
     } else {
       f = sprintf("sqrt(keypress_rate..keypresses.per.second.) ~ %s + %s", fe, re)
     }
-    loglinear_formulae = append(loglinear_formulae, f)
+    sqrtlinear_formulae = append(sqrtlinear_formulae, f)
   }
 }
 
-print(length(loglinear_formulae))
+print(length(sqrtlinear_formulae))
+```
+
+Filter out invalid model specifications
+
+```{r}
+# generate all the boolean index vectors
+
+# formulas with TMS fixed effect
+has_TMS <- grepl('TMS_Type ', sqrtlinear_formulae, fixed = TRUE)
+
+# formulas with participant random effect
+has_participant <- grepl('(1|participant_id)', sqrtlinear_formulae, fixed = TRUE)
+
+# formulas with problem random effect
+has_problem <- grepl('(1|problem_id)', sqrtlinear_formulae, fixed = TRUE)
+
+# formulas with TMS x participant random effect
+has_TMS_participant <- grepl('(1|participant_id:TMS_Type)', sqrtlinear_formulae, fixed = TRUE)
+
+# formulas with TMS x problem random effect
+has_TMS_problem <- grepl('(1|problem_id:TMS_Type)', sqrtlinear_formulae, fixed = TRUE)
+
+# remove them
+
+invalid <- (has_TMS_participant & (!has_TMS | !has_participant)) | (has_TMS_problem & (!has_TMS | !has_problem))
+
+invalid_sqrtlinear_formulae <- sqrtlinear_formulae[invalid]
+sqrtlinear_formulae <- sqrtlinear_formulae[!invalid]
+
+print(length(sqrtlinear_formulae))
 ```
 
 ### Model fitting (\~2 minutes)
@@ -237,7 +345,7 @@ We also store BIC (an alternative model selection criterion) in addition to AIC 
 ```{r fit_all_models, cache=TRUE}
 if (TRUE) {
   # make an output directory for the output of all the candidate linear models
-  logtime_outputdir = 
+  logtime_outputdir <-
     sprintf("%s/FITB_v9-2_sqrt_keypress_model_summaries", outputdir)
   mkdir(logtime_outputdir)
   
@@ -245,23 +353,24 @@ if (TRUE) {
   metricsfile = sprintf("%s/metrics.csv", logtime_outputdir)
   file.create(metricsfile)
   
-  sink(file = metricsfile,
-       append = FALSE,
-       type = "output",
-       split = FALSE
-       )
+  sink(
+    file = metricsfile,
+    append = FALSE,
+    type = "output",
+    split = FALSE
+  )
   
   cat("formula,AIC,BIC\n")
   
   sink()
   
-  for (f in loglinear_formulae) {
+  for (f in sqrtlinear_formulae) {
     # make an output directory for the output of this specific candidate model
-    f_outputdir = sprintf("%s/%s", logtime_outputdir, gsub(" ", "", f, fixed = TRUE))
+    f_outputdir <- sprintf("%s/%s", logtime_outputdir, gsub(" ", "", f, fixed = TRUE))
     mkdir(f_outputdir)
     
     # make the individual output file
-    summaryfile = sprintf("%s/summary.txt", f_outputdir)
+    summaryfile <- sprintf("%s/summary.txt", f_outputdir)
     
     file.create(summaryfile)
     
@@ -269,26 +378,29 @@ if (TRUE) {
     cat(sprintf("\n---------------------------------------------\n%s\n", f))
     
     # fit the model
-    m = lmer(f, data=data, REML=FALSE)
+    m <- lmer(f, data=data, REML=FALSE)
     
     # send the model summary to the summary file
-    sink(file = summaryfile,
-         append = FALSE,
-         type = "output",
-         split = FALSE
-         )
+    sink(
+      file = summaryfile,
+      append = FALSE,
+      type = "output",
+      split = FALSE
+    )
     
     print(summary(m))
     
     sink()
     
     # send the AIC and BIC to the metrics file
-    metrics = sprintf("%s,%f,%f\n", f, AIC(m), BIC(m))
+    metrics <- sprintf("%s,%f,%f\n", f, AIC(m), BIC(m))
     
-    sink(file = metricsfile,
-         append = TRUE,
-         type = "output",
-         split = FALSE)
+    sink(
+      file = metricsfile,
+      append = TRUE,
+      type = "output",
+      split = FALSE
+    )
     
     cat(metrics)
     
@@ -302,27 +414,131 @@ if (TRUE) {
 ```{r}
 # read in the AIC/BIC data
 fin = sprintf("%s/FITB_v9-2_sqrt_keypress_model_summaries/metrics.csv", outputdir)
-log_time_models_da = read_csv(fin)
+log_key_models_da = read_csv(fin)
 ```
 
 ```{r}
-head(log_time_models_da[order(log_time_models_da$AIC),], n = 10)
+head(log_key_models_da[order(log_key_models_da$AIC),], n = 10)
 ```
 
 ```{r}
-head(log_time_models_da[order(log_time_models_da$BIC),], n = 10)
+head(log_key_models_da[order(log_key_models_da$BIC),], n = 10)
 ```
 
 ```{r}
-fA = log_time_models_da[order(log_time_models_da$AIC),]$formula[[1]]
+fA <- log_key_models_da[order(log_key_models_da$AIC),]$formula[[1]]
 cat(fA)
 ```
 
 ```{r}
-fB = log_time_models_da[order(log_time_models_da$AIC),]$formula[[2]]
+fB <- log_key_models_da[order(log_key_models_da$BIC),]$formula[[1]]
 cat(fB)
 ```
 
-AIC favors 'log(duration) \~ session \* coding_section_no + (1\|participant_id) + (1\|problem_id)'. Which does not have TMS as an effect
+AIC favors `sqrt(keypress_rate) ~ coding_section_no * problem_order + TMS_Type + session + problem_set + pain + physical_symptoms + discomfort + sensations + (1|participant_id) + (1|problem_id`. Many of the other low-AIC models also include `TMS_Type` as a fixed and/or effect.
 
-There is no model (favored by AIC or BIC) with a systematic or non-systematic effect of TMS
+```{r}
+best_AIC <- log_key_models_da[order(log_key_models_da$AIC),]$AIC[[1]]
+best_AIC
+
+AIC_candidates <- log_key_models_da[log_key_models_da$AIC < best_AIC + 3,]
+AIC_candidates <- AIC_candidates[order(AIC_candidates$AIC),]
+AIC_candidates
+```
+
+### Check the fixed TMS effect in the best-AIC model
+```{r}
+m0 <- lmer(fA, data = data, REML = FALSE)
+summary(m0)
+```
+
+It is not significant.
+
+```{r}
+m1 <- lmer(
+  sqrt(keypress_rate..keypresses.per.second.) ~ coding_section_no * problem_order + session + problem_set + pain + physical_symptoms + discomfort + sensations + (1|participant_id) + (1|problem_id),
+  data = data,
+  REML = FALSE
+)
+
+anova(m0, m1)
+```
+
+### Check for a random TMS effect in the best-AIC model
+
+```{r}
+m1 <- lmer(
+  sqrt(keypress_rate..keypresses.per.second.) ~ coding_section_no * problem_order + TMS_Type + session + problem_set + pain + physical_symptoms + discomfort + sensations + (1|participant_id) + (1|problem_id) + (1|participant_id:TMS_Type),
+  data = data,
+  REML = FALSE
+)
+
+anova(m0, m1)
+```
+
+```{r}
+m1 <- lmer(
+  sqrt(keypress_rate..keypresses.per.second.) ~ coding_section_no * problem_order + TMS_Type + session + problem_set + pain + physical_symptoms + discomfort + sensations + (1|participant_id) + (1|problem_id) + (1|problem_id:TMS_Type),
+  data = data,
+  REML = FALSE
+)
+
+anova(m0, m1)
+```
+
+### Likelihood ratio test other low-AIC models for TMS effects
+
+```{r}
+# formulas with TMS fixed effect
+has_TMS <- grepl('TMS_Type ', AIC_candidates$formula, fixed = TRUE)
+
+add_fixed_TMS <- paste0(AIC_candidates$formula, ' + TMS_Type')
+AIC_candidates$fixed_TMS_full <- ifelse(
+  has_TMS, AIC_candidates$formula, add_fixed_TMS)
+
+AIC_candidates$fixed_TMS_reduced <- str_remove_all(
+  AIC_candidates$formula, fixed('TMS_Type + '))
+AIC_candidates$fixed_TMS_reduced <- str_remove_all(
+  AIC_candidates$fixed_TMS_reduced, fixed('TMS_Type * '))
+
+AIC_candidates$fixed_TMS_reduced <- str_remove_all(
+  AIC_candidates$fixed_TMS_reduced, fixed(' + (1|participant_id:TMS_Type)'))
+AIC_candidates$fixed_TMS_reduced <- str_remove_all(
+  AIC_candidates$fixed_TMS_reduced, fixed(' + (1|problem_id:TMS_Type)'))
+# unsure whether (1|participant_id:TMS_Type) should be removed in the reduced version
+```
+
+```{r}
+# debugging
+for (f in AIC_candidates$fixed_TMS_full){
+  cat(f, '\n')
+}
+cat('\n\n')
+for (f in AIC_candidates$fixed_TMS_reduced){
+  cat(f, '\n')
+}
+```
+
+```{r}
+AIC_candidates$fixed_TMS_pval <- -1.0
+for (i in seq_len(nrow(AIC_candidates))) {
+  m_full <- lmer(
+    AIC_candidates$fixed_TMS_full[i],
+    data = data,
+    REML = FALSE
+  )
+  m_reduced <- lmer(
+    AIC_candidates$fixed_TMS_reduced[i],
+    data = data,
+    REML = FALSE
+  )
+  a <- anova(m_full, m_reduced)
+  p_val <- a$"Pr(>Chisq)"[2]
+  #print(p_val)
+  AIC_candidates$fixed_TMS_pval[i] <- p_val
+}
+
+AIC_candidates[AIC_candidates$fixed_TMS_pval < 0.05,]
+```
+
+None are statistically significant.

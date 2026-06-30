@@ -1,0 +1,44 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: sqrt(keypress_rate..keypresses.per.second.) ~ TMS_Type * sensations +  
+    session + problem_set + coding_section_no + problem_order +  
+    (1 | participant_id) + (1 | problem_id) + (1 | participant_id:TMS_Type) +  
+    (1 | problem_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  -137.0    -86.2     81.5   -163.0      355 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.5102 -0.6360  0.0167  0.6376  2.9920 
+
+Random effects:
+ Groups                  Name        Variance  Std.Dev.
+ participant_id:TMS_Type (Intercept) 6.377e-04 0.025253
+ problem_id:TMS_Type     (Intercept) 3.679e-05 0.006065
+ participant_id          (Intercept) 3.635e-02 0.190646
+ problem_id              (Intercept) 3.261e-02 0.180596
+ Residual                            2.517e-02 0.158656
+Number of obs: 368, groups:  
+participant_id:TMS_Type, 53; problem_id:TMS_Type, 44; participant_id, 27; problem_id, 22
+
+Fixed effects:
+                       Estimate Std. Error t value
+(Intercept)            0.979379   0.067733  14.459
+TMS_TypeWM             0.011473   0.020900   0.549
+sensations            -0.071941   0.063859  -1.127
+session2               0.048513   0.020233   2.398
+problem_setb          -0.056212   0.064521  -0.871
+coding_section_no      0.029132   0.010803   2.697
+problem_order         -0.015631   0.005244  -2.981
+TMS_TypeWM:sensations  0.049453   0.080344   0.616
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM snstns sessn2 prblm_s cdng__ prblm_r
+TMS_TypeWM  -0.132                                              
+sensations  -0.119  0.320                                       
+session2    -0.130  0.174    0.381                              
+problem_stb -0.387 -0.162   -0.178 -0.181                       
+cdng_sctn_n -0.316  0.058    0.062  0.036 -0.017                
+problem_rdr -0.149  0.025   -0.004 -0.028  0.002  -0.103        
+TMS_TypWM:s  0.103 -0.441   -0.635 -0.305  0.076  -0.063  0.006 

@@ -5,28 +5,28 @@ Formula: correctness ~ TMS_Type * session + (1 | participant_id) + (1 |
     problem_id) + (1 | participant_id:TMS_Type) + (1 | problem_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    486.1     520.3    -235.1     470.1       525 
+     AIC      BIC   logLik deviance df.resid 
+   486.1    520.3   -235.1    470.1      525 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--3.4863 -0.1816  0.2101  0.4281  3.0892 
+-3.4863 -0.1816  0.2101  0.4281  3.0890 
 
 Random effects:
  Groups                  Name        Variance  Std.Dev.
- participant_id:TMS_Type (Intercept) 9.884e-01 0.994204
- problem_id:TMS_Type     (Intercept) 1.502e-06 0.001226
- participant_id          (Intercept) 7.785e-01 0.882345
- problem_id              (Intercept) 5.996e+00 2.448736
+ participant_id:TMS_Type (Intercept) 9.883e-01 0.994127
+ problem_id:TMS_Type     (Intercept) 1.486e-06 0.001219
+ participant_id          (Intercept) 7.785e-01 0.882314
+ problem_id              (Intercept) 5.997e+00 2.448799
 Number of obs: 533, groups:  
 participant_id:TMS_Type, 54; problem_id:TMS_Type, 48; participant_id, 27; problem_id, 24
 
 Fixed effects:
                     Estimate Std. Error z value Pr(>|z|)
 (Intercept)           1.0439     0.6824   1.530    0.126
-TMS_TypeWM           -0.3521     0.6306  -0.558    0.577
+TMS_TypeWM           -0.3520     0.6306  -0.558    0.577
 session2              0.3614     0.6419   0.563    0.573
-TMS_TypeWM:session2   0.3033     1.0237   0.296    0.767
+TMS_TypeWM:session2   0.3031     1.0237   0.296    0.767
 
 Correlation of Fixed Effects:
             (Intr) TMS_TyWM sessn2
@@ -34,6 +34,5 @@ TMS_TypeWM  -0.486
 session2    -0.478  0.656         
 TMS_TypWM:2  0.387 -0.796   -0.803
 optimizer (Nelder_Mead) convergence code: 0 (OK)
-Model failed to converge with max|grad| = 0.0041671 (tol = 0.002, component 1)
-  See ?lme4::convergence and ?lme4::troubleshooting.
+Model failed to converge with max|grad| = 0.00414502 (tol = 0.002, component 1)
 

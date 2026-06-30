@@ -1,0 +1,42 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: sqrt(keypress_rate..keypresses.per.second.) ~ TMS_Type * session *  
+    coding_section_no + problem_set + problem_order + pain +  
+    physical_symptoms + discomfort + sensations + (1 | participant_id) +  
+    (1 | problem_id) + (1 | problem_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  -131.8    -61.5     83.9   -167.8      350 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.55501 -0.62099  0.02433  0.62708  2.96125 
+
+Random effects:
+ Groups              Name        Variance Std.Dev.
+ problem_id:TMS_Type (Intercept) 0.00000  0.0000  
+ participant_id      (Intercept) 0.03742  0.1934  
+ problem_id          (Intercept) 0.03252  0.1803  
+ Residual                        0.02509  0.1584  
+Number of obs: 368, groups:  
+problem_id:TMS_Type, 44; participant_id, 27; problem_id, 22
+
+Fixed effects:
+                                       Estimate Std. Error t value
+(Intercept)                            0.912148   0.085376  10.684
+TMS_TypeWM                             0.101795   0.102698   0.991
+session2                               0.128044   0.102397   1.250
+coding_section_no                      0.063917   0.021520   2.970
+problem_setb                          -0.052203   0.062433  -0.836
+problem_order                         -0.017101   0.005253  -3.256
+pain                                  -0.078145   0.070731  -1.105
+physical_symptoms                     -0.037003   0.051570  -0.718
+discomfort                            -0.005048   0.052051  -0.097
+sensations                            -0.061674   0.051884  -1.189
+TMS_TypeWM:session2                   -0.036993   0.178644  -0.207
+TMS_TypeWM:coding_section_no          -0.035544   0.029791  -1.193
+session2:coding_section_no            -0.038570   0.030480  -1.265
+TMS_TypeWM:session2:coding_section_no  0.015938   0.042610   0.374
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

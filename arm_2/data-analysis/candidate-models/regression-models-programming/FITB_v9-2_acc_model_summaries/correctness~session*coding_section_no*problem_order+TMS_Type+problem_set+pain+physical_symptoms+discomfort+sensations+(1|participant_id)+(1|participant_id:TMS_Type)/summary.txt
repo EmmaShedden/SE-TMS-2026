@@ -7,8 +7,8 @@ correctness ~ session * coding_section_no * problem_order + TMS_Type +
     (1 | participant_id) + (1 | participant_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    662.5     730.9    -315.2     630.5       517 
+     AIC      BIC   logLik deviance df.resid 
+   662.5    730.9   -315.2    630.5      517 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -22,18 +22,18 @@ Number of obs: 533, groups:  participant_id:TMS_Type, 54; participant_id, 27
 
 Fixed effects:
                                           Estimate Std. Error z value Pr(>|z|)
-(Intercept)                               0.811584   0.622075   1.305   0.1920
-session2                                 -0.328841   0.881407  -0.373   0.7091
+(Intercept)                               0.811584   0.622073   1.305   0.1920
+session2                                 -0.328841   0.881400  -0.373   0.7091
 coding_section_no                         0.027996   0.297315   0.094   0.9250
 problem_order                            -0.396657   0.221098  -1.794   0.0728
 TMS_TypeWM                                0.006651   0.245388   0.027   0.9784
-problem_setb                             -0.248334   0.217305  -1.143   0.2531
+problem_setb                             -0.248334   0.217306  -1.143   0.2531
 pain                                     -0.129061   0.516199  -0.250   0.8026
-physical_symptoms                         0.028112   0.479555   0.059   0.9533
+physical_symptoms                         0.028112   0.479554   0.059   0.9533
 discomfort                               -0.340362   0.477453  -0.713   0.4759
 sensations                                0.840311   0.474502   1.771   0.0766
-session2:coding_section_no                0.159757   0.424905   0.376   0.7069
-session2:problem_order                    0.368133   0.316628   1.163   0.2450
+session2:coding_section_no                0.159757   0.424903   0.376   0.7069
+session2:problem_order                    0.368133   0.316626   1.163   0.2450
 coding_section_no:problem_order           0.184106   0.106007   1.737   0.0824
 session2:coding_section_no:problem_order -0.110827   0.151195  -0.733   0.4636
                                           
@@ -54,6 +54,5 @@ session2:coding_section_no:problem_order
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 optimizer (Nelder_Mead) convergence code: 0 (OK)
-Model failed to converge with max|grad| = 0.0227218 (tol = 0.002, component 1)
-  See ?lme4::convergence and ?lme4::troubleshooting.
+Model failed to converge with max|grad| = 0.0227219 (tol = 0.002, component 1)
 

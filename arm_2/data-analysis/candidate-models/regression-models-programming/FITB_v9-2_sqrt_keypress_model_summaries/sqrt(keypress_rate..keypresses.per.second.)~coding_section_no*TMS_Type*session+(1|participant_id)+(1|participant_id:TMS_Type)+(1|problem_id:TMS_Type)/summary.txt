@@ -1,0 +1,42 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: sqrt(keypress_rate..keypresses.per.second.) ~ coding_section_no *  
+    TMS_Type * session + (1 | participant_id) + (1 | participant_id:TMS_Type) +  
+    (1 | problem_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+   -94.1    -47.2     59.1   -118.1      356 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.31521 -0.62854 -0.03376  0.59954  2.53783 
+
+Random effects:
+ Groups                  Name        Variance Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.002056 0.04534 
+ problem_id:TMS_Type     (Intercept) 0.033376 0.18269 
+ participant_id          (Intercept) 0.035982 0.18969 
+ Residual                            0.025408 0.15940 
+Number of obs: 368, groups:  
+participant_id:TMS_Type, 53; problem_id:TMS_Type, 44; participant_id, 27
+
+Fixed effects:
+                                       Estimate Std. Error t value
+(Intercept)                            0.869850   0.082105  10.594
+coding_section_no                      0.048534   0.021791   2.227
+TMS_TypeWM                             0.071844   0.116521   0.617
+session2                               0.104031   0.102832   1.012
+coding_section_no:TMS_TypeWM          -0.025802   0.030808  -0.838
+coding_section_no:session2            -0.020284   0.031733  -0.639
+TMS_TypeWM:session2                   -0.037226   0.177459  -0.210
+coding_section_no:TMS_TypeWM:session2  0.006363   0.044630   0.143
+
+Correlation of Fixed Effects:
+             (Intr) cdng__ TMS_TyWM sessn2 cd__:TMS_TWM cd__:2 TMS_TWM:
+cdng_sctn_n  -0.532                                                    
+TMS_TypeWM   -0.706  0.378                                             
+session2     -0.619  0.434  0.654                                      
+cd__:TMS_TWM  0.378 -0.710 -0.549   -0.313                             
+cdng_sct_:2   0.375 -0.701 -0.269   -0.637  0.506                      
+TMS_TypWM:2   0.547 -0.250 -0.760   -0.873  0.359        0.371         
+c__:TMS_TWM: -0.265  0.499  0.383    0.455 -0.703       -0.717 -0.511  

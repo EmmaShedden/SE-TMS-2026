@@ -6,8 +6,8 @@ Formula: correctness ~ TMS_Type * session + problem_set * problem_order +
     sensations + (1 | participant_id) + (1 | participant_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    659.5     719.4    -315.8     631.5       519 
+     AIC      BIC   logLik deviance df.resid 
+   659.5    719.4   -315.8    631.5      519 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -15,23 +15,23 @@ Scaled residuals:
 
 Random effects:
  Groups                  Name        Variance  Std.Dev. 
- participant_id:TMS_Type (Intercept) 1.721e-07 0.0004148
+ participant_id:TMS_Type (Intercept) 1.720e-07 0.0004148
  participant_id          (Intercept) 2.689e-01 0.5185182
 Number of obs: 533, groups:  participant_id:TMS_Type, 54; participant_id, 27
 
 Fixed effects:
                             Estimate Std. Error z value Pr(>|z|)    
-(Intercept)                 0.180505   0.402310   0.449 0.653669    
-TMS_TypeWM                  0.021441   0.419596   0.051 0.959246    
-session2                    0.339276   0.376854   0.900 0.367970    
+(Intercept)                 0.180505   0.402312   0.449 0.653670    
+TMS_TypeWM                  0.021441   0.419593   0.051 0.959246    
+session2                    0.339275   0.376852   0.900 0.367966    
 problem_setb               -0.843668   0.354804  -2.378 0.017414 *  
 problem_order              -0.084724   0.083381  -1.016 0.309581    
 coding_section_no           0.420722   0.125024   3.365 0.000765 ***
-pain                       -0.170760   0.537043  -0.318 0.750513    
-physical_symptoms           0.026862   0.487274   0.055 0.956037    
-discomfort                 -0.420862   0.492494  -0.855 0.392799    
-sensations                  0.881480   0.500088   1.763 0.077960 .  
-TMS_TypeWM:session2        -0.008811   0.614846  -0.014 0.988566    
+pain                       -0.170760   0.537042  -0.318 0.750512    
+physical_symptoms           0.026862   0.487276   0.055 0.956037    
+discomfort                 -0.420862   0.492494  -0.855 0.392798    
+sensations                  0.881480   0.500089   1.763 0.077960 .  
+TMS_TypeWM:session2        -0.008811   0.614841  -0.014 0.988566    
 problem_setb:problem_order  0.250192   0.120873   2.070 0.038464 *  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

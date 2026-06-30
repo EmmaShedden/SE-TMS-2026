@@ -1,0 +1,43 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: sqrt(keypress_rate..keypresses.per.second.) ~ TMS_Type * session *  
+    coding_section_no + problem_set + problem_order + pain +  
+    physical_symptoms + discomfort + sensations + (1 | participant_id) +  
+    (1 | problem_id) + (1 | participant_id:TMS_Type) + (1 | problem_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  -129.9    -55.6     84.0   -167.9      349 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.54425 -0.62475  0.01845  0.61558  2.96988 
+
+Random effects:
+ Groups                  Name        Variance  Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.0003942 0.01985 
+ problem_id:TMS_Type     (Intercept) 0.0000000 0.00000 
+ participant_id          (Intercept) 0.0371292 0.19269 
+ problem_id              (Intercept) 0.0325386 0.18038 
+ Residual                            0.0248915 0.15777 
+Number of obs: 368, groups:  
+participant_id:TMS_Type, 53; problem_id:TMS_Type, 44; participant_id, 27; problem_id, 22
+
+Fixed effects:
+                                       Estimate Std. Error t value
+(Intercept)                            0.914009   0.085620  10.675
+TMS_TypeWM                             0.102206   0.102940   0.993
+session2                               0.125998   0.102518   1.229
+coding_section_no                      0.062993   0.021472   2.934
+problem_setb                          -0.054670   0.063753  -0.858
+problem_order                         -0.016809   0.005241  -3.207
+pain                                  -0.075116   0.073753  -1.018
+physical_symptoms                     -0.039917   0.054411  -0.734
+discomfort                            -0.006169   0.054310  -0.114
+sensations                            -0.060442   0.054246  -1.114
+TMS_TypeWM:session2                   -0.034735   0.178565  -0.195
+TMS_TypeWM:coding_section_no          -0.035186   0.029712  -1.184
+session2:coding_section_no            -0.037061   0.030439  -1.218
+TMS_TypeWM:session2:coding_section_no  0.014228   0.042502   0.335
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

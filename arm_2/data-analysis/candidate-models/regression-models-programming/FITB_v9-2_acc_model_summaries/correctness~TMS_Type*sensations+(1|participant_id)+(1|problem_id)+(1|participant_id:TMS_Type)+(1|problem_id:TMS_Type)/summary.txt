@@ -5,8 +5,8 @@ Formula: correctness ~ TMS_Type * sensations + (1 | participant_id) +
     (1 | problem_id) + (1 | participant_id:TMS_Type) + (1 | problem_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    486.3     520.5    -235.1     470.3       525 
+     AIC      BIC   logLik deviance df.resid 
+   486.3    520.5   -235.1    470.3      525 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -14,10 +14,10 @@ Scaled residuals:
 
 Random effects:
  Groups                  Name        Variance  Std.Dev. 
- participant_id:TMS_Type (Intercept) 1.005e+00 1.0024368
- problem_id:TMS_Type     (Intercept) 7.236e-07 0.0008507
- participant_id          (Intercept) 7.806e-01 0.8834910
- problem_id              (Intercept) 6.009e+00 2.4513207
+ participant_id:TMS_Type (Intercept) 1.005e+00 1.0024448
+ problem_id:TMS_Type     (Intercept) 7.236e-07 0.0008506
+ participant_id          (Intercept) 7.805e-01 0.8834849
+ problem_id              (Intercept) 6.009e+00 2.4513245
 Number of obs: 533, groups:  
 participant_id:TMS_Type, 54; problem_id:TMS_Type, 48; participant_id, 27; problem_id, 24
 
@@ -26,7 +26,7 @@ Fixed effects:
 (Intercept)             1.1870     0.6121   1.939   0.0525 .
 TMS_TypeWM             -0.3062     0.4093  -0.748   0.4544  
 sensations              0.2694     0.9828   0.274   0.7840  
-TMS_TypeWM:sensations   1.1614     1.3967   0.832   0.4057  
+TMS_TypeWM:sensations   1.1614     1.3966   0.832   0.4057  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -36,6 +36,5 @@ TMS_TypeWM  -0.347
 sensations  -0.198  0.277         
 TMS_TypWM:s  0.117 -0.344   -0.609
 optimizer (Nelder_Mead) convergence code: 0 (OK)
-Model failed to converge with max|grad| = 0.00290262 (tol = 0.002, component 1)
-  See ?lme4::convergence and ?lme4::troubleshooting.
+Model failed to converge with max|grad| = 0.00290243 (tol = 0.002, component 1)
 

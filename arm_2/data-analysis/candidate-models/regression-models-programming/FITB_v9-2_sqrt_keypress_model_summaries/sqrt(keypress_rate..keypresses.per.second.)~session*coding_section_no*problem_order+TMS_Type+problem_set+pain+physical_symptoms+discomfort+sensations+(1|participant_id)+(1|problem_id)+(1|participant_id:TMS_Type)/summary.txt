@@ -1,0 +1,40 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: 
+sqrt(keypress_rate..keypresses.per.second.) ~ session * coding_section_no *  
+    problem_order + TMS_Type + problem_set + pain + physical_symptoms +  
+    discomfort + sensations + (1 | participant_id) + (1 | problem_id) +  
+    (1 | participant_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  -139.1    -68.7     87.5   -175.1      350 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.62115 -0.65182 -0.02476  0.61623  2.67638 
+
+Random effects:
+ Groups                  Name        Variance  Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.0001164 0.01079 
+ participant_id          (Intercept) 0.0375516 0.19378 
+ problem_id              (Intercept) 0.0330596 0.18182 
+ Residual                            0.0244354 0.15632 
+Number of obs: 368, groups:  
+participant_id:TMS_Type, 53; participant_id, 27; problem_id, 22
+
+Fixed effects:
+                                           Estimate Std. Error t value
+(Intercept)                               1.0011340  0.0796956  12.562
+session2                                  0.1703924  0.0791973   2.151
+coding_section_no                         0.0109258  0.0251641   0.434
+problem_order                            -0.0438311  0.0196701  -2.228
+TMS_TypeWM                                0.0292944  0.0233261   1.256
+problem_setb                             -0.0453413  0.0627456  -0.723
+pain                                     -0.0839719  0.0703819  -1.193
+physical_symptoms                        -0.0336770  0.0518596  -0.649
+discomfort                                0.0003304  0.0518150   0.006
+sensations                               -0.0592878  0.0510525  -1.161
+session2:coding_section_no               -0.0484571  0.0364554  -1.329
+session2:problem_order                   -0.0224149  0.0283452  -0.791
+coding_section_no:problem_order           0.0147187  0.0088395   1.665
+session2:coding_section_no:problem_order  0.0070339  0.0124158   0.567

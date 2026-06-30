@@ -1,0 +1,43 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: sqrt(keypress_rate..keypresses.per.second.) ~ TMS_Type + session +  
+    coding_section_no + problem_order + problem_set + pain +  
+    physical_symptoms + discomfort + sensations + (1 | problem_id)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+    86.9    133.7    -31.4     62.9      356 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.2013 -0.6930 -0.1256  0.6307  3.0658 
+
+Random effects:
+ Groups     Name        Variance Std.Dev.
+ problem_id (Intercept) 0.05227  0.2286  
+ Residual               0.05940  0.2437  
+Number of obs: 368, groups:  problem_id, 22
+
+Fixed effects:
+                   Estimate Std. Error t value
+(Intercept)        1.093845   0.073768  14.828
+TMS_TypeWM         0.026988   0.030458   0.886
+session2           0.062632   0.026512   2.362
+coding_section_no  0.027784   0.016105   1.725
+problem_order     -0.016622   0.007833  -2.122
+problem_setb      -0.334245   0.074805  -4.468
+pain               0.074780   0.052819   1.416
+physical_symptoms -0.082661   0.057455  -1.439
+discomfort        -0.016352   0.052157  -0.314
+sensations         0.032904   0.047493   0.693
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW sessn2 cdng__ prblm_r prblm_s pain   physc_ dscmfr
+TMS_TypeWM  -0.148                                                          
+session2    -0.147 -0.020                                                   
+cdng_sctn_n -0.427  0.050  0.008                                            
+problem_rdr -0.201  0.031 -0.034 -0.120                                     
+problem_stb -0.432 -0.069 -0.126 -0.013 -0.015                              
+pain        -0.024  0.122  0.012  0.028 -0.066  -0.061                      
+physcl_symp -0.008 -0.365  0.095 -0.005  0.014  -0.002  -0.343              
+discomfort   0.055 -0.468  0.063 -0.037  0.019  -0.031  -0.349  0.319       
+sensations  -0.071  0.186  0.166  0.023  0.011  -0.129   0.259 -0.063 -0.385
