@@ -6,8 +6,8 @@ Formula: correctness ~ TMS_Type * physical_symptoms + session + problem_set +
     (1 | problem_id) + (1 | problem_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    362.5     400.1    -171.3     342.5       308 
+     AIC      BIC   logLik deviance df.resid 
+   362.5    400.1   -171.3    342.5      308 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -16,31 +16,31 @@ Scaled residuals:
 Random effects:
  Groups              Name        Variance  Std.Dev. 
  participant_id      (Intercept) 4.124e-01 6.422e-01
- problem_id:TMS_Type (Intercept) 6.163e-10 2.483e-05
+ problem_id:TMS_Type (Intercept) 1.216e-10 1.103e-05
  problem_id          (Intercept) 3.106e+00 1.762e+00
 Number of obs: 318, groups:  
 participant_id, 27; problem_id:TMS_Type, 24; problem_id, 12
 
 Fixed effects:
                     Estimate Std. Error z value Pr(>|z|)  
-(Intercept)       -1.7685025  0.8891233  -1.989   0.0467 *
-TMS_TypeWM         0.4144017  0.2918511   1.420   0.1556  
-physical_symptoms -0.6004142  0.6554222  -0.916   0.3596  
-session            0.3324942  0.2814144   1.182   0.2374  
-problem_setb      -0.2568613  0.8403275  -0.306   0.7599  
-coding_section_no  0.2004803  0.1782266   1.125   0.2606  
-problem_order      0.0007471  0.0857081   0.009   0.9930  
+(Intercept)       -1.7684564  0.9043595  -1.955   0.0505 .
+TMS_TypeWM         0.4143936  0.2969229   1.396   0.1628  
+physical_symptoms -0.6004201  0.6695413  -0.897   0.3698  
+session            0.3324820  0.2862265   1.162   0.2454  
+problem_setb      -0.2568897  0.8544590  -0.301   0.7637  
+coding_section_no  0.2004739  0.1804145   1.111   0.2665  
+problem_order      0.0007512  0.0868030   0.009   0.9931  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Correlation of Fixed Effects:
             (Intr) TMS_TW physc_ sessin prblm_s cdng__
-TMS_TypeWM  -0.102                                    
-physcl_symp -0.071 -0.278                             
-session     -0.441 -0.012  0.113                      
-problem_stb -0.364 -0.111 -0.005 -0.107               
-cdng_sctn_n -0.433 -0.009  0.037  0.024  0.012        
-problem_rdr -0.173  0.015 -0.008 -0.014 -0.036  -0.078
+TMS_TypeWM  -0.095                                    
+physcl_symp -0.095 -0.284                             
+session     -0.443 -0.012  0.120                      
+problem_stb -0.373 -0.122  0.025 -0.107               
+cdng_sctn_n -0.434 -0.010  0.041  0.020  0.025        
+problem_rdr -0.175  0.005 -0.005 -0.010 -0.032  -0.078
 fit warnings:
 fixed-effect model matrix is rank deficient so dropping 1 column / coefficient
 optimizer (Nelder_Mead) convergence code: 0 (OK)

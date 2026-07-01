@@ -7,8 +7,8 @@ correctness ~ session * coding_section_no + problem_set * problem_order +
     (1 | participant_id) + (1 | participant_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    438.4     491.1    -205.2     410.4       304 
+     AIC      BIC   logLik deviance df.resid 
+   438.4    491.1   -205.2    410.4      304 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -16,40 +16,40 @@ Scaled residuals:
 
 Random effects:
  Groups                  Name        Variance  Std.Dev. 
- participant_id:TMS_Type (Intercept) 1.496e-10 1.223e-05
+ participant_id:TMS_Type (Intercept) 1.478e-10 1.216e-05
  participant_id          (Intercept) 1.123e-01 3.351e-01
 Number of obs: 318, groups:  participant_id:TMS_Type, 53; participant_id, 27
 
 Fixed effects:
                            Estimate Std. Error z value Pr(>|z|)  
-(Intercept)                -2.50753    1.13480  -2.210   0.0271 *
-session                     0.56401    0.67734   0.833   0.4050  
-coding_section_no           0.52569    0.46243   1.137   0.2556  
-problem_setb                0.57147    0.41839   1.366   0.1720  
-problem_order               0.09857    0.09963   0.989   0.3225  
-TMS_TypeWM                  0.51534    0.28173   1.829   0.0674 .
-pain                        0.29553    0.56096   0.527   0.5983  
-physical_symptoms          -0.73018    0.56222  -1.299   0.1940  
-discomfort                 -0.78391    0.52078  -1.505   0.1323  
-sensations                  1.02847    0.47506   2.165   0.0304 *
-session:coding_section_no  -0.14360    0.29037  -0.495   0.6209  
-problem_setb:problem_order -0.18511    0.14024  -1.320   0.1868  
+(Intercept)                -2.50753    1.14936  -2.182   0.0291 *
+session                     0.56401    0.68202   0.827   0.4083  
+coding_section_no           0.52569    0.46592   1.128   0.2592  
+problem_setb                0.57147    0.42981   1.330   0.1837  
+problem_order               0.09857    0.10203   0.966   0.3340  
+TMS_TypeWM                  0.51534    0.28412   1.814   0.0697 .
+pain                        0.29553    0.56482   0.523   0.6008  
+physical_symptoms          -0.73018    0.56947  -1.282   0.1998  
+discomfort                 -0.78391    0.52430  -1.495   0.1349  
+sensations                  1.02847    0.48779   2.108   0.0350 *
+session:coding_section_no  -0.14360    0.29253  -0.491   0.6235  
+problem_setb:problem_order -0.18511    0.14489  -1.278   0.2014  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Correlation of Fixed Effects:
             (Intr) sessin cdng__ prblm_s prblm_r TMS_TW pain   physc_ dscmfr
-session     -0.919                                                          
-cdng_sctn_n -0.907  0.889                                                   
-problem_stb -0.149 -0.039  0.006                                            
-problem_rdr -0.258  0.060  0.066  0.554                                     
-TMS_TypeWM  -0.092 -0.019  0.005  0.033  -0.035                             
-pain        -0.028 -0.002 -0.006 -0.025   0.042   0.121                     
-physcl_symp -0.017  0.053 -0.004 -0.075  -0.047  -0.347 -0.252              
-discomfort   0.041  0.011 -0.005 -0.149   0.009  -0.477 -0.409  0.296       
-sensations  -0.124  0.084  0.046 -0.057   0.004   0.211  0.294 -0.055 -0.451
-sssn:cdng__  0.860 -0.934 -0.949  0.010  -0.069   0.006  0.003 -0.006  0.000
-prblm_stb:_  0.157  0.016 -0.017 -0.786  -0.705  -0.017 -0.048  0.046  0.055
+session     -0.915                                                          
+cdng_sctn_n -0.904  0.889                                                   
+problem_stb -0.168 -0.033  0.014                                            
+problem_rdr -0.274  0.064  0.073  0.568                                     
+TMS_TypeWM  -0.092 -0.019  0.005  0.034  -0.032                             
+pain        -0.023 -0.004 -0.008 -0.030   0.036   0.120                     
+physcl_symp -0.033  0.057  0.003 -0.049  -0.023  -0.344 -0.253              
+discomfort   0.042  0.011 -0.005 -0.151   0.004  -0.477 -0.407  0.291       
+sensations  -0.143  0.086  0.052 -0.018   0.039   0.209  0.282 -0.029 -0.446
+sssn:cdng__  0.855 -0.933 -0.949  0.008  -0.070   0.006  0.004 -0.008  0.000
+prblm_stb:_  0.178  0.010 -0.026 -0.795  -0.715  -0.020 -0.041  0.017  0.059
             snstns sss:__
 session                  
 cdng_sctn_n              
@@ -61,7 +61,7 @@ physcl_symp
 discomfort               
 sensations               
 sssn:cdng__ -0.036       
-prblm_stb:_ -0.083 -0.009
+prblm_stb:_ -0.122 -0.007
 optimizer (Nelder_Mead) convergence code: 0 (OK)
 boundary (singular) fit: see help('isSingular')
 

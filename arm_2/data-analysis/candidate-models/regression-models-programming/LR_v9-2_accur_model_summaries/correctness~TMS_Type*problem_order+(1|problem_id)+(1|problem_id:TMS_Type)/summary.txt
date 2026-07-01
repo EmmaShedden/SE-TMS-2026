@@ -5,28 +5,31 @@ Formula: correctness ~ TMS_Type * problem_order + (1 | problem_id) + (1 |
     problem_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    364.1     386.6    -176.0     352.1       312 
+     AIC      BIC   logLik deviance df.resid 
+   364.1    386.6   -176.0    352.1      312 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--2.3503 -0.6078 -0.2086  0.7010  2.1965 
+-2.3503 -0.6078 -0.2086  0.7010  2.1966 
 
 Random effects:
  Groups              Name        Variance  Std.Dev. 
- problem_id:TMS_Type (Intercept) 6.469e-08 0.0002543
- problem_id          (Intercept) 2.642e+00 1.6255368
+ problem_id:TMS_Type (Intercept) 1.010e-10 1.005e-05
+ problem_id          (Intercept) 2.642e+00 1.626e+00
 Number of obs: 318, groups:  problem_id:TMS_Type, 24; problem_id, 12
 
 Fixed effects:
                           Estimate Std. Error z value Pr(>|z|)
-(Intercept)              -0.893629   0.593359  -1.506    0.132
-TMS_TypeWM                0.345178   0.470507   0.734    0.463
-problem_order             0.007717   0.124864   0.062    0.951
-TMS_TypeWM:problem_order -0.019651   0.165037  -0.119    0.905
+(Intercept)              -0.893622   0.593358  -1.506    0.132
+TMS_TypeWM                0.345212   0.470505   0.734    0.463
+problem_order             0.007721   0.124864   0.062    0.951
+TMS_TypeWM:problem_order -0.019655   0.165037  -0.119    0.905
 
 Correlation of Fixed Effects:
             (Intr) TMS_TyWM prblm_
 TMS_TypeWM  -0.431                
 problem_rdr -0.482  0.614         
 TMS_TypWM:_  0.360 -0.819   -0.755
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

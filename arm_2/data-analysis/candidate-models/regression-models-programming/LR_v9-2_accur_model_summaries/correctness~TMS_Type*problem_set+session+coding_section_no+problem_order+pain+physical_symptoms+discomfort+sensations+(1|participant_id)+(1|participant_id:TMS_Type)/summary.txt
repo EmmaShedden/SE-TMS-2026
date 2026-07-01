@@ -6,8 +6,8 @@ Formula: correctness ~ TMS_Type * problem_set + session + coding_section_no +
     (1 | participant_id) + (1 | participant_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    436.6     485.5    -205.3     410.6       305 
+     AIC      BIC   logLik deviance df.resid 
+   436.6    485.5   -205.3    410.6      305 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -21,32 +21,32 @@ Number of obs: 318, groups:  participant_id:TMS_Type, 53; participant_id, 27
 
 Fixed effects:
                          Estimate Std. Error z value Pr(>|z|)    
-(Intercept)             -1.908171   0.554166  -3.443 0.000575 ***
-TMS_TypeWM               0.808746   0.360931   2.241 0.025044 *  
-problem_setb             0.462567   0.358858   1.289 0.197398    
-session                  0.252288   0.241444   1.045 0.296063    
-coding_section_no        0.291815   0.144421   2.021 0.043322 *  
-problem_order            0.001036   0.069830   0.015 0.988164    
-pain                     0.413293   0.542856   0.761 0.446459    
-physical_symptoms       -0.728128   0.542819  -1.341 0.179796    
-discomfort              -0.617900   0.506244  -1.221 0.222254    
-sensations               0.953447   0.451253   2.113 0.034611 *  
-TMS_TypeWM:problem_setb -0.706088   0.539385  -1.309 0.190514    
+(Intercept)             -1.908171   0.562261  -3.394 0.000689 ***
+TMS_TypeWM               0.808746   0.362613   2.230 0.025726 *  
+problem_setb             0.462567   0.360948   1.282 0.200006    
+session                  0.252288   0.242713   1.039 0.298597    
+coding_section_no        0.291815   0.145569   2.005 0.045000 *  
+problem_order            0.001036   0.070148   0.015 0.988218    
+pain                     0.413293   0.545321   0.758 0.448517    
+physical_symptoms       -0.728128   0.548435  -1.328 0.184295    
+discomfort              -0.617900   0.508915  -1.214 0.224690    
+sensations               0.953447   0.461222   2.067 0.038713 *  
+TMS_TypeWM:problem_setb -0.706088   0.541803  -1.303 0.192500    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Correlation of Fixed Effects:
             (Intr) TMS_TyWM prblm_s sessin cdng__ prblm_r pain   physc_ dscmfr
-TMS_TypeWM  -0.301                                                            
-problem_stb -0.226  0.470                                                     
-session     -0.656 -0.027   -0.077                                            
-cdng_sctn_n -0.555  0.045   -0.003   0.012                                    
-problem_rdr -0.226 -0.057   -0.021   0.003 -0.085                             
-pain        -0.083  0.220    0.073  -0.003 -0.012  0.007                      
-physcl_symp -0.045 -0.259   -0.033   0.133 -0.024 -0.019  -0.255              
-discomfort   0.015 -0.237    0.015   0.034 -0.007  0.069  -0.346  0.291       
-sensations  -0.165  0.182   -0.107   0.134  0.029 -0.073   0.290 -0.052 -0.433
-TMS_TypWM:_  0.231 -0.634   -0.702  -0.001 -0.024  0.002  -0.204 -0.007 -0.190
+TMS_TypeWM  -0.303                                                            
+problem_stb -0.232  0.471                                                     
+session     -0.655 -0.025   -0.074                                            
+cdng_sctn_n -0.559  0.047    0.002   0.015                                    
+problem_rdr -0.227 -0.056   -0.019   0.004 -0.083                             
+pain        -0.076  0.218    0.070  -0.005 -0.015  0.007                      
+physcl_symp -0.063 -0.253   -0.025   0.138 -0.013 -0.017  -0.257              
+discomfort   0.022 -0.239    0.012   0.032 -0.011  0.068  -0.343  0.282       
+sensations  -0.187  0.186   -0.094   0.139  0.044 -0.068   0.277 -0.028 -0.434
+TMS_TypWM:_  0.233 -0.634   -0.702  -0.003 -0.027  0.001  -0.202 -0.012 -0.188
             snstns
 TMS_TypeWM        
 problem_stb       
@@ -57,7 +57,7 @@ pain
 physcl_symp       
 discomfort        
 sensations        
-TMS_TypWM:_ -0.038
+TMS_TypWM:_ -0.043
 optimizer (Nelder_Mead) convergence code: 0 (OK)
 boundary (singular) fit: see help('isSingular')
 

@@ -7,8 +7,8 @@ correctness ~ session * problem_order + problem_set * coding_section_no +
     (1 | participant_id) + (1 | participant_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    439.6     492.3    -205.8     411.6       304 
+     AIC      BIC   logLik deviance df.resid 
+   439.6    492.3   -205.8    411.6      304 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -22,15 +22,15 @@ Number of obs: 318, groups:  participant_id:TMS_Type, 53; participant_id, 27
 
 Fixed effects:
                                Estimate Std. Error z value Pr(>|z|)   
-(Intercept)                    -2.19096    0.82964  -2.641  0.00827 **
+(Intercept)                    -2.19096    0.82965  -2.641  0.00827 **
 session                         0.53036    0.41293   1.284  0.19901   
 problem_order                   0.17786    0.22556   0.789  0.43040   
 problem_setb                    0.09160    0.67855   0.135  0.89262   
 coding_section_no               0.29642    0.20210   1.467  0.14247   
-TMS_TypeWM                      0.50522    0.28097   1.798  0.07216 . 
-pain                            0.28041    0.54531   0.514  0.60710   
+TMS_TypeWM                      0.50522    0.28097   1.798  0.07215 . 
+pain                            0.28041    0.54530   0.514  0.60710   
 physical_symptoms              -0.72145    0.55653  -1.296  0.19486   
-discomfort                     -0.72789    0.50876  -1.431  0.15251   
+discomfort                     -0.72789    0.50875  -1.431  0.15251   
 sensations                      0.94640    0.46720   2.026  0.04280 * 
 session:problem_order          -0.11583    0.14065  -0.824  0.41018   
 problem_setb:coding_section_no  0.01499    0.28942   0.052  0.95870   
@@ -63,6 +63,5 @@ sensations
 sssn:prblm_  0.010       
 prblm_st:__  0.014 -0.015
 optimizer (Nelder_Mead) convergence code: 0 (OK)
-Model failed to converge with max|grad| = 0.00604139 (tol = 0.002, component 1)
-  See ?lme4::convergence and ?lme4::troubleshooting.
+Model failed to converge with max|grad| = 0.00604143 (tol = 0.002, component 1)
 

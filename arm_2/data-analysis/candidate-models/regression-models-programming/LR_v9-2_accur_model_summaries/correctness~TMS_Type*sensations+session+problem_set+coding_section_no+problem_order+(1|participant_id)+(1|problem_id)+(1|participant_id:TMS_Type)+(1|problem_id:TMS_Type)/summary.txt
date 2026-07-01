@@ -6,32 +6,32 @@ Formula: correctness ~ TMS_Type * sensations + session + problem_set +
     (1 | problem_id) + (1 | participant_id:TMS_Type) + (1 | problem_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    361.9     407.1    -169.0     337.9       306 
+     AIC      BIC   logLik deviance df.resid 
+   361.9    407.1   -169.0    337.9      306 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--2.3084 -0.5773 -0.1738  0.6032  2.4059 
+-2.3095 -0.5773 -0.1738  0.6032  2.4057 
 
 Random effects:
- Groups                  Name        Variance  Std.Dev. 
- participant_id:TMS_Type (Intercept) 1.380e-01 0.3715333
- participant_id          (Intercept) 4.450e-01 0.6671116
- problem_id:TMS_Type     (Intercept) 9.582e-07 0.0009789
- problem_id              (Intercept) 3.488e+00 1.8676297
+ Groups                  Name        Variance  Std.Dev.
+ participant_id:TMS_Type (Intercept) 1.371e-01 0.370278
+ participant_id          (Intercept) 4.454e-01 0.667377
+ problem_id:TMS_Type     (Intercept) 2.260e-06 0.001503
+ problem_id              (Intercept) 3.485e+00 1.866835
 Number of obs: 318, groups:  
 participant_id:TMS_Type, 53; participant_id, 27; problem_id:TMS_Type, 24; problem_id, 12
 
 Fixed effects:
                        Estimate Std. Error z value Pr(>|z|)  
-(Intercept)           -2.142593   0.977953  -2.191   0.0285 *
-TMS_TypeWM             0.422131   0.332640   1.269   0.2044  
-sensations             1.532007   0.849945   1.802   0.0715 .
-session                0.523680   0.324982   1.611   0.1071  
-problem_setb          -0.594695   0.929637  -0.640   0.5224  
-coding_section_no      0.215590   0.185018   1.165   0.2439  
-problem_order         -0.009743   0.089512  -0.109   0.9133  
-TMS_TypeWM:sensations -0.334708   1.144338  -0.292   0.7699  
+(Intercept)           -2.142062   0.977612  -2.191   0.0284 *
+TMS_TypeWM             0.421998   0.332503   1.269   0.2044  
+sensations             1.532176   0.849711   1.803   0.0714 .
+session                0.523749   0.324854   1.612   0.1069  
+problem_setb          -0.595130   0.929371  -0.640   0.5219  
+coding_section_no      0.215701   0.185007   1.166   0.2437  
+problem_order         -0.009746   0.089506  -0.109   0.9133  
+TMS_TypeWM:sensations -0.334448   1.143944  -0.292   0.7700  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -43,4 +43,7 @@ session     -0.483  0.143    0.301
 problem_stb -0.331 -0.142   -0.110 -0.151                       
 cdng_sctn_n -0.416  0.022    0.050  0.027  0.021                
 problem_rdr -0.155 -0.006   -0.033 -0.022 -0.020  -0.094        
-TMS_TypWM:s  0.182 -0.367   -0.639 -0.258  0.046  -0.042  0.022 
+TMS_TypWM:s  0.182 -0.367   -0.638 -0.258  0.046  -0.042  0.022 
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.00326275 (tol = 0.002, component 1)
+

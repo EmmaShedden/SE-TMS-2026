@@ -5,8 +5,8 @@ Formula: correctness ~ TMS_Type * problem_set + (1 | participant_id) +
     (1 | problem_id) + (1 | problem_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    358.1     384.5    -172.1     344.1       311 
+     AIC      BIC   logLik deviance df.resid 
+   358.1    384.5   -172.1    344.1      311 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -15,25 +15,25 @@ Scaled residuals:
 Random effects:
  Groups              Name        Variance  Std.Dev. 
  participant_id      (Intercept) 4.336e-01 6.585e-01
- problem_id:TMS_Type (Intercept) 2.018e-10 1.421e-05
+ problem_id:TMS_Type (Intercept) 1.501e-10 1.225e-05
  problem_id          (Intercept) 3.193e+00 1.787e+00
 Number of obs: 318, groups:  
 participant_id, 27; problem_id:TMS_Type, 24; problem_id, 12
 
 Fixed effects:
                         Estimate Std. Error z value Pr(>|z|)  
-(Intercept)              -1.0851     0.6974  -1.556   0.1197  
-TMS_TypeWM                0.8416     0.4499   1.871   0.0614 .
-problem_setb              0.2917     0.8869   0.329   0.7423  
-TMS_TypeWM:problem_setb  -1.0992     0.7526  -1.461   0.1441  
+(Intercept)              -1.0851     0.7085  -1.532   0.1256  
+TMS_TypeWM                0.8416     0.4568   1.842   0.0654 .
+problem_setb              0.2917     0.9064   0.322   0.7476  
+TMS_TypeWM:problem_setb  -1.0992     0.7635  -1.440   0.1499  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Correlation of Fixed Effects:
             (Intr) TMS_TyWM prblm_
-TMS_TypeWM  -0.237                
-problem_stb -0.561  0.191         
-TMS_TypWM:_  0.182 -0.781   -0.331
+TMS_TypeWM  -0.252                
+problem_stb -0.571  0.204         
+TMS_TypWM:_  0.196 -0.781   -0.342
 optimizer (Nelder_Mead) convergence code: 0 (OK)
 boundary (singular) fit: see help('isSingular')
 

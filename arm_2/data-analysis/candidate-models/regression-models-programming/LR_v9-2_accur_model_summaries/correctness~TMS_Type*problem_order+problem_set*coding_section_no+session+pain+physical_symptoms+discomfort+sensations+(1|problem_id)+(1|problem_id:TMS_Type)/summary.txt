@@ -7,8 +7,8 @@ correctness ~ TMS_Type * problem_order + problem_set * coding_section_no +
     (1 | problem_id) + (1 | problem_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    366.6     419.3    -169.3     338.6       304 
+     AIC      BIC   logLik deviance df.resid 
+   366.6    419.3   -169.3    338.6      304 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -22,17 +22,17 @@ Number of obs: 318, groups:  problem_id:TMS_Type, 24; problem_id, 12
 
 Fixed effects:
                                 Estimate Std. Error z value Pr(>|z|)  
-(Intercept)                    -1.945883   0.962539  -2.022   0.0432 *
-TMS_TypeWM                      0.822013   0.515112   1.596   0.1105  
+(Intercept)                    -1.945883   0.962544  -2.022   0.0432 *
+TMS_TypeWM                      0.822013   0.515110   1.596   0.1105  
 problem_order                   0.002591   0.128151   0.020   0.9839  
 problem_setb                   -0.228744   1.130777  -0.202   0.8397  
 coding_section_no               0.274881   0.231492   1.187   0.2351  
 session                         0.385685   0.285566   1.351   0.1768  
-pain                            0.399278   0.595397   0.671   0.5025  
-physical_symptoms              -1.024424   0.624303  -1.641   0.1008  
-discomfort                     -1.067114   0.585485  -1.823   0.0684 .
-sensations                      1.367866   0.531119   2.575   0.0100 *
-TMS_TypeWM:problem_order       -0.034702   0.169502  -0.205   0.8378  
+pain                            0.399278   0.595395   0.671   0.5025  
+physical_symptoms              -1.024424   0.624299  -1.641   0.1008  
+discomfort                     -1.067114   0.585483  -1.823   0.0684 .
+sensations                      1.367866   0.531118   2.575   0.0100 *
+TMS_TypeWM:problem_order       -0.034702   0.169501  -0.205   0.8378  
 problem_setb:coding_section_no -0.226658   0.360834  -0.628   0.5299  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -65,5 +65,4 @@ prblm_st:__ -0.029 -0.017
 optimizer (Nelder_Mead) convergence code: 0 (OK)
 unable to evaluate scaled gradient
 Model failed to converge: degenerate  Hessian with 1 negative eigenvalues
-  See ?lme4::convergence and ?lme4::troubleshooting.
 

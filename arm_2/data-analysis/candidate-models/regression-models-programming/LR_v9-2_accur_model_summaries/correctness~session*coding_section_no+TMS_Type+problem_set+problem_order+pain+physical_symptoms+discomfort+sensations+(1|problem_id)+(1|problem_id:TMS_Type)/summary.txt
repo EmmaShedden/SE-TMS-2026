@@ -6,8 +6,8 @@ Formula: correctness ~ session * coding_section_no + TMS_Type + problem_set +
     (1 | problem_id) + (1 | problem_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    365.0     413.9    -169.5     339.0       305 
+     AIC      BIC   logLik deviance df.resid 
+   365.0    413.9   -169.5    339.0      305 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -15,23 +15,23 @@ Scaled residuals:
 
 Random effects:
  Groups              Name        Variance Std.Dev.
- problem_id:TMS_Type (Intercept) 0.006679 0.08173 
- problem_id          (Intercept) 2.994422 1.73044 
+ problem_id:TMS_Type (Intercept) 0.006681 0.08174 
+ problem_id          (Intercept) 2.994410 1.73044 
 Number of obs: 318, groups:  problem_id:TMS_Type, 24; problem_id, 12
 
 Fixed effects:
                           Estimate Std. Error z value Pr(>|z|)  
-(Intercept)               -2.04784    1.45153  -1.411   0.1583  
-session                    0.62626    0.80383   0.779   0.4359  
-coding_section_no          0.34558    0.55141   0.627   0.5308  
+(Intercept)               -2.04785    1.45144  -1.411   0.1583  
+session                    0.62626    0.80379   0.779   0.4359  
+coding_section_no          0.34558    0.55138   0.627   0.5308  
 TMS_TypeWM                 0.73090    0.32623   2.240   0.0251 *
 problem_setb              -0.71397    0.80157  -0.891   0.3731  
 problem_order             -0.02138    0.08556  -0.250   0.8027  
-pain                       0.39733    0.60087   0.661   0.5085  
-physical_symptoms         -1.00862    0.62318  -1.618   0.1056  
+pain                       0.39733    0.60086   0.661   0.5084  
+physical_symptoms         -1.00861    0.62317  -1.619   0.1056  
 discomfort                -1.05351    0.59097  -1.783   0.0746 .
 sensations                 1.35728    0.53468   2.538   0.0111 *
-session:coding_section_no -0.10968    0.34563  -0.317   0.7510  
+session:coding_section_no -0.10968    0.34562  -0.317   0.7510  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -39,7 +39,7 @@ Correlation of Fixed Effects:
             (Intr) sessin cdng__ TMS_TW prblm_s prblm_r pain   physc_ dscmfr
 session     -0.847                                                          
 cdng_sctn_n -0.844  0.887                                                   
-TMS_TypeWM  -0.060 -0.016 -0.013                                            
+TMS_TypeWM  -0.059 -0.016 -0.013                                            
 problem_stb -0.219 -0.016  0.043 -0.083                                     
 problem_rdr -0.123  0.042  0.015 -0.029 -0.048                              
 pain        -0.008 -0.011 -0.009  0.120 -0.040  -0.052                      

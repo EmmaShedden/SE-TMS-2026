@@ -5,36 +5,36 @@ Formula: correctness ~ TMS_Type * sensations + (1 | participant_id) +
     (1 | problem_id) + (1 | participant_id:TMS_Type) + (1 | problem_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    357.9     388.0    -170.9     341.9       310 
+     AIC      BIC   logLik deviance df.resid 
+   357.9    388.0   -170.9    341.9      310 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--2.2953 -0.5752 -0.1839  0.5830  2.6080 
+-2.2956 -0.5752 -0.1839  0.5829  2.6087 
 
 Random effects:
- Groups                  Name        Variance  Std.Dev. 
- participant_id:TMS_Type (Intercept) 2.134e-01 4.620e-01
- participant_id          (Intercept) 4.347e-01 6.593e-01
- problem_id:TMS_Type     (Intercept) 1.565e-09 3.956e-05
- problem_id              (Intercept) 3.506e+00 1.872e+00
+ Groups                  Name        Variance  Std.Dev.
+ participant_id:TMS_Type (Intercept) 2.133e-01 0.461850
+ participant_id          (Intercept) 4.353e-01 0.659802
+ problem_id:TMS_Type     (Intercept) 1.787e-06 0.001337
+ problem_id              (Intercept) 3.506e+00 1.872539
 Number of obs: 318, groups:  
 participant_id:TMS_Type, 53; participant_id, 27; problem_id:TMS_Type, 24; problem_id, 12
 
 Fixed effects:
                       Estimate Std. Error z value Pr(>|z|)  
-(Intercept)            -1.1332     0.6140  -1.846    0.065 .
-TMS_TypeWM              0.3350     0.3281   1.021    0.307  
-sensations              1.0897     0.8183   1.332    0.183  
-TMS_TypeWM:sensations   0.1478     1.1320   0.131    0.896  
+(Intercept)            -1.1327     0.6209  -1.824   0.0681 .
+TMS_TypeWM              0.3353     0.3349   1.001   0.3168  
+sensations              1.0906     0.8198   1.330   0.1834  
+TMS_TypeWM:sensations   0.1475     1.1289   0.131   0.8960  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Correlation of Fixed Effects:
             (Intr) TMS_TyWM snstns
-TMS_TypeWM  -0.282                
-sensations  -0.155  0.241         
-TMS_TypWM:s  0.084 -0.335   -0.639
+TMS_TypeWM  -0.288                
+sensations  -0.173  0.249         
+TMS_TypWM:s  0.083 -0.344   -0.625
 optimizer (Nelder_Mead) convergence code: 0 (OK)
-boundary (singular) fit: see help('isSingular')
+Model failed to converge with max|grad| = 0.00303675 (tol = 0.002, component 1)
 

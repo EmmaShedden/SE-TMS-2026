@@ -6,34 +6,34 @@ Formula: correctness ~ TMS_Type * coding_section_no + session + problem_set +
     (1 | participant_id) + (1 | problem_id) + (1 | problem_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    362.9     415.5    -167.4     334.9       304 
+     AIC      BIC   logLik deviance df.resid 
+   362.9    415.5   -167.4    334.9      304 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--2.3578 -0.5661 -0.1841  0.5734  3.1544 
+-2.3574 -0.5661 -0.1841  0.5737  3.1538 
 
 Random effects:
  Groups              Name        Variance  Std.Dev.
- participant_id      (Intercept) 4.300e-01 0.655739
- problem_id:TMS_Type (Intercept) 1.655e-05 0.004069
- problem_id          (Intercept) 3.432e+00 1.852700
+ participant_id      (Intercept) 4.303e-01 0.6560  
+ problem_id:TMS_Type (Intercept) 1.444e-05 0.0038  
+ problem_id          (Intercept) 3.431e+00 1.8524  
 Number of obs: 318, groups:  
 participant_id, 27; problem_id:TMS_Type, 24; problem_id, 12
 
 Fixed effects:
                              Estimate Std. Error z value Pr(>|z|)  
-(Intercept)                  -2.20435    1.05530  -2.089   0.0367 *
-TMS_TypeWM                    1.04771    0.87267   1.201   0.2299  
-coding_section_no             0.28385    0.27076   1.048   0.2945  
-session                       0.42927    0.29857   1.438   0.1505  
-problem_setb                 -0.47737    0.89009  -0.536   0.5917  
-problem_order                -0.01405    0.08924  -0.157   0.8749  
-pain                          0.34722    0.74891   0.464   0.6429  
-physical_symptoms            -0.78059    0.71872  -1.086   0.2774  
-discomfort                   -1.12283    0.68166  -1.647   0.0995 .
-sensations                    1.72780    0.69113   2.500   0.0124 *
-TMS_TypeWM:coding_section_no -0.14542    0.36791  -0.395   0.6926  
+(Intercept)                  -2.20208    1.05515  -2.087   0.0369 *
+TMS_TypeWM                    1.04555    0.87261   1.198   0.2308  
+coding_section_no             0.28305    0.27074   1.045   0.2958  
+session                       0.42956    0.29857   1.439   0.1502  
+problem_setb                 -0.48010    0.89014  -0.539   0.5896  
+problem_order                -0.01378    0.08924  -0.154   0.8773  
+pain                          0.34635    0.74900   0.462   0.6438  
+physical_symptoms            -0.77900    0.71872  -1.084   0.2784  
+discomfort                   -1.12172    0.68166  -1.646   0.0998 .
+sensations                    1.72612    0.69101   2.498   0.0125 *
+TMS_TypeWM:coding_section_no -0.14435    0.36789  -0.392   0.6948  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -42,12 +42,12 @@ Correlation of Fixed Effects:
 TMS_TypeWM  -0.445                                                            
 cdng_sctn_n -0.589  0.671                                                     
 session     -0.416  0.012    0.036                                            
-problem_stb -0.308 -0.030    0.022 -0.136                                     
+problem_stb -0.308 -0.030    0.022 -0.137                                     
 problem_rdr -0.176  0.059   -0.003 -0.012 -0.036                              
 pain        -0.009  0.038   -0.023  0.004 -0.060  -0.027                      
 physcl_symp -0.093 -0.138    0.038  0.150  0.002   0.014  -0.196              
-discomfort   0.019 -0.182    0.007  0.048 -0.032   0.068  -0.406  0.280       
-sensations  -0.166  0.123    0.055  0.174 -0.094  -0.047   0.249  0.008 -0.399
+discomfort   0.019 -0.182    0.008  0.048 -0.032   0.067  -0.406  0.280       
+sensations  -0.166  0.123    0.054  0.174 -0.095  -0.047   0.249  0.008 -0.399
 TMS_TyWM:__  0.446 -0.916   -0.732 -0.024 -0.004  -0.079   0.007 -0.007 -0.018
             snstns
 TMS_TypeWM        
@@ -61,6 +61,5 @@ discomfort
 sensations        
 TMS_TyWM:__ -0.044
 optimizer (Nelder_Mead) convergence code: 0 (OK)
-Model failed to converge with max|grad| = 0.0133733 (tol = 0.002, component 1)
-  See ?lme4::convergence and ?lme4::troubleshooting.
+Model failed to converge with max|grad| = 0.0120679 (tol = 0.002, component 1)
 

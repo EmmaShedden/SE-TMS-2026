@@ -6,31 +6,31 @@ Formula: correctness ~ TMS_Type * discomfort + session + problem_set +
     (1 | problem_id) + (1 | participant_id:TMS_Type) + (1 | problem_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    364.3     405.6    -171.1     342.3       307 
+     AIC      BIC   logLik deviance df.resid 
+   364.3    405.6   -171.1    342.3      307 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--2.1977 -0.5650 -0.1850  0.6165  2.6197 
+-2.1978 -0.5650 -0.1850  0.6165  2.6199 
 
 Random effects:
  Groups                  Name        Variance  Std.Dev.
- participant_id:TMS_Type (Intercept) 3.047e-01 0.552001
- participant_id          (Intercept) 3.444e-01 0.586838
- problem_id:TMS_Type     (Intercept) 1.339e-05 0.003659
+ participant_id:TMS_Type (Intercept) 3.046e-01 0.551936
+ participant_id          (Intercept) 3.444e-01 0.586883
+ problem_id:TMS_Type     (Intercept) 1.393e-05 0.003732
  problem_id              (Intercept) 3.351e+00 1.830680
 Number of obs: 318, groups:  
 participant_id:TMS_Type, 53; participant_id, 27; problem_id:TMS_Type, 24; problem_id, 12
 
 Fixed effects:
                    Estimate Std. Error z value Pr(>|z|)  
-(Intercept)       -1.846342   0.957053  -1.929   0.0537 .
-TMS_TypeWM         0.422525   0.358103   1.180   0.2380  
-discomfort        -0.290846   0.605305  -0.480   0.6309  
-session            0.375618   0.328507   1.143   0.2529  
-problem_setb      -0.322426   0.930969  -0.346   0.7291  
-coding_section_no  0.211379   0.183759   1.150   0.2500  
-problem_order     -0.007704   0.089276  -0.086   0.9312  
+(Intercept)       -1.846476   0.957052  -1.929   0.0537 .
+TMS_TypeWM         0.422498   0.358095   1.180   0.2381  
+discomfort        -0.290871   0.605299  -0.481   0.6308  
+session            0.375661   0.328501   1.144   0.2528  
+problem_setb      -0.322204   0.930964  -0.346   0.7293  
+coding_section_no  0.211390   0.183759   1.150   0.2500  
+problem_order     -0.007671   0.089276  -0.086   0.9315  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -45,6 +45,5 @@ problem_rdr -0.169 -0.017  0.045 -0.009 -0.022  -0.090
 fit warnings:
 fixed-effect model matrix is rank deficient so dropping 1 column / coefficient
 optimizer (Nelder_Mead) convergence code: 0 (OK)
-Model failed to converge with max|grad| = 0.0073226 (tol = 0.002, component 1)
-  See ?lme4::convergence and ?lme4::troubleshooting.
+Model failed to converge with max|grad| = 0.007457 (tol = 0.002, component 1)
 

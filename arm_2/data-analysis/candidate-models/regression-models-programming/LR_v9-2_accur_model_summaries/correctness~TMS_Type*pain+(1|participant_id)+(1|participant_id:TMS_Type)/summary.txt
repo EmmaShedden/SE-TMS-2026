@@ -5,8 +5,8 @@ Formula:
 correctness ~ TMS_Type * pain + (1 | participant_id) + (1 | participant_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    436.3     458.9    -212.2     424.3       312 
+     AIC      BIC   logLik deviance df.resid 
+   436.3    458.9   -212.2    424.3      312 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -14,24 +14,24 @@ Scaled residuals:
 
 Random effects:
  Groups                  Name        Variance  Std.Dev. 
- participant_id:TMS_Type (Intercept) 9.827e-09 9.913e-05
+ participant_id:TMS_Type (Intercept) 9.826e-09 9.913e-05
  participant_id          (Intercept) 9.849e-02 3.138e-01
 Number of obs: 318, groups:  participant_id:TMS_Type, 53; participant_id, 27
 
 Fixed effects:
                 Estimate Std. Error z value Pr(>|z|)   
-(Intercept)     -0.56285    0.18119  -3.106  0.00189 **
-TMS_TypeWM       0.24604    0.24073   1.022  0.30675   
-pain            -0.20006    0.93556  -0.214  0.83067   
-TMS_TypeWM:pain  0.06442    1.05073   0.061  0.95111   
+(Intercept)     -0.56285    0.18358  -3.066  0.00217 **
+TMS_TypeWM       0.24604    0.24289   1.013  0.31108   
+pain            -0.20006    0.94307  -0.212  0.83200   
+TMS_TypeWM:pain  0.06442    1.05995   0.061  0.95153   
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Correlation of Fixed Effects:
             (Intr) TMS_TyWM pain  
 TMS_TypeWM  -0.666                
-pain        -0.192  0.128         
-TMS_TypWM:p  0.165 -0.237   -0.856
+pain        -0.183  0.125         
+TMS_TypWM:p  0.156 -0.234   -0.856
 optimizer (Nelder_Mead) convergence code: 0 (OK)
 boundary (singular) fit: see help('isSingular')
 

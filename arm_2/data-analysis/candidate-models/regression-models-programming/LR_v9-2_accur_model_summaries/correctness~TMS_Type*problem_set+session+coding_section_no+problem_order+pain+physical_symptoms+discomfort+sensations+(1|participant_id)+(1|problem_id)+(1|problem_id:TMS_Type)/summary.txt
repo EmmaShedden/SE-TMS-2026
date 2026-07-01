@@ -6,40 +6,40 @@ Formula: correctness ~ TMS_Type * problem_set + session + coding_section_no +
     (1 | participant_id) + (1 | problem_id) + (1 | problem_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    361.1     413.8    -166.5     333.1       304 
+     AIC      BIC   logLik deviance df.resid 
+   361.1    413.8   -166.5    333.1      304 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--2.5122 -0.5521 -0.1675  0.5862  2.9136 
+-2.5122 -0.5521 -0.1675  0.5862  2.9133 
 
 Random effects:
  Groups              Name        Variance  Std.Dev.
- participant_id      (Intercept) 3.714e-01 0.60946 
- problem_id:TMS_Type (Intercept) 1.429e-05 0.00378 
- problem_id          (Intercept) 3.447e+00 1.85665 
+ participant_id      (Intercept) 3.713e-01 0.609348
+ problem_id:TMS_Type (Intercept) 1.521e-05 0.003901
+ problem_id          (Intercept) 3.448e+00 1.856986
 Number of obs: 318, groups:  
 participant_id, 27; problem_id:TMS_Type, 24; problem_id, 12
 
 Fixed effects:
                         Estimate Std. Error z value Pr(>|z|)  
-(Intercept)             -2.15906    0.95017  -2.272   0.0231 *
-TMS_TypeWM               1.19504    0.48178   2.480   0.0131 *
-problem_setb            -0.10836    0.92989  -0.117   0.9072  
-session                  0.41714    0.29806   1.400   0.1616  
-coding_section_no        0.20842    0.18460   1.129   0.2589  
-problem_order           -0.02158    0.08874  -0.243   0.8078  
-pain                     0.56915    0.74956   0.759   0.4477  
-physical_symptoms       -0.78749    0.70592  -1.116   0.2646  
-discomfort              -0.96914    0.67945  -1.426   0.1538  
-sensations               1.73282    0.68487   2.530   0.0114 *
-TMS_TypeWM:problem_setb -1.12368    0.79617  -1.411   0.1581  
+(Intercept)             -2.15915    0.95022  -2.272   0.0231 *
+TMS_TypeWM               1.19503    0.48176   2.481   0.0131 *
+problem_setb            -0.10798    0.92991  -0.116   0.9076  
+session                  0.41733    0.29806   1.400   0.1615  
+coding_section_no        0.20830    0.18460   1.128   0.2591  
+problem_order           -0.02149    0.08874  -0.242   0.8086  
+pain                     0.56909    0.74952   0.759   0.4477  
+physical_symptoms       -0.78819    0.70592  -1.117   0.2642  
+discomfort              -0.96868    0.67941  -1.426   0.1539  
+sensations               1.73280    0.68485   2.530   0.0114 *
+TMS_TypeWM:problem_setb -1.12365    0.79611  -1.411   0.1581  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Correlation of Fixed Effects:
             (Intr) TMS_TyWM prblm_s sessin cdng__ prblm_r pain   physc_ dscmfr
-TMS_TypeWM  -0.181                                                            
+TMS_TypeWM  -0.180                                                            
 problem_stb -0.366  0.154                                                     
 session     -0.447 -0.016   -0.131                                            
 cdng_sctn_n -0.429  0.023    0.038   0.026                                    
@@ -47,8 +47,8 @@ problem_rdr -0.149 -0.046   -0.042  -0.013 -0.100
 pain        -0.038  0.221    0.001   0.001 -0.019 -0.033                      
 physcl_symp -0.099 -0.238    0.008   0.149  0.047  0.007  -0.200              
 discomfort   0.014 -0.254    0.010   0.048 -0.006  0.061  -0.357  0.271       
-sensations  -0.167  0.215   -0.065   0.163  0.031 -0.054   0.256  0.001 -0.400
-TMS_TypWM:_  0.151 -0.689   -0.302  -0.005 -0.033  0.034  -0.205 -0.020 -0.142
+sensations  -0.167  0.215   -0.064   0.163  0.031 -0.053   0.256  0.001 -0.400
+TMS_TypWM:_  0.151 -0.689   -0.302  -0.005 -0.033  0.034  -0.205 -0.020 -0.143
             snstns
 TMS_TypeWM        
 problem_stb       
@@ -61,6 +61,5 @@ discomfort
 sensations        
 TMS_TypWM:_ -0.090
 optimizer (Nelder_Mead) convergence code: 0 (OK)
-Model failed to converge with max|grad| = 0.0103904 (tol = 0.002, component 1)
-  See ?lme4::convergence and ?lme4::troubleshooting.
+Model failed to converge with max|grad| = 0.0106974 (tol = 0.002, component 1)
 

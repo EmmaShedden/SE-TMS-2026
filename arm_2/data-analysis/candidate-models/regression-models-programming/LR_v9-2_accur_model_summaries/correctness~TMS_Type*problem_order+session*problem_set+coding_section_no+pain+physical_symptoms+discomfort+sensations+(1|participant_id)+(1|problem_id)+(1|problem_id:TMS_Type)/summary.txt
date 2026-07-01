@@ -7,35 +7,35 @@ Formula: correctness ~ TMS_Type * problem_order + session * problem_set +
     problem_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    364.5     421.0    -167.3     334.5       303 
+     AIC      BIC   logLik deviance df.resid 
+   364.5    421.0   -167.3    334.5      303 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--2.4173 -0.5640 -0.1829  0.5606  3.0467 
+-2.4176 -0.5641 -0.1829  0.5606  3.0467 
 
 Random effects:
  Groups              Name        Variance  Std.Dev.
- participant_id      (Intercept) 4.080e-01 0.63876 
- problem_id:TMS_Type (Intercept) 1.918e-05 0.00438 
- problem_id          (Intercept) 3.363e+00 1.83378 
+ participant_id      (Intercept) 4.082e-01 0.638917
+ problem_id:TMS_Type (Intercept) 2.478e-05 0.004978
+ problem_id          (Intercept) 3.362e+00 1.833702
 Number of obs: 318, groups:  
 participant_id, 27; problem_id:TMS_Type, 24; problem_id, 12
 
 Fixed effects:
                          Estimate Std. Error z value Pr(>|z|)  
-(Intercept)              -1.75864    1.07557  -1.635   0.1020  
-TMS_TypeWM                0.88969    0.54885   1.621   0.1050  
-problem_order             0.01549    0.13426   0.115   0.9081  
-session                   0.18700    0.46534   0.402   0.6878  
-problem_setb             -1.18955    1.38842  -0.857   0.3916  
-coding_section_no         0.20556    0.18435   1.115   0.2648  
-pain                      0.31676    0.74732   0.424   0.6717  
-physical_symptoms        -0.85311    0.72374  -1.179   0.2385  
-discomfort               -1.15385    0.67986  -1.697   0.0897 .
-sensations                1.69831    0.68267   2.488   0.0129 *
-TMS_TypeWM:problem_order -0.05625    0.17655  -0.319   0.7500  
-session:problem_setb      0.50236    0.77227   0.651   0.5154  
+(Intercept)              -1.75702    1.07555  -1.634   0.1023  
+TMS_TypeWM                0.88971    0.54887   1.621   0.1050  
+problem_order             0.01542    0.13426   0.115   0.9086  
+session                   0.18598    0.46537   0.400   0.6894  
+problem_setb             -1.19280    1.38853  -0.859   0.3903  
+coding_section_no         0.20560    0.18435   1.115   0.2647  
+pain                      0.31669    0.74739   0.424   0.6718  
+physical_symptoms        -0.85333    0.72377  -1.179   0.2384  
+discomfort               -1.15435    0.67991  -1.698   0.0895 .
+sensations                1.69863    0.68273   2.488   0.0128 *
+TMS_TypeWM:problem_order -0.05622    0.17655  -0.318   0.7502  
+session:problem_setb      0.50416    0.77236   0.653   0.5139  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -46,12 +46,12 @@ problem_rdr -0.241  0.563
 session     -0.588 -0.094   -0.038                                            
 problem_stb -0.524 -0.122   -0.051   0.535                                    
 cdng_sctn_n -0.388  0.035   -0.023   0.023  0.020                             
-pain        -0.067  0.113    0.029   0.073  0.033  -0.021                     
+pain        -0.067  0.113    0.029   0.074  0.033  -0.021                     
 physcl_symp -0.148 -0.229    0.013   0.198  0.107   0.047 -0.181              
 discomfort   0.027 -0.374   -0.012   0.059  0.008  -0.010 -0.402  0.279       
-sensations  -0.145  0.141   -0.022   0.110 -0.060   0.028  0.249  0.008 -0.397
+sensations  -0.145  0.141   -0.022   0.110 -0.061   0.028  0.248  0.008 -0.397
 TMS_TypWM:_  0.199 -0.768   -0.750   0.042  0.048  -0.048 -0.062 -0.007  0.074
-sssn:prblm_  0.440  0.091    0.025  -0.767 -0.770  -0.007 -0.094 -0.137 -0.036
+sssn:prblm_  0.440  0.091    0.025  -0.768 -0.770  -0.007 -0.094 -0.137 -0.036
             snstns TMS_TWM:
 TMS_TypeWM                 
 problem_rdr                
@@ -65,6 +65,5 @@ sensations
 TMS_TypWM:_ -0.013         
 sssn:prblm_  0.001 -0.032  
 optimizer (Nelder_Mead) convergence code: 0 (OK)
-Model failed to converge with max|grad| = 0.0111808 (tol = 0.002, component 1)
-  See ?lme4::convergence and ?lme4::troubleshooting.
+Model failed to converge with max|grad| = 0.0108766 (tol = 0.002, component 1)
 

@@ -6,8 +6,8 @@ Formula: correctness ~ TMS_Type * problem_set + session + coding_section_no +
     (1 | problem_id) + (1 | problem_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    362.2     411.1    -168.1     336.2       305 
+     AIC      BIC   logLik deviance df.resid 
+   362.2    411.1   -168.1    336.2      305 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -21,7 +21,7 @@ Number of obs: 318, groups:  problem_id:TMS_Type, 24; problem_id, 12
 
 Fixed effects:
                         Estimate Std. Error z value Pr(>|z|)   
-(Intercept)             -1.85228    0.87838  -2.109  0.03497 * 
+(Intercept)             -1.85228    0.87837  -2.109  0.03496 * 
 TMS_TypeWM               1.13452    0.40680   2.789  0.00529 **
 problem_setb            -0.35528    0.83555  -0.425  0.67069   
 session                  0.38479    0.28664   1.342  0.17946   
@@ -60,5 +60,4 @@ sensations
 TMS_TypWM:_ -0.082
 optimizer (Nelder_Mead) convergence code: 0 (OK)
 Model failed to converge with max|grad| = 0.00524633 (tol = 0.002, component 1)
-  See ?lme4::convergence and ?lme4::troubleshooting.
 

@@ -6,8 +6,8 @@ Formula: correctness ~ problem_set * problem_order + TMS_Type + session +
     sensations + (1 | problem_id) + (1 | problem_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    364.7     413.6    -169.4     338.7       305 
+     AIC      BIC   logLik deviance df.resid 
+   364.7    413.6   -169.4    338.7      305 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -15,22 +15,22 @@ Scaled residuals:
 
 Random effects:
  Groups              Name        Variance Std.Dev.
- problem_id:TMS_Type (Intercept) 0.007792 0.08827 
- problem_id          (Intercept) 2.991070 1.72947 
+ problem_id:TMS_Type (Intercept) 0.007796 0.0883  
+ problem_id          (Intercept) 2.991007 1.7295  
 Number of obs: 318, groups:  problem_id:TMS_Type, 24; problem_id, 12
 
 Fixed effects:
                            Estimate Std. Error z value Pr(>|z|)   
-(Intercept)                -1.80694    0.89721  -2.014  0.04401 * 
-problem_setb               -0.49618    0.88470  -0.561  0.57490   
+(Intercept)                -1.80696    0.89719  -2.014  0.04401 * 
+problem_setb               -0.49617    0.88470  -0.561  0.57491   
 problem_order               0.02318    0.11470   0.202  0.83986   
 TMS_TypeWM                  0.73401    0.32681   2.246  0.02471 * 
-session                     0.38861    0.28555   1.361  0.17353   
+session                     0.38861    0.28554   1.361  0.17353   
 coding_section_no           0.19099    0.18097   1.055  0.29127   
-pain                        0.43924    0.60520   0.726  0.46797   
-physical_symptoms          -1.02644    0.62315  -1.647  0.09952 . 
-discomfort                 -1.09247    0.59486  -1.837  0.06628 . 
-sensations                  1.39285    0.53975   2.581  0.00986 **
+pain                        0.43926    0.60520   0.726  0.46796   
+physical_symptoms          -1.02646    0.62315  -1.647  0.09951 . 
+discomfort                 -1.09248    0.59485  -1.837  0.06628 . 
+sensations                  1.39286    0.53975   2.581  0.00986 **
 problem_setb:problem_order -0.10242    0.17040  -0.601  0.54781   
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
