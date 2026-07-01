@@ -1,10 +1,11 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
 Formula: log(duration) ~ TMS_Type * problem_order + session + problem_set +  
-    coding_section_no + pain + physical_symptoms + discomfort +      sensations + (1 | problem_id) + (1 | problem_id:TMS_Type)
+    coding_section_no + pain + physical_symptoms + discomfort +  
+    sensations + (1 | problem_id) + (1 | problem_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    607.6     662.4    -289.8     579.6       354 
+     AIC      BIC   logLik deviance df.resid 
+   607.6    662.4   -289.8    579.6      354 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -32,14 +33,25 @@ sensations                0.153623   0.096045   1.599
 TMS_TypeWM:problem_order  0.026043   0.031683   0.822
 
 Correlation of Fixed Effects:
-            (Intr) TMS_TyWM prblm_r sessn2 prblm_s cdng__ pain   physc_ dscmfr snstns
-TMS_TypeWM  -0.251                                                                   
-problem_rdr -0.280  0.522                                                            
-session2    -0.146 -0.031   -0.043                                                   
-problem_stb -0.426 -0.038   -0.009  -0.124                                           
-cdng_sctn_n -0.412 -0.039   -0.149   0.010 -0.012                                    
-pain        -0.036  0.116   -0.013   0.011 -0.060   0.023                            
-physcl_symp -0.006 -0.237    0.004   0.095 -0.002  -0.004 -0.343                     
-discomfort   0.056 -0.294    0.014   0.064 -0.032  -0.036 -0.342  0.318              
-sensations  -0.066  0.089   -0.016   0.167 -0.129   0.027  0.256 -0.062 -0.384       
-TMS_TypWM:_  0.194 -0.762   -0.665   0.024 -0.005   0.091 -0.055  0.010  0.000  0.037
+            (Intr) TMS_TyWM prblm_r sessn2 prblm_s cdng__ pain   physc_ dscmfr
+TMS_TypeWM  -0.251                                                            
+problem_rdr -0.280  0.522                                                     
+session2    -0.146 -0.031   -0.043                                            
+problem_stb -0.426 -0.038   -0.009  -0.124                                    
+cdng_sctn_n -0.412 -0.039   -0.149   0.010 -0.012                             
+pain        -0.036  0.116   -0.013   0.011 -0.060   0.023                     
+physcl_symp -0.006 -0.237    0.004   0.095 -0.002  -0.004 -0.343              
+discomfort   0.056 -0.294    0.014   0.064 -0.032  -0.036 -0.342  0.318       
+sensations  -0.066  0.089   -0.016   0.167 -0.129   0.027  0.256 -0.062 -0.384
+TMS_TypWM:_  0.194 -0.762   -0.665   0.024 -0.005   0.091 -0.055  0.010  0.000
+            snstns
+TMS_TypeWM        
+problem_rdr       
+session2          
+problem_stb       
+cdng_sctn_n       
+pain              
+physcl_symp       
+discomfort        
+sensations        
+TMS_TypWM:_  0.037

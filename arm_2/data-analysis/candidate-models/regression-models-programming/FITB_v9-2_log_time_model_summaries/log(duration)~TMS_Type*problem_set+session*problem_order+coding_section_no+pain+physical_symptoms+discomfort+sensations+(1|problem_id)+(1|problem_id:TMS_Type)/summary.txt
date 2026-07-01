@@ -1,10 +1,11 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
 Formula: log(duration) ~ TMS_Type * problem_set + session * problem_order +  
-    coding_section_no + pain + physical_symptoms + discomfort +      sensations + (1 | problem_id) + (1 | problem_id:TMS_Type)
+    coding_section_no + pain + physical_symptoms + discomfort +  
+    sensations + (1 | problem_id) + (1 | problem_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-    601.8     660.4    -285.9     571.8       353 
+     AIC      BIC   logLik deviance df.resid 
+   601.8    660.4   -285.9    571.8      353 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -33,18 +34,30 @@ TMS_TypeWM:problem_setb  0.334126   0.112829   2.961
 session2:problem_order  -0.006567   0.030853  -0.213
 
 Correlation of Fixed Effects:
-            (Intr) TMS_TyWM prblm_s sessn2 prblm_r cdng__ pain   physc_ dscmfr snstns TMS_TWM:
-TMS_TypeWM  -0.186                                                                            
-problem_stb -0.437  0.089                                                                     
-session2    -0.242 -0.025   -0.075                                                            
-problem_rdr -0.277  0.004   -0.014   0.560                                                    
-cdng_sctn_n -0.404  0.048   -0.009  -0.054 -0.136                                             
-pain        -0.051  0.246    0.002  -0.007 -0.058   0.031                                     
-physcl_symp -0.014 -0.307   -0.008   0.092  0.042  -0.009 -0.339                              
-discomfort   0.024 -0.219    0.028   0.029  0.007  -0.032 -0.267  0.303                       
-sensations  -0.058  0.147   -0.126   0.051 -0.033   0.027  0.250 -0.065 -0.374                
-TMS_TypWM:_  0.123 -0.601   -0.237   0.002  0.003  -0.012 -0.251  0.025 -0.240  0.004         
-sssn2:prbl_  0.193  0.028    0.008  -0.811 -0.708   0.073  0.021 -0.046  0.012  0.057 -0.016  
+            (Intr) TMS_TyWM prblm_s sessn2 prblm_r cdng__ pain   physc_ dscmfr
+TMS_TypeWM  -0.186                                                            
+problem_stb -0.437  0.089                                                     
+session2    -0.242 -0.025   -0.075                                            
+problem_rdr -0.277  0.004   -0.014   0.560                                    
+cdng_sctn_n -0.404  0.048   -0.009  -0.054 -0.136                             
+pain        -0.051  0.246    0.002  -0.007 -0.058   0.031                     
+physcl_symp -0.014 -0.307   -0.008   0.092  0.042  -0.009 -0.339              
+discomfort   0.024 -0.219    0.028   0.029  0.007  -0.032 -0.267  0.303       
+sensations  -0.058  0.147   -0.126   0.051 -0.033   0.027  0.250 -0.065 -0.374
+TMS_TypWM:_  0.123 -0.601   -0.237   0.002  0.003  -0.012 -0.251  0.025 -0.240
+sssn2:prbl_  0.193  0.028    0.008  -0.811 -0.708   0.073  0.021 -0.046  0.012
+            snstns TMS_TWM:
+TMS_TypeWM                 
+problem_stb                
+session2                   
+problem_rdr                
+cdng_sctn_n                
+pain                       
+physcl_symp                
+discomfort                 
+sensations                 
+TMS_TypWM:_  0.004         
+sssn2:prbl_  0.057 -0.016  
 optimizer (nloptwrap) convergence code: 0 (OK)
 boundary (singular) fit: see help('isSingular')
 
