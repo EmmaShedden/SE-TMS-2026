@@ -1,15 +1,16 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
-Formula: log(duration) ~ TMS_Type * session * problem_set + coding_section_no +  
+Formula: 
+log(duration) ~ TMS_Type * session * problem_set + coding_section_no +  
     problem_order + pain + physical_symptoms + discomfort + sensations +  
     (1 | participant_id) + (1 | problem_id) + (1 | participant_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-      186       237       -75       150       107 
+     AIC      BIC   logLik deviance df.resid 
+     186      237      -75      150      107 
 
 Scaled residuals: 
      Min       1Q   Median       3Q      Max 
--1.95648 -0.58350 -0.00406  0.55988  2.43698 
+-1.95648 -0.58350 -0.00406  0.55988  2.43697 
 
 Random effects:
  Groups                  Name        Variance Std.Dev.
@@ -17,7 +18,8 @@ Random effects:
  participant_id          (Intercept) 0.17153  0.4142  
  problem_id              (Intercept) 0.34312  0.5858  
  Residual                            0.09312  0.3051  
-Number of obs: 125, groups:  participant_id:TMS_Type, 51; participant_id, 26; problem_id, 10
+Number of obs: 125, groups:  
+participant_id:TMS_Type, 51; participant_id, 26; problem_id, 10
 
 Fixed effects:
                                  Estimate Std. Error t value
@@ -32,7 +34,7 @@ physical_symptoms                 0.21827    0.20345   1.073
 discomfort                       -0.05650    0.17555  -0.322
 sensations                       -0.18195    0.17694  -1.028
 TMS_TypeWM:session2               0.05029    0.38536   0.130
-TMS_TypeWM:problem_setb          -0.28710    0.36870  -0.779
+TMS_TypeWM:problem_setb          -0.28710    0.36869  -0.779
 session2:problem_setb            -0.46050    0.36693  -1.255
 TMS_TypeWM:session2:problem_setb  0.37712    0.27994   1.347
 optimizer (nloptwrap) convergence code: 0 (OK)
