@@ -1,0 +1,42 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * pain + (1 | participant_id) + (1 |  
+    shown_letter) + (1 | participant_id:shown_letter) + (1 |  
+    participant_id:TMS_Type) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1153.6   1212.9   -567.8   1135.6     5391 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.1682  0.1347  0.1455  0.1578  0.2053 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev. 
+ participant_id:shown_letter (Intercept) 1.665e-02 1.290e-01
+ participant_id:TMS_Type     (Intercept) 2.082e-02 1.443e-01
+ participant_id              (Intercept) 9.186e-02 3.031e-01
+ shown_letter:TMS_Type       (Intercept) 4.037e-02 2.009e-01
+ shown_letter                (Intercept) 3.159e-10 1.777e-05
+Number of obs: 5400, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                 Estimate Std. Error z value Pr(>|z|)    
+(Intercept)       3.83641    0.18715  20.500   <2e-16 ***
+TMS_TypeWM       -0.02099    0.22750  -0.092    0.926    
+pain             18.38056   20.24030   0.908    0.364    
+TMS_TypeWM:pain -17.90180   20.24059  -0.884    0.376    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM pain  
+TMS_TypeWM  -0.570                
+pain         0.000 -0.002         
+TMS_TypWM:p  0.000 -0.004   -1.000
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

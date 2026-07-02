@@ -1,0 +1,47 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * pain + session + problem_set +  
+    problem_order + (1 | participant_id) + (1 | shown_letter) +  
+    (1 | participant_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1154.6   1220.5   -567.3   1134.6     5390 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.1099  0.1349  0.1461  0.1600  0.2050 
+
+Random effects:
+ Groups                  Name        Variance Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.01409  0.1187  
+ participant_id          (Intercept) 0.07811  0.2795  
+ shown_letter            (Intercept) 0.01810  0.1345  
+Number of obs: 5400, groups:  
+participant_id:TMS_Type, 54; participant_id, 27; shown_letter, 6
+
+Fixed effects:
+                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)      3.820e+00  3.758e-01  10.165   <2e-16 ***
+TMS_TypeWM      -2.926e-02  1.960e-01  -0.149    0.881    
+pain             1.555e+01  1.521e+03   0.010    0.992    
+session         -7.130e-02  1.917e-01  -0.372    0.710    
+problem_setb     2.354e-01  2.011e-01   1.170    0.242    
+problem_order    9.007e-05  3.250e-03   0.028    0.978    
+TMS_TypeWM:pain -1.523e+01  1.521e+03  -0.010    0.992    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM pain   sessin prblm_s prblm_r
+TMS_TypeWM  -0.262                                       
+pain         0.000  0.000                                
+session     -0.770  0.020    0.000                       
+problem_stb -0.184 -0.018    0.000 -0.032                
+problem_rdr -0.436  0.001    0.000  0.000  0.000         
+TMS_TypWM:p  0.000  0.000   -1.000  0.000  0.000   0.000 
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+unable to evaluate scaled gradient
+Model failed to converge: degenerate  Hessian with 1 negative eigenvalues
+

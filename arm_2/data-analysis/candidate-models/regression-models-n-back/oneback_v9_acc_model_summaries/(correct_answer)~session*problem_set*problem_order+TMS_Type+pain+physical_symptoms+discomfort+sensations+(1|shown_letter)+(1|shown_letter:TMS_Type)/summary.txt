@@ -1,0 +1,41 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ session * problem_set * problem_order + TMS_Type +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    shown_letter) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1167.6   1266.5   -568.8   1137.6     5385 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.7660  0.1375  0.1484  0.1593  0.1964 
+
+Random effects:
+ Groups                Name        Variance  Std.Dev. 
+ shown_letter:TMS_Type (Intercept) 3.720e-02 1.929e-01
+ shown_letter          (Intercept) 1.671e-09 4.088e-05
+Number of obs: 5400, groups:  shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                                    Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                         4.134135   0.806246   5.128 2.93e-07 ***
+session                            -0.280249   0.498642  -0.562    0.574    
+problem_setb                       -0.673745   1.205035  -0.559    0.576    
+problem_order                      -0.002913   0.013428  -0.217    0.828    
+TMS_TypeWM                         -0.001398   0.244100  -0.006    0.995    
+pain                                0.623327   0.498099   1.251    0.211    
+physical_symptoms                  -0.299416   0.382577  -0.783    0.434    
+discomfort                         -0.075531   0.391966  -0.193    0.847    
+sensations                          0.035853   0.362974   0.099    0.921    
+session:problem_setb                0.565675   0.758645   0.746    0.456    
+session:problem_order               0.001806   0.008457   0.214    0.831    
+problem_setb:problem_order          0.013940   0.021017   0.663    0.507    
+session:problem_setb:problem_order -0.008620   0.013075  -0.659    0.510    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

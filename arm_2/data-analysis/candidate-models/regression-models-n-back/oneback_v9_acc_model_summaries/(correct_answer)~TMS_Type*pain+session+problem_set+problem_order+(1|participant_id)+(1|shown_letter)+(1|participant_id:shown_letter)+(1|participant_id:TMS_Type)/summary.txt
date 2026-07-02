@@ -1,0 +1,48 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * pain + session + problem_set +  
+    problem_order + (1 | participant_id) + (1 | shown_letter) +  
+    (1 | participant_id:shown_letter) + (1 | participant_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1156.6   1229.1   -567.3   1134.6     5389 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.1096  0.1349  0.1461  0.1600  0.2050 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev. 
+ participant_id:shown_letter (Intercept) 6.778e-07 0.0008233
+ participant_id:TMS_Type     (Intercept) 1.410e-02 0.1187435
+ participant_id              (Intercept) 7.811e-02 0.2794742
+ shown_letter                (Intercept) 1.810e-02 0.1345327
+Number of obs: 5400, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter, 6
+
+Fixed effects:
+                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)      3.820e+00  3.758e-01  10.165   <2e-16 ***
+TMS_TypeWM      -2.926e-02  1.943e-01  -0.151    0.880    
+pain             1.561e+01  8.654e+01   0.180    0.857    
+session         -7.128e-02  1.888e-01  -0.377    0.706    
+problem_setb     2.354e-01  2.060e-01   1.143    0.253    
+problem_order    9.068e-05  3.195e-03   0.028    0.977    
+TMS_TypeWM:pain -1.529e+01  8.655e+01  -0.177    0.860    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM pain   sessin prblm_s prblm_r
+TMS_TypeWM  -0.264                                       
+pain         0.002 -0.001                                
+session     -0.762  0.019   -0.002                       
+problem_stb -0.194  0.016    0.000 -0.034                
+problem_rdr -0.428  0.000   -0.001  0.000 -0.001         
+TMS_TypWM:p -0.001  0.000   -1.000  0.001 -0.002   0.001 
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+unable to evaluate scaled gradient
+Model failed to converge: degenerate  Hessian with 1 negative eigenvalues
+

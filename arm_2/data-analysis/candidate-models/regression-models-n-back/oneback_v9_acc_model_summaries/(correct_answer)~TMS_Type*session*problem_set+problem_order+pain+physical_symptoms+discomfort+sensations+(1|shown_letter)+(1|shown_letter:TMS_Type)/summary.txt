@@ -1,0 +1,43 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * session * problem_set + problem_order +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    shown_letter) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1153.6   1252.5   -561.8   1123.6     5385 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-11.1635   0.1258   0.1416   0.1684   0.2260 
+
+Random effects:
+ Groups                Name        Variance  Std.Dev.
+ shown_letter:TMS_Type (Intercept) 3.512e-02 0.187403
+ shown_letter          (Intercept) 1.770e-08 0.000133
+Number of obs: 5400, groups:  shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                      2.720e+00  5.313e-01   5.119 3.07e-07 ***
+TMS_TypeWM                       3.404e+00  1.011e+00   3.366 0.000762 ***
+session                          5.927e-01  3.421e-01   1.732 0.083191 .  
+problem_setb                     1.238e+00  9.274e-01   1.335 0.181813    
+problem_order                    9.688e-05  3.215e-03   0.030 0.975959    
+pain                             1.135e+00  5.299e-01   2.142 0.032174 *  
+physical_symptoms               -8.585e-01  4.409e-01  -1.947 0.051513 .  
+discomfort                      -4.111e-01  4.521e-01  -0.909 0.363156    
+sensations                       3.421e-01  4.030e-01   0.849 0.396009    
+TMS_TypeWM:session              -1.988e+00  5.868e-01  -3.388 0.000703 ***
+TMS_TypeWM:problem_setb         -3.072e+00  1.324e+00  -2.321 0.020289 *  
+session:problem_setb            -5.454e-01  5.773e-01  -0.945 0.344720    
+TMS_TypeWM:session:problem_setb  1.666e+00  8.175e-01   2.037 0.041610 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.0032743 (tol = 0.002, component 1)
+Model is nearly unidentifiable: large eigenvalue ratio
+ - Rescale variables?
+

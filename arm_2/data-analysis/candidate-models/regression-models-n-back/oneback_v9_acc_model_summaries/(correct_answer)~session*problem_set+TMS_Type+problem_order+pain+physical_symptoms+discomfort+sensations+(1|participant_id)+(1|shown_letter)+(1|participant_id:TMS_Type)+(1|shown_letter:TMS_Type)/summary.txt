@@ -1,0 +1,54 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ session * problem_set + TMS_Type + problem_order +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    participant_id) + (1 | shown_letter) + (1 | participant_id:TMS_Type) +  
+    (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1164.0   1256.3   -568.0   1136.0     5386 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.6820  0.1302  0.1449  0.1615  0.2216 
+
+Random effects:
+ Groups                  Name        Variance  Std.Dev. 
+ participant_id:TMS_Type (Intercept) 0.000e+00 0.0000000
+ participant_id          (Intercept) 1.148e-01 0.3388646
+ shown_letter:TMS_Type   (Intercept) 4.016e-02 0.2004078
+ shown_letter            (Intercept) 7.602e-07 0.0008719
+Number of obs: 5400, groups:  
+participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                       Estimate Std. Error z value Pr(>|z|)    
+(Intercept)           4.0889953  0.4930080   8.294   <2e-16 ***
+session              -0.2110070  0.2837620  -0.744    0.457    
+problem_setb         -0.0391682  0.7238328  -0.054    0.957    
+TMS_TypeWM            0.0022684  0.2531878   0.009    0.993    
+problem_order         0.0001216  0.0031848   0.038    0.970    
+pain                  0.7583752  0.5619512   1.350    0.177    
+physical_symptoms    -0.4195296  0.4355274  -0.963    0.335    
+discomfort           -0.0617118  0.4338065  -0.142    0.887    
+sensations           -0.0187817  0.4087834  -0.046    0.963    
+session:problem_setb  0.1447437  0.4599176   0.315    0.753    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) sessin prblm_s TMS_TW prblm_r pain   physc_ dscmfr snstns
+session     -0.858                                                          
+problem_stb -0.618  0.684                                                   
+TMS_TypeWM  -0.077 -0.152 -0.108                                            
+problem_rdr -0.325  0.000  0.000   0.000                                    
+pain         0.008 -0.007  0.012   0.068  0.002                             
+physcl_symp -0.251  0.277  0.103  -0.357  0.001  -0.213                     
+discomfort  -0.039  0.127  0.059  -0.419  0.000  -0.337  0.282              
+sensations  -0.102  0.043 -0.097   0.160  0.000   0.222 -0.011 -0.441       
+sssn:prblm_  0.612 -0.729 -0.958   0.118  0.000  -0.059 -0.114 -0.100  0.036
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

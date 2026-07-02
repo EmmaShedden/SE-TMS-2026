@@ -1,0 +1,42 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * problem_set * problem_order + session +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    shown_letter)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1163.8   1256.1   -567.9   1135.8     5386 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.8164  0.1329  0.1501  0.1624  0.1953 
+
+Random effects:
+ Groups       Name        Variance Std.Dev.
+ shown_letter (Intercept) 0.01317  0.1148  
+Number of obs: 5400, groups:  shown_letter, 6
+
+Fixed effects:
+                                       Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                            3.980450   0.454360   8.761   <2e-16 ***
+TMS_TypeWM                            -0.189607   0.501686  -0.378    0.705    
+problem_setb                           0.265301   0.566007   0.469    0.639    
+problem_order                         -0.003575   0.005643  -0.633    0.526    
+session                               -0.136211   0.192787  -0.707    0.480    
+pain                                   0.752482   0.503693   1.494    0.135    
+physical_symptoms                     -0.277530   0.380215  -0.730    0.465    
+discomfort                             0.048507   0.404167   0.120    0.904    
+sensations                             0.050992   0.370273   0.138    0.890    
+TMS_TypeWM:problem_setb               -0.145004   0.773156  -0.188    0.851    
+TMS_TypeWM:problem_order               0.007754   0.008559   0.906    0.365    
+problem_setb:problem_order             0.004553   0.009640   0.472    0.637    
+TMS_TypeWM:problem_setb:problem_order -0.008603   0.013237  -0.650    0.516    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.00783827 (tol = 0.002, component 1)
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+

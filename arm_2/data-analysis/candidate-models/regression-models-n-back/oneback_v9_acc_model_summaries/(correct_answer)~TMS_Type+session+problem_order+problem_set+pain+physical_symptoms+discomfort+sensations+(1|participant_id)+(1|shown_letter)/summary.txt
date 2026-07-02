@@ -1,0 +1,45 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type + session + problem_order + problem_set +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    participant_id) + (1 | shown_letter)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1158.6   1231.1   -568.3   1136.6     5389 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.8393  0.1297  0.1458  0.1620  0.2115 
+
+Random effects:
+ Groups         Name        Variance Std.Dev.
+ participant_id (Intercept) 0.1159   0.3405  
+ shown_letter   (Intercept) 0.0186   0.1364  
+Number of obs: 5400, groups:  participant_id, 27; shown_letter, 6
+
+Fixed effects:
+                    Estimate Std. Error z value Pr(>|z|)    
+(Intercept)        3.991e+00  3.844e-01  10.382   <2e-16 ***
+TMS_TypeWM        -1.361e-02  2.228e-01  -0.061    0.951    
+session           -1.468e-01  1.947e-01  -0.754    0.451    
+problem_order      8.827e-05  3.190e-03   0.028    0.978    
+problem_setb       1.831e-01  2.070e-01   0.885    0.376    
+pain               7.595e-01  5.609e-01   1.354    0.176    
+physical_symptoms -3.990e-01  4.331e-01  -0.921    0.357    
+discomfort        -4.491e-02  4.324e-01  -0.104    0.917    
+sensations        -2.499e-02  4.107e-01  -0.061    0.951    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW sessin prblm_r prblm_s pain   physc_ dscmfr
+TMS_TypeWM  -0.142                                                   
+session     -0.767 -0.110                                            
+problem_rdr -0.418  0.000  0.000                                     
+problem_stb -0.125  0.022 -0.091  0.000                              
+pain         0.053  0.084 -0.071  0.002  -0.154                      
+physcl_symp -0.232 -0.392  0.284  0.001  -0.025  -0.223              
+discomfort   0.031 -0.465  0.077  0.000  -0.129  -0.341  0.272       
+sensations  -0.160  0.176  0.101  0.000  -0.218   0.225 -0.008 -0.444

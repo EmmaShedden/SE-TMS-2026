@@ -1,0 +1,40 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * session * problem_set + problem_order +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    participant_id)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1152.2   1244.5   -562.1   1124.2     5386 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-10.5754   0.1320   0.1427   0.1612   0.2074 
+
+Random effects:
+ Groups         Name        Variance Std.Dev.
+ participant_id (Intercept) 0        0       
+Number of obs: 5400, groups:  participant_id, 27
+
+Fixed effects:
+                                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                      2.708e+00  5.258e-01   5.150  2.6e-07 ***
+TMS_TypeWM                       3.401e+00  1.005e+00   3.385 0.000713 ***
+session                          5.900e-01  3.423e-01   1.724 0.084777 .  
+problem_setb                     1.224e+00  9.272e-01   1.320 0.186955    
+problem_order                    7.762e-05  3.217e-03   0.024 0.980751    
+pain                             1.133e+00  5.301e-01   2.138 0.032520 *  
+physical_symptoms               -8.505e-01  4.408e-01  -1.929 0.053680 .  
+discomfort                      -4.156e-01  4.518e-01  -0.920 0.357579    
+sensations                       3.524e-01  4.028e-01   0.875 0.381566    
+TMS_TypeWM:session              -1.988e+00  5.866e-01  -3.389 0.000701 ***
+TMS_TypeWM:problem_setb         -3.062e+00  1.323e+00  -2.314 0.020663 *  
+session:problem_setb            -5.333e-01  5.772e-01  -0.924 0.355534    
+TMS_TypeWM:session:problem_setb  1.657e+00  8.175e-01   2.027 0.042614 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

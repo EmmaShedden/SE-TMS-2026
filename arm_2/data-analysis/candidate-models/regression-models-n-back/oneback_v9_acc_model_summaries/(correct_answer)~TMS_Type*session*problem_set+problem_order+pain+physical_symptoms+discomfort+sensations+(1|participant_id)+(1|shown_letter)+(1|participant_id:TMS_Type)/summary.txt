@@ -1,0 +1,43 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * session * problem_set + problem_order +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    participant_id) + (1 | shown_letter) + (1 | participant_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1156.0   1261.5   -562.0   1124.0     5384 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-10.9967   0.1296   0.1406   0.1640   0.2157 
+
+Random effects:
+ Groups                  Name        Variance  Std.Dev. 
+ participant_id:TMS_Type (Intercept) 0.000e+00 0.000e+00
+ participant_id          (Intercept) 1.762e-09 4.197e-05
+ shown_letter            (Intercept) 1.316e-02 1.147e-01
+Number of obs: 5400, groups:  
+participant_id:TMS_Type, 54; participant_id, 27; shown_letter, 6
+
+Fixed effects:
+                                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                      2.713e+00  5.281e-01   5.136  2.8e-07 ***
+TMS_TypeWM                       3.399e+00  1.005e+00   3.382 0.000719 ***
+session                          5.918e-01  3.423e-01   1.729 0.083889 .  
+problem_setb                     1.234e+00  9.279e-01   1.329 0.183698    
+problem_order                    8.321e-05  3.218e-03   0.026 0.979371    
+pain                             1.130e+00  5.299e-01   2.132 0.032970 *  
+physical_symptoms               -8.497e-01  4.407e-01  -1.928 0.053860 .  
+discomfort                      -4.117e-01  4.522e-01  -0.911 0.362550    
+sensations                       3.452e-01  4.034e-01   0.856 0.392112    
+TMS_TypeWM:session              -1.988e+00  5.867e-01  -3.388 0.000703 ***
+TMS_TypeWM:problem_setb         -3.066e+00  1.324e+00  -2.316 0.020572 *  
+session:problem_setb            -5.393e-01  5.775e-01  -0.934 0.350442    
+TMS_TypeWM:session:problem_setb  1.660e+00  8.177e-01   2.031 0.042288 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

@@ -1,0 +1,47 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * sensations + session + problem_set +  
+    problem_order + (1 | participant_id) + (1 | shown_letter) +  
+    (1 | participant_id:shown_letter) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1160.6   1233.2   -569.3   1138.6     5389 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.2499  0.1325  0.1442  0.1595  0.2080 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev. 
+ participant_id:shown_letter (Intercept) 1.519e-06 1.233e-03
+ participant_id              (Intercept) 8.861e-02 2.977e-01
+ shown_letter:TMS_Type       (Intercept) 3.754e-02 1.938e-01
+ shown_letter                (Intercept) 2.091e-09 4.573e-05
+Number of obs: 5400, groups:  
+participant_id:shown_letter, 162; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                        Estimate Std. Error z value Pr(>|z|)    
+(Intercept)            3.8481853  0.3856428   9.979   <2e-16 ***
+TMS_TypeWM             0.0073841  0.2271886   0.033    0.974    
+sensations             0.1571198  0.5198628   0.302    0.762    
+session               -0.0740374  0.1922030  -0.385    0.700    
+problem_setb           0.2518249  0.2009692   1.253    0.210    
+problem_order          0.0001064  0.0031903   0.033    0.973    
+TMS_TypeWM:sensations -0.4242771  0.6750732  -0.628    0.530    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM snstns sessin prblm_s prblm_r
+TMS_TypeWM  -0.323                                       
+sensations  -0.281  0.203                                
+session     -0.763  0.061    0.248                       
+problem_stb -0.122 -0.065   -0.154 -0.081                
+problem_rdr -0.416  0.000   -0.002 -0.001 -0.001         
+TMS_TypWM:s  0.279 -0.290   -0.728 -0.246 -0.066   0.002 
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

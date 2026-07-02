@@ -1,0 +1,46 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * sensations + session + problem_set +  
+    problem_order + (1 | participant_id) + (1 | shown_letter) +  
+    (1 | participant_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1158.9   1224.8   -569.4   1138.9     5390 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.1437  0.1329  0.1441  0.1585  0.2035 
+
+Random effects:
+ Groups                  Name        Variance Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.04653  0.2157  
+ participant_id          (Intercept) 0.06599  0.2569  
+ shown_letter            (Intercept) 0.01776  0.1333  
+Number of obs: 5400, groups:  
+participant_id:TMS_Type, 54; participant_id, 27; shown_letter, 6
+
+Fixed effects:
+                        Estimate Std. Error z value Pr(>|z|)    
+(Intercept)            3.863e+00  3.995e-01   9.669   <2e-16 ***
+TMS_TypeWM            -1.048e-03  2.073e-01  -0.005    0.996    
+sensations             1.531e-01  5.319e-01   0.288    0.773    
+session               -8.117e-02  2.027e-01  -0.400    0.689    
+problem_setb           2.579e-01  2.107e-01   1.224    0.221    
+problem_order          8.538e-05  3.189e-03   0.027    0.979    
+TMS_TypeWM:sensations -3.866e-01  7.020e-01  -0.551    0.582    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM snstns sessin prblm_s prblm_r
+TMS_TypeWM  -0.304                                       
+sensations  -0.286  0.234                                
+session     -0.785  0.077    0.246                       
+problem_stb -0.123 -0.073   -0.147 -0.082                
+problem_rdr -0.402  0.000   -0.001  0.000  0.000         
+TMS_TypWM:s  0.297 -0.333   -0.727 -0.252 -0.059   0.001 
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.00301095 (tol = 0.002, component 1)
+

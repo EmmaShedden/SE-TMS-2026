@@ -1,0 +1,42 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * session * problem_set + problem_order +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    shown_letter)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1152.0   1244.3   -562.0   1124.0     5386 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-10.9949   0.1296   0.1406   0.1640   0.2156 
+
+Random effects:
+ Groups       Name        Variance Std.Dev.
+ shown_letter (Intercept) 0.01314  0.1146  
+Number of obs: 5400, groups:  shown_letter, 6
+
+Fixed effects:
+                                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                      2.713e+00  5.279e-01   5.140 2.75e-07 ***
+TMS_TypeWM                       3.398e+00  1.004e+00   3.383 0.000716 ***
+session                          5.912e-01  3.422e-01   1.728 0.084040 .  
+problem_setb                     1.231e+00  9.273e-01   1.328 0.184260    
+problem_order                    7.903e-05  3.218e-03   0.025 0.980408    
+pain                             1.130e+00  5.299e-01   2.133 0.032935 *  
+physical_symptoms               -8.496e-01  4.407e-01  -1.928 0.053851 .  
+discomfort                      -4.119e-01  4.521e-01  -0.911 0.362297    
+sensations                       3.456e-01  4.034e-01   0.857 0.391602    
+TMS_TypeWM:session              -1.987e+00  5.863e-01  -3.389 0.000701 ***
+TMS_TypeWM:problem_setb         -3.062e+00  1.323e+00  -2.315 0.020629 *  
+session:problem_setb            -5.377e-01  5.772e-01  -0.932 0.351560    
+TMS_TypeWM:session:problem_setb  1.658e+00  8.171e-01   2.029 0.042448 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.00730709 (tol = 0.002, component 1)
+Model is nearly unidentifiable: large eigenvalue ratio
+ - Rescale variables?
+

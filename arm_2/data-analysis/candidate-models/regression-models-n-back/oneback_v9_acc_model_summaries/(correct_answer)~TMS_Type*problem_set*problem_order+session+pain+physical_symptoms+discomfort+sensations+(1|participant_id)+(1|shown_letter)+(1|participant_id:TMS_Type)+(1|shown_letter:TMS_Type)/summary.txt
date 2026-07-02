@@ -1,0 +1,42 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * problem_set * problem_order + session +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    participant_id) + (1 | shown_letter) + (1 | participant_id:TMS_Type) +  
+    (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1167.8   1279.9   -566.9   1133.8     5383 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-10.0702   0.1282   0.1427   0.1627   0.2237 
+
+Random effects:
+ Groups                  Name        Variance  Std.Dev. 
+ participant_id:TMS_Type (Intercept) 1.424e-08 0.0001193
+ participant_id          (Intercept) 9.526e-02 0.3086421
+ shown_letter:TMS_Type   (Intercept) 3.968e-02 0.1991904
+ shown_letter            (Intercept) 9.564e-08 0.0003093
+Number of obs: 5400, groups:  
+participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                                       Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                            4.081544   0.467292   8.734   <2e-16 ***
+TMS_TypeWM                            -0.180110   0.524558  -0.343    0.731    
+problem_setb                           0.218628   0.576077   0.380    0.704    
+problem_order                         -0.003609   0.005603  -0.644    0.520    
+session                               -0.154294   0.194170  -0.795    0.427    
+pain                                   0.855455   0.557143   1.535    0.125    
+physical_symptoms                     -0.377170   0.425706  -0.886    0.376    
+discomfort                             0.048057   0.436350   0.110    0.912    
+sensations                            -0.007605   0.410109  -0.019    0.985    
+TMS_TypeWM:problem_setb               -0.135826   0.804496  -0.169    0.866    
+TMS_TypeWM:problem_order               0.007863   0.008494   0.926    0.355    
+problem_setb:problem_order             0.004674   0.009569   0.488    0.625    
+TMS_TypeWM:problem_setb:problem_order -0.008766   0.013135  -0.667    0.505    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1

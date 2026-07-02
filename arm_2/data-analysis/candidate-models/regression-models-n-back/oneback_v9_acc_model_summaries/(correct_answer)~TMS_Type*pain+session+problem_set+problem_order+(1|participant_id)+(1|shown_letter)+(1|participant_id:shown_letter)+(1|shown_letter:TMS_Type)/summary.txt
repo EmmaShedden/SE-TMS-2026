@@ -1,0 +1,48 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * pain + session + problem_set +  
+    problem_order + (1 | participant_id) + (1 | shown_letter) +  
+    (1 | participant_id:shown_letter) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1156.2   1228.7   -567.1   1134.2     5389 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.1025  0.1335  0.1457  0.1598  0.2097 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev. 
+ participant_id:shown_letter (Intercept) 1.581e-02 0.1257227
+ participant_id              (Intercept) 8.316e-02 0.2883751
+ shown_letter:TMS_Type       (Intercept) 3.784e-02 0.1945271
+ shown_letter                (Intercept) 1.569e-07 0.0003961
+Number of obs: 5400, groups:  
+participant_id:shown_letter, 162; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)      3.828e+00  3.769e-01  10.155   <2e-16 ***
+TMS_TypeWM      -2.944e-02  2.239e-01  -0.131    0.895    
+pain             1.553e+01  1.511e+03   0.010    0.992    
+session         -6.952e-02  1.893e-01  -0.367    0.713    
+problem_setb     2.279e-01  1.989e-01   1.146    0.252    
+problem_order    1.186e-04  3.257e-03   0.036    0.971    
+TMS_TypeWM:pain -1.518e+01  1.511e+03  -0.010    0.992    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM pain   sessin prblm_s prblm_r
+TMS_TypeWM  -0.296                                       
+pain         0.000  0.000                                
+session     -0.758  0.015    0.000                       
+problem_stb -0.182 -0.016    0.000 -0.030                
+problem_rdr -0.435  0.000    0.000  0.000 -0.001         
+TMS_TypWM:p  0.000  0.000   -1.000  0.000  0.000   0.000 
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+unable to evaluate scaled gradient
+Model failed to converge: degenerate  Hessian with 1 negative eigenvalues
+

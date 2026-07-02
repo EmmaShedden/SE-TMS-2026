@@ -1,0 +1,40 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ session * sensations + (1 | participant_id) +  
+    (1 | shown_letter) + (1 | participant_id:shown_letter)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1152.3   1198.4   -569.1   1138.3     5393 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.6093  0.1358  0.1475  0.1575  0.2089 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev. 
+ participant_id:shown_letter (Intercept) 5.697e-07 0.0007548
+ participant_id              (Intercept) 8.908e-02 0.2984623
+ shown_letter                (Intercept) 1.738e-02 0.1318364
+Number of obs: 5400, groups:  
+participant_id:shown_letter, 162; participant_id, 27; shown_letter, 6
+
+Fixed effects:
+                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)         3.80141    0.32722  11.617   <2e-16 ***
+session             0.02319    0.19586   0.118    0.906    
+sensations          1.62055    1.07040   1.514    0.130    
+session:sensations -1.06892    0.65846  -1.623    0.105    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) sessin snstns
+session     -0.911              
+sensations  -0.317  0.309       
+sssn:snstns  0.297 -0.329 -0.947
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+unable to evaluate scaled gradient
+Model failed to converge: degenerate  Hessian with 1 negative eigenvalues
+

@@ -1,0 +1,41 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * session * problem_set + problem_order +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    participant_id) + (1 | participant_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1154.2   1253.1   -562.1   1124.2     5385 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-10.5754   0.1320   0.1427   0.1612   0.2074 
+
+Random effects:
+ Groups                  Name        Variance Std.Dev.
+ participant_id:TMS_Type (Intercept) 4e-14    2e-07   
+ participant_id          (Intercept) 0e+00    0e+00   
+Number of obs: 5400, groups:  participant_id:TMS_Type, 54; participant_id, 27
+
+Fixed effects:
+                                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                      2.708e+00  5.258e-01   5.150 2.61e-07 ***
+TMS_TypeWM                       3.401e+00  1.005e+00   3.384 0.000714 ***
+session                          5.900e-01  3.423e-01   1.724 0.084794 .  
+problem_setb                     1.224e+00  9.273e-01   1.320 0.186996    
+problem_order                    7.762e-05  3.217e-03   0.024 0.980751    
+pain                             1.133e+00  5.301e-01   2.138 0.032520 *  
+physical_symptoms               -8.505e-01  4.408e-01  -1.929 0.053686 .  
+discomfort                      -4.156e-01  4.518e-01  -0.920 0.357587    
+sensations                       3.524e-01  4.028e-01   0.875 0.381578    
+TMS_TypeWM:session              -1.988e+00  5.867e-01  -3.389 0.000702 ***
+TMS_TypeWM:problem_setb         -3.062e+00  1.323e+00  -2.314 0.020681 *  
+session:problem_setb            -5.333e-01  5.772e-01  -0.924 0.355578    
+TMS_TypeWM:session:problem_setb  1.657e+00  8.176e-01   2.027 0.042641 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

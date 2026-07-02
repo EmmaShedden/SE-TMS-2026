@@ -1,0 +1,41 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * problem_set + (1 | participant_id) +  
+    (1 | shown_letter) + (1 | participant_id:TMS_Type) + (1 |  
+    shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1154.4   1207.1   -569.2   1138.4     5392 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.0272  0.1331  0.1441  0.1569  0.2054 
+
+Random effects:
+ Groups                  Name        Variance  Std.Dev.
+ participant_id:TMS_Type (Intercept) 7.660e-02 0.276761
+ participant_id          (Intercept) 3.639e-02 0.190765
+ shown_letter:TMS_Type   (Intercept) 4.022e-02 0.200543
+ shown_letter            (Intercept) 5.680e-06 0.002383
+Number of obs: 5400, groups:  
+participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                        Estimate Std. Error z value Pr(>|z|)    
+(Intercept)               3.7016     0.2101  17.620   <2e-16 ***
+TMS_TypeWM                0.1230     0.2991   0.411    0.681    
+problem_setb              0.4282     0.3092   1.385    0.166    
+TMS_TypeWM:problem_setb  -0.3636     0.4337  -0.838    0.402    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM prblm_
+TMS_TypeWM  -0.641                
+problem_stb -0.543  0.394         
+TMS_TypWM:_  0.402 -0.625   -0.740
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.00598815 (tol = 0.002, component 1)
+

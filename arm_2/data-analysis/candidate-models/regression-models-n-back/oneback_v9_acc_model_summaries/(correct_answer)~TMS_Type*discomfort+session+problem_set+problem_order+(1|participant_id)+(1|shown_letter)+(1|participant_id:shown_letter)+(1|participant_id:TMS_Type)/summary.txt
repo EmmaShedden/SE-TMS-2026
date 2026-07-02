@@ -1,0 +1,48 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * discomfort + session + problem_set +  
+    problem_order + (1 | participant_id) + (1 | shown_letter) +  
+    (1 | participant_id:shown_letter) + (1 | participant_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1159.0   1225.0   -569.5   1139.0     5390 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.0862  0.1338  0.1438  0.1575  0.2089 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev. 
+ participant_id:shown_letter (Intercept) 8.603e-08 0.0002933
+ participant_id:TMS_Type     (Intercept) 5.045e-02 0.2246091
+ participant_id              (Intercept) 6.701e-02 0.2588724
+ shown_letter                (Intercept) 1.827e-02 0.1351839
+Number of obs: 5400, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter, 6
+
+Fixed effects:
+                Estimate Std. Error z value Pr(>|z|)    
+(Intercept)    3.927e+00  3.815e-01  10.293   <2e-16 ***
+TMS_TypeWM    -7.468e-02  2.112e-01  -0.354    0.724    
+discomfort     1.630e-01  3.718e-01   0.438    0.661    
+session       -1.004e-01  1.965e-01  -0.511    0.609    
+problem_setb   2.119e-01  2.137e-01   0.992    0.321    
+problem_order  8.116e-05  3.188e-03   0.025    0.980    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW dscmfr sessin prblm_s
+TMS_TypeWM  -0.221                             
+discomfort   0.020 -0.375                      
+session     -0.764 -0.037  0.073               
+problem_stb -0.154  0.046 -0.327 -0.089        
+problem_rdr -0.421  0.001  0.000  0.000  0.000 
+fit warnings:
+fixed-effect model matrix is rank deficient so dropping 1 column / coefficient
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+unable to evaluate scaled gradient
+Model failed to converge: degenerate  Hessian with 1 negative eigenvalues
+

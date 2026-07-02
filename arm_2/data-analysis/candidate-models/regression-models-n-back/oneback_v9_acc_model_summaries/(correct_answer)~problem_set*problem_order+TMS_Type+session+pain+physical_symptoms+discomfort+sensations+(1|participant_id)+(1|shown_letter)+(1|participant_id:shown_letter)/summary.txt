@@ -1,0 +1,53 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ problem_set * problem_order + TMS_Type + session +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    participant_id) + (1 | shown_letter) + (1 | participant_id:shown_letter)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1162.5   1248.3   -568.3   1136.5     5387 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.7506  0.1298  0.1458  0.1621  0.2120 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev. 
+ participant_id:shown_letter (Intercept) 7.011e-07 0.0008373
+ participant_id              (Intercept) 1.159e-01 0.3404644
+ shown_letter                (Intercept) 1.853e-02 0.1361264
+Number of obs: 5400, groups:  
+participant_id:shown_letter, 162; participant_id, 27; shown_letter, 6
+
+Fixed effects:
+                             Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                 4.0050634  0.4084428   9.806   <2e-16 ***
+problem_setb                0.1502267  0.3854944   0.390    0.697    
+problem_order              -0.0001873  0.0041972  -0.045    0.964    
+TMS_TypeWM                 -0.0136190  0.2228029  -0.061    0.951    
+session                    -0.1467764  0.1946682  -0.754    0.451    
+pain                        0.7597539  0.5609506   1.354    0.176    
+physical_symptoms          -0.3990177  0.4331508  -0.921    0.357    
+discomfort                 -0.0451038  0.4324594  -0.104    0.917    
+sensations                 -0.0248729  0.4107733  -0.061    0.952    
+problem_setb:problem_order  0.0006525  0.0064592   0.101    0.920    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) prblm_s prblm_r TMS_TW sessin pain   physc_ dscmfr snstns
+problem_stb -0.348                                                          
+problem_rdr -0.519  0.552                                                   
+TMS_TypeWM  -0.134  0.012   0.000                                           
+session     -0.721 -0.051  -0.001  -0.110                                   
+pain         0.050 -0.083   0.001   0.084 -0.071                            
+physcl_symp -0.218 -0.015  -0.001  -0.392  0.284 -0.223                     
+discomfort   0.029 -0.069   0.000  -0.465  0.077 -0.341  0.272              
+sensations  -0.150 -0.119  -0.001   0.176  0.101  0.225 -0.008 -0.444       
+prblm_stb:_  0.336 -0.844  -0.650   0.000  0.002  0.000  0.002 -0.001  0.002
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+unable to evaluate scaled gradient
+Model failed to converge: degenerate  Hessian with 1 negative eigenvalues
+

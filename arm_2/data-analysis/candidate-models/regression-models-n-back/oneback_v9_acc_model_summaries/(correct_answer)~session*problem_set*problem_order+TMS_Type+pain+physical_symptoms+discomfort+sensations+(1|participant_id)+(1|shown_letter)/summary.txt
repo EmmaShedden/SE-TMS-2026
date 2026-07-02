@@ -1,0 +1,45 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ session * problem_set * problem_order + TMS_Type +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    participant_id) + (1 | shown_letter)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1165.9   1264.8   -568.0   1135.9     5385 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.1689  0.1294  0.1464  0.1622  0.2170 
+
+Random effects:
+ Groups         Name        Variance Std.Dev.
+ participant_id (Intercept) 0.11558  0.3400  
+ shown_letter   (Intercept) 0.01888  0.1374  
+Number of obs: 5400, groups:  participant_id, 27; shown_letter, 6
+
+Fixed effects:
+                                    Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                         4.244573   0.824670   5.147 2.65e-07 ***
+session                            -0.307982   0.512133  -0.601    0.548    
+problem_setb                       -0.747335   1.259930  -0.593    0.553    
+problem_order                      -0.002981   0.013341  -0.223    0.823    
+TMS_TypeWM                         -0.004088   0.224899  -0.018    0.985    
+pain                                0.747435   0.561872   1.330    0.183    
+physical_symptoms                  -0.413801   0.435770  -0.950    0.342    
+discomfort                         -0.059178   0.434418  -0.136    0.892    
+sensations                         -0.019529   0.409778  -0.048    0.962    
+session:problem_setb                0.590263   0.797447   0.740    0.459    
+session:problem_order               0.001853   0.008402   0.221    0.825    
+problem_setb:problem_order          0.014149   0.020863   0.678    0.498    
+session:problem_setb:problem_order -0.008791   0.012982  -0.677    0.498    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.00925267 (tol = 0.002, component 1)
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+Model is nearly unidentifiable: large eigenvalue ratio
+ - Rescale variables?
+

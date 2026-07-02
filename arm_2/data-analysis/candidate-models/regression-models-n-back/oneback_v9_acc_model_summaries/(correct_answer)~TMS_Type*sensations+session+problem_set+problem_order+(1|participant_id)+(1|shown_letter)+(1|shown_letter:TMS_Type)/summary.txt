@@ -1,0 +1,46 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * sensations + session + problem_set +  
+    problem_order + (1 | participant_id) + (1 | shown_letter) +  
+    (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1158.6   1224.6   -569.3   1138.6     5390 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.2503  0.1325  0.1442  0.1595  0.2080 
+
+Random effects:
+ Groups                Name        Variance  Std.Dev.
+ participant_id        (Intercept) 8.863e-02 0.297714
+ shown_letter:TMS_Type (Intercept) 3.754e-02 0.193761
+ shown_letter          (Intercept) 2.801e-06 0.001674
+Number of obs: 5400, groups:  
+participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                        Estimate Std. Error z value Pr(>|z|)    
+(Intercept)            3.8481347  0.3856310   9.979   <2e-16 ***
+TMS_TypeWM             0.0073689  0.2271843   0.032    0.974    
+sensations             0.1572397  0.5198457   0.302    0.762    
+session               -0.0740049  0.1921975  -0.385    0.700    
+problem_setb           0.2518234  0.2009683   1.253    0.210    
+problem_order          0.0001067  0.0031903   0.033    0.973    
+TMS_TypeWM:sensations -0.4243531  0.6750456  -0.629    0.530    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM snstns sessin prblm_s prblm_r
+TMS_TypeWM  -0.323                                       
+sensations  -0.281  0.203                                
+session     -0.763  0.061    0.248                       
+problem_stb -0.122 -0.065   -0.155 -0.081                
+problem_rdr -0.416  0.000   -0.002 -0.001 -0.001         
+TMS_TypWM:s  0.279 -0.290   -0.728 -0.246 -0.066   0.002 
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.00306433 (tol = 0.002, component 1)
+

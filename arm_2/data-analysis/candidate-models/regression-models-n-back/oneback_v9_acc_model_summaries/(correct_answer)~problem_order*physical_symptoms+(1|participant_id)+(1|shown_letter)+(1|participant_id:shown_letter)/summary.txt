@@ -1,0 +1,41 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: 
+(correct_answer) ~ problem_order * physical_symptoms + (1 | participant_id) +  
+    (1 | shown_letter) + (1 | participant_id:shown_letter)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1154.6   1200.7   -570.3   1140.6     5393 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.2249  0.1358  0.1467  0.1574  0.2061 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev. 
+ participant_id:shown_letter (Intercept) 2.080e-08 0.0001442
+ participant_id              (Intercept) 1.112e-01 0.3333934
+ shown_letter                (Intercept) 1.770e-02 0.1330294
+Number of obs: 5400, groups:  
+participant_id:shown_letter, 162; participant_id, 27; shown_letter, 6
+
+Fixed effects:
+                                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                      3.8892509  0.2182433  17.821   <2e-16 ***
+problem_order                   -0.0003504  0.0033322  -0.105    0.916    
+physical_symptoms               -0.4881273  0.6593696  -0.740    0.459    
+problem_order:physical_symptoms  0.0051829  0.0116125   0.446    0.655    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) prblm_ physc_
+problem_rdr -0.774              
+physcl_symp -0.295  0.257       
+prblm_rdr:_  0.219 -0.287 -0.825
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+unable to evaluate scaled gradient
+Model failed to converge: degenerate  Hessian with 1 negative eigenvalues
+

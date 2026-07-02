@@ -1,0 +1,47 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * pain + session + problem_set +  
+    problem_order + (1 | participant_id) + (1 | shown_letter) +  
+    (1 | participant_id:shown_letter)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1154.6   1220.5   -567.3   1134.6     5390 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.1590  0.1347  0.1464  0.1598  0.2050 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev.
+ participant_id:shown_letter (Intercept) 1.058e-06 0.001029
+ participant_id              (Intercept) 8.631e-02 0.293782
+ shown_letter                (Intercept) 1.807e-02 0.134423
+Number of obs: 5400, groups:  
+participant_id:shown_letter, 162; participant_id, 27; shown_letter, 6
+
+Fixed effects:
+                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)      3.818e+00  3.715e-01  10.278   <2e-16 ***
+TMS_TypeWM      -3.132e-02  1.929e-01  -0.162    0.871    
+pain             1.577e+01  1.689e+03   0.009    0.993    
+session         -7.067e-02  1.887e-01  -0.375    0.708    
+problem_setb     2.309e-01  1.982e-01   1.165    0.244    
+problem_order    9.109e-05  3.248e-03   0.028    0.978    
+TMS_TypeWM:pain -1.543e+01  1.689e+03  -0.009    0.993    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM pain   sessin prblm_s prblm_r
+TMS_TypeWM  -0.259                                       
+pain         0.000  0.000                                
+session     -0.767  0.018    0.000                       
+problem_stb -0.184 -0.018    0.000 -0.031                
+problem_rdr -0.441  0.001    0.000  0.000  0.000         
+TMS_TypWM:p  0.000  0.000   -1.000  0.000  0.000   0.000 
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+unable to evaluate scaled gradient
+Model failed to converge: degenerate  Hessian with 2 negative eigenvalues
+

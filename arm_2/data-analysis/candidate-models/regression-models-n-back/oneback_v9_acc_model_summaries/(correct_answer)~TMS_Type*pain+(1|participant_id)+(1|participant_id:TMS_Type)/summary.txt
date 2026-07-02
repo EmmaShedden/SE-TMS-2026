@@ -1,0 +1,38 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * pain + (1 | participant_id) + (1 |  
+    participant_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1148.4   1187.9   -568.2   1136.4     5394 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.2475  0.1414  0.1467  0.1575  0.1884 
+
+Random effects:
+ Groups                  Name        Variance  Std.Dev.
+ participant_id:TMS_Type (Intercept) 1.019e-06 0.001009
+ participant_id          (Intercept) 1.047e-01 0.323639
+Number of obs: 5400, groups:  participant_id:TMS_Type, 54; participant_id, 27
+
+Fixed effects:
+                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)        3.81042    0.14778  25.785   <2e-16 ***
+TMS_TypeWM        -0.02867    0.19275  -0.149    0.882    
+pain              15.92507 1874.79562   0.008    0.993    
+TMS_TypeWM:pain  -15.42926 1874.79567  -0.008    0.993    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM pain  
+TMS_TypeWM  -0.625                
+pain         0.000  0.000         
+TMS_TypWM:p  0.000  0.000   -1.000
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+unable to evaluate scaled gradient
+Model failed to converge: degenerate  Hessian with 2 negative eigenvalues
+

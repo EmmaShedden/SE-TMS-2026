@@ -1,0 +1,44 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * session * problem_order + problem_set +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    shown_letter)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1157.8   1250.2   -564.9   1129.8     5386 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-11.7784   0.1263   0.1444   0.1710   0.1963 
+
+Random effects:
+ Groups       Name        Variance Std.Dev.
+ shown_letter (Intercept) 0.01331  0.1153  
+Number of obs: 5400, groups:  shown_letter, 6
+
+Fixed effects:
+                                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                       2.848889   0.844514   3.373 0.000742 ***
+TMS_TypeWM                        1.906125   1.282448   1.486 0.137195    
+session                           0.623374   0.557830   1.117 0.263781    
+problem_order                     0.002878   0.014073   0.205 0.837942    
+problem_setb                      0.173147   0.203234   0.852 0.394238    
+pain                              1.086042   0.529362   2.052 0.040208 *  
+physical_symptoms                -0.679211   0.424563  -1.600 0.109645    
+discomfort                       -0.448836   0.423745  -1.059 0.289503    
+sensations                        0.450099   0.395313   1.139 0.254874    
+TMS_TypeWM:session               -1.329825   0.791424  -1.680 0.092900 .  
+TMS_TypeWM:problem_order          0.002015   0.020952   0.096 0.923384    
+session:problem_order            -0.003395   0.009228  -0.368 0.712956    
+TMS_TypeWM:session:problem_order  0.001687   0.013088   0.129 0.897448    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.00797454 (tol = 0.002, component 1)
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+Model is nearly unidentifiable: large eigenvalue ratio
+ - Rescale variables?
+

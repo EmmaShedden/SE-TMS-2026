@@ -1,0 +1,47 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * session * problem_order + problem_set +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    participant_id) + (1 | shown_letter) + (1 | participant_id:shown_letter) +  
+    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1165.2   1283.9   -564.6   1129.2     5382 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-11.2767   0.1245   0.1440   0.1675   0.2161 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev. 
+ participant_id:shown_letter (Intercept) 9.577e-06 0.0030947
+ participant_id:TMS_Type     (Intercept) 2.476e-06 0.0015736
+ participant_id              (Intercept) 2.894e-02 0.1701120
+ shown_letter:TMS_Type       (Intercept) 3.693e-02 0.1921611
+ shown_letter                (Intercept) 2.646e-08 0.0001627
+Number of obs: 5400, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                       2.902555   0.856546   3.389 0.000702 ***
+TMS_TypeWM                        1.866766   1.301855   1.434 0.151593    
+session                           0.610353   0.560686   1.089 0.276339    
+problem_order                     0.002724   0.014017   0.194 0.845898    
+problem_setb                      0.154388   0.207349   0.745 0.456526    
+pain                              1.111432   0.547876   2.029 0.042497 *  
+physical_symptoms                -0.693003   0.434932  -1.593 0.111080    
+discomfort                       -0.419007   0.439731  -0.953 0.340654    
+sensations                        0.415036   0.416830   0.996 0.319398    
+TMS_TypeWM:session               -1.309366   0.801039  -1.635 0.102136    
+TMS_TypeWM:problem_order          0.002270   0.020871   0.109 0.913378    
+session:problem_order            -0.003290   0.009194  -0.358 0.720446    
+TMS_TypeWM:session:problem_order  0.001545   0.013033   0.119 0.905649    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+unable to evaluate scaled gradient
+Model failed to converge: degenerate  Hessian with 1 negative eigenvalues
+

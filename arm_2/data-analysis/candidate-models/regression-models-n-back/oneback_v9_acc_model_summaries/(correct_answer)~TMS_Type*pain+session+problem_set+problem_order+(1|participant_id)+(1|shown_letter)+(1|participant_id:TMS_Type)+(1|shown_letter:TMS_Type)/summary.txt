@@ -1,0 +1,49 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * pain + session + problem_set +  
+    problem_order + (1 | participant_id) + (1 | shown_letter) +  
+    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1156.2   1228.7   -567.1   1134.2     5389 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.1334  0.1330  0.1458  0.1591  0.2119 
+
+Random effects:
+ Groups                  Name        Variance  Std.Dev.
+ participant_id:TMS_Type (Intercept) 2.596e-02 0.161137
+ participant_id          (Intercept) 7.013e-02 0.264813
+ shown_letter:TMS_Type   (Intercept) 3.934e-02 0.198352
+ shown_letter            (Intercept) 1.940e-06 0.001393
+Number of obs: 5400, groups:  
+participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)      3.826e+00  3.835e-01   9.977   <2e-16 ***
+TMS_TypeWM      -2.339e-02  2.280e-01  -0.103    0.918    
+pain             1.587e+01  1.322e+02   0.120    0.904    
+session         -7.089e-02  1.911e-01  -0.371    0.711    
+problem_setb     2.351e-01  2.082e-01   1.129    0.259    
+problem_order    1.166e-04  3.189e-03   0.037    0.971    
+TMS_TypeWM:pain -1.556e+01  1.322e+02  -0.118    0.906    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM pain   sessin prblm_s prblm_r
+TMS_TypeWM  -0.300                                       
+pain         0.003 -0.001                                
+session     -0.755  0.018   -0.002                       
+problem_stb -0.193  0.012    0.000 -0.033                
+problem_rdr -0.418  0.000   -0.001  0.000 -0.001         
+TMS_TypWM:p -0.002  0.000   -1.000  0.002 -0.002   0.001 
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.00282992 (tol = 0.002, component 1)
+Model is nearly unidentifiable: large eigenvalue ratio
+ - Rescale variables?
+

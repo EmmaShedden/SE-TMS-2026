@@ -1,0 +1,49 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * pain + session + problem_set +  
+    problem_order + (1 | participant_id) + (1 | shown_letter) +  
+    (1 | participant_id:shown_letter) + (1 | participant_id:TMS_Type) +  
+    (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1158.2   1237.3   -567.1   1134.2     5388 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.1335  0.1330  0.1458  0.1591  0.2119 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev. 
+ participant_id:shown_letter (Intercept) 2.558e-12 1.599e-06
+ participant_id:TMS_Type     (Intercept) 2.595e-02 1.611e-01
+ participant_id              (Intercept) 7.014e-02 2.648e-01
+ shown_letter:TMS_Type       (Intercept) 3.935e-02 1.984e-01
+ shown_letter                (Intercept) 1.213e-08 1.101e-04
+Number of obs: 5400, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)      3.826e+00  3.845e-01   9.951   <2e-16 ***
+TMS_TypeWM      -2.336e-02  2.296e-01  -0.102    0.919    
+pain             1.562e+01  1.586e+03   0.010    0.992    
+session         -7.086e-02  1.946e-01  -0.364    0.716    
+problem_setb     2.351e-01  2.038e-01   1.153    0.249    
+problem_order    1.168e-04  3.257e-03   0.036    0.971    
+TMS_TypeWM:pain -1.531e+01  1.586e+03  -0.010    0.992    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM pain   sessin prblm_s prblm_r
+TMS_TypeWM  -0.300                                       
+pain         0.000  0.000                                
+session     -0.764  0.018    0.000                       
+problem_stb -0.183 -0.016    0.000 -0.031                
+problem_rdr -0.427  0.000    0.000 -0.001 -0.001         
+TMS_TypWM:p  0.000  0.000   -1.000  0.000  0.000   0.000 
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

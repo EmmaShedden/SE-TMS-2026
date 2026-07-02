@@ -1,0 +1,44 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type + session + problem_order + problem_set +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    shown_letter)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1158.7   1224.7   -569.4   1138.7     5390 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.6203  0.1398  0.1494  0.1598  0.1851 
+
+Random effects:
+ Groups       Name        Variance Std.Dev.
+ shown_letter (Intercept) 0.01432  0.1197  
+Number of obs: 5400, groups:  shown_letter, 6
+
+Fixed effects:
+                    Estimate Std. Error z value Pr(>|z|)    
+(Intercept)        3.889e+00  3.750e-01  10.370   <2e-16 ***
+TMS_TypeWM        -1.409e-02  2.158e-01  -0.065    0.948    
+session           -1.310e-01  1.937e-01  -0.676    0.499    
+problem_order      7.882e-05  3.213e-03   0.025    0.980    
+problem_setb       2.274e-01  2.011e-01   1.131    0.258    
+pain               6.289e-01  4.965e-01   1.267    0.205    
+physical_symptoms -2.771e-01  3.798e-01  -0.730    0.466    
+discomfort        -6.398e-02  3.913e-01  -0.164    0.870    
+sensations         3.190e-02  3.638e-01   0.088    0.930    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW sessin prblm_r prblm_s pain   physc_ dscmfr
+TMS_TypeWM  -0.215                                                   
+session     -0.789 -0.031                                            
+problem_rdr -0.433  0.000  0.000                                     
+problem_stb -0.106  0.040 -0.109  0.000                              
+pain         0.009  0.077 -0.043  0.001  -0.109                      
+physcl_symp -0.178 -0.361  0.241  0.001  -0.042  -0.203              
+discomfort   0.023 -0.428  0.074 -0.001  -0.149  -0.296  0.267       
+sensations  -0.145  0.156  0.105  0.001  -0.192   0.213 -0.011 -0.439

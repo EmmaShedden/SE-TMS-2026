@@ -1,0 +1,42 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * sensations + (1 | participant_id) +  
+    (1 | shown_letter) + (1 | participant_id:shown_letter) +  
+    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1158.0   1217.3   -570.0   1140.0     5391 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.1514  0.1338  0.1441  0.1556  0.2032 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev. 
+ participant_id:shown_letter (Intercept) 7.791e-07 8.827e-04
+ participant_id:TMS_Type     (Intercept) 7.285e-02 2.699e-01
+ participant_id              (Intercept) 6.351e-02 2.520e-01
+ shown_letter:TMS_Type       (Intercept) 4.135e-02 2.034e-01
+ shown_letter                (Intercept) 1.673e-10 1.293e-05
+Number of obs: 5400, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                      Estimate Std. Error z value Pr(>|z|)    
+(Intercept)            3.85178    0.18578  20.733   <2e-16 ***
+TMS_TypeWM             0.02764    0.24192   0.114    0.909    
+sensations             0.29061    0.51840   0.561    0.575    
+TMS_TypeWM:sensations -0.38692    0.69232  -0.559    0.576    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM snstns
+TMS_TypeWM  -0.643                
+sensations  -0.261  0.190         
+TMS_TypWM:s  0.189 -0.289   -0.735
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

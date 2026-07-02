@@ -1,0 +1,45 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * session * problem_set + problem_order +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    participant_id) + (1 | shown_letter) + (1 | participant_id:shown_letter) +  
+    (1 | participant_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1158.0   1270.1   -562.0   1124.0     5383 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-10.9856   0.1294   0.1402   0.1639   0.2183 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev.
+ participant_id:shown_letter (Intercept) 1.113e-02 0.105505
+ participant_id:TMS_Type     (Intercept) 0.000e+00 0.000000
+ participant_id              (Intercept) 1.783e-06 0.001335
+ shown_letter                (Intercept) 1.295e-02 0.113800
+Number of obs: 5400, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter, 6
+
+Fixed effects:
+                                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                      2.719e+00  5.404e-01   5.032 4.85e-07 ***
+TMS_TypeWM                       3.400e+00  1.006e+00   3.379 0.000727 ***
+session                          5.913e-01  3.432e-01   1.723 0.084900 .  
+problem_setb                     1.231e+00  9.298e-01   1.324 0.185499    
+problem_order                    7.777e-05  3.218e-03   0.024 0.980720    
+pain                             1.131e+00  5.310e-01   2.130 0.033176 *  
+physical_symptoms               -8.503e-01  4.414e-01  -1.926 0.054053 .  
+discomfort                      -4.108e-01  4.532e-01  -0.906 0.364677    
+sensations                       3.426e-01  4.071e-01   0.841 0.400115    
+TMS_TypeWM:session              -1.989e+00  5.875e-01  -3.385 0.000712 ***
+TMS_TypeWM:problem_setb         -3.065e+00  1.324e+00  -2.316 0.020554 *  
+session:problem_setb            -5.379e-01  5.786e-01  -0.930 0.352475    
+TMS_TypeWM:session:problem_setb  1.660e+00  8.173e-01   2.032 0.042203 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

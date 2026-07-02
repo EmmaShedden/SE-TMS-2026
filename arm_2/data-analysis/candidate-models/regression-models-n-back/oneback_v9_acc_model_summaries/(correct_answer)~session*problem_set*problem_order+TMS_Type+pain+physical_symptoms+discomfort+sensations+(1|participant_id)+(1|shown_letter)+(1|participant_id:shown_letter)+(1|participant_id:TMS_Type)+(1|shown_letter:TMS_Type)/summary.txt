@@ -1,0 +1,46 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ session * problem_set * problem_order + TMS_Type +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    participant_id) + (1 | shown_letter) + (1 | participant_id:shown_letter) +  
+    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1171.5   1290.2   -567.7   1135.5     5382 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.7907  0.1290  0.1452  0.1614  0.2247 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev. 
+ participant_id:shown_letter (Intercept) 1.037e-05 3.221e-03
+ participant_id:TMS_Type     (Intercept) 4.556e-09 6.749e-05
+ participant_id              (Intercept) 1.149e-01 3.390e-01
+ shown_letter:TMS_Type       (Intercept) 4.004e-02 2.001e-01
+ shown_letter                (Intercept) 1.134e-05 3.367e-03
+Number of obs: 5400, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                                    Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                         4.243856   0.825699   5.140 2.75e-07 ***
+session                            -0.303519   0.511540  -0.593    0.553    
+problem_setb                       -0.732995   1.258938  -0.582    0.560    
+problem_order                      -0.002912   0.013322  -0.219    0.827    
+TMS_TypeWM                          0.002523   0.253145   0.010    0.992    
+pain                                0.758037   0.562006   1.349    0.177    
+physical_symptoms                  -0.421173   0.435593  -0.967    0.334    
+discomfort                         -0.062137   0.433949  -0.143    0.886    
+sensations                         -0.018875   0.408962  -0.046    0.963    
+session:problem_setb                0.576670   0.796650   0.724    0.469    
+session:problem_order               0.001817   0.008389   0.217    0.829    
+problem_setb:problem_order          0.013937   0.020844   0.669    0.504    
+session:problem_setb:problem_order -0.008623   0.012966  -0.665    0.506    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

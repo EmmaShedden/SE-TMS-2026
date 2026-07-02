@@ -1,0 +1,47 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: (correct_answer) ~ TMS_Type * sensations + session + problem_set +  
+    problem_order + (1 | participant_id) + (1 | shown_letter) +  
+    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1160.4   1233.0   -569.2   1138.4     5389 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.0772  0.1317  0.1430  0.1582  0.2106 
+
+Random effects:
+ Groups                  Name        Variance  Std.Dev. 
+ participant_id:TMS_Type (Intercept) 5.934e-02 0.2436028
+ participant_id          (Intercept) 5.697e-02 0.2386913
+ shown_letter:TMS_Type   (Intercept) 4.008e-02 0.2002010
+ shown_letter            (Intercept) 8.588e-07 0.0009267
+Number of obs: 5400, groups:  
+participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                        Estimate Std. Error z value Pr(>|z|)    
+(Intercept)            3.8691971  0.4071999   9.502   <2e-16 ***
+TMS_TypeWM             0.0034412  0.2399124   0.014    0.989    
+sensations             0.1561940  0.5328647   0.293    0.769    
+session               -0.0804926  0.2050422  -0.393    0.695    
+problem_setb           0.2553556  0.2129132   1.199    0.230    
+problem_order          0.0001191  0.0031834   0.037    0.970    
+TMS_TypeWM:sensations -0.3852065  0.7055875  -0.546    0.585    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM snstns sessin prblm_s prblm_r
+TMS_TypeWM  -0.332                                       
+sensations  -0.281  0.204                                
+session     -0.779  0.069    0.245                       
+problem_stb -0.124 -0.063   -0.145 -0.081                
+problem_rdr -0.393  0.000   -0.002 -0.001 -0.001         
+TMS_TypWM:s  0.293 -0.290   -0.727 -0.251 -0.059   0.002 
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.02311 (tol = 0.002, component 1)
+

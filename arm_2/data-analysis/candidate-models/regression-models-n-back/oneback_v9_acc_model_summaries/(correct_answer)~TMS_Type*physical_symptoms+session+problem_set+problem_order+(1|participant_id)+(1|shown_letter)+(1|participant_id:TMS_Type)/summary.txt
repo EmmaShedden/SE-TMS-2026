@@ -1,0 +1,47 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: 
+(correct_answer) ~ TMS_Type * physical_symptoms + session + problem_set +  
+    problem_order + (1 | participant_id) + (1 | shown_letter) +  
+    (1 | participant_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  1156.8   1216.2   -569.4   1138.8     5391 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-7.9265  0.1323  0.1454  0.1590  0.2064 
+
+Random effects:
+ Groups                  Name        Variance Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.04121  0.2030  
+ participant_id          (Intercept) 0.07707  0.2776  
+ shown_letter            (Intercept) 0.01847  0.1359  
+Number of obs: 5400, groups:  
+participant_id:TMS_Type, 54; participant_id, 27; shown_letter, 6
+
+Fixed effects:
+                    Estimate Std. Error z value Pr(>|z|)    
+(Intercept)        3.962e+00  3.844e-01  10.306   <2e-16 ***
+TMS_TypeWM         1.903e-03  2.057e-01   0.009    0.993    
+physical_symptoms -2.667e-01  4.180e-01  -0.638    0.523    
+session           -1.303e-01  1.980e-01  -0.658    0.510    
+problem_setb       2.414e-01  2.009e-01   1.202    0.229    
+problem_order      7.933e-05  3.188e-03   0.025    0.980    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW physc_ sessin prblm_s
+TMS_TypeWM  -0.160                             
+physcl_symp -0.168 -0.330                      
+session     -0.773 -0.069  0.194               
+problem_stb -0.148 -0.099  0.024 -0.071        
+problem_rdr -0.418  0.001  0.001  0.000  0.000 
+fit warnings:
+fixed-effect model matrix is rank deficient so dropping 1 column / coefficient
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.0350373 (tol = 0.002, component 1)
+
