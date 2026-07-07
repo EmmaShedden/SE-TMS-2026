@@ -3,8 +3,8 @@ Formula: log(response.time) ~ TMS_Type + session + problem_order + (1 |
     participant_id:shown_letter) + (1 | shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-   -382.2    -336.2     198.1    -396.2      5274 
+     AIC      BIC   logLik deviance df.resid 
+  -382.2   -336.2    198.1   -396.2     5274 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -15,7 +15,8 @@ Random effects:
  participant_id:shown_letter (Intercept) 0.01976  0.1406  
  shown_letter:TMS_Type       (Intercept) 0.00000  0.0000  
  Residual                                0.05013  0.2239  
-Number of obs: 5281, groups:  participant_id:shown_letter, 162; shown_letter:TMS_Type, 12
+Number of obs: 5281, groups:  
+participant_id:shown_letter, 162; shown_letter:TMS_Type, 12
 
 Fixed effects:
                 Estimate Std. Error t value

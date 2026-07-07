@@ -1,0 +1,43 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(response.time) ~ TMS_Type * sensations + session + problem_set +  
+    problem_order + (1 | participant_id) + (1 | participant_id:shown_letter) +  
+    (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  -756.7   -684.4    389.4   -778.7     5270 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.1955 -0.6783 -0.0961  0.5605  4.6766 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev. 
+ participant_id:shown_letter (Intercept) 5.461e-10 2.337e-05
+ participant_id              (Intercept) 1.953e-02 1.398e-01
+ shown_letter:TMS_Type       (Intercept) 1.264e-07 3.556e-04
+ Residual                                4.941e-02 2.223e-01
+Number of obs: 5281, groups:  
+participant_id:shown_letter, 162; participant_id, 27; shown_letter:TMS_Type, 12
+
+Fixed effects:
+                        Estimate Std. Error t value
+(Intercept)           -0.5375789  0.0282369 -19.038
+TMS_TypeWM             0.0243423  0.0068143   3.572
+sensations             0.0231322  0.0221451   1.045
+session2              -0.0647861  0.0066515  -9.740
+problem_setb           0.0506760  0.0069046   7.339
+problem_order         -0.0007493  0.0001059  -7.077
+TMS_TypeWM:sensations -0.1229805  0.0259304  -4.743
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM snstns sessn2 prblm_s prblm_r
+TMS_TypeWM  -0.140                                       
+sensations  -0.101  0.292                                
+session2    -0.140  0.180    0.370                       
+problem_stb -0.068 -0.044   -0.279 -0.138                
+problem_rdr -0.189 -0.003   -0.005 -0.001  0.000         
+TMS_TypWM:s  0.099 -0.431   -0.607 -0.305 -0.081   0.004 
+optimizer (nloptwrap) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.0126691 (tol = 0.002, component 1)
+

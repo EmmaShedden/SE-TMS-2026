@@ -1,10 +1,11 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
 Formula: log(response.time) ~ TMS_Type * problem_order + (1 | shown_letter) +  
-    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type) +      (1 | participant_id:shown_letter:TMS_Type)
+    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type) +  
+    (1 | participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1104.3   -1045.2     561.2   -1122.3      5272 
+     AIC      BIC   logLik deviance df.resid 
+ -1104.3  -1045.2    561.2  -1122.3     5272 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -12,18 +13,18 @@ Scaled residuals:
 
 Random effects:
  Groups                               Name        Variance  Std.Dev.
- participant_id:shown_letter:TMS_Type (Intercept) 5.316e-05 0.007291
- participant_id:TMS_Type              (Intercept) 2.544e-02 0.159495
- shown_letter:TMS_Type                (Intercept) 0.000e+00 0.000000
- shown_letter                         (Intercept) 2.447e-05 0.004947
- Residual                                         4.537e-02 0.213009
+ participant_id:shown_letter:TMS_Type (Intercept) 0.0000534 0.007308
+ participant_id:TMS_Type              (Intercept) 0.0254350 0.159484
+ shown_letter:TMS_Type                (Intercept) 0.0000000 0.000000
+ shown_letter                         (Intercept) 0.0000244 0.004940
+ Residual                                         0.0453726 0.213009
 Number of obs: 5281, groups:  
 participant_id:shown_letter:TMS_Type, 324; participant_id:TMS_Type, 54; shown_letter:TMS_Type, 12; shown_letter, 6
 
 Fixed effects:
                            Estimate Std. Error t value
-(Intercept)              -0.5735176  0.0318797 -17.990
-TMS_TypeWM                0.0715731  0.0449957   1.591
+(Intercept)              -0.5735180  0.0318773 -17.991
+TMS_TypeWM                0.0715735  0.0449927   1.591
 problem_order            -0.0001954  0.0001436  -1.360
 TMS_TypeWM:problem_order -0.0011001  0.0002031  -5.418
 

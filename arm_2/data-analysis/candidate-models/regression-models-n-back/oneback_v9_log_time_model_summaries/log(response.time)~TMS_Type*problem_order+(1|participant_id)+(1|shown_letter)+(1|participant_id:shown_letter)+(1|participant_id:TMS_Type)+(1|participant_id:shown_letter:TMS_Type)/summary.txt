@@ -1,31 +1,32 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
-Formula: log(response.time) ~ TMS_Type * problem_order + (1 | participant_id) +  
+Formula: 
+log(response.time) ~ TMS_Type * problem_order + (1 | participant_id) +  
     (1 | shown_letter) + (1 | participant_id:shown_letter) +  
     (1 | participant_id:TMS_Type) + (1 | participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1112.3   -1046.6     566.2   -1132.3      5271 
+     AIC      BIC   logLik deviance df.resid 
+ -1112.3  -1046.6    566.2  -1132.3     5271 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--9.4109 -0.6637 -0.1031  0.5513  4.9020 
+-9.4109 -0.6636 -0.1031  0.5512  4.9020 
 
 Random effects:
- Groups                               Name        Variance  Std.Dev. 
- participant_id:shown_letter:TMS_Type (Intercept) 5.265e-05 7.256e-03
- participant_id:shown_letter          (Intercept) 1.150e-10 1.072e-05
- participant_id:TMS_Type              (Intercept) 1.102e-02 1.050e-01
- participant_id                       (Intercept) 1.442e-02 1.201e-01
- shown_letter                         (Intercept) 2.424e-05 4.924e-03
- Residual                                         4.537e-02 2.130e-01
+ Groups                               Name        Variance  Std.Dev.
+ participant_id:shown_letter:TMS_Type (Intercept) 5.291e-05 0.007274
+ participant_id:shown_letter          (Intercept) 0.000e+00 0.000000
+ participant_id:TMS_Type              (Intercept) 1.102e-02 0.104955
+ participant_id                       (Intercept) 1.442e-02 0.120088
+ shown_letter                         (Intercept) 2.426e-05 0.004925
+ Residual                                         4.537e-02 0.213010
 Number of obs: 5281, groups:  
 participant_id:shown_letter:TMS_Type, 324; participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter, 6
 
 Fixed effects:
                            Estimate Std. Error t value
-(Intercept)              -0.5735255  0.0318776 -17.991
-TMS_TypeWM                0.0715890  0.0309254   2.315
+(Intercept)              -0.5735255  0.0318779 -17.991
+TMS_TypeWM                0.0715886  0.0309228   2.315
 problem_order            -0.0001954  0.0001436  -1.361
 TMS_TypeWM:problem_order -0.0011000  0.0002031  -5.417
 

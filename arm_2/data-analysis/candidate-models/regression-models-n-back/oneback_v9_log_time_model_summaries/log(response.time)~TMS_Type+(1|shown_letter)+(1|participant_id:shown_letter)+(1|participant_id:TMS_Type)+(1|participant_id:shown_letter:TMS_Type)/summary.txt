@@ -1,34 +1,34 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
-Formula: log(response.time) ~ TMS_Type + (1 | shown_letter) + (1 | participant_id:shown_letter) +  
+Formula: 
+log(response.time) ~ TMS_Type + (1 | shown_letter) + (1 | participant_id:shown_letter) +  
     (1 | participant_id:TMS_Type) + (1 | participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1025.7    -979.7     519.8   -1039.7      5274 
+     AIC      BIC   logLik deviance df.resid 
+ -1025.7   -979.7    519.8  -1039.7     5274 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--9.2916 -0.6721 -0.1000  0.5624  4.7534 
+-9.2916 -0.6720 -0.1001  0.5624  4.7533 
 
 Random effects:
  Groups                               Name        Variance  Std.Dev. 
- participant_id:shown_letter:TMS_Type (Intercept) 6.723e-05 8.200e-03
- participant_id:shown_letter          (Intercept) 5.305e-10 2.303e-05
- participant_id:TMS_Type              (Intercept) 2.546e-02 1.596e-01
- shown_letter                         (Intercept) 3.069e-05 5.540e-03
+ participant_id:shown_letter:TMS_Type (Intercept) 6.695e-05 8.182e-03
+ participant_id:shown_letter          (Intercept) 3.574e-10 1.891e-05
+ participant_id:TMS_Type              (Intercept) 2.545e-02 1.595e-01
+ shown_letter                         (Intercept) 3.069e-05 5.539e-03
  Residual                                         4.608e-02 2.147e-01
 Number of obs: 5281, groups:  
 participant_id:shown_letter:TMS_Type, 324; participant_id:shown_letter, 162; participant_id:TMS_Type, 54; shown_letter, 6
 
 Fixed effects:
             Estimate Std. Error t value
-(Intercept) -0.58336    0.03108 -18.768
-TMS_TypeWM   0.01592    0.04384   0.363
+(Intercept) -0.58336    0.03108 -18.772
+TMS_TypeWM   0.01592    0.04383   0.363
 
 Correlation of Fixed Effects:
            (Intr)
 TMS_TypeWM -0.705
 optimizer (nloptwrap) convergence code: 0 (OK)
-Model failed to converge with max|grad| = 0.00355867 (tol = 0.002, component 1)
-  See ?lme4::convergence and ?lme4::troubleshooting.
+boundary (singular) fit: see help('isSingular')
 

@@ -3,25 +3,26 @@ Formula: log(response.time) ~ TMS_Type + problem_order + (1 | shown_letter) +
     (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1078.9   -1032.9     546.5   -1092.9      5274 
+     AIC      BIC   logLik deviance df.resid 
+ -1078.9  -1032.9    546.5  -1092.9     5274 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
 -9.5135 -0.6653 -0.0979  0.5562  4.8477 
 
 Random effects:
- Groups                  Name        Variance  Std.Dev. 
- participant_id:TMS_Type (Intercept) 2.547e-02 1.596e-01
- shown_letter:TMS_Type   (Intercept) 1.601e-09 4.001e-05
- shown_letter            (Intercept) 3.069e-05 5.540e-03
- Residual                            4.567e-02 2.137e-01
-Number of obs: 5281, groups:  participant_id:TMS_Type, 54; shown_letter:TMS_Type, 12; shown_letter, 6
+ Groups                  Name        Variance  Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.0254695 0.159592
+ shown_letter:TMS_Type   (Intercept) 0.0000000 0.000000
+ shown_letter            (Intercept) 0.0000307 0.005541
+ Residual                            0.0456685 0.213702
+Number of obs: 5281, groups:  
+participant_id:TMS_Type, 54; shown_letter:TMS_Type, 12; shown_letter, 6
 
 Fixed effects:
                 Estimate Std. Error t value
-(Intercept)   -0.5456964  0.0314981 -17.325
-TMS_TypeWM     0.0159870  0.0438323   0.365
+(Intercept)   -0.5456963  0.0314980 -17.325
+TMS_TypeWM     0.0159870  0.0438321   0.365
 problem_order -0.0007453  0.0001018  -7.322
 
 Correlation of Fixed Effects:
@@ -29,6 +30,5 @@ Correlation of Fixed Effects:
 TMS_TypeWM  -0.696       
 problem_rdr -0.163  0.000
 optimizer (nloptwrap) convergence code: 0 (OK)
-Model failed to converge with max|grad| = 0.00617553 (tol = 0.002, component 1)
-  See ?lme4::convergence and ?lme4::troubleshooting.
+boundary (singular) fit: see help('isSingular')
 

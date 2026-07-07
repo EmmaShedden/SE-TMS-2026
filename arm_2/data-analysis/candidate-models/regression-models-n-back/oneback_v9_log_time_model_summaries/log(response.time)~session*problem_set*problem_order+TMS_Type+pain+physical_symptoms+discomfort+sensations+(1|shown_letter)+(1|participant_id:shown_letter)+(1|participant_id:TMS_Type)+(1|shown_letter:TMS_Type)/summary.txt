@@ -1,0 +1,42 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(response.time) ~ session * problem_set * problem_order +  
+    TMS_Type + pain + physical_symptoms + discomfort + sensations +  
+    (1 | shown_letter) + (1 | participant_id:shown_letter) +  
+    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+ -1086.6   -968.3    561.3  -1122.6     5263 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.4504 -0.6713 -0.1011  0.5609  4.8224 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev.
+ participant_id:shown_letter (Intercept) 3.528e-06 0.001878
+ participant_id:TMS_Type     (Intercept) 2.003e-02 0.141514
+ shown_letter:TMS_Type       (Intercept) 0.000e+00 0.000000
+ shown_letter                (Intercept) 2.740e-05 0.005234
+ Residual                                4.552e-02 0.213352
+Number of obs: 5281, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                                      Estimate Std. Error t value
+(Intercept)                         -0.5422123  0.0434772 -12.471
+session2                            -0.0917166  0.0576869  -1.590
+problem_setb                         0.0783319  0.0591269   1.325
+problem_order                       -0.0008845  0.0001923  -4.599
+TMS_TypeWM                           0.0055634  0.0463568   0.120
+pain                                 0.1736029  0.0843326   2.059
+physical_symptoms                    0.1169447  0.0845444   1.383
+discomfort                          -0.1000073  0.0792182  -1.262
+sensations                           0.0613270  0.0724323   0.847
+session2:problem_setb               -0.0212589  0.0821839  -0.259
+session2:problem_order               0.0005533  0.0002831   1.954
+problem_setb:problem_order          -0.0005296  0.0002891  -1.832
+session2:problem_setb:problem_order  0.0004542  0.0004081   1.113
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

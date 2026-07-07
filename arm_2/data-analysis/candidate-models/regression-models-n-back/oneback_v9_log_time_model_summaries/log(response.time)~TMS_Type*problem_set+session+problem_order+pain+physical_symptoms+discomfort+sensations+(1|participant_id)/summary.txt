@@ -1,0 +1,44 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: 
+log(response.time) ~ TMS_Type * problem_set + session + problem_order +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    participant_id)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  -847.5   -768.6    435.8   -871.5     5269 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.2741 -0.6741 -0.1025  0.5715  4.4706 
+
+Random effects:
+ Groups         Name        Variance Std.Dev.
+ participant_id (Intercept) 0.01336  0.1156  
+ Residual                   0.04864  0.2205  
+Number of obs: 5281, groups:  participant_id, 27
+
+Fixed effects:
+                         Estimate Std. Error t value
+(Intercept)             -0.499956   0.026366 -18.962
+TMS_TypeWM              -0.083698   0.026773  -3.126
+problem_setb            -0.055192   0.028197  -1.957
+session2                -0.062574   0.006494  -9.636
+problem_order           -0.000749   0.000105  -7.131
+pain                     0.221502   0.027043   8.191
+physical_symptoms        0.090098   0.018025   4.998
+discomfort              -0.099327   0.018862  -5.266
+sensations               0.023912   0.019369   1.235
+TMS_TypeWM:problem_setb  0.189436   0.054623   3.468
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM prblm_s sessn2 prblm_r pain   physc_ dscmfr snstns
+TMS_TypeWM  -0.448                                                            
+problem_stb -0.438  0.927                                                     
+session2    -0.056 -0.160   -0.190                                            
+problem_rdr -0.200 -0.002   -0.001   0.000                                    
+pain        -0.052  0.035   -0.030   0.027 -0.003                             
+physcl_symp -0.041 -0.073    0.052   0.189  0.000  -0.032                     
+discomfort   0.010 -0.053    0.080   0.035  0.001  -0.467  0.271              
+sensations  -0.048  0.001   -0.150   0.213 -0.003   0.302 -0.070 -0.425       
+TMS_TypWM:_  0.436 -0.952   -0.967   0.149  0.002  -0.017 -0.072 -0.121  0.071

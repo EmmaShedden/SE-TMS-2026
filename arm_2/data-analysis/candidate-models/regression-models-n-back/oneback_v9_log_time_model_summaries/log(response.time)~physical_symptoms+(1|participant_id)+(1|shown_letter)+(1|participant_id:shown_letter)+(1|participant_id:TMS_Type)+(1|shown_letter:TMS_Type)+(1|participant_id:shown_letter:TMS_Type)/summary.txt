@@ -1,25 +1,26 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
 Formula: log(response.time) ~ physical_symptoms + (1 | participant_id) +  
     (1 | shown_letter) + (1 | participant_id:shown_letter) +  
-    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type) +      (1 | participant_id:shown_letter:TMS_Type)
+    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type) +  
+    (1 | participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1036.5    -977.3     527.2   -1054.5      5272 
+     AIC      BIC   logLik deviance df.resid 
+ -1036.5   -977.3    527.2  -1054.5     5272 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--9.2938 -0.6726 -0.1009  0.5594  4.7399 
+-9.2938 -0.6726 -0.1010  0.5594  4.7399 
 
 Random effects:
- Groups                               Name        Variance  Std.Dev.
- participant_id:shown_letter:TMS_Type (Intercept) 6.449e-05 0.008030
- participant_id:shown_letter          (Intercept) 0.000e+00 0.000000
- participant_id:TMS_Type              (Intercept) 9.917e-03 0.099583
- participant_id                       (Intercept) 1.349e-02 0.116163
- shown_letter:TMS_Type                (Intercept) 0.000e+00 0.000000
- shown_letter                         (Intercept) 3.007e-05 0.005484
- Residual                                         4.608e-02 0.214672
+ Groups                               Name        Variance  Std.Dev. 
+ participant_id:shown_letter:TMS_Type (Intercept) 6.448e-05 8.030e-03
+ participant_id:shown_letter          (Intercept) 1.113e-11 3.335e-06
+ participant_id:TMS_Type              (Intercept) 9.917e-03 9.959e-02
+ participant_id                       (Intercept) 1.349e-02 1.162e-01
+ shown_letter:TMS_Type                (Intercept) 0.000e+00 0.000e+00
+ shown_letter                         (Intercept) 3.009e-05 5.486e-03
+ Residual                                         4.608e-02 2.147e-01
 Number of obs: 5281, groups:  
 participant_id:shown_letter:TMS_Type, 324; participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
 

@@ -1,0 +1,43 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(response.time) ~ problem_set * problem_order + TMS_Type +  
+    session + pain + physical_symptoms + discomfort + sensations +  
+    (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+   630.1    708.9   -303.0    606.1     5269 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.2540 -0.6921 -0.0692  0.6095  4.0226 
+
+Random effects:
+ Groups                Name        Variance  Std.Dev.
+ shown_letter:TMS_Type (Intercept) 4.967e-06 0.002229
+ Residual                          6.566e-02 0.256252
+Number of obs: 5281, groups:  shown_letter:TMS_Type, 12
+
+Fixed effects:
+                             Estimate Std. Error t value
+(Intercept)                -0.5565271  0.0111056 -50.112
+problem_setb                0.0640200  0.0144708   4.424
+problem_order              -0.0006313  0.0001695  -3.725
+TMS_TypeWM                  0.0070441  0.0084508   0.834
+session2                   -0.0613440  0.0072515  -8.460
+pain                        0.1734770  0.0151474  11.453
+physical_symptoms           0.1149033  0.0151915   7.564
+discomfort                 -0.1006853  0.0142878  -7.047
+sensations                  0.0618835  0.0130817   4.731
+problem_setb:problem_order -0.0002357  0.0002443  -0.965
+
+Correlation of Fixed Effects:
+            (Intr) prblm_s prblm_r TMS_TW sessn2 pain   physc_ dscmfr snstns
+problem_stb -0.577                                                          
+problem_rdr -0.770  0.592                                                   
+TMS_TypeWM  -0.303  0.013  -0.002                                           
+session2    -0.317 -0.065  -0.001  -0.021                                   
+pain        -0.052 -0.050   0.000   0.109 -0.018                            
+physcl_symp -0.020 -0.026   0.000  -0.359  0.158 -0.248                     
+discomfort   0.105 -0.083   0.000  -0.459  0.057 -0.386  0.308              
+sensations  -0.131 -0.096  -0.001   0.176  0.123  0.268 -0.039 -0.418       
+prblm_stb:_  0.533 -0.852  -0.694   0.003  0.001  0.001 -0.001 -0.003  0.002

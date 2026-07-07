@@ -1,31 +1,32 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
-Formula: log(response.time) ~ TMS_Type + problem_order + (1 | participant_id) +  
+Formula: 
+log(response.time) ~ TMS_Type + problem_order + (1 | participant_id) +  
     (1 | shown_letter) + (1 | participant_id:TMS_Type) + (1 |  
     shown_letter:TMS_Type) + (1 | participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1085.1   -1025.9     551.5   -1103.1      5272 
+     AIC      BIC   logLik deviance df.resid 
+ -1085.1  -1025.9    551.5  -1103.1     5272 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--9.5117 -0.6647 -0.0984  0.5547  4.8374 
+-9.5117 -0.6646 -0.0984  0.5547  4.8374 
 
 Random effects:
  Groups                               Name        Variance  Std.Dev.
- participant_id:shown_letter:TMS_Type (Intercept) 8.898e-05 0.009433
- participant_id:TMS_Type              (Intercept) 1.102e-02 0.104961
- participant_id                       (Intercept) 1.444e-02 0.120151
+ participant_id:shown_letter:TMS_Type (Intercept) 8.904e-05 0.009436
+ participant_id:TMS_Type              (Intercept) 1.102e-02 0.104978
+ participant_id                       (Intercept) 1.444e-02 0.120149
  shown_letter:TMS_Type                (Intercept) 0.000e+00 0.000000
- shown_letter                         (Intercept) 2.907e-05 0.005392
- Residual                                         4.560e-02 0.213532
+ shown_letter                         (Intercept) 2.907e-05 0.005391
+ Residual                                         4.560e-02 0.213531
 Number of obs: 5281, groups:  
 participant_id:shown_letter:TMS_Type, 324; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
 
 Fixed effects:
                 Estimate Std. Error t value
-(Intercept)   -0.5457595  0.0314927 -17.330
-TMS_TypeWM     0.0160073  0.0291851   0.548
+(Intercept)   -0.5457595  0.0314946 -17.329
+TMS_TypeWM     0.0160073  0.0291897   0.548
 problem_order -0.0007459  0.0001018  -7.327
 
 Correlation of Fixed Effects:

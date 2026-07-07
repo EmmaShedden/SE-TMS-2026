@@ -1,31 +1,32 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
 Formula: log(response.time) ~ TMS_Type * sensations + (1 | shown_letter) +  
-    (1 | participant_id:shown_letter) + (1 | shown_letter:TMS_Type) +      (1 | participant_id:shown_letter:TMS_Type)
+    (1 | participant_id:shown_letter) + (1 | shown_letter:TMS_Type) +  
+    (1 | participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-   -571.6    -512.4     294.8    -589.6      5272 
+     AIC      BIC   logLik deviance df.resid 
+  -571.6   -512.4    294.8   -589.6     5272 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--9.0814 -0.6518 -0.0891  0.5443  4.5917 
+-9.0814 -0.6517 -0.0891  0.5443  4.5917 
 
 Random effects:
- Groups                               Name        Variance  Std.Dev. 
- participant_id:shown_letter:TMS_Type (Intercept) 9.976e-03 9.988e-02
- participant_id:shown_letter          (Intercept) 1.476e-02 1.215e-01
- shown_letter:TMS_Type                (Intercept) 2.547e-11 5.047e-06
- shown_letter                         (Intercept) 0.000e+00 0.000e+00
- Residual                                         4.606e-02 2.146e-01
+ Groups                               Name        Variance Std.Dev.
+ participant_id:shown_letter:TMS_Type (Intercept) 0.009977 0.09989 
+ participant_id:shown_letter          (Intercept) 0.014761 0.12149 
+ shown_letter:TMS_Type                (Intercept) 0.000000 0.00000 
+ shown_letter                         (Intercept) 0.000000 0.00000 
+ Residual                                         0.046063 0.21462 
 Number of obs: 5281, groups:  
 participant_id:shown_letter:TMS_Type, 324; participant_id:shown_letter, 162; shown_letter:TMS_Type, 12; shown_letter, 6
 
 Fixed effects:
                       Estimate Std. Error t value
-(Intercept)           -0.59930    0.01366 -43.876
+(Intercept)           -0.59930    0.01366 -43.877
 TMS_TypeWM             0.03581    0.01366   2.621
-sensations             0.12358    0.03554   3.477
-TMS_TypeWM:sensations -0.17729    0.04680  -3.788
+sensations             0.12357    0.03554   3.477
+TMS_TypeWM:sensations -0.17728    0.04680  -3.788
 
 Correlation of Fixed Effects:
             (Intr) TMS_TyWM snstns

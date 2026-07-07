@@ -1,29 +1,31 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
-Formula: log(response.time) ~ TMS_Type * problem_order + (1 | participant_id) +  
-    (1 | participant_id:shown_letter) + (1 | participant_id:TMS_Type) +      (1 | shown_letter:TMS_Type)
+Formula: 
+log(response.time) ~ TMS_Type * problem_order + (1 | participant_id) +  
+    (1 | participant_id:shown_letter) + (1 | participant_id:TMS_Type) +  
+    (1 | shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1113.9   -1054.7     565.9   -1131.9      5272 
+     AIC      BIC   logLik deviance df.resid 
+ -1113.9  -1054.7    565.9  -1131.9     5272 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
 -9.4115 -0.6653 -0.1013  0.5500  4.8984 
 
 Random effects:
- Groups                      Name        Variance  Std.Dev. 
- participant_id:shown_letter (Intercept) 4.745e-10 2.178e-05
- participant_id:TMS_Type     (Intercept) 1.103e-02 1.050e-01
- participant_id              (Intercept) 1.442e-02 1.201e-01
- shown_letter:TMS_Type       (Intercept) 1.027e-05 3.204e-03
- Residual                                4.543e-02 2.131e-01
+ Groups                      Name        Variance  Std.Dev.
+ participant_id:shown_letter (Intercept) 0.000e+00 0.00000 
+ participant_id:TMS_Type     (Intercept) 1.103e-02 0.10502 
+ participant_id              (Intercept) 1.442e-02 0.12010 
+ shown_letter:TMS_Type       (Intercept) 1.031e-05 0.00321 
+ Residual                                4.543e-02 0.21314 
 Number of obs: 5281, groups:  
 participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12
 
 Fixed effects:
                            Estimate Std. Error t value
-(Intercept)              -0.5736623  0.0318455 -18.014
-TMS_TypeWM                0.0718720  0.0309841   2.320
+(Intercept)              -0.5736621  0.0318468 -18.013
+TMS_TypeWM                0.0718716  0.0309846   2.320
 problem_order            -0.0001937  0.0001436  -1.349
 TMS_TypeWM:problem_order -0.0011031  0.0002031  -5.432
 
@@ -32,3 +34,6 @@ Correlation of Fixed Effects:
 TMS_TypeWM  -0.486                
 problem_rdr -0.228  0.234         
 TMS_TypWM:_  0.161 -0.331   -0.707
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

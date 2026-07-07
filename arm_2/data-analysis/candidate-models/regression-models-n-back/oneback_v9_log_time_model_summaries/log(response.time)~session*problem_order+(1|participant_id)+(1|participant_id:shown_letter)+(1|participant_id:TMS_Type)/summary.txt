@@ -3,8 +3,8 @@ Formula: log(response.time) ~ session * problem_order + (1 | participant_id) +
     (1 | participant_id:shown_letter) + (1 | participant_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1105.8   -1053.3     560.9   -1121.8      5273 
+     AIC      BIC   logLik deviance df.resid 
+ -1105.8  -1053.3    560.9  -1121.8     5273 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -16,7 +16,8 @@ Random effects:
  participant_id:TMS_Type     (Intercept) 8.799e-03 0.093801
  participant_id              (Intercept) 1.560e-02 0.124919
  Residual                                4.557e-02 0.213476
-Number of obs: 5281, groups:  participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27
+Number of obs: 5281, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27
 
 Fixed effects:
                          Estimate Std. Error t value
@@ -33,5 +34,4 @@ sssn2:prbl_  0.164 -0.365 -0.706
 optimizer (nloptwrap) convergence code: 0 (OK)
 unable to evaluate scaled gradient
 Model failed to converge: degenerate  Hessian with 1 negative eigenvalues
-  See ?lme4::convergence and ?lme4::troubleshooting.
 

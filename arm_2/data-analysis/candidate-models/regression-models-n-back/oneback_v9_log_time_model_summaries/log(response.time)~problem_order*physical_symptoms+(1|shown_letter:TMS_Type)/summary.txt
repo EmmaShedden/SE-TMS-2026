@@ -1,0 +1,33 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(response.time) ~ problem_order * physical_symptoms + (1 |  
+    shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+   876.2    915.6   -432.1    864.2     5275 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.0558 -0.6971 -0.0657  0.6173  3.8316 
+
+Random effects:
+ Groups                Name        Variance Std.Dev.
+ shown_letter:TMS_Type (Intercept) 0.00000  0.0000  
+ Residual                          0.06896  0.2626  
+Number of obs: 5281, groups:  shown_letter:TMS_Type, 12
+
+Fixed effects:
+                                  Estimate Std. Error t value
+(Intercept)                     -0.5532507  0.0075588 -73.192
+problem_order                   -0.0006895  0.0001299  -5.307
+physical_symptoms                0.2150325  0.0279301   7.699
+problem_order:physical_symptoms -0.0007821  0.0004797  -1.630
+
+Correlation of Fixed Effects:
+            (Intr) prblm_ physc_
+problem_rdr -0.868              
+physcl_symp -0.271  0.235       
+prblm_rdr:_  0.235 -0.271 -0.869
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

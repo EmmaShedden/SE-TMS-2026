@@ -1,0 +1,49 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: 
+log(response.time) ~ TMS_Type + session + problem_order + problem_set +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    participant_id:shown_letter) + (1 | participant_id:TMS_Type) +  
+    (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+ -1079.2   -993.8    552.6  -1105.2     5268 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.5168 -0.6659 -0.0968  0.5579  4.8463 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev. 
+ participant_id:shown_letter (Intercept) 1.197e-10 1.094e-05
+ participant_id:TMS_Type     (Intercept) 2.002e-02 1.415e-01
+ shown_letter:TMS_Type       (Intercept) 1.796e-05 4.238e-03
+ Residual                                4.568e-02 2.137e-01
+Number of obs: 5281, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; shown_letter:TMS_Type, 12
+
+Fixed effects:
+                    Estimate Std. Error t value
+(Intercept)       -0.5496643  0.0391343 -14.046
+TMS_TypeWM         0.0056683  0.0461832   0.123
+session2          -0.0629873  0.0400445  -1.573
+problem_order     -0.0007454  0.0001018  -7.321
+problem_setb       0.0523799  0.0418317   1.252
+pain               0.1736432  0.0840753   2.065
+physical_symptoms  0.1170024  0.0838695   1.395
+discomfort        -0.1001407  0.0790860  -1.266
+sensations         0.0613718  0.0724009   0.848
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW sessn2 prblm_r prblm_s pain   physc_ dscmfr
+TMS_TypeWM  -0.467                                                   
+session2    -0.496 -0.026                                            
+problem_rdr -0.131  0.000  0.000                                     
+problem_stb -0.366  0.029 -0.121  0.000                              
+pain        -0.080  0.109 -0.019  0.000  -0.095                      
+physcl_symp -0.031 -0.364  0.161  0.000  -0.056  -0.247              
+discomfort   0.164 -0.462  0.058  0.000  -0.163  -0.386  0.309       
+sensations  -0.204  0.176  0.119  0.000  -0.182   0.268 -0.038 -0.419
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

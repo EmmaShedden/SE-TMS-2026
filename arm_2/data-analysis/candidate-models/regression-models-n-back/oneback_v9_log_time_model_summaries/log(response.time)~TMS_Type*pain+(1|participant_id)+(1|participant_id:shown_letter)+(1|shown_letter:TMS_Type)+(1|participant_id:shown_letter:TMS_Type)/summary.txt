@@ -1,30 +1,31 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
 Formula: log(response.time) ~ TMS_Type * pain + (1 | participant_id) +  
-    (1 | participant_id:shown_letter) + (1 | shown_letter:TMS_Type) +      (1 | participant_id:shown_letter:TMS_Type)
+    (1 | participant_id:shown_letter) + (1 | shown_letter:TMS_Type) +  
+    (1 | participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-   -857.5    -798.4     437.8    -875.5      5272 
+     AIC      BIC   logLik deviance df.resid 
+  -857.5   -798.4    437.8   -875.5     5272 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
 -9.1900 -0.6689 -0.1040  0.5419  4.5387 
 
 Random effects:
- Groups                               Name        Variance  Std.Dev. 
- participant_id:shown_letter:TMS_Type (Intercept) 4.315e-03 6.569e-02
- participant_id:shown_letter          (Intercept) 7.452e-12 2.730e-06
- participant_id                       (Intercept) 1.988e-02 1.410e-01
- shown_letter:TMS_Type                (Intercept) 0.000e+00 0.000e+00
- Residual                                         4.605e-02 2.146e-01
+ Groups                               Name        Variance Std.Dev.
+ participant_id:shown_letter:TMS_Type (Intercept) 0.004314 0.06568 
+ participant_id:shown_letter          (Intercept) 0.000000 0.00000 
+ participant_id                       (Intercept) 0.019881 0.14100 
+ shown_letter:TMS_Type                (Intercept) 0.000000 0.00000 
+ Residual                                         0.046051 0.21459 
 Number of obs: 5281, groups:  
 participant_id:shown_letter:TMS_Type, 324; participant_id:shown_letter, 162; participant_id, 27; shown_letter:TMS_Type, 12
 
 Fixed effects:
                 Estimate Std. Error t value
-(Intercept)     -0.57975    0.02803 -20.683
+(Intercept)     -0.57975    0.02803 -20.684
 TMS_TypeWM      -0.01114    0.01000  -1.113
-pain            -0.14606    0.05770  -2.532
+pain            -0.14606    0.05769  -2.532
 TMS_TypeWM:pain  0.34574    0.04928   7.016
 
 Correlation of Fixed Effects:

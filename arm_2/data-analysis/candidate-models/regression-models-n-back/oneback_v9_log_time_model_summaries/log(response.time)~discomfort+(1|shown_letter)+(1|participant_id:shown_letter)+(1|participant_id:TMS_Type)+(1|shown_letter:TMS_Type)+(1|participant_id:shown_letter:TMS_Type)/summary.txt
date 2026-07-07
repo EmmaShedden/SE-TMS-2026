@@ -1,29 +1,31 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
-Formula: log(response.time) ~ discomfort + (1 | shown_letter) + (1 | participant_id:shown_letter) +  
-    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type) +      (1 | participant_id:shown_letter:TMS_Type)
+Formula: 
+log(response.time) ~ discomfort + (1 | shown_letter) + (1 | participant_id:shown_letter) +  
+    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type) +  
+    (1 | participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1023.6    -971.0     519.8   -1039.6      5273 
+     AIC      BIC   logLik deviance df.resid 
+ -1023.6   -971.0    519.8  -1039.6     5273 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
 -9.2924 -0.6728 -0.1000  0.5618  4.7539 
 
 Random effects:
- Groups                               Name        Variance  Std.Dev.
- participant_id:shown_letter:TMS_Type (Intercept) 6.666e-05 0.008164
- participant_id:shown_letter          (Intercept) 0.000e+00 0.000000
- participant_id:TMS_Type              (Intercept) 2.549e-02 0.159655
- shown_letter:TMS_Type                (Intercept) 0.000e+00 0.000000
- shown_letter                         (Intercept) 3.076e-05 0.005547
- Residual                                         4.608e-02 0.214667
+ Groups                               Name        Variance  Std.Dev. 
+ participant_id:shown_letter:TMS_Type (Intercept) 6.664e-05 8.163e-03
+ participant_id:shown_letter          (Intercept) 5.529e-11 7.436e-06
+ participant_id:TMS_Type              (Intercept) 2.549e-02 1.597e-01
+ shown_letter:TMS_Type                (Intercept) 0.000e+00 0.000e+00
+ shown_letter                         (Intercept) 3.077e-05 5.547e-03
+ Residual                                         4.608e-02 2.147e-01
 Number of obs: 5281, groups:  
 participant_id:shown_letter:TMS_Type, 324; participant_id:shown_letter, 162; participant_id:TMS_Type, 54; shown_letter:TMS_Type, 12; shown_letter, 6
 
 Fixed effects:
             Estimate Std. Error t value
-(Intercept) -0.57350    0.02362 -24.284
+(Intercept) -0.57350    0.02362 -24.283
 discomfort  -0.01462    0.06529  -0.224
 
 Correlation of Fixed Effects:

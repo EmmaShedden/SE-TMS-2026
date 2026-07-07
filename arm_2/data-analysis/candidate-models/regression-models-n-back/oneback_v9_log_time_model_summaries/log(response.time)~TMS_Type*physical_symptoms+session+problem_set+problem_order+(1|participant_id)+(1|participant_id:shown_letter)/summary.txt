@@ -1,0 +1,42 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(response.time) ~ TMS_Type * physical_symptoms + session +  
+    problem_set + problem_order + (1 | participant_id) + (1 |  
+    participant_id:shown_letter)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  -769.9   -710.8    394.0   -787.9     5272 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.2490 -0.6815 -0.0925  0.5683  4.6178 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev. 
+ participant_id:shown_letter (Intercept) 6.751e-12 2.598e-06
+ participant_id              (Intercept) 1.841e-02 1.357e-01
+ Residual                                4.934e-02 2.221e-01
+Number of obs: 5281, groups:  
+participant_id:shown_letter, 162; participant_id, 27
+
+Fixed effects:
+                    Estimate Std. Error t value
+(Intercept)       -0.5316997  0.0273143 -19.466
+TMS_TypeWM        -0.0044495  0.0066430  -0.670
+physical_symptoms  0.1058966  0.0173871   6.091
+session2          -0.0637281  0.0062481 -10.200
+problem_setb       0.0421441  0.0062619   6.730
+problem_order     -0.0007478  0.0001058  -7.068
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW physc_ sessn2 prblm_s
+TMS_TypeWM  -0.092                             
+physcl_symp -0.024 -0.383                      
+session2    -0.111 -0.029  0.187               
+problem_stb -0.093 -0.077  0.017 -0.075        
+problem_rdr -0.195 -0.001  0.000  0.001  0.000 
+fit warnings:
+fixed-effect model matrix is rank deficient so dropping 1 column / coefficient
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

@@ -1,10 +1,11 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
 Formula: log(response.time) ~ (1 | participant_id) + (1 | shown_letter) +  
-    (1 | participant_id:shown_letter) + (1 | participant_id:TMS_Type) +      (1 | shown_letter:TMS_Type)
+    (1 | participant_id:shown_letter) + (1 | participant_id:TMS_Type) +  
+    (1 | shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1035.3    -989.3     524.7   -1049.3      5274 
+     AIC      BIC   logLik deviance df.resid 
+ -1035.3   -989.3    524.7  -1049.3     5274 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -12,18 +13,18 @@ Scaled residuals:
 
 Random effects:
  Groups                      Name        Variance  Std.Dev. 
- participant_id:shown_letter (Intercept) 2.338e-09 4.836e-05
+ participant_id:shown_letter (Intercept) 2.501e-10 1.581e-05
  participant_id:TMS_Type     (Intercept) 1.116e-02 1.056e-01
- participant_id              (Intercept) 1.436e-02 1.198e-01
+ participant_id              (Intercept) 1.437e-02 1.199e-01
  shown_letter:TMS_Type       (Intercept) 0.000e+00 0.000e+00
- shown_letter                (Intercept) 3.168e-05 5.629e-03
+ shown_letter                (Intercept) 3.166e-05 5.626e-03
  Residual                                4.614e-02 2.148e-01
 Number of obs: 5281, groups:  
 participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
 
 Fixed effects:
             Estimate Std. Error t value
-(Intercept) -0.57534    0.02743  -20.98
+(Intercept) -0.57534    0.02744  -20.97
 optimizer (nloptwrap) convergence code: 0 (OK)
 boundary (singular) fit: see help('isSingular')
 

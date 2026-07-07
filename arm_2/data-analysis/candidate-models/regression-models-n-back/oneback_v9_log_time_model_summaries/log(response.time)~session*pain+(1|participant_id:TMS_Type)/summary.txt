@@ -1,0 +1,29 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(response.time) ~ session * pain + (1 | participant_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+ -1038.0   -998.5    525.0  -1050.0     5275 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.2834 -0.6762 -0.1000  0.5603  4.7496 
+
+Random effects:
+ Groups                  Name        Variance Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.02069  0.1438  
+ Residual                            0.04616  0.2149  
+Number of obs: 5281, groups:  participant_id:TMS_Type, 54
+
+Fixed effects:
+               Estimate Std. Error t value
+(Intercept)   -0.541263   0.029095 -18.604
+session2      -0.092735   0.041146  -2.254
+pain           0.003407   0.106886   0.032
+session2:pain  0.323396   0.151164   2.139
+
+Correlation of Fixed Effects:
+            (Intr) sessn2 pain  
+session2    -0.707              
+pain        -0.272  0.192       
+session2:pn  0.192 -0.272 -0.707

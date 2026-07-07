@@ -1,0 +1,46 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(response.time) ~ TMS_Type * sensations + session + problem_set +  
+    problem_order + (1 | participant_id) + (1 | shown_letter) +  
+    (1 | participant_id:shown_letter) + (1 | participant_id:TMS_Type) +  
+    (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+ -1087.8  -1002.4    556.9  -1113.8     5268 
+
+Scaled residuals: 
+   Min     1Q Median     3Q    Max 
+-9.514 -0.667 -0.095  0.556  4.825 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev. 
+ participant_id:shown_letter (Intercept) 4.039e-10 0.0000201
+ participant_id:TMS_Type     (Intercept) 7.404e-03 0.0860469
+ participant_id              (Intercept) 1.578e-02 0.1256197
+ shown_letter:TMS_Type       (Intercept) 0.000e+00 0.0000000
+ shown_letter                (Intercept) 3.095e-05 0.0055636
+ Residual                                4.567e-02 0.2137016
+Number of obs: 5281, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                        Estimate Std. Error t value
+(Intercept)           -0.5391532  0.0359912 -14.980
+TMS_TypeWM             0.0235704  0.0265760   0.887
+sensations             0.0355102  0.0771431   0.460
+session2              -0.0644974  0.0258840  -2.492
+problem_setb           0.0516275  0.0265431   1.945
+problem_order         -0.0007455  0.0001018  -7.324
+TMS_TypeWM:sensations -0.1239613  0.0966326  -1.283
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM snstns sessn2 prblm_s prblm_r
+TMS_TypeWM  -0.419                                       
+sensations  -0.290  0.288                                
+session2    -0.415  0.162    0.338                       
+problem_stb -0.230 -0.046   -0.226 -0.117                
+problem_rdr -0.142 -0.001   -0.001  0.000  0.000         
+TMS_TypWM:s  0.287 -0.409   -0.642 -0.290 -0.079   0.001 
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

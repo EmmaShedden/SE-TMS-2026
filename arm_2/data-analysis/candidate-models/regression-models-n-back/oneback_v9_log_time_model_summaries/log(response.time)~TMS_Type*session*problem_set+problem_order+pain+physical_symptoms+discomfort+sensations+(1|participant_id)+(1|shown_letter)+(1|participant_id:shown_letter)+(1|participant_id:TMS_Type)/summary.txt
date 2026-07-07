@@ -1,0 +1,43 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: 
+log(response.time) ~ TMS_Type * session * problem_set + problem_order +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    participant_id) + (1 | shown_letter) + (1 | participant_id:shown_letter) +  
+    (1 | participant_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+ -1096.6   -978.3    566.3  -1132.6     5263 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.5132 -0.6691 -0.0964  0.5571  4.8153 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev. 
+ participant_id:shown_letter (Intercept) 1.207e-07 0.0003474
+ participant_id:TMS_Type     (Intercept) 5.885e-03 0.0767162
+ participant_id              (Intercept) 8.980e-03 0.0947623
+ shown_letter                (Intercept) 2.981e-05 0.0054598
+ Residual                                4.567e-02 0.2137037
+Number of obs: 5281, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter, 6
+
+Fixed effects:
+                                   Estimate Std. Error t value
+(Intercept)                      -0.4674650  0.0450332 -10.380
+TMS_TypeWM                       -0.1535078  0.0694615  -2.210
+session2                         -0.0941387  0.0647065  -1.455
+problem_setb                     -0.1186180  0.0681812  -1.740
+problem_order                    -0.0007455  0.0001018  -7.323
+pain                              0.1569567  0.0738265   2.126
+physical_symptoms                 0.1057606  0.0602016   1.757
+discomfort                       -0.1124275  0.0598701  -1.878
+sensations                        0.0418542  0.0604943   0.692
+TMS_TypeWM:session2               0.0676406  0.0998636   0.677
+TMS_TypeWM:problem_setb           0.3222681  0.0961114   3.353
+session2:problem_setb             0.0494856  0.0950201   0.521
+TMS_TypeWM:session2:problem_setb -0.0886963  0.0934167  -0.949
+optimizer (nloptwrap) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.0174718 (tol = 0.002, component 1)
+

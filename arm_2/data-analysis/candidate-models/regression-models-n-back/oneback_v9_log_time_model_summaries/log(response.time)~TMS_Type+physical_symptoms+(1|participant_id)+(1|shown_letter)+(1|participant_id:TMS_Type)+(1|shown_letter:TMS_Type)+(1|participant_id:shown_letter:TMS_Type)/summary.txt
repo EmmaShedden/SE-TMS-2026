@@ -1,11 +1,12 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
-Formula: log(response.time) ~ TMS_Type + physical_symptoms + (1 | participant_id) +  
+Formula: 
+log(response.time) ~ TMS_Type + physical_symptoms + (1 | participant_id) +  
     (1 | shown_letter) + (1 | participant_id:TMS_Type) + (1 |  
     shown_letter:TMS_Type) + (1 | participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1036.5    -977.4     527.3   -1054.5      5272 
+     AIC      BIC   logLik deviance df.resid 
+ -1036.5   -977.4    527.3  -1054.5     5272 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -13,20 +14,20 @@ Scaled residuals:
 
 Random effects:
  Groups                               Name        Variance  Std.Dev. 
- participant_id:shown_letter:TMS_Type (Intercept) 6.446e-05 8.029e-03
- participant_id:TMS_Type              (Intercept) 9.915e-03 9.957e-02
- participant_id                       (Intercept) 1.346e-02 1.160e-01
- shown_letter:TMS_Type                (Intercept) 7.516e-11 8.669e-06
- shown_letter                         (Intercept) 3.015e-05 5.491e-03
+ participant_id:shown_letter:TMS_Type (Intercept) 6.443e-05 8.027e-03
+ participant_id:TMS_Type              (Intercept) 9.912e-03 9.956e-02
+ participant_id                       (Intercept) 1.347e-02 1.160e-01
+ shown_letter:TMS_Type                (Intercept) 6.217e-11 7.885e-06
+ shown_letter                         (Intercept) 3.021e-05 5.496e-03
  Residual                                         4.608e-02 2.147e-01
 Number of obs: 5281, groups:  
 participant_id:shown_letter:TMS_Type, 324; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
 
 Fixed effects:
                    Estimate Std. Error t value
-(Intercept)       -0.583367   0.029813 -19.567
-TMS_TypeWM        -0.007125   0.029580  -0.241
-physical_symptoms  0.155695   0.069090   2.254
+(Intercept)       -0.583367   0.029813 -19.568
+TMS_TypeWM        -0.007125   0.029576  -0.241
+physical_symptoms  0.155689   0.069082   2.254
 
 Correlation of Fixed Effects:
             (Intr) TMS_TW

@@ -1,28 +1,29 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
 Formula: log(response.time) ~ session * problem_order + (1 | participant_id) +  
-    (1 | participant_id:shown_letter) + (1 | shown_letter:TMS_Type) +      (1 | participant_id:shown_letter:TMS_Type)
+    (1 | participant_id:shown_letter) + (1 | shown_letter:TMS_Type) +  
+    (1 | participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-   -897.8    -838.7     457.9    -915.8      5272 
+     AIC      BIC   logLik deviance df.resid 
+  -897.8   -838.7    457.9   -915.8     5272 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--9.2453 -0.6632 -0.1007  0.5461  4.6675 
+-9.2452 -0.6632 -0.1007  0.5461  4.6674 
 
 Random effects:
- Groups                               Name        Variance Std.Dev.
- participant_id:shown_letter:TMS_Type (Intercept) 0.004948 0.07034 
- participant_id:shown_letter          (Intercept) 0.000000 0.00000 
- participant_id                       (Intercept) 0.019475 0.13955 
- shown_letter:TMS_Type                (Intercept) 0.000000 0.00000 
- Residual                                         0.045466 0.21323 
+ Groups                               Name        Variance  Std.Dev. 
+ participant_id:shown_letter:TMS_Type (Intercept) 4.948e-03 7.034e-02
+ participant_id:shown_letter          (Intercept) 0.000e+00 0.000e+00
+ participant_id                       (Intercept) 1.947e-02 1.395e-01
+ shown_letter:TMS_Type                (Intercept) 1.486e-11 3.855e-06
+ Residual                                         4.547e-02 2.132e-01
 Number of obs: 5281, groups:  
 participant_id:shown_letter:TMS_Type, 324; participant_id:shown_letter, 162; participant_id, 27; shown_letter:TMS_Type, 12
 
 Fixed effects:
                          Estimate Std. Error t value
-(Intercept)            -0.4860081  0.0287074 -16.930
+(Intercept)            -0.4860081  0.0287038 -16.932
 session2               -0.1059070  0.0143545  -7.378
 problem_order          -0.0011271  0.0001460  -7.718
 session2:problem_order  0.0007485  0.0002071   3.614

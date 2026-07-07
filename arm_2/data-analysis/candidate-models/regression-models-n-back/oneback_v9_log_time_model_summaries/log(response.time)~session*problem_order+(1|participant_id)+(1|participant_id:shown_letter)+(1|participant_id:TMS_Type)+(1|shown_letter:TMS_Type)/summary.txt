@@ -1,29 +1,30 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
 Formula: log(response.time) ~ session * problem_order + (1 | participant_id) +  
-    (1 | participant_id:shown_letter) + (1 | participant_id:TMS_Type) +      (1 | shown_letter:TMS_Type)
+    (1 | participant_id:shown_letter) + (1 | participant_id:TMS_Type) +  
+    (1 | shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1103.9   -1044.8     561.0   -1121.9      5272 
+     AIC      BIC   logLik deviance df.resid 
+ -1103.9  -1044.8    561.0  -1121.9     5272 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--9.4341 -0.6717 -0.0956  0.5512  4.8067 
+-9.4341 -0.6717 -0.0955  0.5512  4.8067 
 
 Random effects:
  Groups                      Name        Variance  Std.Dev.
- participant_id:shown_letter (Intercept) 4.226e-06 0.002056
- participant_id:TMS_Type     (Intercept) 8.803e-03 0.093824
- participant_id              (Intercept) 1.557e-02 0.124795
- shown_letter:TMS_Type       (Intercept) 1.235e-05 0.003514
- Residual                                4.556e-02 0.213449
+ participant_id:shown_letter (Intercept) 3.998e-06 0.002000
+ participant_id:TMS_Type     (Intercept) 8.804e-03 0.093828
+ participant_id              (Intercept) 1.557e-02 0.124793
+ shown_letter:TMS_Type       (Intercept) 1.233e-05 0.003511
+ Residual                                4.556e-02 0.213450
 Number of obs: 5281, groups:  
 participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12
 
 Fixed effects:
                          Estimate Std. Error t value
-(Intercept)            -0.4844048  0.0312061 -15.523
-session2               -0.1067217  0.0281439  -3.792
+(Intercept)            -0.4844047  0.0312062 -15.523
+session2               -0.1067219  0.0281449  -3.792
 problem_order          -0.0011203  0.0001437  -7.798
 session2:problem_order  0.0007509  0.0002034   3.692
 
@@ -32,7 +33,3 @@ Correlation of Fixed Effects:
 session2    -0.451              
 problem_rdr -0.233  0.258       
 sssn2:prbl_  0.164 -0.365 -0.706
-optimizer (nloptwrap) convergence code: 0 (OK)
-Model failed to converge with max|grad| = 0.00256066 (tol = 0.002, component 1)
-  See ?lme4::convergence and ?lme4::troubleshooting.
-

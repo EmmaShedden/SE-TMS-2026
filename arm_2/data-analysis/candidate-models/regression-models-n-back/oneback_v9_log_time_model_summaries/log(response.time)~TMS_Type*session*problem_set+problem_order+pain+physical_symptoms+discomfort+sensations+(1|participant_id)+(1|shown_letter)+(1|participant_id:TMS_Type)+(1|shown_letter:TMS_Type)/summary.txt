@@ -1,0 +1,43 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: 
+log(response.time) ~ TMS_Type * session * problem_set + problem_order +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    participant_id) + (1 | shown_letter) + (1 | participant_id:TMS_Type) +  
+    (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+ -1096.6   -978.3    566.3  -1132.6     5263 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.5132 -0.6690 -0.0964  0.5571  4.8153 
+
+Random effects:
+ Groups                  Name        Variance  Std.Dev. 
+ participant_id:TMS_Type (Intercept) 5.888e-03 7.673e-02
+ participant_id          (Intercept) 8.997e-03 9.485e-02
+ shown_letter:TMS_Type   (Intercept) 5.428e-11 7.368e-06
+ shown_letter            (Intercept) 2.975e-05 5.454e-03
+ Residual                            4.567e-02 2.137e-01
+Number of obs: 5281, groups:  
+participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                                   Estimate Std. Error t value
+(Intercept)                      -0.4674725  0.0450587 -10.375
+TMS_TypeWM                       -0.1535022  0.0695011  -2.209
+session2                         -0.0941314  0.0647462  -1.454
+problem_setb                     -0.1186090  0.0682170  -1.739
+problem_order                    -0.0007455  0.0001018  -7.323
+pain                              0.1570058  0.0738595   2.126
+physical_symptoms                 0.1057575  0.0602206   1.756
+discomfort                       -0.1124067  0.0598902  -1.877
+sensations                        0.0418549  0.0605175   0.692
+TMS_TypeWM:session2               0.0676474  0.0999255   0.677
+TMS_TypeWM:problem_setb           0.3222455  0.0961665   3.351
+session2:problem_setb             0.0494763  0.0950754   0.520
+TMS_TypeWM:session2:problem_setb -0.0887185  0.0934389  -0.949
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

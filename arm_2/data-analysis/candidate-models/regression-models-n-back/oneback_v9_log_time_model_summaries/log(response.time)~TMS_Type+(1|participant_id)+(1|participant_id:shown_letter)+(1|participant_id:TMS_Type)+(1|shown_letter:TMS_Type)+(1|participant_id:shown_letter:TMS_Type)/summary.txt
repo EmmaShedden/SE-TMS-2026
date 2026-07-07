@@ -1,10 +1,12 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
-Formula: log(response.time) ~ TMS_Type + (1 | participant_id) + (1 | participant_id:shown_letter) +  
-    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type) +      (1 | participant_id:shown_letter:TMS_Type)
+Formula: 
+log(response.time) ~ TMS_Type + (1 | participant_id) + (1 | participant_id:shown_letter) +  
+    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type) +  
+    (1 | participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1033.2    -980.6     524.6   -1049.2      5273 
+     AIC      BIC   logLik deviance df.resid 
+ -1033.2   -980.6    524.6  -1049.2     5273 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -12,19 +14,19 @@ Scaled residuals:
 
 Random effects:
  Groups                               Name        Variance  Std.Dev.
- participant_id:shown_letter:TMS_Type (Intercept) 7.866e-05 0.008869
+ participant_id:shown_letter:TMS_Type (Intercept) 7.875e-05 0.008874
  participant_id:shown_letter          (Intercept) 0.000e+00 0.000000
- participant_id:TMS_Type              (Intercept) 1.102e-02 0.104977
- participant_id                       (Intercept) 1.444e-02 0.120177
- shown_letter:TMS_Type                (Intercept) 1.627e-05 0.004034
+ participant_id:TMS_Type              (Intercept) 1.102e-02 0.104971
+ participant_id                       (Intercept) 1.443e-02 0.120143
+ shown_letter:TMS_Type                (Intercept) 1.631e-05 0.004039
  Residual                                         4.608e-02 0.214671
 Number of obs: 5281, groups:  
 participant_id:shown_letter:TMS_Type, 324; participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12
 
 Fixed effects:
             Estimate Std. Error t value
-(Intercept) -0.58348    0.03104 -18.795
-TMS_TypeWM   0.01606    0.02929   0.549
+(Intercept) -0.58348    0.03104 -18.798
+TMS_TypeWM   0.01606    0.02928   0.549
 
 Correlation of Fixed Effects:
            (Intr)

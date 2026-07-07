@@ -1,0 +1,39 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(response.time) ~ session * problem_set * problem_order +  
+    TMS_Type + pain + physical_symptoms + discomfort + sensations +  
+    (1 | participant_id) + (1 | participant_id:shown_letter) +  
+    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+ -1103.1   -984.8    569.5  -1139.1     5263 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.4514 -0.6752 -0.0991  0.5557  4.7952 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev.
+ participant_id:shown_letter (Intercept) 1.378e-05 0.003712
+ participant_id:TMS_Type     (Intercept) 5.962e-03 0.077213
+ participant_id              (Intercept) 1.428e-02 0.119499
+ shown_letter:TMS_Type       (Intercept) 1.131e-05 0.003363
+ Residual                                4.552e-02 0.213363
+Number of obs: 5281, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12
+
+Fixed effects:
+                                      Estimate Std. Error t value
+(Intercept)                         -0.5302023  0.0392725 -13.501
+session2                            -0.1023134  0.0538216  -1.901
+problem_setb                         0.0584953  0.0559998   1.045
+problem_order                       -0.0008872  0.0001923  -4.612
+TMS_TypeWM                           0.0056816  0.0288058   0.197
+pain                                 0.2005049  0.0774255   2.590
+physical_symptoms                    0.0970926  0.0603773   1.608
+discomfort                          -0.0920418  0.0605906  -1.519
+sensations                           0.0332138  0.0602526   0.551
+session2:problem_setb               -0.0045706  0.0984071  -0.046
+session2:problem_order               0.0005571  0.0002831   1.968
+problem_setb:problem_order          -0.0005284  0.0002891  -1.827
+session2:problem_setb:problem_order  0.0004526  0.0004081   1.109

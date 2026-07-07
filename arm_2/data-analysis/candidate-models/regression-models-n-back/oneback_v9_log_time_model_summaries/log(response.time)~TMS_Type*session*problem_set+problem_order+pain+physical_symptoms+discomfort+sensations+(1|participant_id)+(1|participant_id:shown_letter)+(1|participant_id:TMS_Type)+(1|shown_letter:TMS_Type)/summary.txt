@@ -1,0 +1,43 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: 
+log(response.time) ~ TMS_Type * session * problem_set + problem_order +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    participant_id) + (1 | participant_id:shown_letter) + (1 |  
+    participant_id:TMS_Type) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+ -1096.1   -977.8    566.1  -1132.1     5263 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.5150 -0.6708 -0.0971  0.5557  4.8135 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev. 
+ participant_id:shown_letter (Intercept) 5.192e-11 7.205e-06
+ participant_id:TMS_Type     (Intercept) 5.890e-03 7.674e-02
+ participant_id              (Intercept) 8.996e-03 9.485e-02
+ shown_letter:TMS_Type       (Intercept) 1.600e-05 4.000e-03
+ Residual                                4.568e-02 2.137e-01
+Number of obs: 5281, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12
+
+Fixed effects:
+                                   Estimate Std. Error t value
+(Intercept)                      -0.4674400  0.0450357 -10.379
+TMS_TypeWM                       -0.1535446  0.0695433  -2.208
+session2                         -0.0942335  0.0647491  -1.455
+problem_setb                     -0.1188072  0.0682213  -1.741
+problem_order                    -0.0007456  0.0001018  -7.323
+pain                              0.1568165  0.0738656   2.123
+physical_symptoms                 0.1059036  0.0602271   1.758
+discomfort                       -0.1124041  0.0598964  -1.877
+sensations                        0.0418600  0.0605230   0.692
+TMS_TypeWM:session2               0.0677154  0.0999301   0.678
+TMS_TypeWM:problem_setb           0.3224864  0.0961716   3.353
+session2:problem_setb             0.0495524  0.0950804   0.521
+TMS_TypeWM:session2:problem_setb -0.0886611  0.0934511  -0.949
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

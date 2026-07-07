@@ -1,10 +1,11 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
 Formula: log(response.time) ~ TMS_Type * sensations + (1 | participant_id) +  
-    (1 | shown_letter) + (1 | participant_id:TMS_Type) + (1 |      participant_id:shown_letter:TMS_Type)
+    (1 | shown_letter) + (1 | participant_id:TMS_Type) + (1 |  
+    participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1034.7    -975.5     526.3   -1052.7      5272 
+     AIC      BIC   logLik deviance df.resid 
+ -1034.7   -975.5    526.3  -1052.7     5272 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -12,7 +13,7 @@ Scaled residuals:
 
 Random effects:
  Groups                               Name        Variance  Std.Dev.
- participant_id:shown_letter:TMS_Type (Intercept) 6.830e-05 0.008264
+ participant_id:shown_letter:TMS_Type (Intercept) 6.830e-05 0.008265
  participant_id:TMS_Type              (Intercept) 9.877e-03 0.099383
  participant_id                       (Intercept) 1.489e-02 0.122018
  shown_letter                         (Intercept) 3.067e-05 0.005538
@@ -33,6 +34,5 @@ TMS_TypeWM  -0.470
 sensations  -0.277  0.251         
 TMS_TypWM:s  0.181 -0.384   -0.653
 optimizer (nloptwrap) convergence code: 0 (OK)
-Model failed to converge with max|grad| = 0.00223392 (tol = 0.002, component 1)
-  See ?lme4::convergence and ?lme4::troubleshooting.
+Model failed to converge with max|grad| = 0.00223776 (tol = 0.002, component 1)
 

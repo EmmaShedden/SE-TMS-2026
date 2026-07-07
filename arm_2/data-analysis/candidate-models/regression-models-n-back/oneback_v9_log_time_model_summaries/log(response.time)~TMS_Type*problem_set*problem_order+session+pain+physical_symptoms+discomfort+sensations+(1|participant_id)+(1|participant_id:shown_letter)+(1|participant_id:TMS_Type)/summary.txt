@@ -1,0 +1,41 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(response.time) ~ TMS_Type * problem_set * problem_order +  
+    session + pain + physical_symptoms + discomfort + sensations +  
+    (1 | participant_id) + (1 | participant_id:shown_letter) +  
+    (1 | participant_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+ -1127.3  -1015.6    580.6  -1161.3     5264 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.4127 -0.6628 -0.1018  0.5501  4.8847 
+
+Random effects:
+ Groups                      Name        Variance Std.Dev.
+ participant_id:shown_letter (Intercept) 0.000000 0.00000 
+ participant_id:TMS_Type     (Intercept) 0.006196 0.07872 
+ participant_id              (Intercept) 0.008672 0.09312 
+ Residual                                0.045431 0.21315 
+Number of obs: 5281, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27
+
+Fixed effects:
+                                        Estimate Std. Error t value
+(Intercept)                           -5.125e-01  3.528e-02 -14.529
+TMS_TypeWM                            -6.874e-02  4.913e-02  -1.399
+problem_setb                          -8.805e-02  4.945e-02  -1.781
+problem_order                         -1.558e-04  1.927e-04  -0.808
+session2                              -6.135e-02  2.320e-02  -2.644
+pain                                   1.579e-01  7.259e-02   2.176
+physical_symptoms                      9.291e-02  5.904e-02   1.574
+discomfort                            -1.194e-01  5.915e-02  -2.019
+sensations                             3.521e-02  5.741e-02   0.613
+TMS_TypeWM:problem_setb                2.902e-01  8.661e-02   3.350
+TMS_TypeWM:problem_order              -1.022e-03  2.827e-04  -3.614
+problem_setb:problem_order            -8.428e-05  2.890e-04  -0.292
+TMS_TypeWM:problem_setb:problem_order -1.479e-04  4.075e-04  -0.363
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

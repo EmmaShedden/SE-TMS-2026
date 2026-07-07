@@ -1,0 +1,44 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: 
+log(response.time) ~ session * problem_order + TMS_Type + problem_set +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    shown_letter)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+   621.4    700.3   -298.7    597.4     5269 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.1841 -0.6973 -0.0725  0.6065  3.9757 
+
+Random effects:
+ Groups       Name        Variance  Std.Dev.
+ shown_letter (Intercept) 0.0000448 0.006693
+ Residual                 0.0655271 0.255983
+Number of obs: 5281, groups:  shown_letter, 6
+
+Fixed effects:
+                         Estimate Std. Error t value
+(Intercept)            -0.5325758  0.0115093 -46.274
+session2               -0.0976084  0.0142831  -6.834
+problem_order          -0.0011035  0.0001723  -6.405
+TMS_TypeWM              0.0067936  0.0083459   0.814
+problem_setb            0.0522153  0.0075598   6.907
+pain                    0.1738310  0.0151344  11.486
+physical_symptoms       0.1149029  0.0151783   7.570
+discomfort             -0.1006677  0.0142748  -7.052
+sensations              0.0618759  0.0130715   4.734
+session2:problem_order  0.0007181  0.0002439   2.945
+
+Correlation of Fixed Effects:
+            (Intr) sessn2 prblm_r TMS_TW prblm_s pain   physc_ dscmfr snstns
+session2    -0.615                                                          
+problem_rdr -0.756  0.609                                                   
+TMS_TypeWM  -0.290 -0.008  0.002                                            
+problem_stb -0.226 -0.062  0.001   0.029                                    
+pain        -0.050 -0.010  0.000   0.110 -0.094                             
+physcl_symp -0.016  0.076 -0.005  -0.363 -0.052  -0.248                     
+discomfort   0.105  0.026 -0.004  -0.464 -0.164  -0.386  0.308              
+sensations  -0.127  0.062 -0.001   0.178 -0.180   0.268 -0.039 -0.418       
+sssn2:prbl_  0.534 -0.862 -0.706  -0.003  0.000   0.001  0.005  0.003  0.000

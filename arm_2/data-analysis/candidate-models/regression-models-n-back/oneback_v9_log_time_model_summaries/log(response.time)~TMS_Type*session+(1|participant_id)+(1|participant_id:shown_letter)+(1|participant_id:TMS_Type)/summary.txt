@@ -3,24 +3,25 @@ Formula: log(response.time) ~ TMS_Type * session + (1 | participant_id) +
     (1 | participant_id:shown_letter) + (1 | participant_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1039.5    -986.9     527.8   -1055.5      5273 
+     AIC      BIC   logLik deviance df.resid 
+ -1039.5   -986.9    527.8  -1055.5     5273 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
 -9.2797 -0.6768 -0.1014  0.5585  4.7334 
 
 Random effects:
- Groups                      Name        Variance  Std.Dev. 
- participant_id:shown_letter (Intercept) 1.696e-11 4.118e-06
- participant_id:TMS_Type     (Intercept) 8.703e-03 9.329e-02
- participant_id              (Intercept) 1.527e-02 1.236e-01
- Residual                                4.616e-02 2.149e-01
-Number of obs: 5281, groups:  participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27
+ Groups                      Name        Variance Std.Dev.
+ participant_id:shown_letter (Intercept) 0.000000 0.0000  
+ participant_id:TMS_Type     (Intercept) 0.008705 0.0933  
+ participant_id              (Intercept) 0.015269 0.1236  
+ Residual                                0.046163 0.2149  
+Number of obs: 5281, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27
 
 Fixed effects:
                     Estimate Std. Error t value
-(Intercept)         -0.52910    0.04336 -12.201
+(Intercept)         -0.52910    0.04337 -12.201
 TMS_TypeWM          -0.02298    0.06022  -0.382
 session2            -0.10487    0.06022  -1.741
 TMS_TypeWM:session2  0.07321    0.10855   0.674

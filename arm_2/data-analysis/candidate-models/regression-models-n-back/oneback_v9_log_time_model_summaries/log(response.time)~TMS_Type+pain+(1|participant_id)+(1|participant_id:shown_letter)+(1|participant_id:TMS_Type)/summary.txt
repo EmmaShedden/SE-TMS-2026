@@ -3,8 +3,8 @@ Formula: log(response.time) ~ TMS_Type + pain + (1 | participant_id) +
     (1 | participant_id:shown_letter) + (1 | participant_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1039.3    -993.3     526.7   -1053.3      5274 
+     AIC      BIC   logLik deviance df.resid 
+ -1039.3   -993.3    526.7  -1053.3     5274 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -16,7 +16,8 @@ Random effects:
  participant_id:TMS_Type     (Intercept) 9.974e-03 0.0998710
  participant_id              (Intercept) 1.368e-02 0.1169802
  Residual                                4.616e-02 0.2148559
-Number of obs: 5281, groups:  participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27
+Number of obs: 5281, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27
 
 Fixed effects:
              Estimate Std. Error t value
@@ -29,6 +30,5 @@ Correlation of Fixed Effects:
 TMS_TypeWM -0.433       
 pain       -0.098 -0.206
 optimizer (nloptwrap) convergence code: 0 (OK)
-Model failed to converge with max|grad| = 0.00796486 (tol = 0.002, component 1)
-  See ?lme4::convergence and ?lme4::troubleshooting.
+Model failed to converge with max|grad| = 0.00796505 (tol = 0.002, component 1)
 

@@ -1,10 +1,11 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
 Formula: log(response.time) ~ TMS_Type * pain + (1 | participant_id) +  
-    (1 | participant_id:shown_letter) + (1 | participant_id:TMS_Type) +      (1 | shown_letter:TMS_Type)
+    (1 | participant_id:shown_letter) + (1 | participant_id:TMS_Type) +  
+    (1 | shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1040.1    -981.0     529.1   -1058.1      5272 
+     AIC      BIC   logLik deviance df.resid 
+ -1040.1   -981.0    529.1  -1058.1     5272 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -12,26 +13,23 @@ Scaled residuals:
 
 Random effects:
  Groups                      Name        Variance  Std.Dev. 
- participant_id:shown_letter (Intercept) 4.902e-12 2.214e-06
+ participant_id:shown_letter (Intercept) 6.145e-10 2.479e-05
  participant_id:TMS_Type     (Intercept) 7.820e-03 8.843e-02
- participant_id              (Intercept) 1.594e-02 1.262e-01
- shown_letter:TMS_Type       (Intercept) 1.836e-05 4.284e-03
+ participant_id              (Intercept) 1.593e-02 1.262e-01
+ shown_letter:TMS_Type       (Intercept) 1.834e-05 4.283e-03
  Residual                                4.615e-02 2.148e-01
 Number of obs: 5281, groups:  
 participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12
 
 Fixed effects:
                 Estimate Std. Error t value
-(Intercept)     -0.58067    0.03038 -19.112
+(Intercept)     -0.58067    0.03038 -19.114
 TMS_TypeWM      -0.01044    0.02620  -0.398
-pain            -0.07430    0.12829  -0.579
-TMS_TypeWM:pain  0.28814    0.12321   2.339
+pain            -0.07428    0.12828  -0.579
+TMS_TypeWM:pain  0.28812    0.12321   2.338
 
 Correlation of Fixed Effects:
             (Intr) TMS_TyWM pain  
 TMS_TypeWM  -0.399                
 pain        -0.157  0.062         
 TMS_TypWM:p  0.127 -0.228   -0.813
-optimizer (nloptwrap) convergence code: 0 (OK)
-boundary (singular) fit: see help('isSingular')
-

@@ -1,30 +1,31 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
 Formula: log(response.time) ~ TMS_Type + pain + (1 | shown_letter) + (1 |  
-    participant_id:TMS_Type) + (1 | shown_letter:TMS_Type) +      (1 | participant_id:shown_letter:TMS_Type)
+    participant_id:TMS_Type) + (1 | shown_letter:TMS_Type) +  
+    (1 | participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1027.6    -975.0     521.8   -1043.6      5273 
+     AIC      BIC   logLik deviance df.resid 
+ -1027.6   -975.0    521.8  -1043.6     5273 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--9.2916 -0.6711 -0.1012  0.5623  4.7542 
+-9.2916 -0.6711 -0.1012  0.5624  4.7543 
 
 Random effects:
- Groups                               Name        Variance  Std.Dev. 
- participant_id:shown_letter:TMS_Type (Intercept) 6.817e-05 8.256e-03
- participant_id:TMS_Type              (Intercept) 2.364e-02 1.538e-01
- shown_letter:TMS_Type                (Intercept) 1.010e-11 3.178e-06
- shown_letter                         (Intercept) 3.090e-05 5.559e-03
- Residual                                         4.608e-02 2.147e-01
+ Groups                               Name        Variance  Std.Dev.
+ participant_id:shown_letter:TMS_Type (Intercept) 6.823e-05 0.008260
+ participant_id:TMS_Type              (Intercept) 2.364e-02 0.153741
+ shown_letter:TMS_Type                (Intercept) 0.000e+00 0.000000
+ shown_letter                         (Intercept) 3.100e-05 0.005568
+ Residual                                         4.608e-02 0.214664
 Number of obs: 5281, groups:  
 participant_id:shown_letter:TMS_Type, 324; participant_id:TMS_Type, 54; shown_letter:TMS_Type, 12; shown_letter, 6
 
 Fixed effects:
             Estimate Std. Error t value
-(Intercept) -0.58944    0.03013 -19.564
+(Intercept) -0.58944    0.03013 -19.565
 TMS_TypeWM   0.00375    0.04270   0.088
-pain         0.16426    0.08152   2.015
+pain         0.16426    0.08151   2.015
 
 Correlation of Fixed Effects:
            (Intr) TMS_TW

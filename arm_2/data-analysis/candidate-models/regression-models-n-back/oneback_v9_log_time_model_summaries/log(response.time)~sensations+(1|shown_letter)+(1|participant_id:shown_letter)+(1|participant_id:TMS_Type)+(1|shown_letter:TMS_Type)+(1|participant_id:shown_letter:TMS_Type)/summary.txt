@@ -1,10 +1,12 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
-Formula: log(response.time) ~ sensations + (1 | shown_letter) + (1 | participant_id:shown_letter) +  
-    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type) +      (1 | participant_id:shown_letter:TMS_Type)
+Formula: 
+log(response.time) ~ sensations + (1 | shown_letter) + (1 | participant_id:shown_letter) +  
+    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type) +  
+    (1 | participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1023.7    -971.1     519.8   -1039.7      5273 
+     AIC      BIC   logLik deviance df.resid 
+ -1023.7   -971.1    519.8  -1039.7     5273 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -12,11 +14,11 @@ Scaled residuals:
 
 Random effects:
  Groups                               Name        Variance  Std.Dev. 
- participant_id:shown_letter:TMS_Type (Intercept) 6.667e-05 8.165e-03
- participant_id:shown_letter          (Intercept) 0.000e+00 0.000e+00
+ participant_id:shown_letter:TMS_Type (Intercept) 6.685e-05 8.176e-03
+ participant_id:shown_letter          (Intercept) 2.299e-11 4.795e-06
  participant_id:TMS_Type              (Intercept) 2.544e-02 1.595e-01
- shown_letter:TMS_Type                (Intercept) 4.526e-11 6.728e-06
- shown_letter                         (Intercept) 3.069e-05 5.540e-03
+ shown_letter:TMS_Type                (Intercept) 1.362e-11 3.690e-06
+ shown_letter                         (Intercept) 3.073e-05 5.543e-03
  Residual                                         4.608e-02 2.147e-01
 Number of obs: 5281, groups:  
 participant_id:shown_letter:TMS_Type, 324; participant_id:shown_letter, 162; participant_id:TMS_Type, 54; shown_letter:TMS_Type, 12; shown_letter, 6
@@ -24,7 +26,7 @@ participant_id:shown_letter:TMS_Type, 324; participant_id:shown_letter, 162; par
 Fixed effects:
             Estimate Std. Error t value
 (Intercept) -0.57849    0.02335 -24.776
-sensations   0.02783    0.06971   0.399
+sensations   0.02783    0.06972   0.399
 
 Correlation of Fixed Effects:
            (Intr)

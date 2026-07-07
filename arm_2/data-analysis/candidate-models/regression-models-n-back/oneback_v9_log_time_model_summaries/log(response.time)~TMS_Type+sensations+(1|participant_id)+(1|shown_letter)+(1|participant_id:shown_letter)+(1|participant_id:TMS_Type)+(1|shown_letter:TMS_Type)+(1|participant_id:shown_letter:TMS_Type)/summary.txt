@@ -1,25 +1,26 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
 Formula: log(response.time) ~ TMS_Type + sensations + (1 | participant_id) +  
     (1 | shown_letter) + (1 | participant_id:shown_letter) +  
-    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type) +      (1 | participant_id:shown_letter:TMS_Type)
+    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type) +  
+    (1 | participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1030.0    -964.3     525.0   -1050.0      5271 
+     AIC      BIC   logLik deviance df.resid 
+ -1030.0   -964.3    525.0  -1050.0     5271 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
 -9.2918 -0.6722 -0.1002  0.5593  4.7401 
 
 Random effects:
- Groups                               Name        Variance  Std.Dev.
- participant_id:shown_letter:TMS_Type (Intercept) 6.702e-05 0.008186
- participant_id:shown_letter          (Intercept) 0.000e+00 0.000000
- participant_id:TMS_Type              (Intercept) 1.089e-02 0.104351
- participant_id                       (Intercept) 1.449e-02 0.120367
- shown_letter:TMS_Type                (Intercept) 0.000e+00 0.000000
- shown_letter                         (Intercept) 3.041e-05 0.005515
- Residual                                         4.608e-02 0.214667
+ Groups                               Name        Variance  Std.Dev. 
+ participant_id:shown_letter:TMS_Type (Intercept) 6.668e-05 8.166e-03
+ participant_id:shown_letter          (Intercept) 4.095e-11 6.399e-06
+ participant_id:TMS_Type              (Intercept) 1.089e-02 1.043e-01
+ participant_id                       (Intercept) 1.449e-02 1.204e-01
+ shown_letter:TMS_Type                (Intercept) 0.000e+00 0.000e+00
+ shown_letter                         (Intercept) 3.043e-05 5.516e-03
+ Residual                                         4.608e-02 2.147e-01
 Number of obs: 5281, groups:  
 participant_id:shown_letter:TMS_Type, 324; participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
 
@@ -27,11 +28,11 @@ Fixed effects:
             Estimate Std. Error t value
 (Intercept) -0.58726    0.03179 -18.473
 TMS_TypeWM   0.01594    0.02902   0.549
-sensations   0.03503    0.06220   0.563
+sensations   0.03503    0.06219   0.563
 
 Correlation of Fixed Effects:
            (Intr) TMS_TW
-TMS_TypeWM -0.457       
+TMS_TypeWM -0.456       
 sensations -0.217  0.000
 optimizer (nloptwrap) convergence code: 0 (OK)
 boundary (singular) fit: see help('isSingular')

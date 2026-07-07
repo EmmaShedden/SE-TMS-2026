@@ -4,33 +4,33 @@ Formula: log(response.time) ~ TMS_Type + sensations + (1 | participant_id) +
     (1 | participant_id:TMS_Type) + (1 | participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1032.0    -972.8     525.0   -1050.0      5272 
+     AIC      BIC   logLik deviance df.resid 
+ -1032.0   -972.8    525.0  -1050.0     5272 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--9.2918 -0.6722 -0.1001  0.5593  4.7401 
+-9.2918 -0.6722 -0.1001  0.5594  4.7401 
 
 Random effects:
  Groups                               Name        Variance  Std.Dev. 
- participant_id:shown_letter:TMS_Type (Intercept) 6.754e-05 8.218e-03
- participant_id:shown_letter          (Intercept) 5.279e-11 7.265e-06
- participant_id:TMS_Type              (Intercept) 1.089e-02 1.043e-01
- participant_id                       (Intercept) 1.449e-02 1.204e-01
- shown_letter                         (Intercept) 3.048e-05 5.521e-03
+ participant_id:shown_letter:TMS_Type (Intercept) 6.835e-05 8.267e-03
+ participant_id:shown_letter          (Intercept) 1.250e-10 1.118e-05
+ participant_id:TMS_Type              (Intercept) 1.089e-02 1.044e-01
+ participant_id                       (Intercept) 1.448e-02 1.203e-01
+ shown_letter                         (Intercept) 3.045e-05 5.518e-03
  Residual                                         4.608e-02 2.147e-01
 Number of obs: 5281, groups:  
 participant_id:shown_letter:TMS_Type, 324; participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter, 6
 
 Fixed effects:
             Estimate Std. Error t value
-(Intercept) -0.58726    0.03179 -18.473
-TMS_TypeWM   0.01594    0.02902   0.549
-sensations   0.03503    0.06220   0.563
+(Intercept) -0.58726    0.03179 -18.476
+TMS_TypeWM   0.01594    0.02903   0.549
+sensations   0.03502    0.06220   0.563
 
 Correlation of Fixed Effects:
            (Intr) TMS_TW
-TMS_TypeWM -0.456       
+TMS_TypeWM -0.457       
 sensations -0.217  0.000
 optimizer (nloptwrap) convergence code: 0 (OK)
 boundary (singular) fit: see help('isSingular')

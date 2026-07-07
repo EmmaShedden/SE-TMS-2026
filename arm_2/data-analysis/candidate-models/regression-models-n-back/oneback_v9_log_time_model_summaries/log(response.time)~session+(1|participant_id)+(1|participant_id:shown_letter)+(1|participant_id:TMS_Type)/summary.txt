@@ -1,32 +1,33 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
-Formula: log(response.time) ~ session + (1 | participant_id) + (1 | participant_id:shown_letter) +  
+Formula: 
+log(response.time) ~ session + (1 | participant_id) + (1 | participant_id:shown_letter) +  
     (1 | participant_id:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1042.8   -1003.4     527.4   -1054.8      5275 
+     AIC      BIC   logLik deviance df.resid 
+ -1042.8  -1003.4    527.4  -1054.8     5275 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--9.2822 -0.6763 -0.0995  0.5595  4.7363 
+-9.2822 -0.6763 -0.0994  0.5595  4.7363 
 
 Random effects:
  Groups                      Name        Variance  Std.Dev. 
- participant_id:shown_letter (Intercept) 2.660e-08 0.0001631
- participant_id:TMS_Type     (Intercept) 8.792e-03 0.0937674
- participant_id              (Intercept) 1.556e-02 0.1247582
- Residual                                4.616e-02 0.2148555
-Number of obs: 5281, groups:  participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27
+ participant_id:shown_letter (Intercept) 1.303e-08 0.0001142
+ participant_id:TMS_Type     (Intercept) 8.801e-03 0.0938113
+ participant_id              (Intercept) 1.554e-02 0.1246525
+ Residual                                4.616e-02 0.2148557
+Number of obs: 5281, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27
 
 Fixed effects:
             Estimate Std. Error t value
-(Intercept) -0.54102    0.03032 -17.841
-session2    -0.06877    0.02620  -2.625
+(Intercept) -0.54102    0.03031 -17.847
+session2    -0.06877    0.02621  -2.624
 
 Correlation of Fixed Effects:
          (Intr)
 session2 -0.432
 optimizer (nloptwrap) convergence code: 0 (OK)
-Model failed to converge with max|grad| = 0.00925973 (tol = 0.002, component 1)
-  See ?lme4::convergence and ?lme4::troubleshooting.
+Model failed to converge with max|grad| = 0.00648503 (tol = 0.002, component 1)
 

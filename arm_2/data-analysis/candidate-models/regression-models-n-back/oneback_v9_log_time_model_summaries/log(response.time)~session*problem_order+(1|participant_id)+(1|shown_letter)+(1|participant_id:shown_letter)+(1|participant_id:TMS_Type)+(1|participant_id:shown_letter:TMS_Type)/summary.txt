@@ -4,28 +4,28 @@ Formula: log(response.time) ~ session * problem_order + (1 | participant_id) +
     (1 | participant_id:TMS_Type) + (1 | participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1102.4   -1036.7     561.2   -1122.4      5271 
+     AIC      BIC   logLik deviance df.resid 
+ -1102.4  -1036.7    561.2  -1122.4     5271 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
 -9.4315 -0.6718 -0.0993  0.5481  4.8117 
 
 Random effects:
- Groups                               Name        Variance  Std.Dev. 
- participant_id:shown_letter:TMS_Type (Intercept) 8.903e-05 9.436e-03
- participant_id:shown_letter          (Intercept) 1.609e-11 4.011e-06
- participant_id:TMS_Type              (Intercept) 8.786e-03 9.373e-02
- participant_id                       (Intercept) 1.557e-02 1.248e-01
- shown_letter                         (Intercept) 2.508e-05 5.008e-03
- Residual                                         4.548e-02 2.133e-01
+ Groups                               Name        Variance  Std.Dev.
+ participant_id:shown_letter:TMS_Type (Intercept) 8.885e-05 0.009426
+ participant_id:shown_letter          (Intercept) 0.000e+00 0.000000
+ participant_id:TMS_Type              (Intercept) 8.786e-03 0.093732
+ participant_id                       (Intercept) 1.557e-02 0.124764
+ shown_letter                         (Intercept) 2.513e-05 0.005013
+ Residual                                         4.548e-02 0.213260
 Number of obs: 5281, groups:  
 participant_id:shown_letter:TMS_Type, 324; participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter, 6
 
 Fixed effects:
                          Estimate Std. Error t value
-(Intercept)            -0.4845110  0.0312495 -15.505
-session2               -0.1065640  0.0281407  -3.787
+(Intercept)            -0.4845110  0.0312499 -15.504
+session2               -0.1065638  0.0281405  -3.787
 problem_order          -0.0011195  0.0001436  -7.794
 session2:problem_order  0.0007487  0.0002034   3.682
 

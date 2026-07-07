@@ -1,30 +1,31 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
 Formula: log(response.time) ~ TMS_Type + pain + (1 | shown_letter) + (1 |  
-    participant_id:shown_letter) + (1 | shown_letter:TMS_Type) +      (1 | participant_id:shown_letter:TMS_Type)
+    participant_id:shown_letter) + (1 | shown_letter:TMS_Type) +  
+    (1 | participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-   -581.5    -528.9     298.8    -597.5      5273 
+     AIC      BIC   logLik deviance df.resid 
+  -581.5   -528.9    298.8   -597.5     5273 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--9.0957 -0.6612 -0.0932  0.5379  4.6139 
+-9.0958 -0.6612 -0.0932  0.5379  4.6140 
 
 Random effects:
- Groups                               Name        Variance  Std.Dev. 
- participant_id:shown_letter:TMS_Type (Intercept) 1.009e-02 1.004e-01
- participant_id:shown_letter          (Intercept) 1.353e-02 1.163e-01
- shown_letter:TMS_Type                (Intercept) 3.295e-11 5.740e-06
- shown_letter                         (Intercept) 7.013e-11 8.375e-06
- Residual                                         4.606e-02 2.146e-01
+ Groups                               Name        Variance Std.Dev.
+ participant_id:shown_letter:TMS_Type (Intercept) 0.01009  0.1004  
+ participant_id:shown_letter          (Intercept) 0.01353  0.1163  
+ shown_letter:TMS_Type                (Intercept) 0.00000  0.0000  
+ shown_letter                         (Intercept) 0.00000  0.0000  
+ Residual                                         0.04606  0.2146  
 Number of obs: 5281, groups:  
 participant_id:shown_letter:TMS_Type, 324; participant_id:shown_letter, 162; shown_letter:TMS_Type, 12; shown_letter, 6
 
 Fixed effects:
              Estimate Std. Error t value
-(Intercept) -0.591957   0.012875 -45.978
+(Intercept) -0.591957   0.012875 -45.977
 TMS_TypeWM   0.003525   0.012948   0.272
-pain         0.170493   0.034683   4.916
+pain         0.170493   0.034684   4.916
 
 Correlation of Fixed Effects:
            (Intr) TMS_TW

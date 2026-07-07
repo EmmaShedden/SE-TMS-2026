@@ -1,0 +1,35 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(response.time) ~ session + discomfort + (1 | participant_id) +  
+    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+ -1040.8   -994.8    527.4  -1054.8     5274 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.2822 -0.6763 -0.0994  0.5595  4.7363 
+
+Random effects:
+ Groups                  Name        Variance  Std.Dev. 
+ participant_id:TMS_Type (Intercept) 8.806e-03 9.384e-02
+ participant_id          (Intercept) 1.554e-02 1.246e-01
+ shown_letter:TMS_Type   (Intercept) 1.532e-09 3.915e-05
+ Residual                            4.616e-02 2.149e-01
+Number of obs: 5281, groups:  
+participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12
+
+Fixed effects:
+             Estimate Std. Error t value
+(Intercept) -0.540922   0.031129 -17.377
+session2    -0.068793   0.026275  -2.618
+discomfort  -0.000638   0.047700  -0.013
+
+Correlation of Fixed Effects:
+           (Intr) sessn2
+session2   -0.435       
+discomfort -0.227  0.067
+optimizer (nloptwrap) convergence code: 0 (OK)
+unable to evaluate scaled gradient
+Model failed to converge: degenerate  Hessian with 1 negative eigenvalues
+

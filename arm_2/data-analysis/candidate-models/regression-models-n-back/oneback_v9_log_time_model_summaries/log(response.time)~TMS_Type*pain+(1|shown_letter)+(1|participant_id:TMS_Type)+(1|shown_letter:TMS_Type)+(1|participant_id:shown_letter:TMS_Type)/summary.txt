@@ -1,31 +1,32 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
 Formula: log(response.time) ~ TMS_Type * pain + (1 | shown_letter) + (1 |  
-    participant_id:TMS_Type) + (1 | shown_letter:TMS_Type) +      (1 | participant_id:shown_letter:TMS_Type)
+    participant_id:TMS_Type) + (1 | shown_letter:TMS_Type) +  
+    (1 | participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1026.1    -967.0     522.1   -1044.1      5272 
+     AIC      BIC   logLik deviance df.resid 
+ -1026.1   -967.0    522.1  -1044.1     5272 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
 -9.2920 -0.6717 -0.1005  0.5627  4.7545 
 
 Random effects:
- Groups                               Name        Variance  Std.Dev.
- participant_id:shown_letter:TMS_Type (Intercept) 6.829e-05 0.008264
- participant_id:TMS_Type              (Intercept) 2.339e-02 0.152930
- shown_letter:TMS_Type                (Intercept) 0.000e+00 0.000000
- shown_letter                         (Intercept) 3.097e-05 0.005565
- Residual                                         4.608e-02 0.214663
+ Groups                               Name        Variance  Std.Dev. 
+ participant_id:shown_letter:TMS_Type (Intercept) 6.824e-05 8.261e-03
+ participant_id:TMS_Type              (Intercept) 2.339e-02 1.529e-01
+ shown_letter:TMS_Type                (Intercept) 1.106e-10 1.052e-05
+ shown_letter                         (Intercept) 3.092e-05 5.560e-03
+ Residual                                         4.608e-02 2.147e-01
 Number of obs: 5281, groups:  
 participant_id:shown_letter:TMS_Type, 324; participant_id:TMS_Type, 54; shown_letter:TMS_Type, 12; shown_letter, 6
 
 Fixed effects:
                  Estimate Std. Error t value
 (Intercept)     -0.585688   0.030386 -19.275
-TMS_TypeWM      -0.004076   0.043735  -0.093
-pain             0.062877   0.157412   0.399
-TMS_TypeWM:pain  0.137998   0.183655   0.751
+TMS_TypeWM      -0.004076   0.043736  -0.093
+pain             0.062878   0.157416   0.399
+TMS_TypeWM:pain  0.137997   0.183660   0.751
 
 Correlation of Fixed Effects:
             (Intr) TMS_TyWM pain  

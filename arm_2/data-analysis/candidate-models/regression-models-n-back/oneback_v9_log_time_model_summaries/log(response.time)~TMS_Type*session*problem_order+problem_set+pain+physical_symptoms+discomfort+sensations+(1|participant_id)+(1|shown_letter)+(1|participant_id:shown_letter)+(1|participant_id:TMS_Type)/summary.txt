@@ -1,0 +1,43 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: 
+log(response.time) ~ TMS_Type * session * problem_order + problem_set +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    participant_id) + (1 | shown_letter) + (1 | participant_id:shown_letter) +  
+    (1 | participant_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+ -1131.8  -1013.5    583.9  -1167.8     5263 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.3902 -0.6678 -0.1028  0.5491  4.8405 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev. 
+ participant_id:shown_letter (Intercept) 4.754e-10 0.0000218
+ participant_id:TMS_Type     (Intercept) 5.980e-03 0.0773299
+ participant_id              (Intercept) 1.410e-02 0.1187317
+ shown_letter                (Intercept) 2.165e-05 0.0046533
+ Residual                                4.528e-02 0.2127945
+Number of obs: 5281, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter, 6
+
+Fixed effects:
+                                    Estimate Std. Error t value
+(Intercept)                       -0.5478096  0.0445765 -12.289
+TMS_TypeWM                         0.0539427  0.0645487   0.836
+session2                          -0.1049082  0.0599541  -1.750
+problem_order                     -0.0003615  0.0002066  -1.749
+problem_setb                       0.0417993  0.0251946   1.659
+pain                               0.1939900  0.0789011   2.459
+physical_symptoms                  0.1015475  0.0605429   1.677
+discomfort                        -0.0859937  0.0615846  -1.396
+sensations                         0.0260794  0.0621161   0.420
+TMS_TypeWM:session2                0.0073866  0.1080483   0.068
+TMS_TypeWM:problem_order          -0.0014591  0.0002867  -5.090
+session2:problem_order             0.0003218  0.0002870   1.122
+TMS_TypeWM:session2:problem_order  0.0007716  0.0004058   1.902
+optimizer (nloptwrap) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.0024042 (tol = 0.002, component 1)
+

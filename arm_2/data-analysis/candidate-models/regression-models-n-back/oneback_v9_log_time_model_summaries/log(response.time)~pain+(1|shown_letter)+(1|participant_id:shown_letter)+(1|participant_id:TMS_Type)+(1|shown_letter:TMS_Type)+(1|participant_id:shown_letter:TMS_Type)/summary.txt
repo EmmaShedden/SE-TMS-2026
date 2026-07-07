@@ -1,30 +1,32 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
-Formula: log(response.time) ~ pain + (1 | shown_letter) + (1 | participant_id:shown_letter) +  
-    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type) +      (1 | participant_id:shown_letter:TMS_Type)
+Formula: 
+log(response.time) ~ pain + (1 | shown_letter) + (1 | participant_id:shown_letter) +  
+    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type) +  
+    (1 | participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1027.6    -975.0     521.8   -1043.6      5273 
+     AIC      BIC   logLik deviance df.resid 
+ -1027.6   -975.0    521.8  -1043.6     5273 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--9.2918 -0.6711 -0.1010  0.5625  4.7544 
+-9.2918 -0.6711 -0.1010  0.5626  4.7544 
 
 Random effects:
  Groups                               Name        Variance  Std.Dev. 
- participant_id:shown_letter:TMS_Type (Intercept) 6.810e-05 8.252e-03
- participant_id:shown_letter          (Intercept) 2.353e-11 4.850e-06
- participant_id:TMS_Type              (Intercept) 2.364e-02 1.537e-01
- shown_letter:TMS_Type                (Intercept) 3.359e-11 5.796e-06
- shown_letter                         (Intercept) 3.090e-05 5.559e-03
+ participant_id:shown_letter:TMS_Type (Intercept) 6.796e-05 8.244e-03
+ participant_id:shown_letter          (Intercept) 1.421e-10 1.192e-05
+ participant_id:TMS_Type              (Intercept) 2.364e-02 1.538e-01
+ shown_letter:TMS_Type                (Intercept) 5.294e-12 2.301e-06
+ shown_letter                         (Intercept) 3.093e-05 5.561e-03
  Residual                                         4.608e-02 2.147e-01
 Number of obs: 5281, groups:  
 participant_id:shown_letter:TMS_Type, 324; participant_id:shown_letter, 162; participant_id:TMS_Type, 54; shown_letter:TMS_Type, 12; shown_letter, 6
 
 Fixed effects:
             Estimate Std. Error t value
-(Intercept) -0.58764    0.02208 -26.613
-pain         0.16527    0.08069   2.048
+(Intercept) -0.58764    0.02208 -26.611
+pain         0.16527    0.08070   2.048
 
 Correlation of Fixed Effects:
      (Intr)

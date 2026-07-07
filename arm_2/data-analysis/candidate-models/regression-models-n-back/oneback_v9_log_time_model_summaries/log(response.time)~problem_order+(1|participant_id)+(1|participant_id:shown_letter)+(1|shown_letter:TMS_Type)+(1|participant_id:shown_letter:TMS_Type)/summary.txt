@@ -1,28 +1,29 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
 Formula: log(response.time) ~ problem_order + (1 | participant_id) + (1 |  
-    participant_id:shown_letter) + (1 | shown_letter:TMS_Type) +      (1 | participant_id:shown_letter:TMS_Type)
+    participant_id:shown_letter) + (1 | shown_letter:TMS_Type) +  
+    (1 | participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-   -844.4    -798.4     429.2    -858.4      5274 
+     AIC      BIC   logLik deviance df.resid 
+  -844.4   -798.4    429.2   -858.4     5274 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
 -9.3487 -0.6596 -0.0981  0.5416  4.6583 
 
 Random effects:
- Groups                               Name        Variance Std.Dev.
- participant_id:shown_letter:TMS_Type (Intercept) 0.006223 0.07889 
- participant_id:shown_letter          (Intercept) 0.000000 0.00000 
- participant_id                       (Intercept) 0.019324 0.13901 
- shown_letter:TMS_Type                (Intercept) 0.000000 0.00000 
- Residual                                         0.045580 0.21349 
+ Groups                               Name        Variance  Std.Dev. 
+ participant_id:shown_letter:TMS_Type (Intercept) 6.223e-03 7.889e-02
+ participant_id:shown_letter          (Intercept) 0.000e+00 0.000e+00
+ participant_id                       (Intercept) 1.932e-02 1.390e-01
+ shown_letter:TMS_Type                (Intercept) 3.284e-11 5.731e-06
+ Residual                                         4.558e-02 2.135e-01
 Number of obs: 5281, groups:  
 participant_id:shown_letter:TMS_Type, 324; participant_id:shown_letter, 162; participant_id, 27; shown_letter:TMS_Type, 12
 
 Fixed effects:
                 Estimate Std. Error t value
-(Intercept)   -0.5390189  0.0277733 -19.408
+(Intercept)   -0.5390189  0.0277715 -19.409
 problem_order -0.0007543  0.0001038  -7.264
 
 Correlation of Fixed Effects:

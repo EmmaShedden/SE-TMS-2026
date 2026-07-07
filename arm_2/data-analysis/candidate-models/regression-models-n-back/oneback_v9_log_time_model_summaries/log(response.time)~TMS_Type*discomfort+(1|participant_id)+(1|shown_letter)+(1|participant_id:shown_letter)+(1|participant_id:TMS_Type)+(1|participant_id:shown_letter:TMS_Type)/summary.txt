@@ -4,8 +4,8 @@ Formula: log(response.time) ~ TMS_Type * discomfort + (1 | participant_id) +
     (1 | participant_id:TMS_Type) + (1 | participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1031.7    -972.6     524.9   -1049.7      5272 
+     AIC      BIC   logLik deviance df.resid 
+ -1031.7   -972.6    524.9  -1049.7     5272 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -13,8 +13,8 @@ Scaled residuals:
 
 Random effects:
  Groups                               Name        Variance  Std.Dev. 
- participant_id:shown_letter:TMS_Type (Intercept) 6.727e-05 8.202e-03
- participant_id:shown_letter          (Intercept) 2.127e-11 4.612e-06
+ participant_id:shown_letter:TMS_Type (Intercept) 6.706e-05 8.189e-03
+ participant_id:shown_letter          (Intercept) 2.201e-11 4.692e-06
  participant_id:TMS_Type              (Intercept) 1.104e-02 1.051e-01
  participant_id                       (Intercept) 1.437e-02 1.199e-01
  shown_letter                         (Intercept) 3.043e-05 5.516e-03
@@ -24,14 +24,14 @@ participant_id:shown_letter:TMS_Type, 324; participant_id:shown_letter, 162; par
 
 Fixed effects:
              Estimate Std. Error t value
-(Intercept) -0.583371   0.031048 -18.789
-TMS_TypeWM   0.018516   0.032952   0.562
-discomfort  -0.009947   0.058782  -0.169
+(Intercept) -0.583370   0.031049 -18.789
+TMS_TypeWM   0.018515   0.032949   0.562
+discomfort  -0.009944   0.058779  -0.169
 
 Correlation of Fixed Effects:
            (Intr) TMS_TW
 TMS_TypeWM -0.417       
-discomfort  0.000 -0.462
+discomfort  0.000 -0.463
 fit warnings:
 fixed-effect model matrix is rank deficient so dropping 1 column / coefficient
 optimizer (nloptwrap) convergence code: 0 (OK)

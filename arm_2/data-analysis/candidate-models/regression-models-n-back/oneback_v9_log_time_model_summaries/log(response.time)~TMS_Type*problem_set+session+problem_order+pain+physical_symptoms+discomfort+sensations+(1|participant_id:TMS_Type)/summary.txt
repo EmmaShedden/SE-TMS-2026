@@ -1,0 +1,44 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: 
+log(response.time) ~ TMS_Type * problem_set + session + problem_order +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    participant_id:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+ -1098.2  -1019.3    561.1  -1122.2     5269 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.4989 -0.6658 -0.0946  0.5557  4.8204 
+
+Random effects:
+ Groups                  Name        Variance Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.01445  0.1202  
+ Residual                            0.04569  0.2138  
+Number of obs: 5281, groups:  participant_id:TMS_Type, 54
+
+Fixed effects:
+                          Estimate Std. Error t value
+(Intercept)             -0.4831901  0.0365948 -13.204
+TMS_TypeWM              -0.1285149  0.0494146  -2.601
+problem_setb            -0.0919759  0.0480145  -1.916
+session2                -0.0605768  0.0341681  -1.773
+problem_order           -0.0007455  0.0001018  -7.322
+pain                     0.1054862  0.0733092   1.439
+physical_symptoms        0.1126534  0.0715602   1.574
+discomfort              -0.1615211  0.0688386  -2.346
+sensations               0.0515227  0.0618076   0.834
+TMS_TypeWM:problem_setb  0.3214150  0.0715418   4.493
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM prblm_s sessn2 prblm_r pain   physc_ dscmfr snstns
+TMS_TypeWM  -0.583                                                            
+problem_stb -0.519  0.422                                                     
+session2    -0.446 -0.030   -0.100                                            
+problem_rdr -0.140  0.000    0.000   0.000                                    
+pain        -0.155  0.210    0.069  -0.021  0.000                             
+physcl_symp -0.034 -0.282   -0.033   0.161  0.000  -0.239                     
+discomfort   0.066 -0.241    0.014   0.053 -0.001  -0.329  0.305              
+sensations  -0.200  0.162   -0.111   0.118  0.000   0.270 -0.038 -0.404       
+TMS_TypWM:_  0.405 -0.605   -0.669   0.015  0.000  -0.207 -0.013 -0.198 -0.036

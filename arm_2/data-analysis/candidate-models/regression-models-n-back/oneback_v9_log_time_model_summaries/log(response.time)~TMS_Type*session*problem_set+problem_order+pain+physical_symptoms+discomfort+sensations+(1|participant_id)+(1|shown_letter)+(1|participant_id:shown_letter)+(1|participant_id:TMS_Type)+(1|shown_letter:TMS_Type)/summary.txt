@@ -1,0 +1,44 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: 
+log(response.time) ~ TMS_Type * session * problem_set + problem_order +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    participant_id) + (1 | shown_letter) + (1 | participant_id:shown_letter) +  
+    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+ -1094.6   -969.8    566.3  -1132.6     5262 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.5132 -0.6691 -0.0963  0.5571  4.8153 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev. 
+ participant_id:shown_letter (Intercept) 5.187e-09 7.202e-05
+ participant_id:TMS_Type     (Intercept) 5.887e-03 7.672e-02
+ participant_id              (Intercept) 9.002e-03 9.488e-02
+ shown_letter:TMS_Type       (Intercept) 0.000e+00 0.000e+00
+ shown_letter                (Intercept) 2.980e-05 5.459e-03
+ Residual                                4.567e-02 2.137e-01
+Number of obs: 5281, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                                   Estimate Std. Error t value
+(Intercept)                      -0.4674769  0.0450629 -10.374
+TMS_TypeWM                       -0.1534989  0.0695070  -2.208
+session2                         -0.0941270  0.0647533  -1.454
+problem_setb                     -0.1186032  0.0682210  -1.739
+problem_order                    -0.0007455  0.0001018  -7.323
+pain                              0.1570344  0.0738606   2.126
+physical_symptoms                 0.1057553  0.0602169   1.756
+discomfort                       -0.1123950  0.0598873  -1.877
+sensations                        0.0418552  0.0605162   0.692
+TMS_TypeWM:session2               0.0676511  0.0999369   0.677
+TMS_TypeWM:problem_setb           0.3222319  0.0961749   3.350
+session2:problem_setb             0.0494707  0.0950841   0.520
+TMS_TypeWM:session2:problem_setb -0.0887315  0.0934290  -0.950
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

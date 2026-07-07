@@ -1,31 +1,32 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
 Formula: log(response.time) ~ TMS_Type + session + (1 | participant_id) +  
     (1 | shown_letter) + (1 | participant_id:shown_letter) +  
-    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type) +      (1 | participant_id:shown_letter:TMS_Type)
+    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type) +  
+    (1 | participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1035.8    -970.1     527.9   -1055.8      5271 
+     AIC      BIC   logLik deviance df.resid 
+ -1035.8   -970.1    527.9  -1055.8     5271 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--9.2853 -0.6733 -0.0984  0.5605  4.7427 
+-9.2854 -0.6734 -0.0984  0.5605  4.7427 
 
 Random effects:
  Groups                               Name        Variance  Std.Dev.
- participant_id:shown_letter:TMS_Type (Intercept) 6.593e-05 0.008120
+ participant_id:shown_letter:TMS_Type (Intercept) 6.572e-05 0.008107
  participant_id:shown_letter          (Intercept) 0.000e+00 0.000000
- participant_id:TMS_Type              (Intercept) 8.697e-03 0.093255
- participant_id                       (Intercept) 1.558e-02 0.124832
+ participant_id:TMS_Type              (Intercept) 8.697e-03 0.093256
+ participant_id                       (Intercept) 1.559e-02 0.124877
  shown_letter:TMS_Type                (Intercept) 0.000e+00 0.000000
- shown_letter                         (Intercept) 3.032e-05 0.005506
+ shown_letter                         (Intercept) 3.030e-05 0.005504
  Residual                                         4.608e-02 0.214669
 Number of obs: 5281, groups:  
 participant_id:shown_letter:TMS_Type, 324; participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
 
 Fixed effects:
             Estimate Std. Error t value
-(Intercept) -0.54799    0.03325 -16.483
+(Intercept) -0.54799    0.03325 -16.480
 TMS_TypeWM   0.01340    0.02609   0.514
 session2    -0.06822    0.02609  -2.615
 

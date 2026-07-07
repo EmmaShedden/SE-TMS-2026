@@ -1,0 +1,47 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: 
+log(response.time) ~ TMS_Type + session + problem_order + problem_set +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    participant_id) + (1 | participant_id:shown_letter)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  -836.5   -757.7    430.3   -860.5     5269 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.2802 -0.6771 -0.1042  0.5733  4.6643 
+
+Random effects:
+ Groups                      Name        Variance Std.Dev.
+ participant_id:shown_letter (Intercept) 0.00000  0.0000  
+ participant_id              (Intercept) 0.01749  0.1323  
+ Residual                                0.04867  0.2206  
+Number of obs: 5281, groups:  
+participant_id:shown_letter, 162; participant_id, 27
+
+Fixed effects:
+                    Estimate Std. Error t value
+(Intercept)       -0.5397249  0.0267667 -20.164
+TMS_TypeWM         0.0046247  0.0082262   0.562
+session2          -0.0659709  0.0064260 -10.266
+problem_order     -0.0007497  0.0001051  -7.135
+problem_setb       0.0393026  0.0072138   5.448
+pain               0.2240085  0.0272576   8.218
+physical_symptoms  0.0945296  0.0180242   5.245
+discomfort        -0.0914456  0.0187925  -4.866
+sensations         0.0187102  0.0194116   0.964
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW sessn2 prblm_r prblm_s pain   physc_ dscmfr
+TMS_TypeWM  -0.106                                                   
+session2    -0.120 -0.061                                            
+problem_rdr -0.198 -0.001  0.000                                     
+problem_stb -0.064  0.085 -0.185  0.001                              
+pain        -0.044  0.060  0.030 -0.003  -0.183                      
+physcl_symp -0.010 -0.463  0.203  0.000  -0.069  -0.030              
+discomfort   0.063 -0.551  0.054  0.001  -0.147  -0.474  0.264       
+sensations  -0.078  0.223  0.206 -0.003  -0.324   0.304 -0.066 -0.420
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+

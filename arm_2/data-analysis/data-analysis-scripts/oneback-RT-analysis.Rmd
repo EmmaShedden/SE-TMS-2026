@@ -8,54 +8,55 @@ date: "2025-1-29"
 
 ```{r}
 # import packages
-library(lme4)     # mixed models
-library(dplyr)    # dataframe manipulation
-library(readr)    # reading in the data
-library(emmeans)  # likelihood ratio testing
-library(purrr)    # for map()
-library(lattice)  # for xyplot()
-library(TAF)      # setting up output file directory structure during model fitting
-library(moments)  # skewness for selecting between additive and multiplicative models of response times
+library(lme4) # mixed models
+library(dplyr) # dataframe manipulation
+library(readr) # reading in the data
+library(emmeans) # likelihood ratio testing
+library(purrr) # for map()
+library(lattice) # for xyplot()
+library(TAF) # setting up output file directory structure during model fitting
+library(moments) # skewness for selecting between additive and multiplicative models of response times
+library(filelock)
+library(lmerTest)
 
-
-
-#If you get an error, you likely need to install the packages using the "install.package('insert-package-name-here')" command
+# If you get an error, you likely need to install the packages using the "install.package('insert-package-name-here')" command
 ```
 
 ## Notebook configurable settings
 
 ```{r}
 # name the directories to read data from and write output to
-input_version = 9
-output_version = 'n-back'
-nback_version = '1-back'
-
-
+input_version <- 9
+output_version <- "n-back"
+nback_version <- "1-back"
 ```
 
 make an overall output directory (model summaries, stats, etc. will all go here)
 
 ```{r}
-#setwd("..")
-outputdir = sprintf("%s/../journal-candidate-models/regression-models-%s",getwd(), output_version)
+# setwd("..")
+outputdir <- sprintf(
+  "%s/../candidate-models/regression-models-%s", getwd(), output_version
+)
 ```
 
 ```{r}
-
 mkdir(outputdir)
 ```
 
 ## Loading Data
 
 ```{r}
-#setwd("..")
-input_file = sprintf("%s/../preprocessed-data/full-data-version-%d/nback-full-data.csv", getwd(), input_version)
+# setwd("..")
+input_file <- sprintf("%s/../preprocessed-data/full-data-version-%d/nback-full-data.csv", getwd(), input_version)
 data <- read.csv(input_file)
 
 
-#Transforming the session number such that it is treated as a character and not a value
-data <- transform( 
-  data, session = as.character(session)) 
+# Transforming the session number such that it is treated as a character and not a value
+data <- transform(
+  data,
+  session = as.character(session)
+)
 
 head(data)
 ```
@@ -63,11 +64,11 @@ head(data)
 Removing irrelevant data from dataframe
 
 ```{r}
-#remove rows that have no values - nothing actually happens here. Everyone saw the stimuli
-#data <- data[data$response.time != 0, ] 
+# remove rows that have no values - nothing actually happens here. Everyone saw the stimuli
+# data <- data[data$response.time != 0, ]
 
 
-#Removing the one participants that didn't listen to instructions:
+# Removing the one participants that didn't listen to instructions:
 participants_to_remove <- c("REDACTED_20")
 data <- subset(data, !(participant_id %in% participants_to_remove))
 ```
@@ -75,11 +76,10 @@ data <- subset(data, !(participant_id %in% participants_to_remove))
 Making sure we are only looking at one type of n-back at a time and only instance of correct response
 
 ```{r}
-data <- data[data$correct_answer == 'True', ] #only counting the onces they got correct
+data <- data[data$correct_answer == "True", ] # only counting the onces they got correct
 
 
-data <- data[data$nback_type == nback_version, ] #1-back , 2-back , or 3-back
-
+data <- data[data$nback_type == nback_version, ] # 1-back , 2-back , or 3-back
 ```
 
 Determining what is the mean response.time
@@ -87,7 +87,6 @@ Determining what is the mean response.time
 ```{r}
 mean_value <- mean((data$response.time))
 print(mean_value)
-
 ```
 
 Centralizing the response.time so that it is more normally distributed. One-back was not generally normally distributed as seen in the bottom graph so transformation is required
@@ -105,10 +104,9 @@ hist(log(data$response.time))
 Checking number of participants is n=27
 
 ```{r}
-
 id <- unique(data$participant_id)
-id #all unique IDs
-length(id) #number of participants
+id # all unique IDs
+length(id) # number of participants
 ```
 
 Checking distribution of of observations per factor load in n-back
@@ -136,90 +134,122 @@ print(count_table)
 ## Specify candidate predictor structures for mixed model formulas
 
 ```{r}
-fixed_effects = c(# no fixed effects
-                  "", 
-                  
-                  # no interactions
-                  "TMS_Type", 
-                  "session",
-                  "problem_order", #the letter that they saw at what time
-                  
-                  "pain",
-                  "physical_symptoms",
-                  "discomfort", 
-                  "sensations",
-                  
-                  "TMS_Type + session", 
-                  "TMS_Type + problem_order",
-                  "session + problem_order",
-                  "TMS_Type + session + problem_order",
-                  
-                  "TMS_Type + pain",
-                  "TMS_Type + physical_symptoms",
-                  "TMS_Type + discomfort",
-                  "TMS_Type + sensations", 
-                  
-                  # 2-way interactions
-                  "TMS_Type * session", 
-                  "TMS_Type * problem_order",
-                  "session * problem_order",
-                  
-                  "TMS_Type * pain",
-                  "TMS_Type * physical_symptoms",
-                  "TMS_Type * discomfort",
-                  "TMS_Type * sensations",
-                  
-                  # 1- and 2-way interactions
-                  "TMS_Type * session + coding_section_no", 
-                  "TMS_Type * coding_section_no + session",
-                  "session * coding_section_no + TMS_Type", 
-                  
-                  "TMS_Type * pain + session",
-                  "TMS_Type * physical_symptoms + session",
-                  "TMS_Type * discomfort + session",
-                  "TMS_Type * sensations + session", 
-                  
-                  "TMS_Type * pain + coding_section_no",
-                  "TMS_Type * physical_symptoms + coding_section_no",
-                  "TMS_Type * discomfort + coding_section_no",
-                  "TMS_Type * sensations + coding_section_no", 
-                  
-                  # multiple 2-way interactions
-                  #"condition * domain + condition * session_num",
-                  #"domain * session_num + condition * session_num",
-                  #"condition * domain + domain * session_num + condition * session_num",
-                  
-                  # 3-way interactions
-                  #"condition * domain * session_num"
-                  "TMS_Type * session * problem_order"
-                  )
+fixed_effects <- c(
+  # no fixed effects
+  "",
+
+  # no interactions
+  "TMS_Type",
+  "session",
+  "problem_order",
+  "problem_set",
+  "pain",
+  "physical_symptoms",
+  "discomfort",
+  "sensations",
+
+  "TMS_Type + session",
+  "TMS_Type + problem_order",
+  "TMS_Type + problem_set",
+  "session + problem_order",
+  "session + problem_set",
+  "problem_set + problem_order",
+
+  "TMS_Type + pain",
+  "TMS_Type + physical_symptoms",
+  "TMS_Type + discomfort",
+  "TMS_Type + sensations",
+  "session + pain",
+  "session + physical_symptoms",
+  "session + discomfort",
+  "session + sensations",
+  "problem_order + pain",
+  "problem_order + physical_symptoms",
+  "problem_order + discomfort",
+  "problem_order + sensations",
+  "problem_set + pain",
+  "problem_set + physical_symptoms",
+  "problem_set + discomfort",
+  "problem_set + sensations",
+
+  "TMS_Type + session + problem_order + problem_set + pain + physical_symptoms + discomfort + sensations",
+
+  # 2-way interactions
+  "TMS_Type * session",
+  "TMS_Type * problem_order",
+  "TMS_Type * problem_set",
+  "session * problem_order",
+  "session * problem_set",
+  "problem_set * problem_order",
+
+  "TMS_Type * pain",
+  "TMS_Type * physical_symptoms",
+  "TMS_Type * discomfort",
+  "TMS_Type * sensations",
+  "session * pain",
+  "session * physical_symptoms",
+  "session * discomfort",
+  "session * sensations",
+  "problem_order * pain",
+  "problem_order * physical_symptoms",
+  "problem_order * discomfort",
+  "problem_order * sensations",
+  "problem_set * pain",
+  "problem_set * physical_symptoms",
+  "problem_set * discomfort",
+  "problem_set * sensations",
+
+  # 1- and 2-way interactions
+  "TMS_Type * session + problem_set + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_set + session + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_order + session + problem_set + pain + physical_symptoms + discomfort + sensations",
+  "session * problem_set + TMS_Type + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "session * problem_order + TMS_Type + problem_set + pain + physical_symptoms + discomfort + sensations",
+  "problem_set * problem_order + TMS_Type + session + pain + physical_symptoms + discomfort + sensations",
+
+  "TMS_Type * pain + session + problem_set + problem_order",
+  "TMS_Type * physical_symptoms + session + problem_set + problem_order",
+  "TMS_Type * discomfort + session + problem_set + problem_order",
+  "TMS_Type * sensations + session + problem_set + problem_order",
+
+  # multiple 2-way interactions
+  "TMS_Type * session + problem_set * problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_set + session * problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_order + session * problem_set + pain + physical_symptoms + discomfort + sensations",
+
+  # 3-way interactions
+  "TMS_Type * session * problem_set + problem_order + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * session * problem_order + problem_set + pain + physical_symptoms + discomfort + sensations",
+  "TMS_Type * problem_set * problem_order + session + pain + physical_symptoms + discomfort + sensations",
+  "session * problem_set * problem_order + TMS_Type + pain + physical_symptoms + discomfort + sensations"
+)
 ```
 
 ```{r}
-random_effects = c(#"",                                   # (1)
-                   "participant_id", 
-                   "shown_letter",                    
-                   #"condition",                          # (2)
-                   "participant_id:shown_letter", 
-                   "participant_id:TMS_Type",
-                   "shown_letter:TMS_Type",          
-                   "participant_id:shown_letter:TMS_Type"
-                   )
-
+random_effects <- c(
+  "participant_id",
+  "shown_letter",
+  # other than adding this term, all is the same as in the programming analyses
+  # (it couldn't be included in the programming analyses because there would
+  # only be one observation per group)
+  "participant_id:shown_letter",
+  "participant_id:TMS_Type",
+  "shown_letter:TMS_Type"
+)
 ```
 
 In this first cell, we enumerate random effect structures by taking all combinations of the random effects specified in Section 5.
 
 ```{r}
-random_effects = map(random_effects, function (s) sprintf("(1|%s)", s))
+random_effects <- map(random_effects, function(s) sprintf("(1|%s)", s))
 
-random_exprs = c()
-N_random = length(random_effects)
+random_exprs <- c()
+N_random <- length(random_effects)
 for (k in 1:N_random) {
-  iii = combn(1:N_random, k, simplify=FALSE)
+  iii <- combn(1:N_random, k, simplify = FALSE)
   for (ii in iii) {
-    expr = paste(random_effects[ii], collapse = " + ")
-    random_exprs = append(random_exprs, expr)
+    expr <- paste(random_effects[ii], collapse = " + ")
+    random_exprs <- append(random_exprs, expr)
   }
 }
 ```
@@ -227,16 +257,16 @@ for (k in 1:N_random) {
 Now, we combine the response variable, fixed effects, and random effects together to generate our candidate model structures.
 
 ```{r}
-loglinear_formulae = c()
+loglinear_formulae <- c()
 for (fe in fixed_effects) {
   for (re in random_exprs) {
-    f = ""
+    f <- ""
     if (fe == "") {
-      f = sprintf("log(response.time) ~ %s", re)
+      f <- sprintf("log(response.time) ~ %s", re)
     } else {
-      f = sprintf("log(response.time) ~ %s + %s", fe, re)
+      f <- sprintf("log(response.time) ~ %s + %s", fe, re)
     }
-    loglinear_formulae = append(loglinear_formulae, f)
+    loglinear_formulae <- append(loglinear_formulae, f)
   }
 }
 
@@ -252,61 +282,65 @@ We also store BIC (an alternative model selection criterion) in addition to AIC 
 ```{r fit_all_models, cache=TRUE}
 if (TRUE) {
   # make an output directory for the output of all the candidate linear models
-  logtime_outputdir = 
+  logtime_outputdir <-
     sprintf("%s/oneback_v9_log_time_model_summaries", outputdir)
   mkdir(logtime_outputdir)
-  
+
   # make an output file for the AIC and BIC of each model
-  metricsfile = sprintf("%s/metrics.csv", logtime_outputdir)
+  metricsfile <- sprintf("%s/metrics.csv", logtime_outputdir)
   file.create(metricsfile)
-  
-  sink(file = metricsfile,
-       append = FALSE,
-       type = "output",
-       split = FALSE
-       )
-  
+
+  sink(
+    file = metricsfile,
+    append = FALSE,
+    type = "output",
+    split = FALSE
+  )
+
   cat("formula,AIC,BIC\n")
-  
+
   sink()
-  
+
   for (f in loglinear_formulae) {
     # make an output directory for the output of this specific candidate model
-    f_outputdir = sprintf("%s/%s", logtime_outputdir, gsub(" ", "", f, fixed = TRUE))
+    f_outputdir <- sprintf("%s/%s", logtime_outputdir, gsub(" ", "", f, fixed = TRUE))
     mkdir(f_outputdir)
-    
+
     # make the individual output file
-    summaryfile = sprintf("%s/summary.txt", f_outputdir)
-    
+    summaryfile <- sprintf("%s/summary.txt", f_outputdir)
+
     file.create(summaryfile)
-    
+
     # print a delimiter for console output
     cat(sprintf("\n---------------------------------------------\n%s\n", f))
-    
+
     # fit the model
-    m = lmer(f, data=data, REML=FALSE)
-    
+    m <- lmer(f, data = data, REML = FALSE)
+
     # send the model summary to the summary file
-    sink(file = summaryfile,
-         append = FALSE,
-         type = "output",
-         split = FALSE
-         )
-    
+    sink(
+      file = summaryfile,
+      append = FALSE,
+      type = "output",
+      split = FALSE
+    )
+
     print(summary(m))
-    
+
     sink()
-    
+
     # send the AIC and BIC to the metrics file
-    metrics = sprintf("%s,%f,%f\n", f, AIC(m), BIC(m))
-    
-    sink(file = metricsfile,
-         append = TRUE,
-         type = "output",
-         split = FALSE)
-    
+    metrics <- sprintf("%s,%f,%f\n", f, AIC(m), BIC(m))
+
+    sink(
+      file = metricsfile,
+      append = TRUE,
+      type = "output",
+      split = FALSE
+    )
+
     cat(metrics)
-    
+
     sink()
   }
 }
@@ -316,127 +350,183 @@ if (TRUE) {
 
 ```{r}
 # read in the AIC/BIC data
-fin = sprintf("%s/oneback_v9_log_time_model_summaries/metrics.csv", outputdir)
-log_time_models_da = read_csv(fin)
+fin <- sprintf("%s/oneback_v9_log_time_model_summaries/metrics.csv", outputdir)
+log_time_models_da <- read_csv(fin)
 ```
 
 ```{r}
-head(log_time_models_da[order(log_time_models_da$AIC),], n = 10)
+head(log_time_models_da[order(log_time_models_da$AIC), ], n = 10)
 ```
 
 ```{r}
-head(log_time_models_da[order(log_time_models_da$BIC),], n = 10)
+head(log_time_models_da[order(log_time_models_da$BIC), ], n = 10)
 ```
 
 ### Optimal AIC
 
 ```{r}
-fA = log_time_models_da[order(log_time_models_da$AIC),]$formula[[1]]
+fA <- log_time_models_da[order(log_time_models_da$AIC), ]$formula[[1]]
 cat(fA)
 ```
 
 ```{r}
-fB = log_time_models_da[order(log_time_models_da$BIC),]$formula[[1]]
+fB <- log_time_models_da[order(log_time_models_da$BIC), ]$formula[[1]]
 cat(fB)
 ```
 
-The AIC favors the model 'log(response.time) \~ TMS_Type \* session \* problem_order + (1\|participant_id) + (1\|participant_id:TMS_Type)' however BIC favors a different model 'log(response.time) \~ TMS_Type \* problem_order + (1\|participant_id) + (1\|participant_id:TMS_Type)' . We will check which model describes the data better via an ANOVA
+The AIC favors the model `log(response.time) ~ TMS_Type * session * problem_order + problem_set + pain + physical_symptoms + discomfort + sensations + (1|participant_id) + (1|participant_id:TMS_Type)` however BIC favors a different model `log(response.time) ~ TMS_Type * problem_order + (1|participant_id) + (1|participant_id:TMS_Type)`.
 
 ```{r}
-m0 = lmer(fA, data=data, REML=FALSE)
+m0 <- lmer(fA, data = data, REML = FALSE)
 summary(m0)
 ```
 
 ```{r}
-m1 = lmer(fB, data=data, REML=FALSE)
+m1 <- lmer(fB, data = data, REML = FALSE)
 summary(m1)
 ```
 
-## Which model is better AIC or BIC selected
+## Which model is better: AIC- or BIC-selected?
+This step is not really part of our analysis procedure, because in general the two model specifications are not always nested so not always comparable by likelihood ratio test. However, they happen to be nested in this case, so we might as well double-check.
 
-If Pr(\>Chisq) \< 0.05 → m1 is significantly better than m0 ✅ Keep m1, since the extra parameter improves model fit. If Pr(\>Chisq) \> 0.05 → No significant difference ❌ Prefer m0 (simpler model), since m1 doesn’t improve fit enough. If AIC is lower in m1 but p \> 0.05 If the AIC difference is ≥ 2, consider m1. If ΔAIC \< 2, prefer the simpler m0.
+If Pr(\>Chisq) \< 0.05 → m0 is significantly better than m1 ✅ Keep m0, since the extra parameter improves model fit. If Pr(\>Chisq) \> 0.05 → No significant difference ❌ Prefer m1 (simpler model), since m0 doesn’t improve fit enough.
 
 ```{r}
-anova(m0,m1)
-
+anova(m0, m1)
 ```
 
-According to the ANOVA, the m0: `log(response.time) ~ TMS_Type * session * problem_order + (1 | participant_id) + (1 | participant_id:TMS_Type)` is a better model so we choose it
+The larger model `log(response.time) ~ TMS_Type * session * problem_order + problem_set + pain + physical_symptoms + discomfort + sensations + (1|participant_id) + (1|participant_id:TMS_Type)` is a significantly better fit.
 
-## P-Values for Fixed effects
+## Omnibus test TMS effects
 
+Specify the nested model with all TMS effect terms removed.
 ```{r}
-e2 = emmeans(m0, ~ TMS_Type, mode = "asymptotic") # default mode raises Error
-pairs(e2, adjust="BH")
+fA_reduced <- 'log(response.time) ~ session * problem_order + problem_set + pain + physical_symptoms + discomfort + sensations + (1|participant_id)'
+mA_reduced <- lmer(fA_reduced, data = data, REML = FALSE)
+anova(m0, mA_reduced)
 ```
 
-Although we find the model favors `log(response.time) ~ TMS_Type * session * problem_order + (1 | participant_id) + (1 | participant_id:TMS_Type)`, TMS_Type as a fixed effect does not survive statistical significance. We move towards checking random effects
+$p < 0.05$, so TMS condition is significant and we can move on to pinpointing the source by examining individual effects.
 
-## CI and PVE
+## TMS fixed effects
 
 ```{r}
-if (TRUE) {
-  pp0 = profile(m0)
+# revisit the model summary
+summary(m0)
+```
+
+The marginal fixed effect of TMS condition is not statistically significant ($t = 0.839$, $p = 0.4052$), and neither is the interaction of TMS condition with session number ($t = 0.069$, $p = 0.9451$).
+
+However, the interaction of TMS condition with problem order is statistically significant ($t = -5.099$, $p = 3.54 \times 10^{-7}$), though small (estimate $= -0.0014618$). This implies a small multiplicative effect of TMS condition on response time that is dependent on the order in which problems are presented. Specifically, when in the control group for TMS condition, response times decrease as the test goes on, following a gradual exponential decay of $\times e^{-3.619 \times 10^{-4}} \approx 0.9996$ per problem (because the problem order coefficient is negative: estimate $= -3.619 \times 10^{-4}$). In contrast, when under the influence of TMS to the working memory region, response times decrease faster as the test goes on, following a steeper exponential decay of $\times e^{(-3.619 \times 10^{-4}) + (-1.462 \times 10^{-3})} \approx 0.9982$ per problem (because the interaction coefficient is negative: estimate $= -1.462 \times 10^{-3}$).
+
+There is also a three-way interaction of TMS condition, session number, and problem order that is not significant at the 95% threshold, but is significant at the 90% threshold ($t = 1.902$, $p = 0.0573$, estimate $= 0.0007717$).
+
+## TMS random effects
+
+The selected model `m0` has a person-dependent TMS effect represented by a random intercept (`participant_id:TMS_Type`). Next, we check whether it is statistically significant using parametric bootstrapping.
+
+```{r}
+# Simple thread-safe append function
+safe_write <- function(row, fout, lock_file) {
+  lck <- lock(lock_file) # Acquire lock
+  # on.exit(unlock(lck))  # Ensure unlock on finish or error
+
+  sink(
+    file = fout,
+    append = TRUE,
+    type = "output",
+    split = FALSE
+  )
+  cat(row, " \n")
+  sink()
+  unlock(lck) # Release lock
 }
 ```
 
 ```{r}
-confint(pp0)
-```
-
-All random effects (as described by the .sig02) survive statisical significance since they exclude zero.
-
-### Point estimate PVE
-
-```{r}
-get_pve = function(m, effect) {
-  random_effects = as.data.frame(VarCorr(m)) %>% 
-    rename(Groups = grp, Name = var1, Variance = vcov, Std.Dev. = sdcor) %>% 
+# Callback function for each bootstrap simulation
+get_estimates <- function(m, save = FALSE, fout, effect_order, f_lock) {
+  # Store variance estimates for all random effects
+  random_effects <- as.data.frame(VarCorr(m)) %>%
+    rename(Groups = grp, Name = var1, Variance = vcov, Std.Dev. = sdcor) %>%
     select(-var2)
-  
-  num = (random_effects %>% filter(Groups == effect))$Variance
-  
-  denom = sum(random_effects$Variance)
-  
-  return (c(num / denom))
-}
+  vv <- sapply(effect_order, function(eff) {
+    (random_effects %>% filter(Groups == eff))$Variance
+  }) # this is to ensure that they appear in the same order every time
 
+  if (save) {
+    if (missing(fout) || missing(effect_order)) {
+      warning(
+        paste0(
+          "get_estimates failed to save: ",
+          "fout or effect_order not provided"
+        )
+      )
+    } else {
+      safe_write(paste0(vv, collapse = ", "), fout, f_lock)
+    }
+  }
 
-get_pve(m1, "participant_id:TMS_Type")
-```
-
-The person-condition random effect explains 15.7% of the variance in the data, according to the point estimates.
-
-```{r}
-get_pve = function(m, effect) {
-  random_effects = as.data.frame(VarCorr(m)) %>% 
-    rename(Groups = grp, Name = var1, Variance = vcov, Std.Dev. = sdcor) %>% 
-    select(-var2)
-  
-  num = (random_effects %>% filter(Groups == effect))$Variance
-  
-  denom = sum(random_effects$Variance)
-  
-  return (c(num / denom))
-}
-
-
-get_pve(m1, "participant_id")
-```
-
-Ther person randome effect explains 18.2% of the varience in the data.
-
-### PVE confidence interval (\~5 minutes)
-
-```{r bootmer_b0, cache=TRUE}
-if (TRUE) {
-  b0 = bootMer(m1, 
-               FUN = function (m) {return(get_pve(m, "participant_id:TMS_Type"))}, 
-               nsim = 1000,
-               .progress = "txt")
+  return(vv)
 }
 ```
 
 ```{r}
-quantile(b0$t, c(0.025, 0.975))
+VarCorr(m0)
 ```
+
+```{r bootmer_b0_2, cache=TRUE}
+ordered_factors <- as.data.frame(VarCorr(m0))$grp
+nsim <- 10000
+# 10k sims took about 2.5 hrs
+
+psve_log <- sprintf("%s/bootstrap_%i.csv", logtime_outputdir, nsim)
+file.create(psve_log)
+lock_file <- paste0(psve_log, ".lock") # Define a lock file
+cat(psve_log, "\n")
+
+# write the header
+cat(paste0(ordered_factors, collapse = ","), "\n", file = psve_log)
+
+b0 <- bootMer(
+  m0,
+  FUN = function(m) {
+    get_estimates(
+      m,
+      save = TRUE,
+      psve_log,
+      ordered_factors,
+      lock_file
+    )
+  },
+  nsim = nsim,
+  #.progress = "txt"
+  parallel = "multicore",
+  ncpus = 64
+)
+```
+
+```{r}
+b0_df <- data.frame(b0$t)
+quantile(b0_df$participant_id.TMS_Type, c(0.025, 0.975))
+```
+
+The TMS random effect has a 95% confidence interval of $[0.001875637, 0.008148756]$, so is statistically significant. To interpret the effect size, we compute the PVE and its CI.
+
+```{r}
+estimates <- get_estimates(m0, effect_order = ordered_factors)
+names(estimates) <- ordered_factors
+pve_estimate <- estimates["participant_id:TMS_Type"] / sum(estimates)
+cat(sprintf("Point estimate of PVE(participant_id:TMS_Type): %f", pve_estimate))
+
+b0_df$pve_TMS <- b0_df$participant_id.TMS_Type / rowSums(b0_df)
+quantile(b0_df$pve_TMS, c(0.025, 0.975))
+```
+
+So, the TMS random effect explains about 9.15% of the variance in log-transformed response times, with a 95% confidence interval of $[2.97\%, 13.08\%]$.
+
+```{r}
+estimates["participant_id:TMS_Type"] / (estimates["participant_id:TMS_Type"] + estimates["participant_id"])
+```
+
+It also explains about 30% of the structural variance among participants.

@@ -1,11 +1,12 @@
 Linear mixed model fit by maximum likelihood  ['lmerMod']
 Formula: log(response.time) ~ sensations + (1 | participant_id) + (1 |  
-    shown_letter) + (1 | participant_id:shown_letter) + (1 |      participant_id:TMS_Type) + (1 | shown_letter:TMS_Type) +  
+    shown_letter) + (1 | participant_id:shown_letter) + (1 |  
+    participant_id:TMS_Type) + (1 | shown_letter:TMS_Type) +  
     (1 | participant_id:shown_letter:TMS_Type)
    Data: data
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -1031.7    -972.5     524.8   -1049.7      5272 
+     AIC      BIC   logLik deviance df.resid 
+ -1031.7   -972.5    524.8  -1049.7     5272 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -13,19 +14,19 @@ Scaled residuals:
 
 Random effects:
  Groups                               Name        Variance  Std.Dev. 
- participant_id:shown_letter:TMS_Type (Intercept) 6.718e-05 8.197e-03
- participant_id:shown_letter          (Intercept) 4.661e-12 2.159e-06
+ participant_id:shown_letter:TMS_Type (Intercept) 6.688e-05 8.178e-03
+ participant_id:shown_letter          (Intercept) 0.000e+00 0.000e+00
  participant_id:TMS_Type              (Intercept) 1.102e-02 1.050e-01
  participant_id                       (Intercept) 1.443e-02 1.201e-01
- shown_letter:TMS_Type                (Intercept) 0.000e+00 0.000e+00
- shown_letter                         (Intercept) 3.067e-05 5.538e-03
+ shown_letter:TMS_Type                (Intercept) 1.566e-10 1.251e-05
+ shown_letter                         (Intercept) 3.068e-05 5.539e-03
  Residual                                         4.608e-02 2.147e-01
 Number of obs: 5281, groups:  
 participant_id:shown_letter:TMS_Type, 324; participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
 
 Fixed effects:
             Estimate Std. Error t value
-(Intercept) -0.57929    0.02829  -20.47
+(Intercept) -0.57929    0.02830  -20.47
 sensations   0.03497    0.06244    0.56
 
 Correlation of Fixed Effects:

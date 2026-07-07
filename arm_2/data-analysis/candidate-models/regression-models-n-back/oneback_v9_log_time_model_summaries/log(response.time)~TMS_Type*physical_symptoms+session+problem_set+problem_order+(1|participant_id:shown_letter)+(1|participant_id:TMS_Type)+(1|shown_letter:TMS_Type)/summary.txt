@@ -1,0 +1,43 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: log(response.time) ~ TMS_Type * physical_symptoms + session +  
+    problem_set + problem_order + (1 | participant_id:shown_letter) +  
+    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+ -1080.8  -1015.1    550.4  -1100.8     5271 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.5177 -0.6648 -0.0956  0.5564  4.8476 
+
+Random effects:
+ Groups                      Name        Variance  Std.Dev. 
+ participant_id:shown_letter (Intercept) 3.404e-08 0.0001845
+ participant_id:TMS_Type     (Intercept) 2.175e-02 0.1474766
+ shown_letter:TMS_Type       (Intercept) 1.783e-05 0.0042231
+ Residual                                4.568e-02 0.2137262
+Number of obs: 5281, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; shown_letter:TMS_Type, 12
+
+Fixed effects:
+                    Estimate Std. Error t value
+(Intercept)       -0.5395924  0.0397075 -13.589
+TMS_TypeWM        -0.0153570  0.0424810  -0.362
+physical_symptoms  0.1683991  0.0815132   2.066
+session2          -0.0611762  0.0410989  -1.489
+problem_setb       0.0574328  0.0408283   1.407
+problem_order     -0.0007455  0.0001018  -7.322
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW physc_ sessn2 prblm_s
+TMS_TypeWM  -0.457                             
+physcl_symp -0.073 -0.279                      
+session2    -0.502  0.003  0.136               
+problem_stb -0.416 -0.074  0.001 -0.076        
+problem_rdr -0.129  0.000  0.000  0.000  0.000 
+fit warnings:
+fixed-effect model matrix is rank deficient so dropping 1 column / coefficient
+optimizer (nloptwrap) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.00207125 (tol = 0.002, component 1)
+

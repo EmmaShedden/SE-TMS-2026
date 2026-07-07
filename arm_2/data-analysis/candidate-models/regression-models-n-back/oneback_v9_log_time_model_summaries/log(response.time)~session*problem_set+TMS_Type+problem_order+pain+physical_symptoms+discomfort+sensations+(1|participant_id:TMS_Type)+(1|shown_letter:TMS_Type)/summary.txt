@@ -1,0 +1,46 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: 
+log(response.time) ~ session * problem_set + TMS_Type + problem_order +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    participant_id:TMS_Type) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+ -1079.2   -993.8    552.6  -1105.2     5268 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.5168 -0.6659 -0.0967  0.5579  4.8463 
+
+Random effects:
+ Groups                  Name        Variance  Std.Dev.
+ participant_id:TMS_Type (Intercept) 2.002e-02 0.141501
+ shown_letter:TMS_Type   (Intercept) 1.797e-05 0.004239
+ Residual                            4.568e-02 0.213726
+Number of obs: 5281, groups:  
+participant_id:TMS_Type, 54; shown_letter:TMS_Type, 12
+
+Fixed effects:
+                        Estimate Std. Error t value
+(Intercept)           -0.5492820  0.0426692 -12.873
+session2              -0.0638636  0.0558854  -1.143
+problem_setb           0.0514999  0.0572906   0.899
+TMS_TypeWM             0.0057735  0.0464190   0.124
+problem_order         -0.0007454  0.0001018  -7.321
+pain                   0.1734965  0.0843269   2.057
+physical_symptoms      0.1167634  0.0845393   1.381
+discomfort            -0.1002422  0.0792132  -1.265
+sensations             0.0614170  0.0724275   0.848
+session2:problem_setb  0.0017883  0.0795500   0.022
+
+Correlation of Fixed Effects:
+            (Intr) sessn2 prblm_s TMS_TW prblm_r pain   physc_ dscmfr snstns
+session2    -0.604                                                          
+problem_stb -0.517  0.413                                                   
+TMS_TypeWM  -0.386 -0.089 -0.048                                            
+problem_rdr -0.120  0.000  0.000   0.000                                    
+pain        -0.104  0.041 -0.017   0.100  0.000                             
+physcl_symp -0.079  0.202  0.045  -0.372  0.000  -0.235                     
+discomfort   0.127  0.081 -0.080  -0.465  0.000  -0.380  0.313              
+sensations  -0.176  0.066 -0.152   0.178  0.000   0.265 -0.041 -0.420       
+sssn2:prbl_  0.399 -0.698 -0.683   0.101  0.000  -0.077 -0.126 -0.057  0.028

@@ -1,0 +1,44 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: 
+log(response.time) ~ TMS_Type * session + problem_set + problem_order +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    shown_letter:TMS_Type)
+   Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+   620.3    699.1   -298.1    596.3     5269 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-8.2053 -0.6929 -0.0713  0.6061  4.0873 
+
+Random effects:
+ Groups                Name        Variance  Std.Dev.
+ shown_letter:TMS_Type (Intercept) 5.488e-06 0.002343
+ Residual                          6.554e-02 0.256014
+Number of obs: 5281, groups:  shown_letter:TMS_Type, 12
+
+Fixed effects:
+                      Estimate Std. Error t value
+(Intercept)         -0.5355320  0.0104856 -51.073
+TMS_TypeWM          -0.0235261  0.0126017  -1.867
+session2            -0.0876501  0.0108218  -8.099
+problem_setb         0.0545881  0.0075981   7.184
+problem_order       -0.0007451  0.0001219  -6.111
+pain                 0.1559401  0.0160563   9.712
+physical_symptoms    0.1269416  0.0156179   8.128
+discomfort          -0.0857568  0.0149895  -5.721
+sensations           0.0439179  0.0141777   3.098
+TMS_TypeWM:session2  0.0520660  0.0159066   3.273
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM sessn2 prblm_s prblm_r pain   physc_ dscmfr snstns
+TMS_TypeWM  -0.547                                                            
+session2    -0.556  0.541                                                     
+problem_stb -0.203 -0.054   -0.155                                            
+problem_rdr -0.587  0.001    0.001  0.001                                     
+pain        -0.202  0.317    0.237 -0.122   0.001                             
+physcl_symp  0.085 -0.409   -0.072 -0.027  -0.002  -0.306                     
+discomfort   0.244 -0.519   -0.191 -0.125  -0.003  -0.448  0.357              
+sensations  -0.301  0.396    0.364 -0.204   0.000   0.362 -0.126 -0.485       
+TMS_TypWM:2  0.445 -0.742   -0.743  0.099  -0.001  -0.334  0.236  0.305 -0.388
