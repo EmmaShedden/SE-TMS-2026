@@ -1,0 +1,47 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correct_answer ~ TMS_Type * sensations + session + problem_set +  
+    problem_order + (1 | participant_id) + (1 | shown_letter) +  
+    (1 | participant_id:shown_letter)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   5608.3    5674.2   -2794.1    5588.3      5390 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.2927  0.3740  0.4872  0.5451  0.9638 
+
+Random effects:
+ Groups                      Name        Variance Std.Dev.
+ participant_id:shown_letter (Intercept) 0.019019 0.13791 
+ participant_id              (Intercept) 0.134219 0.36636 
+ shown_letter                (Intercept) 0.008412 0.09172 
+Number of obs: 5400, groups:  
+participant_id:shown_letter, 162; participant_id, 27; shown_letter, 6
+
+Fixed effects:
+                        Estimate Std. Error z value Pr(>|z|)    
+(Intercept)            1.2533319  0.1227169  10.213  < 2e-16 ***
+TMS_TypeWM             0.0429662  0.0735939   0.584   0.5593    
+sensations             0.1568200  0.2133203   0.735   0.4623    
+session                0.3071401  0.0714760   4.297 1.73e-05 ***
+problem_setb          -0.1698540  0.0733905  -2.314   0.0206 *  
+problem_order         -0.0009045  0.0011552  -0.783   0.4336    
+TMS_TypeWM:sensations  0.0245441  0.2659421   0.092   0.9265    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM snstns sessin prblm_s prblm_r
+TMS_TypeWM  -0.325                                       
+sensations  -0.231  0.287                                
+session     -0.314  0.148    0.331                       
+problem_stb -0.193 -0.070   -0.229 -0.102                
+problem_rdr -0.480  0.000   -0.001 -0.002  0.001         
+TMS_TypWM:s  0.226 -0.403   -0.624 -0.286 -0.081   0.001 
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+

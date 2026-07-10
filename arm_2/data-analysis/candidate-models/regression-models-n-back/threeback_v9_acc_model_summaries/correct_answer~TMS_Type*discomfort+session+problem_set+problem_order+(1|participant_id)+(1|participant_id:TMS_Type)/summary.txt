@@ -1,0 +1,44 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correct_answer ~ TMS_Type * discomfort + session + problem_set +  
+    problem_order + (1 | participant_id) + (1 | participant_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   5603.4    5656.2   -2793.7    5587.4      5392 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.1295  0.3582  0.4879  0.5470  0.8960 
+
+Random effects:
+ Groups                  Name        Variance Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.02136  0.1462  
+ participant_id          (Intercept) 0.10670  0.3266  
+Number of obs: 5400, groups:  participant_id:TMS_Type, 54; participant_id, 27
+
+Fixed effects:
+                Estimate Std. Error z value Pr(>|z|)    
+(Intercept)    1.2685824  0.1141212  11.116  < 2e-16 ***
+TMS_TypeWM    -0.0279260  0.0873411  -0.320   0.7492    
+discomfort     0.3242522  0.1749172   1.854   0.0638 .  
+session        0.3084093  0.0786225   3.923 8.76e-05 ***
+problem_setb  -0.1963818  0.0845458  -2.323   0.0202 *  
+problem_order -0.0008818  0.0011529  -0.765   0.4444    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW dscmfr sessin prblm_s
+TMS_TypeWM  -0.321                             
+discomfort   0.081 -0.440                      
+session     -0.304  0.007  0.052               
+problem_stb -0.298  0.070 -0.338 -0.085        
+problem_rdr -0.514  0.000 -0.001 -0.001  0.001 
+fit warnings:
+fixed-effect model matrix is rank deficient so dropping 1 column / coefficient
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+

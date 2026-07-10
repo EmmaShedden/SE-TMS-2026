@@ -1,0 +1,48 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correct_answer ~ TMS_Type * discomfort + session + problem_set +  
+    problem_order + (1 | participant_id) + (1 | shown_letter) +  
+    (1 | participant_id:shown_letter) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   5605.0    5671.0   -2792.5    5585.0      5390 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.0945  0.3620  0.4848  0.5424  0.9855 
+
+Random effects:
+ Groups                      Name        Variance Std.Dev.
+ participant_id:shown_letter (Intercept) 0.019398 0.13928 
+ participant_id              (Intercept) 0.115474 0.33981 
+ shown_letter:TMS_Type       (Intercept) 0.005916 0.07691 
+ shown_letter                (Intercept) 0.005450 0.07382 
+Number of obs: 5400, groups:  
+participant_id:shown_letter, 162; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                Estimate Std. Error z value Pr(>|z|)    
+(Intercept)    1.2812690  0.1181560  10.844  < 2e-16 ***
+TMS_TypeWM    -0.0224389  0.0872689  -0.257  0.79708    
+discomfort     0.3092300  0.1553795   1.990  0.04657 *  
+session        0.3005808  0.0671852   4.474 7.68e-06 ***
+problem_setb  -0.1922244  0.0725871  -2.648  0.00809 ** 
+problem_order -0.0009234  0.0011562  -0.799  0.42448    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW dscmfr sessin prblm_s
+TMS_TypeWM  -0.320                             
+discomfort   0.067 -0.380                      
+session     -0.249  0.009  0.033               
+problem_stb -0.251  0.058 -0.340 -0.069        
+problem_rdr -0.499  0.000 -0.001 -0.003  0.001 
+fit warnings:
+fixed-effect model matrix is rank deficient so dropping 1 column / coefficient
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+

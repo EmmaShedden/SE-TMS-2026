@@ -1,0 +1,47 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correct_answer ~ TMS_Type * sensations + session + problem_set +  
+    problem_order + (1 | participant_id) + (1 | shown_letter) +  
+    (1 | participant_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   5607.7    5673.7   -2793.9    5587.7      5390 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.3614  0.3656  0.4870  0.5481  0.9150 
+
+Random effects:
+ Groups                  Name        Variance Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.020426 0.14292 
+ participant_id          (Intercept) 0.128137 0.35796 
+ shown_letter            (Intercept) 0.009017 0.09496 
+Number of obs: 5400, groups:  
+participant_id:TMS_Type, 54; participant_id, 27; shown_letter, 6
+
+Fixed effects:
+                        Estimate Std. Error z value Pr(>|z|)    
+(Intercept)            1.2475539  0.1282678   9.726  < 2e-16 ***
+TMS_TypeWM             0.0464400  0.0852358   0.545 0.585862    
+sensations             0.1332304  0.2404399   0.554 0.579503    
+session                0.3100953  0.0828110   3.745 0.000181 ***
+problem_setb          -0.1677549  0.0847673  -1.979 0.047816 *  
+problem_order         -0.0008912  0.0011538  -0.772 0.439884    
+TMS_TypeWM:sensations  0.0320667  0.3031797   0.106 0.915766    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM snstns sessin prblm_s prblm_r
+TMS_TypeWM  -0.361                                       
+sensations  -0.250  0.279                                
+session     -0.348  0.147    0.320                       
+problem_stb -0.215 -0.063   -0.219 -0.105                
+problem_rdr -0.458  0.001    0.000 -0.001  0.000         
+TMS_TypWM:s  0.248 -0.397   -0.634 -0.280 -0.079   0.000 
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+

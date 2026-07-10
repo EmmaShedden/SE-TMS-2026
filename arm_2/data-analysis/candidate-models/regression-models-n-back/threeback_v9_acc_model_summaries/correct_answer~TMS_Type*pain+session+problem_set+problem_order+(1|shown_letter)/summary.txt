@@ -1,0 +1,46 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: 
+correct_answer ~ TMS_Type * pain + session + problem_set + problem_order +  
+    (1 | shown_letter)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   5670.5    5723.2   -2827.2    5654.5      5392 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.6368  0.4304  0.5116  0.5498  0.6331 
+
+Random effects:
+ Groups       Name        Variance Std.Dev.
+ shown_letter (Intercept) 0.005823 0.07631 
+Number of obs: 5400, groups:  shown_letter, 6
+
+Fixed effects:
+                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)      1.2635957  0.0935943  13.501  < 2e-16 ***
+TMS_TypeWM      -0.0125607  0.0683862  -0.184  0.85427    
+pain            -0.1128309  0.2404039  -0.469  0.63883    
+session          0.2723056  0.0671813   4.053 5.05e-05 ***
+problem_setb    -0.2020384  0.0681938  -2.963  0.00305 ** 
+problem_order   -0.0008732  0.0011426  -0.764  0.44475    
+TMS_TypeWM:pain  0.6486712  0.3006694   2.157  0.03097 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM pain   sessin prblm_s prblm_r
+TMS_TypeWM  -0.380                                       
+pain        -0.195  0.148                                
+session     -0.345  0.079    0.134                       
+problem_stb -0.339 -0.003    0.132 -0.044                
+problem_rdr -0.622  0.001    0.000 -0.001  0.001         
+TMS_TypWM:p  0.211 -0.237   -0.821 -0.148 -0.220  -0.001 
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.00248149 (tol = 0.002, component 1)
+  See ?lme4::convergence and ?lme4::troubleshooting.
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+

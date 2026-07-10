@@ -1,0 +1,45 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: 
+correct_answer ~ TMS_Type * physical_symptoms + session + problem_set +  
+    problem_order + (1 | shown_letter) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   5678.3    5731.0   -2831.1    5662.3      5392 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.3486  0.4538  0.5077  0.5533  0.6745 
+
+Random effects:
+ Groups                Name        Variance Std.Dev.
+ shown_letter:TMS_Type (Intercept) 0.004866 0.06976 
+ shown_letter          (Intercept) 0.003117 0.05583 
+Number of obs: 5400, groups:  shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                    Estimate Std. Error z value Pr(>|z|)    
+(Intercept)        1.2334744  0.0932629  13.226  < 2e-16 ***
+TMS_TypeWM         0.0759480  0.0803869   0.945   0.3448    
+physical_symptoms -0.2059490  0.1262973  -1.631   0.1030    
+session            0.2804481  0.0670399   4.183 2.87e-05 ***
+problem_setb      -0.1515949  0.0663550  -2.285   0.0223 *  
+problem_order     -0.0008917  0.0011427  -0.780   0.4352    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW physc_ sessin prblm_s
+TMS_TypeWM  -0.375                             
+physcl_symp -0.049 -0.260                      
+session     -0.318  0.007  0.128               
+problem_stb -0.299 -0.070  0.012 -0.083        
+problem_rdr -0.624 -0.001  0.001 -0.002  0.001 
+fit warnings:
+fixed-effect model matrix is rank deficient so dropping 1 column / coefficient
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+

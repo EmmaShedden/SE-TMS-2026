@@ -1,0 +1,47 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: 
+correct_answer ~ TMS_Type * pain + session + problem_set + problem_order +  
+    (1 | participant_id) + (1 | shown_letter) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+     5608      5674     -2794      5588      5390 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.1828  0.3591  0.4856  0.5480  0.9469 
+
+Random effects:
+ Groups                Name        Variance Std.Dev.
+ participant_id        (Intercept) 0.126247 0.35531 
+ shown_letter:TMS_Type (Intercept) 0.005707 0.07554 
+ shown_letter          (Intercept) 0.006324 0.07952 
+Number of obs: 5400, groups:  
+participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)      1.2818809  0.1215222  10.549  < 2e-16 ***
+TMS_TypeWM       0.0167945  0.0825396   0.203   0.8388    
+pain            -0.1145125  0.3538046  -0.324   0.7462    
+session          0.2787676  0.0683851   4.076 4.57e-05 ***
+problem_setb    -0.1681053  0.0708064  -2.374   0.0176 *  
+problem_order   -0.0009099  0.0011542  -0.788   0.4305    
+TMS_TypeWM:pain  0.3704770  0.3489367   1.062   0.2884    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM pain   sessin prblm_s prblm_r
+TMS_TypeWM  -0.332                                       
+pain        -0.168  0.059                                
+session     -0.275  0.066    0.120                       
+problem_stb -0.262 -0.015    0.060 -0.009                
+problem_rdr -0.484  0.000    0.001 -0.002  0.001         
+TMS_TypWM:p  0.191 -0.192   -0.765 -0.195 -0.215  -0.001 
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+

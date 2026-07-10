@@ -1,0 +1,46 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correct_answer ~ TMS_Type * sensations + session + problem_set +  
+    problem_order + (1 | shown_letter) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   5682.0    5741.4   -2832.0    5664.0      5391 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.3118  0.4566  0.5088  0.5534  0.6268 
+
+Random effects:
+ Groups                Name        Variance Std.Dev.
+ shown_letter:TMS_Type (Intercept) 0.004741 0.06885 
+ shown_letter          (Intercept) 0.003128 0.05593 
+Number of obs: 5400, groups:  shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                        Estimate Std. Error z value Pr(>|z|)    
+(Intercept)            1.2265866  0.0961619  12.755  < 2e-16 ***
+TMS_TypeWM             0.0364753  0.0812079   0.449   0.6533    
+sensations             0.0508329  0.1493250   0.340   0.7335    
+session                0.2960039  0.0690931   4.284 1.83e-05 ***
+problem_setb          -0.1664256  0.0686481  -2.424   0.0153 *  
+problem_order         -0.0008909  0.0011425  -0.780   0.4355    
+TMS_TypeWM:sensations  0.0801345  0.2155049   0.372   0.7100    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM snstns sessin prblm_s prblm_r
+TMS_TypeWM  -0.443                                       
+sensations  -0.231  0.238                                
+session     -0.362  0.115    0.264                       
+problem_stb -0.270 -0.053   -0.142 -0.097                
+problem_rdr -0.605 -0.001    0.000 -0.002  0.001         
+TMS_TypWM:s  0.229 -0.303   -0.687 -0.234 -0.061   0.000 
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.0031522 (tol = 0.002, component 1)
+  See ?lme4::convergence and ?lme4::troubleshooting.
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+

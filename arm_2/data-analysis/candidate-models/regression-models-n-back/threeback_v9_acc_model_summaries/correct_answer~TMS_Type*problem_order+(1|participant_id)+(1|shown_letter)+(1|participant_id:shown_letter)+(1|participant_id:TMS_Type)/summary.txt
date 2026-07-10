@@ -1,0 +1,42 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correct_answer ~ TMS_Type * problem_order + (1 | participant_id) +  
+    (1 | shown_letter) + (1 | participant_id:shown_letter) +  
+    (1 | participant_id:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   5617.1    5669.9   -2800.6    5601.1      5392 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.0639  0.3480  0.4901  0.5412  0.8990 
+
+Random effects:
+ Groups                      Name        Variance Std.Dev.
+ participant_id:shown_letter (Intercept) 0.016471 0.12834 
+ participant_id:TMS_Type     (Intercept) 0.073017 0.27022 
+ participant_id              (Intercept) 0.098015 0.31307 
+ shown_letter                (Intercept) 0.008513 0.09227 
+Number of obs: 5400, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter, 6
+
+Fixed effects:
+                           Estimate Std. Error z value Pr(>|z|)    
+(Intercept)               1.351e+00  1.306e-01  10.346   <2e-16 ***
+TMS_TypeWM                3.430e-02  1.543e-01   0.222    0.824    
+problem_order            -9.173e-04  1.625e-03  -0.565    0.572    
+TMS_TypeWM:problem_order  2.609e-05  2.311e-03   0.011    0.991    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM prblm_
+TMS_TypeWM  -0.585                
+problem_rdr -0.635  0.537         
+TMS_TypWM:_  0.446 -0.762   -0.704
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+

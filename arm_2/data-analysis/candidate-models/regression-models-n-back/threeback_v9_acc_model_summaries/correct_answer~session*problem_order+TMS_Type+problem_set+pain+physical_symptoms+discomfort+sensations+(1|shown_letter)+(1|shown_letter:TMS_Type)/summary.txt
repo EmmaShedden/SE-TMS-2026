@@ -1,0 +1,51 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correct_answer ~ session * problem_order + TMS_Type + problem_set +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    shown_letter) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   5665.9    5745.1   -2821.0    5641.9      5388 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.7715  0.4293  0.5001  0.5518  0.7007 
+
+Random effects:
+ Groups                Name        Variance Std.Dev.
+ shown_letter:TMS_Type (Intercept) 0.005863 0.07657 
+ shown_letter          (Intercept) 0.003503 0.05918 
+Number of obs: 5400, groups:  shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                        Estimate Std. Error z value Pr(>|z|)    
+(Intercept)            1.1897541  0.1096891  10.847  < 2e-16 ***
+session                0.4492672  0.1357886   3.309 0.000938 ***
+problem_order          0.0004842  0.0015595   0.310 0.756199    
+TMS_TypeWM            -0.0535775  0.0895452  -0.598 0.549620    
+problem_setb          -0.2273692  0.0699214  -3.252 0.001147 ** 
+pain                   0.2205044  0.1498557   1.471 0.141171    
+physical_symptoms     -0.1170215  0.1352028  -0.866 0.386751    
+discomfort             0.4316406  0.1378561   3.131 0.001742 ** 
+sensations            -0.0480732  0.1205342  -0.399 0.690015    
+session:problem_order -0.0029916  0.0022969  -1.302 0.192765    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) sessin prblm_r TMS_TW prblm_s pain   physc_ dscmfr snstns
+session     -0.555                                                          
+problem_rdr -0.715  0.577                                                   
+TMS_TypeWM  -0.350 -0.006  0.000                                            
+problem_stb -0.238 -0.060  0.000   0.020                                    
+pain        -0.046 -0.013  0.001   0.093 -0.078                             
+physcl_symp -0.022  0.083  0.000  -0.323 -0.045  -0.242                     
+discomfort   0.103  0.023  0.001  -0.387 -0.147  -0.349  0.291              
+sensations  -0.139  0.072  0.000   0.170 -0.177   0.226 -0.024 -0.399       
+sssn:prblm_  0.485 -0.864 -0.679   0.000  0.001  -0.002  0.000 -0.002  0.000
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+

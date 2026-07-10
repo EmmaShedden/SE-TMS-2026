@@ -1,0 +1,49 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correct_answer ~ TMS_Type * sensations + session + problem_set +  
+    problem_order + (1 | participant_id) + (1 | shown_letter) +  
+    (1 | shown_letter:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   5608.6    5674.6   -2794.3    5588.6      5390 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.3856  0.3719  0.4858  0.5465  0.9526 
+
+Random effects:
+ Groups                Name        Variance Std.Dev.
+ participant_id        (Intercept) 0.137951 0.37142 
+ shown_letter:TMS_Type (Intercept) 0.005482 0.07404 
+ shown_letter          (Intercept) 0.006409 0.08006 
+Number of obs: 5400, groups:  
+participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                       Estimate Std. Error z value Pr(>|z|)    
+(Intercept)            1.248299   0.124865   9.997  < 2e-16 ***
+TMS_TypeWM             0.043256   0.085117   0.508   0.6113    
+sensations             0.161646   0.213212   0.758   0.4484    
+session                0.308190   0.071429   4.315  1.6e-05 ***
+problem_setb          -0.170948   0.073300  -2.332   0.0197 *  
+problem_order         -0.000909   0.001154  -0.788   0.4310    
+TMS_TypeWM:sensations  0.025655   0.265735   0.097   0.9231    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM snstns sessin prblm_s prblm_r
+TMS_TypeWM  -0.362                                       
+sensations  -0.226  0.248                                
+session     -0.308  0.128    0.331                       
+problem_stb -0.191 -0.061   -0.229 -0.102                
+problem_rdr -0.471  0.000    0.000 -0.002  0.001         
+TMS_TypWM:s  0.223 -0.347   -0.624 -0.285 -0.081   0.000 
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.00265356 (tol = 0.002, component 1)
+  See ?lme4::convergence and ?lme4::troubleshooting.
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+

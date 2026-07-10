@@ -1,0 +1,49 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: 
+correct_answer ~ TMS_Type * physical_symptoms + session + problem_set +  
+    problem_order + (1 | participant_id) + (1 | shown_letter) +  
+    (1 | participant_id:shown_letter) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   5608.6    5674.5   -2794.3    5588.6      5390 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.2289  0.3678  0.4873  0.5425  0.9812 
+
+Random effects:
+ Groups                      Name        Variance Std.Dev.
+ participant_id:shown_letter (Intercept) 0.019874 0.14098 
+ participant_id              (Intercept) 0.130635 0.36144 
+ shown_letter:TMS_Type       (Intercept) 0.005438 0.07374 
+ shown_letter                (Intercept) 0.005681 0.07538 
+Number of obs: 5400, groups:  
+participant_id:shown_letter, 162; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                    Estimate Std. Error z value Pr(>|z|)    
+(Intercept)        1.2693594  0.1201653  10.563  < 2e-16 ***
+TMS_TypeWM         0.0592512  0.0840830   0.705   0.4810    
+physical_symptoms -0.0987534  0.1732518  -0.570   0.5687    
+session            0.2890605  0.0684646   4.222 2.42e-05 ***
+problem_setb      -0.1416773  0.0683367  -2.073   0.0382 *  
+problem_order     -0.0009223  0.0011559  -0.798   0.4250    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW physc_ sessin prblm_s
+TMS_TypeWM  -0.279                             
+physcl_symp -0.044 -0.317                      
+session     -0.249 -0.039  0.196               
+problem_stb -0.236 -0.072 -0.031 -0.068        
+problem_rdr -0.491 -0.001  0.000 -0.002  0.001 
+fit warnings:
+fixed-effect model matrix is rank deficient so dropping 1 column / coefficient
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+

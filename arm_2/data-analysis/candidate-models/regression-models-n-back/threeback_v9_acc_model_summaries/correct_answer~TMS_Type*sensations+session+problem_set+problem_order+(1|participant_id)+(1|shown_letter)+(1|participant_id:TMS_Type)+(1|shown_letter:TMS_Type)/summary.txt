@@ -1,0 +1,50 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correct_answer ~ TMS_Type * sensations + session + problem_set +  
+    problem_order + (1 | participant_id) + (1 | shown_letter) +  
+    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   5609.2    5681.7   -2793.6    5587.2      5389 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.3541  0.3581  0.4851  0.5489  0.9334 
+
+Random effects:
+ Groups                  Name        Variance Std.Dev.
+ participant_id:TMS_Type (Intercept) 0.022044 0.14847 
+ participant_id          (Intercept) 0.127602 0.35721 
+ shown_letter:TMS_Type   (Intercept) 0.006766 0.08226 
+ shown_letter            (Intercept) 0.005592 0.07478 
+Number of obs: 5400, groups:  
+participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                        Estimate Std. Error z value Pr(>|z|)    
+(Intercept)            1.2489033  0.1308973   9.541  < 2e-16 ***
+TMS_TypeWM             0.0489331  0.0984369   0.497 0.619118    
+sensations             0.1316416  0.2423018   0.543 0.586926    
+session                0.3122672  0.0836996   3.731 0.000191 ***
+problem_setb          -0.1679001  0.0856136  -1.961 0.049863 *  
+problem_order         -0.0009127  0.0011547  -0.790 0.429283    
+TMS_TypeWM:sensations  0.0322477  0.3058992   0.105 0.916043    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM snstns sessin prblm_s prblm_r
+TMS_TypeWM  -0.400                                       
+sensations  -0.248  0.244                                
+session     -0.344  0.129    0.319                       
+problem_stb -0.214 -0.055   -0.218 -0.106                
+problem_rdr -0.449  0.000    0.000 -0.002  0.001         
+TMS_TypWM:s  0.246 -0.347   -0.634 -0.279 -0.079   0.000 
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.00263251 (tol = 0.002, component 1)
+  See ?lme4::convergence and ?lme4::troubleshooting.
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+

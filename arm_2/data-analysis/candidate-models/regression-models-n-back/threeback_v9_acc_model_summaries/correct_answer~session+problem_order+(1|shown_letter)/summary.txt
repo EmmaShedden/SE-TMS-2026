@@ -1,0 +1,34 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correct_answer ~ session + problem_order + (1 | shown_letter)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   5678.5    5704.9   -2835.3    5670.5      5396 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.1741  0.4678  0.5013  0.5642  0.5925 
+
+Random effects:
+ Groups       Name        Variance Std.Dev.
+ shown_letter (Intercept) 0.005491 0.0741  
+Number of obs: 5400, groups:  shown_letter, 6
+
+Fixed effects:
+                Estimate Std. Error z value Pr(>|z|)    
+(Intercept)    1.1786347  0.0794479  14.835  < 2e-16 ***
+session        0.2795931  0.0660643   4.232 2.31e-05 ***
+problem_order -0.0008719  0.0011410  -0.764    0.445    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) sessin
+session     -0.383       
+problem_rdr -0.731 -0.001
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+

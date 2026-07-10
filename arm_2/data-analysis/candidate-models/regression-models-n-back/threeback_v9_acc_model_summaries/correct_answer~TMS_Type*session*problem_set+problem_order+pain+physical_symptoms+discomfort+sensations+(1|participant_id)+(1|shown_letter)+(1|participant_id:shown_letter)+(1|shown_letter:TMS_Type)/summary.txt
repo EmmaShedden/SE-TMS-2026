@@ -1,0 +1,46 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correct_answer ~ TMS_Type * session * problem_set + problem_order +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    participant_id) + (1 | shown_letter) + (1 | participant_id:shown_letter) +  
+    (1 | shown_letter:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   5614.2    5726.3   -2790.1    5580.2      5383 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.0749  0.3558  0.4863  0.5447  0.9710 
+
+Random effects:
+ Groups                      Name        Variance Std.Dev.
+ participant_id:shown_letter (Intercept) 0.018202 0.13491 
+ participant_id              (Intercept) 0.098583 0.31398 
+ shown_letter:TMS_Type       (Intercept) 0.006067 0.07789 
+ shown_letter                (Intercept) 0.005012 0.07080 
+Number of obs: 5400, groups:  
+participant_id:shown_letter, 162; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                      1.1950259  0.1605659   7.443 9.87e-14 ***
+TMS_TypeWM                       0.1837987  0.2259502   0.813    0.416    
+session                          0.2398089  0.2099954   1.142    0.253    
+problem_setb                    -0.1735203  0.2144557  -0.809    0.418    
+problem_order                   -0.0009222  0.0011563  -0.798    0.425    
+pain                             0.1755068  0.2495308   0.703    0.482    
+physical_symptoms                0.0106013  0.1831807   0.058    0.954    
+discomfort                       0.2972838  0.1913148   1.554    0.120    
+sensations                       0.1404459  0.1899529   0.739    0.460    
+TMS_TypeWM:session               0.0175114  0.3244786   0.054    0.957    
+TMS_TypeWM:problem_setb         -0.2408970  0.3053962  -0.789    0.430    
+session:problem_setb             0.3322522  0.3068194   1.083    0.279    
+TMS_TypeWM:session:problem_setb -0.3970318  0.2864076  -1.386    0.166    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+

@@ -1,0 +1,63 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correct_answer ~ TMS_Type * problem_set * problem_order + session +  
+    pain + physical_symptoms + discomfort + sensations + (1 |  
+    participant_id) + (1 | shown_letter) + (1 | participant_id:shown_letter) +  
+    (1 | participant_id:TMS_Type) + (1 | shown_letter:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   5612.1    5730.8   -2788.0    5576.1      5382 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.2975  0.3455  0.4842  0.5494  1.0029 
+
+Random effects:
+ Groups                      Name        Variance Std.Dev.
+ participant_id:shown_letter (Intercept) 0.017145 0.13094 
+ participant_id:TMS_Type     (Intercept) 0.023256 0.15250 
+ participant_id              (Intercept) 0.088133 0.29687 
+ shown_letter:TMS_Type       (Intercept) 0.006985 0.08358 
+ shown_letter                (Intercept) 0.004500 0.06708 
+Number of obs: 5400, groups:  
+participant_id:shown_letter, 162; participant_id:TMS_Type, 54; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                                        Estimate Std. Error z value Pr(>|z|)
+(Intercept)                            1.135e+00  1.652e-01   6.872 6.32e-12
+TMS_TypeWM                             4.359e-01  2.401e-01   1.816 0.069428
+problem_setb                           1.156e-01  2.321e-01   0.498 0.618400
+problem_order                         -1.229e-05  2.171e-03  -0.006 0.995483
+session                                2.995e-01  8.268e-02   3.623 0.000291
+pain                                   1.766e-01  2.649e-01   0.667 0.504865
+physical_symptoms                     -3.788e-02  2.056e-01  -0.184 0.853820
+discomfort                             3.425e-01  2.149e-01   1.594 0.110958
+sensations                             2.665e-02  2.010e-01   0.133 0.894523
+TMS_TypeWM:problem_setb               -9.180e-01  3.716e-01  -2.470 0.013499
+TMS_TypeWM:problem_order              -4.854e-03  3.281e-03  -1.479 0.139060
+problem_setb:problem_order            -2.119e-03  3.274e-03  -0.647 0.517429
+TMS_TypeWM:problem_setb:problem_order  9.328e-03  4.661e-03   2.001 0.045348
+                                         
+(Intercept)                           ***
+TMS_TypeWM                            .  
+problem_setb                             
+problem_order                            
+session                               ***
+pain                                     
+physical_symptoms                        
+discomfort                               
+sensations                               
+TMS_TypeWM:problem_setb               *  
+TMS_TypeWM:problem_order                 
+problem_setb:problem_order               
+TMS_TypeWM:problem_setb:problem_order *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.00234312 (tol = 0.002, component 1)
+  See ?lme4::convergence and ?lme4::troubleshooting.
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+

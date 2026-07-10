@@ -1,0 +1,38 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correct_answer ~ TMS_Type * pain + (1 | participant_id) + (1 |  
+    shown_letter) + (1 | participant_id:shown_letter) + (1 |  
+    shown_letter:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   5626.0    5678.8   -2805.0    5610.0      5392 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.4442  0.3563  0.4922  0.5409  0.8561 
+
+Random effects:
+ Groups                      Name        Variance Std.Dev.
+ participant_id:shown_letter (Intercept) 0.019518 0.13971 
+ participant_id              (Intercept) 0.124703 0.35313 
+ shown_letter:TMS_Type       (Intercept) 0.003869 0.06220 
+ shown_letter                (Intercept) 0.007186 0.08477 
+Number of obs: 5400, groups:  
+participant_id:shown_letter, 162; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                 Estimate Std. Error z value Pr(>|z|)    
+(Intercept)      1.309736   0.095362  13.734   <2e-16 ***
+TMS_TypeWM      -0.006634   0.078319  -0.085    0.933    
+pain            -0.241167   0.352031  -0.685    0.493    
+TMS_TypeWM:pain  0.474688   0.333078   1.425    0.154    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM pain  
+TMS_TypeWM  -0.383                
+pain        -0.152  0.053         
+TMS_TypWM:p  0.109 -0.199   -0.767

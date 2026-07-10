@@ -1,0 +1,45 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: correct_answer ~ TMS_Type * discomfort + session + problem_set +  
+    problem_order + (1 | shown_letter)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   5661.1    5707.3   -2823.6    5647.1      5393 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.4962  0.4320  0.5012  0.5525  0.6651 
+
+Random effects:
+ Groups       Name        Variance Std.Dev.
+ shown_letter (Intercept) 0.006128 0.07828 
+Number of obs: 5400, groups:  shown_letter, 6
+
+Fixed effects:
+                Estimate Std. Error z value Pr(>|z|)    
+(Intercept)    1.2538561  0.0919717  13.633  < 2e-16 ***
+TMS_TypeWM    -0.0711111  0.0706443  -1.007 0.314123    
+discomfort     0.4852383  0.1168874   4.151 3.31e-05 ***
+session        0.3107366  0.0665749   4.667 3.05e-06 ***
+problem_setb  -0.2297868  0.0686224  -3.349 0.000812 ***
+problem_order -0.0008741  0.0011435  -0.764 0.444602    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TW dscmfr sessin prblm_s
+TMS_TypeWM  -0.352                             
+discomfort   0.070 -0.350                      
+session     -0.315  0.015  0.063               
+problem_stb -0.320  0.039 -0.259 -0.091        
+problem_rdr -0.633  0.001 -0.001 -0.001  0.001 
+fit warnings:
+fixed-effect model matrix is rank deficient so dropping 1 column / coefficient
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.0031234 (tol = 0.002, component 1)
+  See ?lme4::convergence and ?lme4::troubleshooting.
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+

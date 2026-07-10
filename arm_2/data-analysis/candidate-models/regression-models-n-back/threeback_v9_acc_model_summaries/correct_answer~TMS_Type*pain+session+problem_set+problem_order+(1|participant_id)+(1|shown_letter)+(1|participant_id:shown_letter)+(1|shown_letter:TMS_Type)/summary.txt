@@ -1,0 +1,49 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: 
+correct_answer ~ TMS_Type * pain + session + problem_set + problem_order +  
+    (1 | participant_id) + (1 | shown_letter) + (1 | participant_id:shown_letter) +  
+    (1 | shown_letter:TMS_Type)
+   Data: data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   5609.2    5681.7   -2793.6    5587.2      5389 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.0881  0.3576  0.4856  0.5458  0.9677 
+
+Random effects:
+ Groups                      Name        Variance Std.Dev.
+ participant_id:shown_letter (Intercept) 0.020066 0.14166 
+ participant_id              (Intercept) 0.122571 0.35010 
+ shown_letter:TMS_Type       (Intercept) 0.005665 0.07527 
+ shown_letter                (Intercept) 0.005521 0.07431 
+Number of obs: 5400, groups:  
+participant_id:shown_letter, 162; participant_id, 27; shown_letter:TMS_Type, 12; shown_letter, 6
+
+Fixed effects:
+                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)      1.2881100  0.1212075  10.627  < 2e-16 ***
+TMS_TypeWM       0.0180998  0.0825555   0.219   0.8265    
+pain            -0.1143035  0.3539593  -0.323   0.7467    
+session          0.2798164  0.0685102   4.084 4.42e-05 ***
+problem_setb    -0.1684468  0.0709256  -2.375   0.0175 *  
+problem_order   -0.0009238  0.0011560  -0.799   0.4242    
+TMS_TypeWM:pain  0.3732629  0.3493279   1.069   0.2853    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Correlation of Fixed Effects:
+            (Intr) TMS_TyWM pain   sessin prblm_s prblm_r
+TMS_TypeWM  -0.333                                       
+pain        -0.168  0.059                                
+session     -0.275  0.067    0.120                       
+problem_stb -0.263 -0.014    0.060 -0.010                
+problem_rdr -0.487  0.000    0.001 -0.002  0.002         
+TMS_TypWM:p  0.193 -0.192   -0.765 -0.194 -0.216  -0.001 
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+
